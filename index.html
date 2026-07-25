@@ -4,7 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
-  <title>PlayVerse</title>
+  <title>PlayVerse — бесплатные игры онлайн: авиа-миссия, змейка, шахматы и другие</title>
+  <meta name="description" content="PlayVerse — бесплатная игровая платформа для детей и всей семьи. Авиа-миссия, змейка, кликер, шахматы, тетрис, морской бой и ещё 20+ игр. Играй бесплатно в браузере.">
+  <meta name="keywords" content="PlayVerse, Плейверс, игры онлайн, бесплатные игры, детские игры, авиа миссия, змейка, шахматы, браузерные игры">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ameshkov2026-lgtm.github.io/PlayVerse/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PlayVerse">
+  <meta property="og:title" content="PlayVerse — бесплатные игры онлайн">
+  <meta property="og:description" content="Играй в авиа-миссию, змейку, кликер, шахматы и другие игры бесплатно в браузере.">
+  <meta property="og:url" content="https://ameshkov2026-lgtm.github.io/PlayVerse/">
+  <meta property="og:locale" content="ru_RU">
+  <!-- Яндекс.Вебмастер: после регистрации сайта вставь сюда meta name="yandex-verification" content="..." -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14083,7 +14094,8 @@ const HUB_GAME_META = {
       }
 
       function isNameTaken(name) {
-        return !!getUsers()[name];
+        const u = getUsers()[name];
+        return !!(u && !u.isBot);
       }
 
       function getAvailablePlayerNames() {
@@ -14663,6 +14675,10 @@ const HUB_GAME_META = {
       }
 
       function sendFriendRequest(name) {
+        return sendFriendRequestAsync(name);
+      }
+
+      async function sendFriendRequestAsync(name) {
         const n = String(name || "").trim();
         const me = currentUser();
         if (!me) return "Сначала войди в аккаунт";
@@ -14670,8 +14686,11 @@ const HUB_GAME_META = {
         if (n === me.username) return "Нельзя добавить себя";
         if (isUserBlocked(n)) return "Игрок заблокирован";
         const users = getUsers();
-        const target = users[n];
-        if (!target) return "Игрок не найден";
+        let target = users[n];
+        if (!target && CLOUD_ENABLED) {
+          try { target = await fetchCloudUser(n); } catch (e) { return "Ошибка сервера"; }
+        }
+        if (!target) return "Игрок не найден — он должен зарегистрироваться на сайте";
         normalizeUser(me);
         normalizeUser(target);
         if (me.friends.indexOf(n) >= 0) return "Уже в друзьях";
@@ -14859,9 +14878,9 @@ const HUB_GAME_META = {
           });
         });
         container.querySelectorAll("[data-friend-add]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            const err = sendFriendRequest(btn.getAttribute("data-friend-add"));
+            const err = await sendFriendRequest(btn.getAttribute("data-friend-add"));
             if (err) { toast(err); return; }
             if (typeof rerender === "function") rerender();
             else { renderFriendsPage(); render(); }
@@ -15008,7 +15027,7 @@ const HUB_GAME_META = {
         else if (inPending) addBtn.textContent = "Принять заявку";
         else addBtn.textContent = "+ Заявка в друзья";
         addBtn.disabled = outPending;
-        addBtn.addEventListener("click", () => {
+        addBtn.addEventListener("click", async () => {
           if (isFriend(targetName)) {
             removeFriend(targetName);
             toast("Удалено из друзей");
@@ -15016,7 +15035,7 @@ const HUB_GAME_META = {
             acceptFriendRequest(targetName);
             render();
           } else {
-            const err = sendFriendRequest(targetName);
+            const err = await sendFriendRequest(targetName);
             if (err) { toast(err); return; }
             toast("Заявка отправлена");
           }
@@ -15100,10 +15119,161 @@ const HUB_GAME_META = {
         try { return btoa(unescape(encodeURIComponent(String(p)))); } catch (e) { return String(p); }
       }
 
-      function getUsers() {
+      const SUPABASE_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
+      const CLOUD_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+      let cloudUsers = {};
+      let cloudReady = false;
+
+      function supaHeaders(extra) {
+        return Object.assign({
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: "Bearer " + SUPABASE_ANON_KEY,
+          "Content-Type": "application/json"
+        }, extra || {});
+      }
+
+      async function supaFetch(path, opts) {
+        opts = opts || {};
+        const headers = supaHeaders(opts.prefer ? { Prefer: opts.prefer } : {});
+        const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
+          method: opts.method || "GET",
+          headers: headers,
+          body: opts.body
+        });
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(res.status + " " + txt);
+        }
+        if (res.status === 204) return null;
+        const text = await res.text();
+        return text ? JSON.parse(text) : null;
+      }
+
+      function profileToRow(u) {
+        return {
+          username: u.username,
+          pass_hash: u.pass,
+          display_name: u.displayName || "",
+          coins: getUserCoins(u),
+          avatar_type: u.avatarType || "initials",
+          avatar_shop_id: u.avatarShopId || "",
+          avatar_emoji: u.avatarEmoji || "",
+          avatar_image: u.avatarImage || "",
+          owned_avatars: u.ownedAvatars || [],
+          favorites: u.favorites || [],
+          history: u.history || [],
+          friends: u.friends || [],
+          favorite_friends: u.favoriteFriends || [],
+          incoming_requests: u.incomingFriendRequests || [],
+          outgoing_requests: u.outgoingFriendRequests || [],
+          role: u.role || ""
+        };
+      }
+
+      function rowToProfile(row) {
+        return {
+          username: row.username,
+          pass: row.pass_hash,
+          displayName: row.display_name || "",
+          coins: row.coins || 0,
+          avatarType: row.avatar_type || "initials",
+          avatarShopId: row.avatar_shop_id || "",
+          avatarEmoji: row.avatar_emoji || "",
+          avatarImage: row.avatar_image || "",
+          ownedAvatars: row.owned_avatars || [],
+          favorites: row.favorites || [],
+          history: row.history || [],
+          friends: row.friends || [],
+          favoriteFriends: row.favorite_friends || [],
+          incomingFriendRequests: row.incoming_requests || [],
+          outgoingFriendRequests: row.outgoing_requests || [],
+          role: row.role || "",
+          created: row.created_at ? new Date(row.created_at).getTime() : Date.now()
+        };
+      }
+
+      async function loadCloudUsers() {
+        if (!CLOUD_ENABLED) return;
+        const rows = await supaFetch("profiles?select=*");
+        cloudUsers = {};
+        (rows || []).forEach((row) => {
+          cloudUsers[row.username] = normalizeUser(rowToProfile(row));
+        });
+        cloudReady = true;
+      }
+
+      async function fetchCloudUser(name) {
+        if (!CLOUD_ENABLED) return null;
+        const rows = await supaFetch("profiles?username=eq." + encodeURIComponent(name) + "&select=*");
+        if (rows && rows[0]) {
+          const u = normalizeUser(rowToProfile(rows[0]));
+          cloudUsers[name] = u;
+          return u;
+        }
+        return null;
+      }
+
+      async function insertCloudUser(u) {
+        await supaFetch("profiles", {
+          method: "POST",
+          body: JSON.stringify(profileToRow(u)),
+          prefer: "return=minimal"
+        });
+        cloudUsers[u.username] = normalizeUser(u);
+      }
+
+      async function saveCloudUser(u) {
+        if (!CLOUD_ENABLED || !u || u.isBot) return;
+        await supaFetch("profiles?username=eq." + encodeURIComponent(u.username), {
+          method: "PATCH",
+          body: JSON.stringify(profileToRow(u)),
+          prefer: "return=minimal"
+        });
+        cloudUsers[u.username] = normalizeUser(u);
+      }
+
+      async function syncAdminToCloud() {
+        if (!CLOUD_ENABLED) return;
+        const admin = getUsers()[SUPER_ADMIN_NAME];
+        if (!admin || admin.isBot) return;
+        try {
+          const ex = await fetchCloudUser(SUPER_ADMIN_NAME);
+          if (!ex) await insertCloudUser(admin);
+          else await saveCloudUser(admin);
+        } catch (e) { console.warn("Admin cloud sync", e); }
+      }
+
+      function getLocalUsersRaw() {
         try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch (e) { return {}; }
       }
-      function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+
+      function getUsers() {
+        const local = getLocalUsersRaw();
+        const merged = {};
+        Object.keys(local).forEach((k) => {
+          if (local[k] && local[k].isBot) merged[k] = local[k];
+        });
+        Object.keys(cloudUsers).forEach((k) => { merged[k] = cloudUsers[k]; });
+        Object.keys(local).forEach((k) => {
+          if (local[k] && !local[k].isBot && !merged[k]) merged[k] = local[k];
+        });
+        return merged;
+      }
+
+      function saveUsers(u) {
+        const bots = {};
+        Object.keys(u || {}).forEach((k) => {
+          const row = u[k];
+          if (!row) return;
+          if (row.isBot) bots[k] = row;
+          else {
+            cloudUsers[k] = row;
+            if (CLOUD_ENABLED) saveCloudUser(row).catch(() => toast("Ошибка сохранения на сервер"));
+          }
+        });
+        localStorage.setItem(USERS_KEY, JSON.stringify(Object.assign({}, bots, cloudUsers)));
+      }
 
       function getSession() {
         try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (e) { return null; }
@@ -15884,28 +16054,47 @@ const HUB_GAME_META = {
         runBotPlaytest(false);
         ensureUserFields();
         if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
-        loadSiteSettings().then(() => {
+        const bootCloud = async () => {
+          if (CLOUD_ENABLED) {
+            try {
+              await loadCloudUsers();
+              await syncAdminToCloud();
+              toast("Сервер PlayVerse подключён");
+            } catch (e) {
+              console.warn(e);
+              toast("Сервер недоступен — проверь SQL в Supabase");
+            }
+          }
+          await loadSiteSettings();
           if (checkSessionBlocked()) { render(); return; }
           render();
+          renderPlayerNameSelects();
           const pending = getIncomingRequests().length;
           if (pending > 0) {
             setTimeout(() => toast("У тебя " + pending + " " + (pending === 1 ? "заявка" : (pending < 5 ? "заявки" : "заявок")) + " в друзья"), 700);
           }
           if (isLoggedIn()) goToGames();
           else if (typeof showScreen === "function") showScreen("profile");
-        });
+        };
+        bootCloud();
       }
 
-      function register(name, pass) {
+      async function register(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name)) return "Выбери имя из списка";
         if (!validName(name)) return "Некорректное имя";
         if (pass.length < 4) return "Пароль минимум 4 символа";
         if (isUserBlocked(name)) return "Это имя заблокировано";
         if (name === SUPER_ADMIN_NAME) return "Это имя зарезервировано";
-        const users = getUsers();
-        if (users[name]) return "Это имя уже занято — выбери другое";
-        users[name] = {
+        if (CLOUD_ENABLED) {
+          try {
+            const taken = await fetchCloudUser(name);
+            if (taken) return "Это имя уже занято — выбери другое";
+          } catch (e) { return "Ошибка сервера при регистрации"; }
+        } else if (getUsers()[name]) {
+          return "Это имя уже занято — выбери другое";
+        }
+        const user = {
           username: name,
           displayName: "",
           pass: hashPass(pass),
@@ -15922,18 +16111,25 @@ const HUB_GAME_META = {
           incomingFriendRequests: [],
           outgoingFriendRequests: []
         };
+        if (CLOUD_ENABLED) {
+          try { await insertCloudUser(user); } catch (e) { return "Не удалось создать аккаунт на сервере"; }
+        }
+        const users = getUsers();
+        users[name] = user;
         saveUsers(users);
         setSession(name);
         renderPlayerNameSelects();
         return null;
       }
 
-      function login(name, pass) {
+      async function login(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name) && name !== SUPER_ADMIN_NAME) return "Выбери имя из списка";
         if (isUserBlocked(name)) return "Аккаунт заблокирован администратором";
-        const users = getUsers();
-        const u = users[name];
+        let u = getUsers()[name];
+        if (!u && CLOUD_ENABLED) {
+          try { u = await fetchCloudUser(name); } catch (e) { return "Ошибка сервера"; }
+        }
         if (!u) return "Пользователь не найден";
         if (u.pass !== hashPass(pass)) return "Неверный пароль";
         setSession(name);
@@ -15960,11 +16156,11 @@ const HUB_GAME_META = {
       });
 
       if (el.loginForm) {
-        el.loginForm.addEventListener("submit", (e) => {
+        el.loginForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-login-name").value.trim();
           const pass = document.getElementById("profile-login-pass").value;
-          const err = login(name, pass);
+          const err = await login(name, pass);
           if (err) { setMsg(el.loginMsg, err); return; }
           setMsg(el.loginMsg, "Добро пожаловать!", true);
           render();
@@ -15974,13 +16170,13 @@ const HUB_GAME_META = {
       }
 
       if (el.registerForm) {
-        el.registerForm.addEventListener("submit", (e) => {
+        el.registerForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-reg-name").value.trim();
           const pass = document.getElementById("profile-reg-pass").value;
           const pass2 = document.getElementById("profile-reg-pass2").value;
           if (pass !== pass2) { setMsg(el.registerMsg, "Пароли не совпадают"); return; }
-          const err = register(name, pass);
+          const err = await register(name, pass);
           if (err) { setMsg(el.registerMsg, err); return; }
           setMsg(el.registerMsg, "Аккаунт создан!", true);
           render();
@@ -15996,9 +16192,9 @@ const HUB_GAME_META = {
         if (typeof showScreen === "function") showScreen("cover");
       });
       if (el.friendsPageAddBtn) {
-        el.friendsPageAddBtn.addEventListener("click", () => {
+        el.friendsPageAddBtn.addEventListener("click", async () => {
           const name = el.friendsPageAddName ? el.friendsPageAddName.value.trim() : "";
-          const err = sendFriendRequest(name);
+          const err = await sendFriendRequest(name);
           if (err) { toast(err); return; }
           if (el.friendsPageAddName) el.friendsPageAddName.value = "";
           renderFriendsPage();
@@ -16100,7 +16296,9 @@ const HUB_GAME_META = {
         getBotBugsReport: getBotBugsReport,
         getUserRecord: getUserRecord,
         serverPlayerFromUser: serverPlayerFromUser,
-        sendFriendRequest: sendFriendRequest
+        sendFriendRequest: sendFriendRequest,
+        getUsers: getUsers,
+        cloudEnabled: function () { return CLOUD_ENABLED && cloudReady; }
       };
     })();
 
@@ -16357,6 +16555,9 @@ const HUB_GAME_META = {
         try {
           const s = JSON.parse(localStorage.getItem("playverse_session"));
           if (!s || !s.username) return null;
+          if (window.PVProfile && typeof PVProfile.getUsers === "function") {
+            return PVProfile.getUsers()[s.username] || null;
+          }
           const users = JSON.parse(localStorage.getItem("playverse_users")) || {};
           return users[s.username] || null;
         } catch (e) {
@@ -16369,6 +16570,7 @@ const HUB_GAME_META = {
       }
 
       function getUsersMap() {
+        if (window.PVProfile && typeof PVProfile.getUsers === "function") return PVProfile.getUsers();
         try { return JSON.parse(localStorage.getItem("playverse_users")) || {}; } catch (e) { return {}; }
       }
 
