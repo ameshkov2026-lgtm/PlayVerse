@@ -4,18 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
-  <title>PlayVerse — бесплатные игры онлайн: авиа-миссия, змейка, шахматы и другие</title>
-  <meta name="description" content="PlayVerse — бесплатная игровая платформа для детей и всей семьи. Авиа-миссия, змейка, кликер, шахматы, тетрис, морской бой и ещё 20+ игр. Играй бесплатно в браузере.">
-  <meta name="keywords" content="PlayVerse, Плейверс, игры онлайн, бесплатные игры, детские игры, авиа миссия, змейка, шахматы, браузерные игры">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ameshkov2026-lgtm.github.io/PlayVerse/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="PlayVerse">
-  <meta property="og:title" content="PlayVerse — бесплатные игры онлайн">
-  <meta property="og:description" content="Играй в авиа-миссию, змейку, кликер, шахматы и другие игры бесплатно в браузере.">
-  <meta property="og:url" content="https://ameshkov2026-lgtm.github.io/PlayVerse/">
-  <meta property="og:locale" content="ru_RU">
-  <!-- Яндекс.Вебмастер: после регистрации сайта вставь сюда meta name="yandex-verification" content="..." -->
+  <title>PlayVerse</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -304,6 +293,18 @@
       text-shadow: 0 3px 18px rgba(46, 16, 101, 0.55);
     }
     .rbx-logo-sub { display: none !important; }
+    .rbx-beta-btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.1);
+      color: #ede9fe;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 7px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .rbx-beta-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
     .rbx-search-btn {
       position: static;
       transform: none;
@@ -713,10 +714,23 @@
       color: #e8e8ec;
       opacity: 0;
       border-radius: 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 100vmax rgba(0,0,0,0.7);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
       transition: opacity 0.2s ease, transform 0.2s ease;
       overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    #hub-join-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 8999;
+      background: rgba(15, 23, 42, 0.72);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    #hub-join-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
     }
     #hub-join.active {
       display: flex;
@@ -2460,6 +2474,7 @@
     .game-brand-btn .brand-arrow { margin-left: 4px; opacity: 0.85; }
 
 
+
     /* ===== ФАБРИКА ИГР ===== */
     .cover-art-factory {
       background:
@@ -2512,6 +2527,30 @@
     .factory-btn.primary { background: linear-gradient(135deg, #a78bfa, #ec4899); color: #fff; }
     .factory-btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.25); }
     .factory-btn:hover { filter: brightness(1.08); }
+    .factory-publish-hint { margin: 10px 0 0; font-size: 0.82rem; opacity: 0.78; line-height: 1.45; }
+    .factory-rules-panel { border-color: rgba(253, 224, 71, 0.35); }
+    .factory-rules-panel h3 { color: #fde68a; }
+    .factory-rules-grid { display: grid; gap: 14px; }
+    @media (min-width: 720px) {
+      .factory-rules-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+    }
+    .factory-rules-block h4 { margin: 0 0 8px; font-size: 0.92rem; color: #e9d5ff; }
+    .factory-rules-list, .factory-steps { margin: 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.88rem; opacity: 0.9; }
+    .factory-rules-list li, .factory-steps li { margin-bottom: 6px; }
+    .factory-rules-list li:last-child, .factory-steps li:last-child { margin-bottom: 0; }
+    .factory-type-hints { display: grid; gap: 8px; margin-top: 4px; }
+    .factory-type-hint {
+      padding: 10px 12px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.84rem; line-height: 1.45;
+    }
+    .factory-type-hint strong { color: #fde68a; }
+    .pv-to-hub-btn, [id$="-to-hub"] { display: none !important; }
+    .factory-status { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+    .factory-status.local { background: #dbeafe; color: #1d4ed8; }
+    .factory-status.pending { background: #fef3c7; color: #b45309; }
+    .factory-status.published { background: #dcfce7; color: #15803d; }
+    .factory-status.rejected { background: #fee2e2; color: #b91c1c; }
     .factory-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .factory-chip {
       border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08);
@@ -3824,6 +3863,18 @@
       color: #fff;
     }
 
+    
+    .screen-pack {
+      background: linear-gradient(180deg, #0f172a 0%, #334155 55%, #0f172a 100%);
+      color: #fff;
+      padding: clamp(10px, 2vw, 18px);
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+    .screen-pack.active { align-items: stretch; }
+    .cover-card-pack .cover-meta h2 { color: #7c3aed; }
+
     #screen-tetris {
       background: linear-gradient(180deg, #0f172a 0%, #0369a1 55%, #0f172a 100%);
       color: #fff;
@@ -5118,6 +5169,39 @@
       .music-tab { top: 54px; }
       .hub-exit { padding: 10px 14px; font-size: 0.85rem; }
     }
+
+    /* ===== Мобильная адаптация PlayVerse ===== */
+    @media (max-width: 640px) {
+      .rbx-topbar { padding: 10px 12px 10px; }
+      .rbx-topbar-actions { right: 8px; gap: 6px; }
+      .rbx-beta-btn { font-size: 0.65rem; padding: 6px 8px; max-width: 92px; overflow: hidden; text-overflow: ellipsis; }
+      .rbx-logo-main { font-size: 1.35rem; }
+      .hub-grid { grid-template-columns: 1fr; --hub-row-h: clamp(220px, 42vw, 320px); gap: 12px; }
+      .hub-grid .cover-meta h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+      .rbx-bottom-nav { gap: 24px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
+      .rbx-nav-item { font-size: 0.7rem; min-height: 44px; }
+      .factory-grid-2 { grid-template-columns: 1fr !important; }
+      .factory-shell { padding: 0 4px; }
+      .profile-shell { padding: 12px; }
+      .profile-header { flex-wrap: wrap; gap: 8px; }
+      .pv-shell { padding: 0 4px; }
+      .pv-top h2 { font-size: 1.1rem; }
+      .pv-board-wrap canvas { max-width: 100%; height: auto !important; }
+      .pv-pad { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 280px; margin: 8px auto 0; }
+      .pv-pad button { min-height: 44px; font-size: 1.1rem; }
+      #hub-join { width: 100%; max-width: none; height: 100dvh; max-height: 100dvh; top: 0; left: 0; transform: translate(0, 8px) scale(0.98); border-radius: 18px 18px 0 0; }
+      #hub-join.active { transform: translate(0, 0) scale(1); }
+      .friends-page-title { padding-right: 0; font-size: 1.2rem; }
+      .profile-admin-row { flex-direction: column; align-items: stretch; }
+      .profile-admin-row input { width: 100%; }
+    }
+    @media (max-width: 380px) {
+      .rbx-beta-btn { display: none; }
+    }
+    body.on-cover, body.on-profile {
+      background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -5192,6 +5276,7 @@
     </div>
   </div>
 
+  <div id="hub-join-backdrop" aria-hidden="true"></div>
   <div id="hub-join" aria-hidden="true">
     <div class="hub-join-nav">
       <button type="button" class="hub-join-back" id="hub-join-back">
@@ -5395,6 +5480,9 @@
           <button type="button" class="profile-admin-btn danger" id="admin-block-btn">Заблокировать</button>
         </div>
         <div class="profile-admin-list" id="admin-blocked-list"></div>
+        <h3 style="margin:14px 0 8px;font-size:0.95rem;color:#475569">Игры на проверке <span id="admin-pending-count"></span></h3>
+        <p class="profile-admin-hint" style="margin-top:0">Сюда попадают игры из Фабрики, когда игрок нажимает «Выложить». Одобри — игра появится у всех в хабе.</p>
+        <div class="profile-admin-list" id="admin-pending-list"></div>
         <h3 style="margin:14px 0 8px;font-size:0.95rem;color:#475569">Игры в каталоге</h3>
         <div class="profile-admin-games" id="admin-games-list"></div>
         <h3 style="margin:14px 0 8px;font-size:0.95rem;color:#475569">Отчёт тестировщиков (39 игроков)</h3>
@@ -5462,6 +5550,7 @@
           <span class="rbx-logo-main">PlayVerse</span>
         </div>
         <div class="rbx-topbar-actions">
+          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">Новая версия</button>
           <button type="button" class="rbx-search-btn" id="hub-search-btn" aria-label="Поиск">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           </button>
@@ -6024,9 +6113,41 @@
     <div class="factory-shell">
       <div class="factory-top">
         <h2>Фабрика игр</h2>
-        <button type="button" class="factory-btn ghost" id="factory-to-hub">← В хаб</button>
       </div>
-      <p class="lead" style="margin:0;opacity:.85">Создавай мини-игры сам или с подсказками ИИ. Готовые игры сохраняются в этом браузере и появляются в хабе.</p>
+      <p class="lead" style="margin:0;opacity:.85">Создавай мини-игры сам или с подсказками ИИ. Сохраняй приватно или отправляй на проверку — после одобрения админа игра появится в хабе у всех.</p>
+
+      <div class="factory-panel factory-rules-panel">
+        <h3>Правила и инструкция</h3>
+        <div class="factory-rules-grid">
+          <div class="factory-rules-block">
+            <h4>Правила PlayVerse</h4>
+            <ul class="factory-rules-list">
+              <li>Название и тема — без оскорблений, мата и личных данных.</li>
+              <li>В викторине первый ответ после «|» — правильный.</li>
+              <li>«Сохранить у себя» — игра только у тебя в списке «Мои игры».</li>
+              <li>«Выложить» — игра уходит администратору на проверку, потом в общий каталог.</li>
+              <li>Перед публикацией нажми «Проверить» и убедись, что игра работает.</li>
+            </ul>
+          </div>
+          <div class="factory-rules-block">
+            <h4>Как создать игру</h4>
+            <ol class="factory-steps">
+              <li>Опиши идею в блоке «Идея + ИИ» или выбери готовый шаблон.</li>
+              <li>Нажми «Сгенерировать с ИИ» → «Подставить в конструктор».</li>
+              <li>Заполни название, тип, цель, время, цвет и эмодзи.</li>
+              <li>Для викторины добавь вопросы: <code>вопрос | верный | неправильный | …</code></li>
+              <li>Нажми «Проверить», поиграй, затем «Сохранить у себя» или «Выложить».</li>
+            </ol>
+          </div>
+        </div>
+        <div class="factory-type-hints">
+          <div class="factory-type-hint"><strong>Кликер</strong> — тапай по цели, набирай очки до цели или до конца времени.</div>
+          <div class="factory-type-hint"><strong>Ловец</strong> — двигай корзинку, лови падающие объекты. Цель — нужное количество пойманного.</div>
+          <div class="factory-type-hint"><strong>Викторина</strong> — вопросы с вариантами. Цель — пройти все вопросы или набрать нужный результат.</div>
+          <div class="factory-type-hint"><strong>Мемо</strong> — найди пары одинаковых эмодзи. Цель — число пар (4–8).</div>
+          <div class="factory-type-hint"><strong>Уклонялка</strong> — уворачивайся от препятствий. Цель — продержаться или набрать очки за время.</div>
+        </div>
+      </div>
 
       <div class="factory-grid-2">
         <div class="factory-panel">
@@ -6084,9 +6205,11 @@
             </label>
           </div>
           <div class="factory-actions">
-            <button type="button" class="factory-btn primary" id="factory-save">Сохранить игру</button>
-            <button type="button" class="factory-btn" id="factory-play-draft">Проверить сейчас</button>
+            <button type="button" class="factory-btn primary" id="factory-save-local">💾 Сохранить у себя</button>
+            <button type="button" class="factory-btn" id="factory-submit">📤 Выложить на PlayVerse</button>
+            <button type="button" class="factory-btn ghost" id="factory-play-draft">▶ Проверить</button>
           </div>
+          <p class="factory-publish-hint" id="factory-publish-hint">«Сохранить у себя» — только для тебя. «Выложить» — сначала проверка у администратора, потом в общем каталоге.</p>
         </div>
       </div>
 
@@ -6104,7 +6227,6 @@
       <div class="custom-stats">
         <span class="custom-pill" id="custom-score">Счёт: 0</span>
         <span class="custom-pill" id="custom-timer">Время: —</span>
-        <button type="button" class="factory-btn ghost" id="custom-to-hub">← В хаб</button>
       </div>
     </div>
     <div class="custom-stage" id="custom-stage">
@@ -7706,7 +7828,7 @@
       if (!screens[name]) return;
       Object.values(screens).forEach(s => s && s.classList.remove("active"));
       screens[name].classList.add("active");
-      const EXTRA_IDS = ["tetris","pong","dobble","mines","simon","space","runner","moles","catcher","maze","battleship","chess","checkers","tictactoe"];
+      const EXTRA_IDS = window.PV_EXTRA_GAME_IDS || ["tetris","pong","dobble","mines","simon","space","runner","moles","catcher","maze","battleship","chess","checkers","tictactoe"];
       let mode = null;
       if (name === "intro") mode = introGameMode;
       else if (name === "snake") mode = "snake";
@@ -8284,6 +8406,11 @@ const HUB_GAME_META = {
         hubJoin.classList.remove("active", "leaving");
         hubJoin.setAttribute("aria-hidden", "true");
       }
+      const hubBackdrop = document.getElementById("hub-join-backdrop");
+      if (hubBackdrop) {
+        hubBackdrop.classList.remove("active");
+        hubBackdrop.setAttribute("aria-hidden", "true");
+      }
       const overlay = document.getElementById("hub-join-loading-overlay");
       if (overlay) overlay.classList.remove("active");
       
@@ -8383,6 +8510,11 @@ const HUB_GAME_META = {
         hubJoin.setAttribute("aria-hidden", "false");
         const scroll = hubJoin.querySelector(".hub-join-content-scroll");
         if (scroll) scroll.scrollTop = 0;
+      }
+      const hubBackdrop = document.getElementById("hub-join-backdrop");
+      if (hubBackdrop) {
+        hubBackdrop.classList.add("active");
+        hubBackdrop.setAttribute("aria-hidden", "false");
       }
       
       document.querySelectorAll(".cover-card").forEach((c) => {
@@ -8528,6 +8660,15 @@ const HUB_GAME_META = {
           closeSearch();
         }
       });
+
+      const betaBtn = document.getElementById("hub-beta-btn");
+      if (betaBtn) {
+        betaBtn.addEventListener("click", () => {
+          if (window.PVProfile && typeof PVProfile.toast === "function") {
+            PVProfile.toast("Новая версия сайта — ещё в разработке");
+          }
+        });
+      }
     }
     initHubSearch();
 
@@ -8547,6 +8688,8 @@ const HUB_GAME_META = {
     }
 
     if (hubJoinBack) hubJoinBack.addEventListener("click", closeHubJoinPage);
+    const hubJoinBackdrop = document.getElementById("hub-join-backdrop");
+    if (hubJoinBackdrop) hubJoinBackdrop.addEventListener("click", closeHubJoinPage);
     if (hubJoinPlay) hubJoinPlay.addEventListener("click", startHubJoinLoading);
     if (hubJoinPlayTop) hubJoinPlayTop.addEventListener("click", startHubJoinLoading);
 
@@ -11521,15 +11664,6 @@ const HUB_GAME_META = {
         });
         actions.appendChild(fav);
       }
-      if (!document.getElementById(gameId + "-to-hub")) {
-        const hub = document.createElement("button");
-        hub.type = "button";
-        hub.className = "pv-btn ghost pv-to-hub-btn";
-        hub.id = gameId + "-to-hub";
-        hub.textContent = "← В хаб";
-        hub.addEventListener("click", () => { if (typeof exitToHub === "function") exitToHub(); });
-        actions.appendChild(hub);
-      }
       updateGameFavBtn(fav, gameId);
     }
 
@@ -13352,9 +13486,1286 @@ const HUB_GAME_META = {
 
 
 
+
+
+    /* ===== 30 НОВЫХ ИГР PlayVerse Pack ===== */
+    (function () {
+      const PACK_DEFS = [
+    { id: "pk_flappy", title: "Полёт", emoji: "🐦", color: "#0284c7", desc: "Пролетай между трубами. Тап, пробел или ● — взмах.", coin: "complete" },
+    { id: "pk_stack", title: "Башня", emoji: "🏗️", color: "#7c3aed", desc: "Строй башню — бросай блоки точно друг на друга.", coin: "complete" },
+    { id: "pk_wow", title: "Слова", emoji: "🧩", color: "#0d9488", desc: "Веди пальцем по буквам в круге — собери слова и заполни кроссворд.", coin: "complete" },
+    { id: "pk_frog", title: "Переход", emoji: "🐸", color: "#16a34a", desc: "Дойди до цели: дорога, река, бревна. Стрелки.", coin: "complete" },
+    { id: "pk_astro", title: "Астероиды", emoji: "☄️", color: "#475569", desc: "Стреляй по камням. Стрелки + пробел.", coin: "complete" },
+    { id: "pk_invade", title: "Захватчики", emoji: "👾", color: "#6366f1", desc: "Уничтожь всех пришельцев. ← → и пробел.", coin: "win" },
+    { id: "pk_c4", title: "4 в ряд", emoji: "🔴", color: "#dc2626", desc: "Клик по столбцу — брось фишку. 4 в ряд = победа.", coin: "win" },
+    { id: "pk_slide", title: "Пятнашки", emoji: "🧩", color: "#0891b2", desc: "Кликай клетку рядом с пустой, собери 1–15.", coin: "complete" },
+    { id: "pk_hang", title: "Слово", emoji: "📝", color: "#be185d", desc: "Угадай слово — кликай буквы на экране.", coin: "win" },
+    { id: "pk_reflex", title: "Рефлекс", emoji: "⚡", color: "#eab308", desc: "Жми ● или пробел, когда экран зелёный.", coin: "complete" },
+    { id: "pk_type", title: "Печать", emoji: "⌨️", color: "#0d9488", desc: "Набери слово с клавиатуры до конца таймера.", coin: "complete" },
+    { id: "pk_math", title: "Счёт", emoji: "➕", color: "#2563eb", desc: "Выбирай правильный ответ на примеры.", coin: "complete" },
+    { id: "pk_dart", title: "Дартс", emoji: "🎯", color: "#b91c1c", desc: "Клик по мишени — ближе к центру = больше очков.", coin: "complete" },
+    { id: "pk_bowl", title: "Боулинг", emoji: "🎳", color: "#4338ca", desc: "Клик — брось шар. Сбей как можно больше кеглей.", coin: "complete" },
+    { id: "pk_golf", title: "Гольф", emoji: "⛳", color: "#15803d", desc: "Клик по полю — направление и сила к лунке.", coin: "complete" },
+    { id: "pk_fish", title: "Рыбалка", emoji: "🎣", color: "#0369a1", desc: "Жми ●, когда поплавок дёрнется (3 рыбы).", coin: "complete" },
+    { id: "pk_beat", title: "Ритм", emoji: "🎵", color: "#c026d3", desc: "Жми ● в такт — 12 нот подряд.", coin: "complete" },
+    { id: "pk_bubble", title: "Пузыри", emoji: "🫧", color: "#06b6d4", desc: "Клик — выстрел. Собери 3+ одного цвета.", coin: "complete" },
+    { id: "pk_gem", title: "3 в ряд", emoji: "💎", color: "#db2777", desc: "Кликни два соседних камня, собери комбо.", coin: "complete" },
+    { id: "pk_pipe", title: "Трубы", emoji: "🔧", color: "#64748b", desc: "Клик — поворот трубы. Проведи воду A→B.", coin: "complete" },
+    { id: "pk_box", title: "Склады", emoji: "🧱", color: "#92400e", desc: "Стрелки толкают ящик на звезду.", coin: "complete" },
+    { id: "pk_fill", title: "Заливка", emoji: "🎨", color: "#f97316", desc: "Клик по цвету внизу — залей всё поле.", coin: "complete" },
+    { id: "pk_flip", title: "Гравитация", emoji: "🔄", color: "#4f46e5", desc: "Пробел меняет гравитацию. Дойди до выхода.", coin: "complete" },
+    { id: "pk_tilt", title: "Баланс", emoji: "⚖️", color: "#059669", desc: "← → наклоняй платформу, доведи шар до цели.", coin: "complete" },
+    { id: "pk_target", title: "Мишень", emoji: "🔫", color: "#991b1b", desc: "Кликай по мишеням — 20 секунд.", coin: "complete" },
+    { id: "pk_race", title: "Гонка", emoji: "🏎️", color: "#ea580c", desc: "← → меняй полосу, объезжай машины.", coin: "complete" },
+    { id: "pk_defense", title: "Оборона", emoji: "🛡️", color: "#1d4ed8", desc: "Кликай по врагам. Не дай им дойти до замка.", coin: "win" },
+    { id: "pk_word", title: "Поиск", emoji: "🔤", color: "#7c3aed", desc: "Найди слово в сетке — кликай буквы по порядку.", coin: "complete" },
+    { id: "pk_hue", title: "Оттенки", emoji: "🌈", color: "#ec4899", desc: "Кликни клетку с другим оттенком. 8 раундов.", coin: "complete" },
+    { id: "pk_pin", title: "Пинбол", emoji: "🎱", color: "#312e81", desc: "← → флипперы. Набери 3000 очков.", coin: "complete" }
+      ];
+      window.PACK_GAME_IDS = PACK_DEFS.map((d) => d.id);
+      if (!window.PV_EXTRA_GAME_IDS) window.PV_EXTRA_GAME_IDS = ["tetris","pong","dobble","mines","simon","space","runner","moles","catcher","maze","battleship","chess","checkers","tictactoe"];
+      window.PV_EXTRA_GAME_IDS = window.PV_EXTRA_GAME_IDS.concat(window.PACK_GAME_IDS);
+
+      const packBest = {};
+      PACK_DEFS.forEach((d) => { packBest[d.id] = 0; EXTRA_GAME_TITLES[d.id] = d.title; });
+
+      function esc(s) { return String(s).replace(/[&<>"']/g, (ch) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[ch])); }
+
+      function buildPackDom() {
+        const hubGrid = document.getElementById("hub-grid");
+        const factoryCard = document.getElementById("cover-card-factory");
+        const container = document.getElementById("pack-screens-root") || (function () {
+          const el = document.createElement("div");
+          el.id = "pack-screens-root";
+          document.body.appendChild(el);
+          return el;
+        })();
+
+        PACK_DEFS.forEach((d) => {
+          if (hubGrid && factoryCard && !document.getElementById("cover-card-" + d.id)) {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "cover-card cover-card-pack";
+            btn.id = "cover-card-" + d.id;
+            btn.setAttribute("aria-label", "Открыть игру " + d.title);
+            btn.innerHTML =
+              '<div class="cover-art" style="background:linear-gradient(145deg,' + d.color + 'cc,#0f172a)" aria-hidden="true">' +
+              '<div style="font-size:3rem;line-height:1;margin-top:18%">' + d.emoji + '</div>' +
+              '<h1 class="cover-title"><span>Игра</span>' + esc(d.title) + '</h1></div>' +
+              '<div class="cover-meta"><h2>' + esc(d.title) + '</h2><p>' + esc(d.desc) + '</p></div>';
+            hubGrid.insertBefore(btn, factoryCard);
+          }
+
+          if (!document.getElementById("screen-" + d.id)) {
+            container.insertAdjacentHTML("beforeend",
+              '<div id="screen-' + d.id + '" class="screen screen-pack">' +
+              '<div class="pv-shell"><div class="pv-top"><h2>' + esc(d.title) + '</h2>' +
+              '<div class="pv-stats"><span class="pv-pill" id="' + d.id + '-score">Счёт: 0</span>' +
+              '<span class="pv-pill" id="' + d.id + '-best">Рекорд: 0</span>' +
+              '<span class="pv-pill" id="' + d.id + '-extra">—</span></div></div>' +
+              '<div class="pv-board-wrap" id="' + d.id + '-board">' +
+              '<canvas id="' + d.id + '-canvas" width="480" height="480"></canvas>' +
+              '<div class="pv-overlay open" id="' + d.id + '-overlay">' +
+              '<h3 id="' + d.id + '-overlay-title">' + esc(d.title) + '</h3>' +
+              '<p id="' + d.id + '-overlay-text">' + esc(d.desc) + '</p>' +
+              '<div class="pv-diff-row" data-diff-for="' + d.id + '">' +
+              '<button type="button" class="pv-diff-btn" data-diff="easy">Лёгкая</button>' +
+              '<button type="button" class="pv-diff-btn active" data-diff="normal">Средняя</button>' +
+              '<button type="button" class="pv-diff-btn" data-diff="hard">Сложная</button></div>' +
+              '<div class="pv-actions"><button type="button" class="pv-btn primary" id="' + d.id + '-start">Играть</button></div>' +
+              '</div></div><p class="pv-hint">' + d.emoji + ' PlayVerse · ' + esc(d.title) + '</p>' +
+              '<p class="game-brand">PlayVerse</p>' +
+              '<div class="pv-pad" id="' + d.id + '-pad">' +
+              '<button type="button" data-dir="left">←</button><button type="button" data-dir="up">↑</button>' +
+              '<button type="button" data-dir="down">↓</button><button type="button" data-dir="right">→</button>' +
+              '<button type="button" data-dir="action">●</button></div></div></div>');
+          }
+
+          screens[d.id] = document.getElementById("screen-" + d.id);
+          if (typeof gameDifficulty !== "undefined") gameDifficulty[d.id] = "normal";
+          INTRO_TITLES[d.id] = d.title;
+          INTRO_START_LABELS[d.id] = "Играть!";
+          INTRO_BY_GAME[d.id] = [{ badge: "НОВИНКА · " + d.emoji, icon: "", chars: [], text: d.title, detail: d.desc }];
+          if (typeof OVERLAY_GAME_IDS !== "undefined" && OVERLAY_GAME_IDS.indexOf(d.id) === -1) OVERLAY_GAME_IDS.push(d.id);
+          if (typeof GAME_COIN_RULES !== "undefined" && !GAME_COIN_RULES[d.id]) GAME_COIN_RULES[d.id] = { amount: d.coin === "win" ? 2 : 1, kind: d.coin };
+        });
+      }
+
+      
+  function packDiff() {
+    const id = this._id;
+    return (typeof getDiff === "function" ? getDiff(id) : "normal");
+  }
+  function packMul(d) {
+    return d === "easy" ? 0.75 : d === "hard" ? 1.35 : 1;
+  }
+
+  const PACK_GAME_FACTORIES = {
+    pk_flappy: function(id, c, W, H, diff) {
+      const sp = packMul(diff) * 2.8;
+      const st = { y: H/2, vy: 0, pipes: [{ x: W+60, gap: H*0.32, top: 40+Math.random()*(H*0.35) }], score: 0, t: 0 };
+      return {
+        tick: function(inp) {
+          if (inp.flap) st.vy = -7.5;
+          st.vy += 0.42; st.y += st.vy; st.t++;
+          st.pipes.forEach(p => p.x -= sp);
+          if (st.pipes[0].x < -70) {
+            st.pipes.shift();
+            const gap = H * (diff === "hard" ? 0.26 : diff === "easy" ? 0.38 : 0.32);
+            st.pipes.push({ x: W+40, gap, top: 30+Math.random()*(H-gap-60) });
+            st.score++;
+          }
+          const p = st.pipes[0];
+          if (st.y < 8 || st.y > H-8) return { done: true, score: st.score*10, extra: "Трубы: "+st.score };
+          if (p && st.t > 20 && Math.abs(p.x - 80) < 36) {
+            if (st.y < p.top || st.y > p.top + p.gap) return { done: true, score: st.score*10, extra: "Трубы: "+st.score };
+          }
+          if (st.score >= (diff==="hard"?18:diff==="easy"?8:12)) return { done: true, score: st.score*10+50, extra: "Победа!", win: false };
+          return { score: st.score*10, extra: "Трубы: "+st.score };
+        },
+        draw: function() {
+          c.fillStyle="#0c4a6e"; c.fillRect(0,0,W,H);
+          c.fillStyle="#fde68a"; c.beginPath(); c.arc(80,st.y,14,0,Math.PI*2); c.fill();
+          st.pipes.forEach(p => {
+            c.fillStyle="#22c55e";
+            c.fillRect(p.x,0,52,p.top);
+            c.fillRect(p.x,p.top+p.gap,52,H-p.top-p.gap);
+          });
+        },
+        st: st
+      };
+    },
+    pk_stack: function(id,c,W,H,diff) {
+      const st = { blocks: [{x:W/2-50,w:100,y:H-40}], cur: {x:W/2-50,w:100,y:40,dir:1,sp:3*packMul(diff)}, score:0 };
+      return {
+        tick: function(inp) {
+          if (inp.drop) {
+            const b = st.blocks[st.blocks.length-1], cur = st.cur;
+            const overlap = Math.min(b.x+b.w, cur.x+cur.w) - Math.max(b.x, cur.x);
+            if (overlap <= 4) return { done:true, score:st.score*25, extra:"Этажей: "+st.score };
+            const nx = Math.max(b.x, cur.x), nw = overlap;
+            st.blocks.push({x:nx,w:nw,y:b.y-28});
+            st.score++;
+            st.cur = {x:0,w:nw,y:40,dir:1,sp:3.2*packMul(diff)+st.score*0.08};
+            if (st.score >= (diff==="hard"?14:diff==="easy"?6:10)) return { done:true, score:st.score*25+80, extra:"Башня!" };
+          } else {
+            st.cur.x += st.cur.dir*st.cur.sp;
+            if (st.cur.x <= 0 || st.cur.x+st.cur.w >= W) st.cur.dir *= -1;
+          }
+          return { score: st.score*25, extra: "Этаж: "+st.score };
+        },
+        draw: function() {
+          c.fillStyle="#1e1b4b"; c.fillRect(0,0,W,H);
+          st.blocks.forEach(b => { c.fillStyle="#a78bfa"; c.fillRect(b.x,b.y,b.w,24); });
+          c.fillStyle="#c4b5fd"; c.fillRect(st.cur.x,st.cur.y,st.cur.w,24);
+        },
+        st: st
+      };
+    },
+    pk_wow: function(id,c,W,H,diff) {
+      const LEVELS = [
+        {
+          rows: 3, cols: 5,
+          letters: ["К","О","Т","С","О","Н"],
+          words: [
+            { w: "КОТ", cells: [[0,1],[0,2],[0,3]] },
+            { w: "СОН", cells: [[2,0],[2,1],[2,2]] }
+          ]
+        },
+        {
+          rows: 3, cols: 6,
+          letters: ["М","О","Р","Е","Л","Ь","О"],
+          words: [
+            { w: "МОРЕ", cells: [[0,1],[0,2],[0,3],[0,4]] },
+            { w: "РОЛЬ", cells: [[2,0],[2,1],[2,2],[2,3]] }
+          ]
+        },
+        {
+          rows: 4, cols: 5,
+          letters: ["Н","Е","Б","О","Л","У","Н","А","С"],
+          words: [
+            { w: "НЕБО", cells: [[0,0],[0,1],[0,2],[0,3]] },
+            { w: "ЛУНА", cells: [[2,0],[2,1],[2,2],[2,3]] },
+            { w: "НОС", cells: [[3,0],[3,1],[3,2]] }
+          ]
+        }
+      ];
+      const lvl = LEVELS[diff === "hard" ? 2 : diff === "easy" ? 0 : 1];
+      const grid = Array.from({ length: lvl.rows }, () => Array(lvl.cols).fill(null));
+      lvl.words.forEach(({ w, cells }) => {
+        cells.forEach(([r, col], i) => {
+          grid[r][col] = { letter: w[i], filled: false };
+        });
+      });
+      const st = {
+        letters: lvl.letters,
+        grid: grid,
+        rows: lvl.rows,
+        cols: lvl.cols,
+        words: lvl.words,
+        pick: [],
+        found: {},
+        score: 0,
+        flash: "",
+        wheelCx: W / 2,
+        wheelCy: H * 0.78,
+        wheelR: Math.min(W, H) * 0.27,
+        letterPos: []
+      };
+      function layoutWheel() {
+        const n = st.letters.length;
+        st.letterPos = st.letters.map((_, i) => {
+          const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+          return { x: st.wheelCx + Math.cos(a) * st.wheelR, y: st.wheelCy + Math.sin(a) * st.wheelR, r: Math.min(30, W / (n + 2)) };
+        });
+      }
+      layoutWheel();
+      function hitLetter(x, y) {
+        for (let i = 0; i < st.letterPos.length; i++) {
+          const p = st.letterPos[i];
+          if (Math.hypot(x - p.x, y - p.y) < p.r + 6) return i;
+        }
+        return -1;
+      }
+      function addPick(idx) {
+        if (idx < 0 || st.pick.indexOf(idx) >= 0) return;
+        st.pick.push(idx);
+      }
+      function currentWord() {
+        return st.pick.map((i) => st.letters[i]).join("");
+      }
+      function submitWord() {
+        const word = currentWord();
+        st.pick = [];
+        if (word.length < 2) return;
+        const match = st.words.find((wd) => wd.w === word && !st.found[wd.w]);
+        if (match) {
+          st.found[word] = true;
+          match.cells.forEach(([r, col], i) => {
+            if (st.grid[r][col]) st.grid[r][col].filled = true;
+          });
+          st.score += word.length * 20;
+          st.flash = "✓ " + word;
+        } else {
+          st.flash = "— " + word;
+        }
+      }
+      return {
+        wheelMode: true,
+        hidePad: true,
+        hitLetter: hitLetter,
+        tick: function(inp) {
+          if (inp.wheel) {
+            if (inp.wheel.start) {
+              st.pick = [];
+              if (inp.wheel.pick >= 0) addPick(inp.wheel.pick);
+            } else if (inp.wheel.pick >= 0) {
+              addPick(inp.wheel.pick);
+            }
+            if (inp.wheel.submit) submitWord();
+          }
+          const need = st.words.length;
+          const got = Object.keys(st.found).length;
+          if (got >= need) {
+            return { done: true, score: st.score + 60, extra: "Кроссворд готов!", win: true };
+          }
+          const preview = currentWord();
+          return {
+            score: st.score,
+            extra: got + "/" + need + (preview ? " · " + preview : st.flash ? " · " + st.flash : " · веди по буквам")
+          };
+        },
+        draw: function() {
+          c.fillStyle = "#0c4a6e";
+          c.fillRect(0, 0, W, H);
+          const cs = Math.min((W - 24) / st.cols, H * 0.17);
+          const ox = (W - st.cols * (cs + 4)) / 2;
+          const oy = H * 0.06;
+          st.grid.forEach((row, r) => row.forEach((cell, col) => {
+            if (!cell) return;
+            const x = ox + col * (cs + 4), y = oy + r * (cs + 4);
+            c.fillStyle = cell.filled ? "#fde047" : "#1e293b";
+            c.strokeStyle = cell.filled ? "#f59e0b" : "#475569";
+            c.lineWidth = 2;
+            c.fillRect(x, y, cs, cs);
+            c.strokeRect(x, y, cs, cs);
+            if (cell.filled) {
+              c.fillStyle = "#0f172a";
+              c.font = "bold " + Math.floor(cs * 0.52) + "px sans-serif";
+              c.textAlign = "center";
+              c.fillText(cell.letter, x + cs / 2, y + cs * 0.68);
+            }
+          }));
+          c.fillStyle = "rgba(15,23,42,0.85)";
+          c.beginPath();
+          c.arc(st.wheelCx, st.wheelCy, st.wheelR + 38, 0, Math.PI * 2);
+          c.fill();
+          if (st.pick.length > 1) {
+            c.strokeStyle = "#fbbf24";
+            c.lineWidth = 5;
+            c.lineCap = "round";
+            c.beginPath();
+            st.pick.forEach((idx, i) => {
+              const p = st.letterPos[idx];
+              if (i === 0) c.moveTo(p.x, p.y); else c.lineTo(p.x, p.y);
+            });
+            c.stroke();
+          }
+          st.letters.forEach((ch, i) => {
+            const p = st.letterPos[i];
+            const sel = st.pick.indexOf(i) >= 0;
+            c.fillStyle = sel ? "#fbbf24" : "#334155";
+            c.beginPath();
+            c.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            c.fill();
+            c.strokeStyle = sel ? "#fff" : "#64748b";
+            c.lineWidth = 2;
+            c.stroke();
+            c.fillStyle = sel ? "#1e293b" : "#f8fafc";
+            c.font = "bold " + Math.floor(p.r * 0.85) + "px sans-serif";
+            c.textAlign = "center";
+            c.fillText(ch, p.x, p.y + p.r * 0.32);
+          });
+          const cw = currentWord();
+          if (cw) {
+            c.fillStyle = "#fff";
+            c.font = "bold 18px sans-serif";
+            c.textAlign = "center";
+            c.fillText(cw, st.wheelCx, st.wheelCy - st.wheelR - 16);
+          }
+        },
+        st: st
+      };
+    },
+    pk_frog: function(id,c,W,H,diff) {
+      const lanes=5, st={x:2,y:lanes-1,goal:false,score:0,t:0,cars:[]};
+      for(let i=0;i<4;i++) st.cars.push({y:i,items:Array.from({length:4},(_,k)=>({x:k*2+(i%2),sp:(i%2?1:-1)*(1.2+packMul(diff)*0.5)}))});
+      return {
+        tick: function(inp) {
+          st.t++;
+          if (inp.dir==="up"&&st.y>0) st.y--;
+          if (inp.dir==="down"&&st.y<lanes-1) st.y++;
+          if (inp.dir==="left"&&st.x>0) st.x--;
+          if (inp.dir==="right"&&st.x<5) st.x++;
+          st.cars.forEach(l=>l.items.forEach(it=>{ it.x+=it.sp*0.08; if(it.x>6)it.x=-1; if(it.x<-1)it.x=6; }));
+          if (st.y<4) {
+            st.cars.forEach(l=>{
+              if(l.y===st.y-1) l.items.forEach(it=>{
+                if(Math.abs(it.x-st.x)<0.6) { st.x=2; st.y=lanes-1; st.score=Math.max(0,st.score-20); }
+              });
+            });
+          }
+          if (st.y===0) { st.score+=100; return { done:true, score:st.score+200, extra:"Финиш!" }; }
+          if (st.t>900) return { done:true, score:st.score, extra:"Время" };
+          return { score: st.score+st.y*10, extra: "Ряд: "+(lanes-st.y) };
+        },
+        draw: function() {
+          c.fillStyle="#14532d"; c.fillRect(0,0,W,H);
+          for(let i=0;i<lanes;i++){
+            c.fillStyle=i===0?"#22c55e":i===lanes-1?"#854d0e":"#334155";
+            c.fillRect(0,i*(H/lanes),W,H/lanes);
+            if(i>0&&i<lanes-1) st.cars[i-1].items.forEach(it=>{
+              c.fillStyle="#ef4444"; c.fillRect(it.x*(W/6),i*(H/lanes)+4,W/6-4,H/lanes-8);
+            });
+          }
+          c.fillStyle="#4ade80"; c.fillRect(st.x*(W/6)+8,st.y*(H/lanes)+8,W/6-16,H/lanes-16);
+        },
+        st: st
+      };
+    },
+    pk_astro: function(id,c,W,H,diff) {
+      const st={x:W/2,y:H/2,rocks:[],bullets:[],score:0,angle:0,t:0,lives:3};
+      for(let i=0;i<5;i++) st.rocks.push({x:Math.random()*W,y:Math.random()*H,r:20+Math.random()*20,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2});
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(inp.dir==="left") st.angle-=0.08;
+          if(inp.dir==="right") st.angle+=0.08;
+          if(inp.action) st.bullets.push({x:st.x,y:st.y,vx:Math.cos(st.angle)*8,vy:Math.sin(st.angle)*8,life:60});
+          st.rocks.forEach(r=>{ r.x+=r.vx; r.y+=r.vy; if(r.x<0||r.x>W)r.vx*=-1; if(r.y<0||r.y>H)r.vy*=-1; });
+          st.bullets=st.bullets.filter(b=>{
+            b.x+=b.vx; b.y+=b.vy; b.life--;
+            st.rocks.forEach((r,i)=>{
+              if(Math.hypot(b.x-r.x,b.y-r.y)<r.r){ st.rocks.splice(i,1); st.score+=Math.floor(r.r);
+                if(r.r>14){st.rocks.push({x:r.x+10,y:r.y,r:r.r*0.55,vx:r.vx+0.5,vy:r.vy});st.rocks.push({x:r.x-10,y:r.y,r:r.r*0.55,vx:r.vx-0.5,vy:r.vy});}
+              }
+            });
+            return b.life>0&&b.x>0&&b.x<W&&b.y>0&&b.y<H;
+          });
+          st.rocks.forEach(r=>{ if(Math.hypot(r.x-st.x,r.y-st.y)<r.r+8){ st.lives--; r.x=Math.random()*W; r.y=Math.random()*H; }});
+          if(st.lives<=0) return { done:true, score:st.score, extra:"Жизни: 0" };
+          if(st.rocks.length===0) return { done:true, score:st.score+150, extra:"Чисто!" };
+          return { score: st.score, extra: "Жизни: "+st.lives+" · Камни: "+st.rocks.length };
+        },
+        draw: function() {
+          c.fillStyle="#0f172a"; c.fillRect(0,0,W,H);
+          st.rocks.forEach(r=>{ c.strokeStyle="#94a3b8"; c.beginPath(); c.arc(r.x,r.y,r.r,0,Math.PI*2); c.stroke(); });
+          st.bullets.forEach(b=>{ c.fillStyle="#fde047"; c.fillRect(b.x-2,b.y-2,4,4); });
+          c.save(); c.translate(st.x,st.y); c.rotate(st.angle);
+          c.fillStyle="#60a5fa"; c.fillRect(-12,-6,24,12); c.restore();
+        },
+        st: st
+      };
+    },
+    pk_invade: function(id,c,W,H,diff) {
+      const cols=8, rows=3, st={px:W/2,bullets:[],ebullets:[],inv:Array.from({length:rows},(_,r)=>Array.from({length:cols},(_,col)=>({x:40+col*48,y:40+r*36,alive:true}))),dir:1,score:0,t:0};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(inp.dir==="left") st.px=Math.max(30,st.px-6);
+          if(inp.dir==="right") st.px=Math.min(W-30,st.px+6);
+          if(inp.action&&st.bullets.length<2) st.bullets.push({x:st.px,y:H-50,vy:-7});
+          let edge=false;
+          st.inv.forEach(row=>row.forEach(inv=>{
+            if(!inv.alive)return;
+            inv.x+=st.dir*(1.2+packMul(diff));
+            if(inv.x<20||inv.x>W-30) edge=true;
+          }));
+          if(edge){st.dir*=-1; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)inv.y+=16;}));}
+          if(st.t%Math.floor(40/packMul(diff))===0){
+            const live=[]; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)live.push(inv);});
+            if(live.length) { const t=live[Math.floor(Math.random()*live.length)]; st.ebullets.push({x:t.x,y:t.y+20,vy:3}); }
+          }
+          st.bullets.forEach(b=>{ b.y+=b.vy; st.inv.forEach(row=>row.forEach(inv=>{
+            if(inv.alive&&Math.abs(b.x-inv.x)<20&&Math.abs(b.y-inv.y)<16){ inv.alive=false; st.score+=25; b.y=-99; }
+          })); });
+          st.ebullets.forEach(b=>{ b.y+=b.vy; if(Math.abs(b.x-st.px)<22&&Math.abs(b.y-(H-40))<14) b.y=999; });
+          st.bullets=st.bullets.filter(b=>b.y>0); st.ebullets=st.ebullets.filter(b=>b.y<H);
+          const left=st.inv.some(r=>r.some(i=>i.alive));
+          if(!left) return { done:true, score:st.score+100, extra:"Победа!", win:true };
+          if(st.inv.some(r=>r.some(i=>i.alive&&i.y>H-80))) return { done:true, score:st.score, extra:"Проигрыш" };
+          return { score: st.score, extra: "Очки: "+st.score };
+        },
+        draw: function() {
+          c.fillStyle="#020617"; c.fillRect(0,0,W,H);
+          st.inv.forEach(row=>row.forEach(inv=>{ if(!inv.alive)return; c.fillStyle="#a78bfa"; c.fillRect(inv.x,inv.y,28,22); }));
+          c.fillStyle="#22c55e"; c.fillRect(st.px-20,H-44,40,12);
+          st.bullets.forEach(b=>{ c.fillStyle="#fde047"; c.fillRect(b.x-2,b.y,4,10); });
+          st.ebullets.forEach(b=>{ c.fillStyle="#f87171"; c.fillRect(b.x-2,b.y,4,10); });
+        },
+        st: st
+      };
+    },
+    pk_c4: function(id,c,W,H,diff) {
+      const cols=7, rows=6, st={board:Array.from({length:rows},()=>Array(cols).fill(0)), turn:1, score:0, colHover:-1};
+      function checkWin(p) {
+        const d=[[1,0],[0,1],[1,1],[1,-1]];
+        for(let r=0;r<rows;r++) for(let col=0;col<cols;col++) if(st.board[r][col]===p)
+          for(const [dx,dy] of d) {
+            let n=1;
+            for(let k=1;k<4;k++){ const nr=r+dy*k,nc=col+dx*k; if(nr<0||nr>=rows||nc<0||nc>=cols||st.board[nr][nc]!==p)break; n++; }
+            if(n>=4) return true;
+          }
+        return false;
+      }
+      function botMove() {
+        for(let col=0;col<cols;col++){
+          for(let r=rows-1;r>=0;r--) if(!st.board[r][col]){ st.board[r][col]=2; return; }
+        }
+      }
+      function drop(col,p) {
+        for(let r=rows-1;r>=0;r--) if(!st.board[r][col]){ st.board[r][col]=p; return r; }
+        return -1;
+      }
+      return {
+        tick: function(inp) {
+          if (inp.click) {
+            const col=Math.floor(inp.click.x/(W/cols));
+            if(col>=0&&col<cols&&drop(col,1)>=0){
+              st.score+=10;
+              if(checkWin(1)) return { done:true, score:st.score+200, extra:"Победа!", win:true };
+              botMove();
+              if(checkWin(2)) return { done:true, score:st.score, extra:"Бот выиграл" };
+            }
+          }
+          return { score: st.score, extra: "Твой ход" };
+        },
+        draw: function() {
+          c.fillStyle="#1e3a8a"; c.fillRect(0,0,W,H);
+          const cw=W/cols, ch=H/rows;
+          for(let r=0;r<rows;r++) for(let col=0;col<cols;col++){
+            c.beginPath(); c.arc(col*cw+cw/2,r*ch+ch/2,cw*0.38,0,Math.PI*2);
+            c.fillStyle=st.board[r][col]===1?"#fde047":st.board[r][col]===2?"#f87171":"#1d4ed8"; c.fill();
+          }
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_slide: function(id,c,W,H,diff) {
+      const n=diff==="hard"?5:4, total=n*n;
+      let arr=Array.from({length:total-1},(_,i)=>i+1); arr.push(0);
+      for(let k=0;k<200;k++){ const i=arr.indexOf(0), moves=[];
+        if(i%n>0)moves.push(i-1); if(i%n<n-1)moves.push(i+1); if(i>=n)moves.push(i-n); if(i<total-n)moves.push(i+n);
+        const j=moves[Math.floor(Math.random()*moves.length)]; [arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+      const st={arr,score:0,moves:0};
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs), idx=row*n+col;
+            const zi=st.arr.indexOf(0), zr=Math.floor(zi/n), zc=zi%n;
+            if((Math.abs(row-zr)+Math.abs(col-zc))===1){
+              st.arr[zi]=st.arr[idx]; st.arr[idx]=0; st.moves++; st.score=Math.max(st.score,1000-st.moves*8);
+              if(st.arr.every((v,i)=>v===(i===total-1?0:i+1))) return { done:true, score:st.score+300, extra:"Собрано!" };
+            }
+          }
+          return { score: st.score, extra: "Ходы: "+st.moves };
+        },
+        draw: function() {
+          c.fillStyle="#0e7490"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/n-4;
+          st.arr.forEach((v,i)=>{
+            const col=i%n, row=Math.floor(i/n);
+            if(!v)return;
+            c.fillStyle="#bae6fd"; c.fillRect(col*(cs+4)+4,row*(cs+4)+4,cs,cs);
+            c.fillStyle="#0c4a6e"; c.font="bold "+Math.floor(cs*0.35)+"px sans-serif"; c.textAlign="center";
+            c.fillText(v,col*(cs+4)+4+cs/2,row*(cs+4)+4+cs*0.62);
+          });
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_hang: function(id,c,W,H,diff) {
+      const words=[\'РАКЕТА\', \'ПЛАНЕТА\', \'КОМЕТА\', \'ЗВЕЗДА\', \'ОРБИТА\', \'ПИЛОТ\', \'НЕБО\', \'ОБЛАКО\'];
+      const st={word:words[Math.floor(Math.random()*words.length)], guessed:new Set(), wrong:0, score:0};
+      return {
+        tick: function(inp) {
+          if(inp.key && inp.key.length===1) {
+            const ch=inp.key.toUpperCase();
+            if(st.word.includes(ch)&&!st.guessed.has(ch)){ st.guessed.add(ch); st.score+=15; }
+            else if(!st.guessed.has(ch)){ st.guessed.add(ch); st.wrong++; st.score=Math.max(0,st.score-5); }
+          }
+          if([...st.word].every(ch=>st.guessed.has(ch))) return { done:true, score:st.score+120, extra:"Угадано!", win:true };
+          if(st.wrong>=(diff==="hard"?4:diff==="easy"?8:6)) return { done:true, score:st.score, extra:"Слово: "+st.word };
+          return { score: st.score, extra: "Ошибок: "+st.wrong };
+        },
+        draw: function() {
+          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
+          c.strokeStyle="#fbcfe8"; c.lineWidth=3; c.beginPath(); c.moveTo(80,40); c.lineTo(80,200); c.lineTo(160,200); c.stroke();
+          c.fillStyle="#fff"; c.font="bold 22px sans-serif"; c.textAlign="center";
+          c.fillText([...st.word].map(ch=>st.guessed.has(ch)?ch:"_").join(" "),W/2,80);
+          c.font="14px sans-serif"; c.fillText("Кликай буквы на клавиатуре",W/2,110);
+        },
+        st: st, keyMode: true
+      };
+    },
+    pk_reflex: function(id,c,W,H,diff) {
+      const st={phase:"wait",t:0,score:0,round:0,wait:60+Math.random()*120};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(st.phase==="wait"&&st.t>st.wait){ st.phase="go"; st.t=0; }
+          if(st.phase==="go"&&inp.action){
+            const pts=Math.max(10,120-st.t); st.score+=pts; st.round++;
+            st.phase="wait"; st.t=0; st.wait=50+Math.random()*80;
+            if(st.round>=(diff==="hard"?8:diff==="easy"?4:6)) return { done:true, score:st.score, extra:"Ср:"+Math.round(st.score/st.round) };
+          }
+          if(st.phase==="wait"&&inp.action&&st.t>10) return { done:true, score:Math.max(0,st.score-30), extra:"Рано!" };
+          return { score: st.score, extra: st.phase==="go"?"ЖМИ!":"Жди зелёный..." };
+        },
+        draw: function() {
+          c.fillStyle=st.phase==="go"?"#22c55e":"#ca8a04"; c.fillRect(0,0,W,H);
+          c.fillStyle="#fff"; c.font="bold 28px sans-serif"; c.textAlign="center";
+          c.fillText(st.phase==="go"?"ЖМИ!":"Жди...",W/2,H/2);
+        },
+        st: st
+      };
+    },
+    pk_type: function(id,c,W,H,diff) {
+      const words=[\'игра\', \'небо\', \'скорость\', \'победа\', \'космос\', \'робот\', \'звезда\', \'мир\'];
+      const st={word:words[Math.floor(Math.random()*words.length)], typed:"", score:0, t:0, limit:diff==="hard"?180:diff==="easy"?400:280};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(inp.key&&inp.key.length===1){
+            const ch=inp.key.toLowerCase();
+            if(ch===st.word[st.typed.length]){ st.typed+=ch; st.score+=12; }
+            else st.score=Math.max(0,st.score-3);
+          }
+          if(st.typed===st.word) return { done:true, score:st.score+100, extra:"Готово!" };
+          if(st.t>st.limit) return { done:true, score:st.score, extra:"Время" };
+          return { score: st.score, extra: st.typed+"_"+st.word.slice(st.typed.length) };
+        },
+        draw: function() {
+          c.fillStyle="#115e59"; c.fillRect(0,0,W,H);
+          c.fillStyle="#fff"; c.font="bold 32px monospace"; c.textAlign="center";
+          c.fillText(st.word,W/2,H/2-20);
+          c.font="20px monospace"; c.fillText(st.typed,W/2,H/2+30);
+        },
+        st: st, keyMode: true
+      };
+    },
+    pk_math: function(id,c,W,H,diff) {
+      function mk() {
+        const a=1+Math.floor(Math.random()*9*(diff==="hard"?3:1));
+        const b=1+Math.floor(Math.random()*9);
+        const op=["+","-","×"][Math.floor(Math.random()* (diff==="hard"?3:2))];
+        const ans=op==="+"?a+b:op==="-"?a-b:a*b;
+        const opts=[ans,ans+1+Math.floor(Math.random()*3),ans-1-Math.floor(Math.random()*3),ans+5].sort(()=>Math.random()-0.5);
+        return { q:a+" "+op+" "+b+" = ?", ans, opts };
+      }
+      const st={cur:mk(), score:0, round:0, max:diff==="hard"?15:diff==="easy"?6:10};
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const idx=Math.floor(inp.click.y/(H/4));
+            const opts=st.cur.opts;
+            if(idx>=0&&idx<4){
+              if(opts[idx]===st.cur.ans){ st.score+=20; st.round++; st.cur=mk(); }
+              else st.score=Math.max(0,st.score-8);
+            }
+          }
+          if(st.round>=st.max) return { done:true, score:st.score, extra:"Примеров: "+st.max };
+          return { score: st.score, extra: st.cur.q };
+        },
+        draw: function() {
+          c.fillStyle="#1e40af"; c.fillRect(0,0,W,H);
+          c.fillStyle="#fff"; c.font="bold 26px sans-serif"; c.textAlign="center";
+          c.fillText(st.cur.q,W/2,60);
+          st.cur.opts.forEach((o,i)=>{
+            c.fillStyle="#3b82f6"; c.fillRect(40,80+i*(H/4),W-80,H/4-16);
+            c.fillStyle="#fff"; c.fillText(o,W/2,80+i*(H/4)+(H/4)/2+8);
+          });
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_dart: function(id,c,W,H,diff) {
+      const st={score:0,shots:0,max:diff==="hard"?8:diff==="easy"?4:6};
+      return {
+        tick: function(inp) {
+          if(inp.click&&st.shots<st.max){
+            const cx=W/2, cy=H/2, dx=inp.click.x-cx, dy=inp.click.y-cy, dist=Math.hypot(dx,dy);
+            const pts=Math.max(5,Math.round(100-dist*0.6)); st.score+=pts; st.shots++;
+          }
+          if(st.shots>=st.max) return { done:true, score:st.score, extra:"Бросков: "+st.max };
+          return { score: st.score, extra: "Бросок "+(st.shots+1)+"/"+st.max };
+        },
+        draw: function() {
+          c.fillStyle="#450a0a"; c.fillRect(0,0,W,H);
+          const cx=W/2,cy=H/2;
+          ["#ef4444","#fde047","#22c55e","#1d4ed8"].forEach((col,i)=>{
+            c.beginPath(); c.arc(cx,cy,90-i*22,0,Math.PI*2); c.fillStyle=col; c.fill();
+          });
+          c.beginPath(); c.arc(cx,cy,8,0,Math.PI*2); c.fillStyle="#fff"; c.fill();
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_bowl: function(id,c,W,H,diff) {
+      const st={pins:Array.from({length:10},(_,i)=>({x:60+(i%5)*70,y:80+Math.floor(i/5)*30,up:true})), ball:null, score:0, rolls:0, max:diff==="hard"?4:2};
+      return {
+        tick: function(inp) {
+          if(!st.ball&&inp.click&&st.rolls<st.max){
+            st.ball={x:W/2,y:H-40,vx:(inp.click.x-W/2)*0.08,vy:-8-Math.random()*3};
+            st.rolls++;
+          }
+          if(st.ball){
+            st.ball.x+=st.ball.vx; st.ball.y+=st.ball.vy; st.ball.vy+=0.25;
+            st.pins.forEach(p=>{ if(p.up&&Math.hypot(st.ball.x-p.x,st.ball.y-p.y)<22){ p.up=false; st.score+=15; }});
+            if(st.ball.y>H) st.ball=null;
+          }
+          if(st.rolls>=st.max&&!st.ball) return { done:true, score:st.score, extra:"Кегли: "+st.pins.filter(p=>!p.up).length };
+          return { score: st.score, extra: "Бросок "+st.rolls+"/"+st.max };
+        },
+        draw: function() {
+          c.fillStyle="#312e81"; c.fillRect(0,0,W,H);
+          st.pins.forEach(p=>{ if(!p.up)return; c.fillStyle="#fff"; c.beginPath(); c.arc(p.x,p.y,12,0,Math.PI*2); c.fill(); });
+          if(st.ball){ c.fillStyle="#f87171"; c.beginPath(); c.arc(st.ball.x,st.ball.y,14,0,Math.PI*2); c.fill(); }
+          else { c.fillStyle="#94a3b8"; c.beginPath(); c.arc(W/2,H-40,14,0,Math.PI*2); c.fill(); }
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_golf: function(id,c,W,H,diff) {
+      const st={bx:60,by:H-60,hole:{x:W-60,y:60},score:0,strokes:0,max:diff==="hard"?6:diff==="easy"?10:8};
+      return {
+        tick: function(inp) {
+          if(inp.click&&st.strokes<st.max){
+            const dx=inp.click.x-st.bx, dy=inp.click.y-st.by;
+            st.bx+=dx*0.15; st.by+=dy*0.15; st.strokes++; st.score+=5;
+            if(Math.hypot(st.bx-st.hole.x,st.by-st.hole.y)<20) return { done:true, score:st.score+200-st.strokes*10, extra:"Лунка!" };
+          }
+          if(st.strokes>=st.max) return { done:true, score:st.score, extra:"Удары: "+st.strokes };
+          return { score: st.score, extra: "Удар "+(st.strokes+1) };
+        },
+        draw: function() {
+          c.fillStyle="#166534"; c.fillRect(0,0,W,H);
+          c.fillStyle="#22c55e"; c.beginPath(); c.arc(st.hole.x,st.hole.y,16,0,Math.PI*2); c.fill();
+          c.fillStyle="#fff"; c.beginPath(); c.arc(st.bx,st.by,10,0,Math.PI*2); c.fill();
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_fish: function(id,c,W,H,diff) {
+      const st={phase:"wait",t:0,score:0,caught:0,need:diff==="hard"?5:diff==="easy"?2:3,biteAt:0};
+      function reset(){ st.phase="wait"; st.t=0; st.biteAt=80+Math.random()*120; }
+      reset();
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(st.phase==="wait"&&st.t>=st.biteAt) st.phase="bite";
+          if(st.phase==="bite"&&st.t-st.biteAt>(diff==="hard"?25:40)) { st.phase="miss"; st.t=0; reset(); }
+          if(inp.action){
+            if(st.phase==="bite"){ st.score+=50; st.caught++; reset(); if(st.caught>=st.need) return { done:true, score:st.score, extra:"Улов!" }; }
+            else { st.score=Math.max(0,st.score-10); reset(); }
+          }
+          return { score: st.score, extra: "Рыба: "+st.caught+"/"+st.need+(st.phase==="bite"?" — ЖМИ!":"") };
+        },
+        draw: function() {
+          c.fillStyle="#0c4a6e"; c.fillRect(0,0,W,H);
+          c.fillStyle="#0369a1"; c.fillRect(0,H*0.55,W,H*0.45);
+          c.fillStyle=st.phase==="bite"?"#fde047":"#fff";
+          c.beginPath(); c.arc(W/2,H*0.45,8,0,Math.PI*2); c.fill();
+        },
+        st: st
+      };
+    },
+    pk_beat: function(id,c,W,H,diff) {
+      const st={t:0,score:0,hit:0,need:diff==="hard"?16:diff==="easy"?8:12,next:60};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(st.t>=st.next){
+            if(inp.action){ st.score+=40; st.hit++; } else st.score=Math.max(0,st.score-15);
+            st.next=st.t+(diff==="hard"?35:50);
+            if(st.hit>=st.need) return { done:true, score:st.score, extra:"Ритм!" };
+          }
+          return { score: st.score, extra: "Нота "+st.hit+"/"+st.need };
+        },
+        draw: function() {
+          c.fillStyle="#701a75"; c.fillRect(0,0,W,H);
+          const prog=Math.min(1,(st.t%st.next)/st.next);
+          c.strokeStyle="#f0abfc"; c.lineWidth=6; c.beginPath(); c.arc(W/2,H/2,70,0,Math.PI*2*prog); c.stroke();
+          c.fillStyle="#fff"; c.font="bold 24px sans-serif"; c.textAlign="center"; c.fillText("●",W/2,H/2+8);
+        },
+        st: st
+      };
+    },
+    pk_bubble: function(id,c,W,H,diff) {
+      const colors=["#ef4444","#3b82f6","#22c55e","#eab308","#a855f7"];
+      const cols=8, rows=10, st={grid:Array.from({length:rows},()=>Array.from({length:cols},()=>colors[Math.floor(Math.random()*colors.length)])), shooter:colors[0], score:0, shots:0, max:diff==="hard"?25:15};
+      function pop(r,col) {
+        const colr=st.grid[r][col]; if(!colr)return 0;
+        const q=[[r,col]], seen=new Set([r+","+col]), n=0;
+        while(q.length){
+          const [rr,cc]=q.pop(); if(st.grid[rr][cc]!==colr)continue;
+          st.grid[rr][cc]=null; n++;
+          [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc])=>{
+            const nr=rr+dr,nc=cc+dc,k=nr+","+nc;
+            if(nr>=0&&nr<rows&&nc>=0&&nc<cols&&!seen.has(k)&&st.grid[nr][nc]===colr){ seen.add(k); q.push([nr,nc]); }
+          });
+        }
+        return n;
+      }
+      return {
+        tick: function(inp) {
+          if(inp.click&&st.shots<st.max){
+            const col=Math.floor(inp.click.x/(W/cols));
+            if(col>=0&&col<cols){
+              for(let r=rows-1;r>=0;r--) if(st.grid[r][col]){ st.grid[r][col]=st.shooter; break; }
+              let p=0; for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) if(st.grid[r][c]){ const n=pop(r,c); if(n>=3){ p+=n*10; st.score+=n*10; } }
+              st.shooter=colors[Math.floor(Math.random()*colors.length)]; st.shots++;
+            }
+          }
+          if(st.shots>=st.max) return { done:true, score:st.score, extra:"Выстрелов: "+st.max };
+          return { score: st.score, extra: "Цвет: "+st.shooter };
+        },
+        draw: function() {
+          c.fillStyle="#164e63"; c.fillRect(0,0,W,H);
+          const cw=W/cols, ch=H/rows;
+          st.grid.forEach((row,r)=>row.forEach((col,cc)=>{
+            if(!col)return;
+            c.fillStyle=col; c.beginPath(); c.arc(cc*cw+cw/2,r*ch+ch/2,cw*0.38,0,Math.PI*2); c.fill();
+          }));
+          c.fillStyle=st.shooter; c.beginPath(); c.arc(W/2,H-20,16,0,Math.PI*2); c.fill();
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_gem: function(id,c,W,H,diff) {
+      const colors=["#f472b6","#38bdf8","#4ade80","#fbbf24"];
+      const n=6, st={grid:Array.from({length:n},()=>Array.from({length:n},()=>colors[Math.floor(Math.random()*4)])), sel:null, score:0, moves:0, max:diff==="hard"?18:12};
+      function swap(r1,c1,r2,c2){
+        const t=st.grid[r1][c1]; st.grid[r1][c1]=st.grid[r2][c2]; st.grid[r2][c2]=t;
+        let ok=false;
+        for(let r=0;r<n;r++) for(let c=0;c<n-2;c++) if(st.grid[r][c]&&st.grid[r][c]===st.grid[r][c+1]&&st.grid[r][c]===st.grid[r][c+2]) ok=true;
+        if(!ok){ swap(r2,c2,r1,c1); return false; }
+        st.moves++; st.score+=30; return true;
+      }
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
+            if(!st.sel) st.sel=[row,col];
+            else { swap(st.sel[0],st.sel[1],row,col); st.sel=null; }
+          }
+          if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы: "+st.max };
+          return { score: st.score, extra: "Ходы: "+st.moves+"/"+st.max };
+        },
+        draw: function() {
+          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/n-4;
+          st.grid.forEach((row,r)=>row.forEach((col,c)=>{
+            c.fillStyle=col; c.fillRect(c*(cs+4)+4,r*(cs+4)+4,cs,cs);
+            if(st.sel&&st.sel[0]===r&&st.sel[1]===c){ c.strokeStyle="#fff"; c.lineWidth=3; c.strokeRect(c*(cs+4)+4,r*(cs+4)+4,cs,cs); }
+          }));
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_pipe: function(id,c,W,H,diff) {
+      const n=5, types=[0,1,2,3];
+      const st={grid:Array.from({length:n},()=>Array.from({length:n},()=>Math.floor(Math.random()*4))), score:0, connected:false};
+      st.grid[0][0]=1; st.grid[n-1][n-1]=1;
+      function flows() {
+        const q=[[0,0]], seen=new Set(["0,0"]);
+        while(q.length){
+          const [r,c]=q.pop(); if(r===n-1&&c===n-1) return true;
+          [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc],i)=>{
+            const nr=r+dr,nc=c+dc,k=nr+","+nc;
+            if(nr>=0&&nr<n&&nc>=0&&nc<n&&!seen.has(k)) { seen.add(k); q.push([nr,nc]); }
+          });
+        }
+        return false;
+      }
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
+            if(row>=0&&row<n&&col>=0&&col<n){ st.grid[row][col]=(st.grid[row][col]+1)%4; st.score+=5; }
+            if(flows()) return { done:true, score:st.score+150, extra:"Вода пошла!" };
+          }
+          return { score: st.score, extra: "Клик — поворот" };
+        },
+        draw: function() {
+          c.fillStyle="#334155"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/n-6;
+          st.grid.forEach((row,r)=>row.forEach((t,col)=>{
+            c.fillStyle="#64748b"; c.fillRect(col*(cs+6)+6,r*(cs+6)+6,cs,cs);
+            c.strokeStyle="#38bdf8"; c.lineWidth=4;
+            c.beginPath();
+            if(t%2===0){ c.moveTo(col*(cs+6)+6+cs/2,r*(cs+6)+6); c.lineTo(col*(cs+6)+6+cs/2,r*(cs+6)+6+cs); }
+            else { c.moveTo(col*(cs+6)+6,r*(cs+6)+6+cs/2); c.lineTo(col*(cs+6)+6+cs,r*(cs+6)+6+cs/2); }
+            c.stroke();
+          }));
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_box: function(id,c,W,H,diff) {
+      const st={px:1,py:1,bx:3,by:1,gx:3,gy:3,score:0,moves:0,max:diff==="hard"?25:15};
+      return {
+        tick: function(inp) {
+          let dx=0,dy=0;
+          if(inp.dir==="left")dx=-1; if(inp.dir==="right")dx=1; if(inp.dir==="up")dy=-1; if(inp.dir==="down")dy=1;
+          if(dx||dy){
+            const nx=st.bx+dx, ny=st.by+dy;
+            if(nx<0||nx>4||ny<0||ny>4) return { score:st.score, extra:"Стена" };
+            if(nx===st.px&&ny===st.py){ st.px=st.bx; st.py=st.by; st.bx=nx; st.by=ny; st.moves++; st.score+=10; }
+            else if(nx!==st.px||ny!==st.py){ st.bx=nx; st.by=ny; st.moves++; st.score+=5; }
+            if(st.bx===st.gx&&st.by===st.gy) return { done:true, score:st.score+100, extra:"Цель!" };
+            if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы" };
+          }
+          return { score: st.score, extra: "Ходы: "+st.moves };
+        },
+        draw: function() {
+          c.fillStyle="#451a03"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/5;
+          c.fillStyle="#eab308"; c.fillRect(st.gx*cs+4,st.gy*cs+4,cs-8,cs-8);
+          c.fillStyle="#92400e"; c.fillRect(st.bx*cs+4,st.by*cs+4,cs-8,cs-8);
+          c.fillStyle="#22c55e"; c.fillRect(st.px*cs+4,st.py*cs+4,cs-8,cs-8);
+        },
+        st: st
+      };
+    },
+    pk_fill: function(id,c,W,H,diff) {
+      const n=8, colors=["#ef4444","#3b82f6","#22c55e","#eab308"];
+      const st={grid:Array.from({length:n},()=>Array.from({length:n},()=>colors[Math.floor(Math.random()*4)])), score:0, moves:0, max:diff==="hard"?12:20};
+      function flood(col,r,c,target,rep){
+        if(r<0||r>=n||c<0||c>=n||st.grid[r][c]!==target||st.grid[r][c]===rep)return;
+        st.grid[r][c]=rep; flood(col,r+1,c,target,rep); flood(col,r-1,c,target,rep); flood(col,r,c+1,target,rep); flood(col,r,c-1,target,rep);
+      }
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const idx=Math.floor(inp.click.y/(H-60)/(H/n));
+            const col=colors[Math.min(3,Math.max(0,Math.floor(inp.click.x/(W/4))))];
+            if(col&&col!==st.grid[0][0]){ flood(0,0,0,st.grid[0][0],col); st.moves++; st.score+=15;
+              if(st.grid.every(r=>r.every(v=>v===col))) return { done:true, score:st.score+100, extra:"Залито!" };
+            }
+          }
+          if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы" };
+          return { score: st.score, extra: "Ходы: "+st.moves+"/"+st.max };
+        },
+        draw: function() {
+          c.fillStyle="#7c2d12"; c.fillRect(0,0,W,H-60);
+          const cs=(H-60)/n;
+          st.grid.forEach((row,r)=>row.forEach((col,ci)=>{ c.fillStyle=col; c.fillRect(ci*cs,r*cs,cs,cs); }));
+          colors.forEach((col,i)=>{ c.fillStyle=col; c.fillRect(i*(W/4),H-50,W/4-4,40); });
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_flip: function(id,c,W,H,diff) {
+      const st={x:40,y:40,g:1,score:0,t:0,goal:{x:W-50,y:H-50}};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(inp.action) st.g*=-1;
+          st.y+=st.g*4; st.x+=2;
+          if(st.y>H-20){ st.y=H-20; st.g=-Math.abs(st.g); }
+          if(st.y<20){ st.y=20; st.g=Math.abs(st.g); }
+          if(Math.hypot(st.x-st.goal.x,st.y-st.goal.y)<24) return { done:true, score:st.score+200, extra:"Выход!" };
+          if(st.t>600) return { done:true, score:st.score, extra:"Время" };
+          st.score+=1;
+          return { score: st.score, extra: "Пробел — гравитация" };
+        },
+        draw: function() {
+          c.fillStyle="#312e81"; c.fillRect(0,0,W,H);
+          c.fillStyle="#22c55e"; c.fillRect(st.goal.x-12,st.goal.y-12,24,24);
+          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.x,st.y,14,0,Math.PI*2); c.fill();
+        },
+        st: st
+      };
+    },
+    pk_tilt: function(id,c,W,H,diff) {
+      const st={bx:W/2,by:40,angle:0,score:0,t:0,goal:{x:W/2,y:H-40}, holes:[{x:W*0.3,y:H*0.5,r:18},{x:W*0.7,y:H*0.65,r:18}]};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(inp.dir==="left") st.angle=Math.max(-0.35,st.angle-0.02);
+          if(inp.dir==="right") st.angle=Math.min(0.35,st.angle+0.02);
+          st.bx+=st.angle*8; st.by+=2+Math.abs(st.angle)*2;
+          st.holes.forEach(h=>{ if(Math.hypot(st.bx-h.x,st.by-h.y)<h.r){ st.bx=W/2; st.by=40; st.score=Math.max(0,st.score-20); }});
+          if(st.by>=st.goal.y-10&&Math.abs(st.bx-st.goal.x)<30) return { done:true, score:st.score+150, extra:"Цель!" };
+          if(st.t>700||st.by>H) return { done:true, score:st.score, extra:"Упал" };
+          st.score+=1;
+          return { score: st.score, extra: "Баланс" };
+        },
+        draw: function() {
+          c.fillStyle="#064e3b"; c.fillRect(0,0,W,H);
+          st.holes.forEach(h=>{ c.fillStyle="#022c22"; c.beginPath(); c.arc(h.x,h.y,h.r,0,Math.PI*2); c.fill(); });
+          c.fillStyle="#22c55e"; c.fillRect(0,H-20,W,20);
+          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.bx,st.by,12,0,Math.PI*2); c.fill();
+        },
+        st: st
+      };
+    },
+    pk_target: function(id,c,W,H,diff) {
+      const st={targets:[],score:0,t:0,limit:diff==="hard"?300:480};
+      function spawn(){ st.targets.push({x:30+Math.random()*(W-60),y:30+Math.random()*(H-60),r:16+Math.random()*14,life:80}); }
+      for(let i=0;i<3;i++) spawn();
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(st.t%40===0) spawn();
+          if(inp.click) st.targets.forEach((t,i)=>{
+            if(Math.hypot(inp.click.x-t.x,inp.click.y-t.y)<t.r){ st.score+=Math.round(50-t.r); st.targets.splice(i,1); spawn(); }
+          });
+          st.targets=st.targets.filter(t=>{ t.life--; return t.life>0; });
+          if(st.t>=st.limit) return { done:true, score:st.score, extra:"Время!" };
+          return { score: st.score, extra: "Сек: "+Math.floor((st.limit-st.t)/60) };
+        },
+        draw: function() {
+          c.fillStyle="#450a0a"; c.fillRect(0,0,W,H);
+          st.targets.forEach(t=>{ c.fillStyle="#ef4444"; c.beginPath(); c.arc(t.x,t.y,t.r,0,Math.PI*2); c.fill();
+            c.fillStyle="#fff"; c.beginPath(); c.arc(t.x,t.y,t.r*0.35,0,Math.PI*2); c.fill(); });
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_race: function(id,c,W,H,diff) {
+      const st={lane:1,score:0,t:0,cars:[]};
+      return {
+        tick: function(inp) {
+          st.t++; st.score+=2;
+          if(inp.dir==="left"&&st.lane>0) st.lane--;
+          if(inp.dir==="right"&&st.lane<2) st.lane++;
+          if(st.t%Math.floor(50/packMul(diff))===0) st.cars.push({lane:Math.floor(Math.random()*3),y:-40});
+          let crashed=false;
+          st.cars.forEach(car=>{ car.y+=5+packMul(diff)*2;
+            if(car.lane===st.lane&&car.y>H*0.7&&car.y<H*0.85) crashed=true;
+          });
+          if(crashed) return { done:true, score:st.score, extra:"Авария" };
+          st.cars=st.cars.filter(c=>c.y<H+40);
+          if(st.score>= (diff==="hard"?800:diff==="easy"?350:550)) return { done:true, score:st.score, extra:"Финиш!" };
+          return { score: st.score, extra: "Дистанция: "+st.score };
+        },
+        draw: function() {
+          c.fillStyle="#374151"; c.fillRect(0,0,W,H);
+          for(let i=0;i<3;i++){ c.fillStyle="#1f2937"; c.fillRect(i*(W/3)+4,0,W/3-8,H); }
+          st.cars.forEach(car=>{ c.fillStyle="#ef4444"; c.fillRect(car.lane*(W/3)+20,car.y,W/3-40,50); });
+          c.fillStyle="#3b82f6"; c.fillRect(st.lane*(W/3)+30,H*0.75,W/3-60,40);
+        },
+        st: st
+      };
+    },
+    pk_defense: function(id,c,W,H,diff) {
+      const st={enemies:[],score:0,base:100,t:0};
+      return {
+        tick: function(inp) {
+          st.t++;
+          if(st.t%Math.floor(55/packMul(diff))===0) st.enemies.push({x:20+Math.random()*(W-40),y:0,hp:2});
+          st.enemies.forEach((e,i)=>{
+            e.y+=2+packMul(diff);
+            if(inp.click&&Math.hypot(inp.click.x-e.x,inp.click.y-e.y)<22){ e.hp--; st.score+=15; if(e.hp<=0) st.enemies.splice(i,1); }
+            if(e.y>H-40) { st.base-=8; st.enemies.splice(i,1); }
+          });
+          if(st.base<=0) return { done:true, score:st.score, extra:"Замок пал" };
+          if(st.score>= (diff==="hard"?200:120)) return { done:true, score:st.score+80, extra:"Победа!", win:true };
+          return { score: st.score, extra: "База: "+st.base+"%" };
+        },
+        draw: function() {
+          c.fillStyle="#1e3a8a"; c.fillRect(0,0,W,H);
+          c.fillStyle="#64748b"; c.fillRect(0,H-36,W,36);
+          st.enemies.forEach(e=>{ c.fillStyle="#f87171"; c.fillRect(e.x-14,e.y-14,28,28); });
+          c.fillStyle="#fff"; c.font="14px sans-serif"; c.fillText("База "+st.base+"%",10,20);
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_word: function(id,c,W,H,diff) {
+      const words=["КОТ","СОН","МИР","ЛУНА","ИГРА","НЕБО"];
+      const word=words[Math.floor(Math.random()*words.length)];
+      const n=6, st={letters:word.split(""), found:[], grid:Array.from({length:n},()=>Array.from({length:n},()=>String.fromCharCode(1040+Math.floor(Math.random()*32)))), score:0, next:0};
+      for(let i=0;i<word.length;i++){ st.grid[i][i]=word[i]; }
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
+            if(st.grid[row][col]===st.letters[st.next]){ st.found.push(row+","+col); st.next++; st.score+=25;
+              if(st.next>=st.letters.length) return { done:true, score:st.score+80, extra:"Слово: "+word };
+            }
+          }
+          return { score: st.score, extra: "Буква "+(st.next+1)+"/"+st.letters.length };
+        },
+        draw: function() {
+          c.fillStyle="#4c1d95"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/n-4;
+          st.grid.forEach((row,r)=>row.forEach((ch,col)=>{
+            c.fillStyle=st.found.includes(r+","+col)?"#fde047":"#ddd6fe";
+            c.fillRect(col*(cs+4)+4,r*(cs+4)+4,cs,cs);
+            c.fillStyle="#312e81"; c.font="bold "+Math.floor(cs*0.45)+"px sans-serif"; c.textAlign="center";
+            c.fillText(ch,col*(cs+4)+4+cs/2,r*(cs+4)+4+cs*0.65);
+          }));
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_hue: function(id,c,W,H,diff) {
+      const st={round:0,score:0,base:120,odd:0,cells:Array.from({length:9},(_,i)=>i), max:diff==="hard"?10:6};
+      function newRound(){
+        st.base=100+Math.floor(Math.random()*80);
+        st.odd=Math.floor(Math.random()*9);
+        st.cells=Array.from({length:9},(_,i)=>i);
+      }
+      newRound();
+      return {
+        tick: function(inp) {
+          if(inp.click){
+            const cs=Math.min(W,H)/3, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs), idx=row*3+col;
+            if(idx===st.odd){ st.score+=30; st.round++; newRound(); if(st.round>=st.max) return { done:true, score:st.score, extra:"Глаз!" }; }
+            else st.score=Math.max(0,st.score-10);
+          }
+          return { score: st.score, extra: "Раунд "+(st.round+1)+"/"+st.max };
+        },
+        draw: function() {
+          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
+          const cs=Math.min(W,H)/3-6;
+          for(let i=0;i<9;i++){
+            const col=i%3, row=Math.floor(i/3);
+            const v=i===st.odd?st.base+18:st.base;
+            c.fillStyle="rgb("+v+","+Math.floor(v*0.6)+","+Math.floor(v*0.85)+")";
+            c.fillRect(col*(cs+6)+6,row*(cs+6)+6,cs,cs);
+          }
+        },
+        st: st, clickMode: true
+      };
+    },
+    pk_pin: function(id,c,W,H,diff) {
+      const st={bx:W/2,by:H*0.35,vx:3*(diff==="hard"?1.3:1),vy:2,score:0,lL:H-60,lR:H-60,goal:diff==="hard"?4000:3000};
+      return {
+        tick: function(inp) {
+          st.bx+=st.vx; st.by+=st.vy; st.vy+=0.15;
+          if(st.bx<16||st.bx>W-16) st.vx*=-1;
+          if(st.by>H-50){ st.by=H-50; st.vy=-Math.abs(st.vy)*0.92;
+            if(inp.dir==="left") st.lL=Math.max(H-120,st.lL-8);
+            if(inp.dir==="right") st.lR=Math.max(H-120,st.lR-8);
+            if(st.by>=st.lL-10&&st.bx<W/2) st.vy=-8-Math.random()*2;
+            if(st.by>=st.lR-10&&st.bx>W/2) st.vy=-8-Math.random()*2;
+            st.score+=5;
+          }
+          if(st.by<40) st.vy=Math.abs(st.vy);
+          if(st.score>=st.goal) return { done:true, score:st.score, extra:"Пинбол!" };
+          if(st.score>1500&&st.vy>0&&st.by>H) return { done:true, score:st.score, extra:"Шар ушёл" };
+          return { score: st.score, extra: "Цель: "+st.goal };
+        },
+        draw: function() {
+          c.fillStyle="#1e1b4b"; c.fillRect(0,0,W,H);
+          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.bx,st.by,10,0,Math.PI*2); c.fill();
+          c.fillStyle="#94a3b8"; c.fillRect(W/2-4,40,8,H-100);
+          c.fillStyle="#f87171"; c.fillRect(20,st.lL,W/2-30,12); c.fillRect(W/2+10,st.lR,W/2-30,12);
+        },
+        st: st
+      };
+    }
+  };
+
+
+      const packRunners = {};
+      let packActiveId = null;
+      let packRaf = 0;
+      let packInput = {};
+
+      function resetPackInput() { packInput = {}; }
+
+      function endPackGame(id, score, extra, title, text, coinEvent) {
+        if (window.PVPlayLog) {
+          PVPlayLog.record(id, "finish", "Счёт: " + score);
+          if (coinEvent) PVPlayLog.tryAward(id, coinEvent);
+        }
+        if (score > (packBest[id] || 0)) packBest[id] = score;
+        showExtraFinal(id, score, "Доп.", extra || "—", "Рекорд", packBest[id] || score, title, text, coinEvent);
+      }
+
+      function makePackRunner(def) {
+        const id = def.id;
+        let running = false;
+        let engine = null;
+        const canvas = () => document.getElementById(id + "-canvas");
+        function stop() { running = false; if (packRaf) cancelAnimationFrame(packRaf); packRaf = 0; packActiveId = null; resetPackInput(); }
+        function loop() {
+          if (!running || packActiveId !== id) return;
+          const cnv = canvas();
+          if (!cnv || !engine) return;
+          const ctx = cnv.getContext("2d");
+          const W = cnv.width, H = cnv.height;
+          const res = engine.tick(packInput);
+          resetPackInput();
+          if (engine.draw) engine.draw(ctx, W, H);
+          if (res && res.score != null) setExtraHud(id, res.score, res.extra || "—");
+          if (res && res.done) {
+            const coin = res.win ? "win" : (def.coin || "complete");
+            endPackGame(id, res.score || 0, res.extra, res.win ? "Победа!" : "Партия окончена",
+              "Ты набрал " + (res.score || 0) + " очков в «" + def.title + "».", res.win ? coin : def.coin);
+            stop();
+            return;
+          }
+          packRaf = requestAnimationFrame(loop);
+        }
+        function start() {
+          stop();
+          packActiveId = id;
+          hideExtraOverlay(id);
+          const cnv = canvas();
+          if (!cnv) return;
+          const factory = PACK_GAME_FACTORIES[id];
+          if (!factory) return;
+          engine = factory(id, cnv.getContext("2d"), cnv.width, cnv.height, getDiff(id));
+          running = true;
+          setExtraHud(id, 0, "—");
+          loop();
+        }
+        function open() {
+          stop();
+          showScreen(id);
+          setExtraHud(id, 0, "—");
+          openExtraOverlay(id, def.title, def.desc);
+        }
+        EXTRA_STOPPERS[id] = stop;
+        EXTRA_OPENERS[id] = open;
+        bindExtraShell(id, start);
+        packRunners[id] = { stop, start, open };
+
+        const cnv = () => document.getElementById(id + "-canvas");
+        let wheelDragging = false;
+        function canvasPoint(e) {
+          const cnvEl = cnv();
+          if (!cnvEl) return null;
+          const rect = cnvEl.getBoundingClientRect();
+          return {
+            x: (e.clientX - rect.left) * (cnvEl.width / rect.width),
+            y: (e.clientY - rect.top) * (cnvEl.height / rect.height)
+          };
+        }
+        document.addEventListener("keydown", (e) => {
+          if (!running || packActiveId !== id) return;
+          if (!screens[id] || !screens[id].classList.contains("active")) return;
+          if (engine && engine.keyMode) {
+            if (e.key.length === 1) { packInput.key = e.key; e.preventDefault(); }
+            return;
+          }
+          if (e.key === "ArrowLeft") { packInput.dir = "left"; e.preventDefault(); }
+          if (e.key === "ArrowRight") { packInput.dir = "right"; e.preventDefault(); }
+          if (e.key === "ArrowUp") { packInput.dir = "up"; e.preventDefault(); }
+          if (e.key === "ArrowDown") { packInput.dir = "down"; e.preventDefault(); }
+          if (e.key === " " || e.key === "Enter") { packInput.action = true; packInput.flap = true; packInput.drop = true; e.preventDefault(); }
+        });
+        const board = document.getElementById(id + "-board");
+        if (board) {
+          board.addEventListener("click", (e) => {
+            if (!running || packActiveId !== id || !engine || !engine.clickMode) return;
+            const cnvEl = cnv(); if (!cnvEl) return;
+            const rect = cnvEl.getBoundingClientRect();
+            packInput.click = { x: (e.clientX - rect.left) * (cnvEl.width / rect.width), y: (e.clientY - rect.top) * (cnvEl.height / rect.height) };
+          });
+          board.addEventListener("pointerdown", (e) => {
+            if (!running || packActiveId !== id || !engine || !engine.wheelMode) return;
+            wheelDragging = true;
+            try { board.setPointerCapture(e.pointerId); } catch (err) {}
+            const pt = canvasPoint(e);
+            if (pt && engine.hitLetter) {
+              packInput.wheel = { start: true, pick: engine.hitLetter(pt.x, pt.y) };
+            }
+          });
+          board.addEventListener("pointermove", (e) => {
+            if (!wheelDragging || !running || packActiveId !== id || !engine || !engine.wheelMode) return;
+            const pt = canvasPoint(e);
+            if (pt && engine.hitLetter) {
+              packInput.wheel = { pick: engine.hitLetter(pt.x, pt.y) };
+            }
+          });
+          board.addEventListener("pointerup", (e) => {
+            if (!wheelDragging || !engine || !engine.wheelMode) return;
+            wheelDragging = false;
+            try { board.releasePointerCapture(e.pointerId); } catch (err) {}
+            packInput.wheel = { submit: true };
+          });
+          board.addEventListener("pointercancel", () => {
+            if (wheelDragging && engine && engine.wheelMode) {
+              wheelDragging = false;
+              packInput.wheel = { submit: true };
+            }
+          });
+        }
+        const pad = document.getElementById(id + "-pad");
+        if (pad) {
+          if (def.id === "pk_wow") pad.style.display = "none";
+          pad.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-dir]");
+          if (!btn || !running || packActiveId !== id) return;
+          const d = btn.getAttribute("data-dir");
+          if (d === "action") { packInput.action = true; packInput.flap = true; packInput.drop = true; }
+          else packInput.dir = d;
+        });
+        }
+      }
+
+      buildPackDom();
+      PACK_DEFS.forEach(makePackRunner);
+      if (typeof bindDiffRows === "function") bindDiffRows();
+      if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
+      if (typeof enhanceHubCardRatings === "function") enhanceHubCardRatings();
+    })();
+
+
     /* ===== ФАБРИКА ИГР ===== */
     (function () {
-      const STORE_KEY = "pvFactoryGames_v1";
+      const STORE_LOCAL = "pvFactoryLocal_v1";
+      const STORE_PENDING = "pvFactoryPending_v1";
+      const STORE_PUBLISHED = "pvFactoryPublished_v1";
+      const STORE_KEY_LEGACY = "pvFactoryGames_v1";
       const hubGrid = document.querySelector(".hub-grid");
       const listEl = document.getElementById("factory-list");
       const aiOut = document.getElementById("factory-ai-out");
@@ -13363,21 +14774,64 @@ const HUB_GAME_META = {
       let customRAF = 0;
       let customTimerId = 0;
       let customState = null;
+      let editingId = null;
 
       function uid() {
         return "g_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7);
       }
 
-      function loadGames() {
+      function migrateFactoryStores() {
         try {
-          const raw = localStorage.getItem(STORE_KEY);
+          const legacyRaw = localStorage.getItem(STORE_KEY_LEGACY);
+          if (!legacyRaw) return;
+          const legacy = JSON.parse(legacyRaw);
+          if (!Array.isArray(legacy) || !legacy.length) return;
+          if (!localStorage.getItem(STORE_PUBLISHED)) {
+            const pub = legacy.map((g) => Object.assign({}, g, { status: "published" }));
+            localStorage.setItem(STORE_PUBLISHED, JSON.stringify(pub));
+          }
+          if (!localStorage.getItem(STORE_LOCAL)) {
+            localStorage.setItem(STORE_LOCAL, JSON.stringify([]));
+          }
+        } catch (e) {}
+      }
+      migrateFactoryStores();
+
+      function factoryAuthor() {
+        try {
+          const s = JSON.parse(localStorage.getItem("playverse_session") || "null");
+          return s && s.username ? s.username : null;
+        } catch (e) { return null; }
+      }
+
+      function loadJson(key) {
+        try {
+          const raw = localStorage.getItem(key);
           const arr = raw ? JSON.parse(raw) : [];
           return Array.isArray(arr) ? arr : [];
         } catch (e) { return []; }
       }
 
-      function saveGames(arr) {
-        localStorage.setItem(STORE_KEY, JSON.stringify(arr));
+      function saveJson(key, arr) {
+        localStorage.setItem(key, JSON.stringify(arr));
+      }
+
+      function loadLocalGames() { return loadJson(STORE_LOCAL); }
+      function saveLocalGames(arr) { saveJson(STORE_LOCAL, arr); }
+      function loadPendingGames() { return loadJson(STORE_PENDING); }
+      function savePendingGames(arr) { saveJson(STORE_PENDING, arr); }
+      function loadPublishedGames() { return loadJson(STORE_PUBLISHED); }
+      function savePublishedGames(arr) { saveJson(STORE_PUBLISHED, arr); }
+
+      function loadGames() { return loadLocalGames(); }
+      function saveGames(arr) { saveLocalGames(arr); }
+
+      function statusLabel(st) {
+        return ({ local: "У себя", pending: "На проверке", published: "В каталоге", rejected: "Отклонена" })[st] || "";
+      }
+
+      function statusClass(st) {
+        return st || "local";
       }
 
       function typeLabel(t) {
@@ -13399,8 +14853,9 @@ const HUB_GAME_META = {
       function readForm() {
         const type = document.getElementById("factory-type").value;
         const theme = (document.getElementById("factory-theme").value || "⭐ 🎯 ✨").trim();
+        const author = factoryAuthor();
         return {
-          id: uid(),
+          id: editingId || uid(),
           title: (document.getElementById("factory-title").value || "Моя игра").trim().slice(0, 40),
           type: type,
           goal: Math.max(5, Math.min(500, Number(document.getElementById("factory-goal").value) || 30)),
@@ -13409,12 +14864,15 @@ const HUB_GAME_META = {
           color: document.getElementById("factory-color").value || "#a855f7",
           theme: theme,
           quiz: type === "quiz" ? parseQuiz(document.getElementById("factory-quiz").value) : [],
-          createdAt: Date.now()
+          createdAt: Date.now(),
+          author: author || "guest",
+          status: "local"
         };
       }
 
       function fillForm(cfg) {
         if (!cfg) return;
+        editingId = cfg.id || null;
         document.getElementById("factory-title").value = cfg.title || "";
         document.getElementById("factory-type").value = cfg.type || "clicker";
         document.getElementById("factory-goal").value = cfg.goal || 30;
@@ -13429,6 +14887,8 @@ const HUB_GAME_META = {
         }
         toggleQuizField();
       }
+
+      function clearEditing() { editingId = null; }
 
       function toggleQuizField() {
         const wrap = document.getElementById("factory-quiz-wrap");
@@ -13515,19 +14975,27 @@ const HUB_GAME_META = {
       }
 
       function renderList() {
-        const games = loadGames();
+        const author = factoryAuthor();
+        const local = loadLocalGames().filter((g) => !author || !g.author || g.author === author || g.author === "guest");
+        const pending = loadPendingGames().filter((g) => !author || g.author === author);
+        const published = loadPublishedGames().filter((g) => !author || g.author === author);
+        const all = local.concat(pending).concat(published);
         if (!listEl) return;
-        if (!games.length) {
+        if (!all.length) {
           listEl.innerHTML = '<p style="opacity:.7;margin:0">Пока пусто — создай первую игру выше.</p>';
           return;
         }
-        listEl.innerHTML = games.map((g) => {
-          return '<div class="factory-game-card" data-id="' + g.id + '">' +
-            '<div><h4>' + escapeHtml(g.title) + '</h4><p>' + typeLabel(g.type) + ' · цель ' + g.goal + '</p></div>' +
+        listEl.innerHTML = all.map((g) => {
+          const st = g.status || "local";
+          return '<div class="factory-game-card" data-id="' + g.id + '" data-status="' + st + '">' +
+            '<div><h4>' + escapeHtml(g.title) +
+            '<span class="factory-status ' + statusClass(st) + '">' + statusLabel(st) + '</span></h4>' +
+            '<p>' + typeLabel(g.type) + ' · цель ' + g.goal + (g.author && g.author !== "guest" ? " · " + escapeHtml(g.author) : "") + '</p></div>' +
             '<div class="mini-actions">' +
             '<button type="button" class="factory-btn primary" data-act="play">Играть</button>' +
-            '<button type="button" class="factory-btn" data-act="edit">В конструктор</button>' +
-            '<button type="button" class="factory-btn ghost" data-act="del">Удалить</button>' +
+            '<button type="button" class="factory-btn" data-act="edit">Править</button>' +
+            (st === "local" ? '<button type="button" class="factory-btn" data-act="submit">Выложить</button>' : "") +
+            (st === "local" || st === "rejected" ? '<button type="button" class="factory-btn ghost" data-act="del">Удалить</button>' : "") +
             '</div></div>';
         }).join("");
       }
@@ -13539,7 +15007,7 @@ const HUB_GAME_META = {
       function refreshHubCards() {
         if (!hubGrid) return;
         hubGrid.querySelectorAll(".cover-card-custom").forEach((el) => el.remove());
-        const games = loadGames();
+        const games = loadPublishedGames();
         games.forEach((g) => {
           const btn = document.createElement("button");
           btn.type = "button";
@@ -13550,12 +15018,97 @@ const HUB_GAME_META = {
             '<div class="cover-art" style="background:linear-gradient(145deg,' + g.color + '88,#0f172a)" aria-hidden="true">' +
             '<div style="font-size:3rem;line-height:1;margin-top:18%">' + escapeHtml((g.theme || "🎮").split(/\s+/)[0]) + '</div>' +
             '<h1 class="cover-title"><span>Своя</span>' + escapeHtml(g.title) + '</h1></div>' +
-            '<div class="cover-meta"><h2>' + escapeHtml(g.title) + '</h2><p>' + typeLabel(g.type) + '</p></div>';
+            '<div class="cover-meta"><h2>' + escapeHtml(g.title) + '</h2><p>' + typeLabel(g.type) + (g.author ? " · " + escapeHtml(g.author) : "") + '</p></div>';
           btn.addEventListener("click", () => openCustom(g));
           hubGrid.appendChild(btn);
         });
         if (typeof window.enhanceHubCardRatings === "function") window.enhanceHubCardRatings();
         if (typeof window.applyHubSearchFilter === "function") window.applyHubSearchFilter();
+      }
+
+      function prepareCfg(cfg) {
+        if (cfg.type === "quiz" && (!cfg.quiz || cfg.quiz.length < 1)) {
+          cfg.quiz = sampleQuiz(cfg.title);
+        }
+        return cfg;
+      }
+
+      function saveLocalFromForm() {
+        const author = factoryAuthor();
+        if (!author) {
+          if (window.PVProfile && PVProfile.toast) PVProfile.toast("Войди в аккаунт, чтобы сохранять игры");
+          return null;
+        }
+        const cfg = prepareCfg(readForm());
+        cfg.author = author;
+        cfg.status = "local";
+        const games = loadLocalGames().filter((g) => g.id !== cfg.id);
+        games.unshift(cfg);
+        saveLocalGames(games.slice(0, 40));
+        editingId = cfg.id;
+        renderList();
+        refreshHubCards();
+        if (aiOut) { aiOut.classList.add("show"); aiOut.textContent = "Игра «" + cfg.title + "» сохранена только у тебя."; }
+        if (window.PVProfile && PVProfile.toast) PVProfile.toast("Сохранено у тебя");
+        return cfg;
+      }
+
+      function submitGame(cfg) {
+        const author = factoryAuthor();
+        if (!author) {
+          if (window.PVProfile && PVProfile.toast) PVProfile.toast("Войди в аккаунт, чтобы выложить игру");
+          return false;
+        }
+        cfg = prepareCfg(cfg || readForm());
+        cfg.author = author;
+        cfg.status = "pending";
+        cfg.submittedAt = Date.now();
+        const pending = loadPendingGames().filter((g) => g.id !== cfg.id);
+        pending.unshift(cfg);
+        savePendingGames(pending.slice(0, 80));
+        const local = loadLocalGames().filter((g) => g.id !== cfg.id);
+        saveLocalGames(local);
+        editingId = cfg.id;
+        renderList();
+        if (aiOut) { aiOut.classList.add("show"); aiOut.textContent = "«" + cfg.title + "» отправлена на проверку администратору."; }
+        if (window.PVProfile && PVProfile.toast) PVProfile.toast("Отправлено на проверку");
+        if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
+        return true;
+      }
+
+      function approveFactoryGame(id) {
+        const pending = loadPendingGames();
+        const g = pending.find((x) => x.id === id);
+        if (!g) return false;
+        g.status = "published";
+        g.approvedAt = Date.now();
+        savePendingGames(pending.filter((x) => x.id !== id));
+        const pub = loadPublishedGames().filter((x) => x.id !== id);
+        pub.unshift(g);
+        savePublishedGames(pub.slice(0, 100));
+        refreshHubCards();
+        renderList();
+        return true;
+      }
+
+      function rejectFactoryGame(id) {
+        const pending = loadPendingGames();
+        const g = pending.find((x) => x.id === id);
+        if (!g) return false;
+        g.status = "rejected";
+        g.rejectedAt = Date.now();
+        savePendingGames(pending.filter((x) => x.id !== id));
+        const local = loadLocalGames();
+        local.unshift(g);
+        saveLocalGames(local.slice(0, 40));
+        renderList();
+        return true;
+      }
+
+      function findFactoryGame(id) {
+        return loadLocalGames().find((x) => x.id === id)
+          || loadPendingGames().find((x) => x.id === id)
+          || loadPublishedGames().find((x) => x.id === id);
       }
 
       function openFactory() {
@@ -13826,10 +15379,6 @@ const HUB_GAME_META = {
       /* events */
       const card = document.getElementById("cover-card-factory");
       if (card) card.addEventListener("click", openFactory);
-      const toHub = document.getElementById("factory-to-hub");
-      if (toHub) toHub.addEventListener("click", () => { refreshHubCards(); if (typeof exitToHub === "function") exitToHub(); else showScreen("cover"); });
-      const customHub = document.getElementById("custom-to-hub");
-      if (customHub) customHub.addEventListener("click", () => { stopCustom(); if (typeof exitToHub === "function") exitToHub(); else showScreen("cover"); });
       document.getElementById("factory-type").addEventListener("change", toggleQuizField);
       document.getElementById("factory-ai-btn").addEventListener("click", () => {
         const prompt = document.getElementById("factory-ai-prompt").value;
@@ -13853,21 +15402,15 @@ const HUB_GAME_META = {
         document.querySelectorAll(".factory-chip").forEach((x) => x.classList.remove("active"));
         chip.classList.add("active");
       });
-      document.getElementById("factory-save").addEventListener("click", () => {
-        const cfg = readForm();
-        if (cfg.type === "quiz" && (!cfg.quiz || cfg.quiz.length < 1)) {
-          cfg.quiz = sampleQuiz(cfg.title);
-        }
-        const games = loadGames();
-        games.unshift(cfg);
-        saveGames(games.slice(0, 30));
-        renderList();
-        refreshHubCards();
-        aiOut.classList.add("show");
-        aiOut.textContent = "Игра «" + cfg.title + "» сохранена и добавлена в хаб.";
-        if (window.PVPlayLog && typeof PVPlayLog.tryAward === "function") {
+      document.getElementById("factory-save-local").addEventListener("click", () => {
+        const cfg = saveLocalFromForm();
+        if (cfg && window.PVPlayLog && typeof PVPlayLog.tryAward === "function") {
           PVPlayLog.tryAward("factory", "create");
         }
+      });
+      document.getElementById("factory-submit").addEventListener("click", () => {
+        saveLocalFromForm();
+        submitGame();
       });
       document.getElementById("factory-play-draft").addEventListener("click", () => {
         const cfg = readForm();
@@ -13879,15 +15422,17 @@ const HUB_GAME_META = {
         if (!cardEl) return;
         const id = cardEl.getAttribute("data-id");
         const act = e.target.getAttribute("data-act");
-        const games = loadGames();
-        const g = games.find((x) => x.id === id);
+        const g = findFactoryGame(id);
         if (!g || !act) return;
         if (act === "play") openCustom(g);
         if (act === "edit") fillForm(g);
+        if (act === "submit") submitGame(Object.assign({}, g));
         if (act === "del") {
-          saveGames(games.filter((x) => x.id !== id));
+          const st = cardEl.getAttribute("data-status") || g.status || "local";
+          if (st === "pending") savePendingGames(loadPendingGames().filter((x) => x.id !== id));
+          else saveLocalGames(loadLocalGames().filter((x) => x.id !== id));
+          if (editingId === id) clearEditing();
           renderList();
-          refreshHubCards();
         }
       });
       document.getElementById("custom-start").addEventListener("click", startCustom);
@@ -13898,7 +15443,24 @@ const HUB_GAME_META = {
       toggleQuizField();
       if (window.PVAdmin && typeof PVAdmin.applyDisabledGames === "function") PVAdmin.applyDisabledGames();
 
-      window.PVFactory = { open: openFactory, refresh: refreshHubCards, openCustom: openCustom };
+      window.PVFactory = {
+        open: openFactory,
+        refresh: refreshHubCards,
+        openCustom: openCustom,
+        loadPending: loadPendingGames,
+        loadPublished: loadPublishedGames,
+        approve: approveFactoryGame,
+        reject: rejectFactoryGame
+      };
+      window.PVFactoryModeration = {
+        getPendingCount: function () { return loadPendingGames().length; },
+        notifyAdmin: function () {
+          if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin()) {
+            if (typeof PVProfile.render === "function") PVProfile.render();
+            if (typeof PVProfile.toast === "function") PVProfile.toast("Новая игра на проверке — открой профиль администратора");
+          }
+        }
+      };
     })();
 
     /* --- Профиль пользователя --- */
@@ -13924,8 +15486,8 @@ const HUB_GAME_META = {
       const ALL_HUB_GAMES = [
         "avia", "snake", "breakout", "clicker", "memory", "tetris", "pong", "dobble",
         "mines", "simon", "space", "runner", "moles", "catcher", "maze",
-        "battleship", "chess", "checkers", "tictactoe", "factory"
-      ];
+        "battleship", "chess", "checkers", "tictactoe"
+      ].concat(window.PACK_GAME_IDS || []).concat(["factory"]);
       const PLAYTEST_GAMES = ALL_HUB_GAMES.filter((g) => g !== "factory");
       const BUGS_KEY = "playverse_bot_bugs";
       const PLAYTEST_VER = "pv_playtest_v3";
@@ -14094,8 +15656,7 @@ const HUB_GAME_META = {
       }
 
       function isNameTaken(name) {
-        const u = getUsers()[name];
-        return !!(u && !u.isBot);
+        return !!getUsers()[name];
       }
 
       function getAvailablePlayerNames() {
@@ -14228,6 +15789,8 @@ const HUB_GAME_META = {
         adminBlockName: document.getElementById("admin-block-name"),
         adminBlockBtn: document.getElementById("admin-block-btn"),
         adminExportBtn: document.getElementById("admin-export-settings"),
+        adminPendingList: document.getElementById("admin-pending-list"),
+        adminPendingCount: document.getElementById("admin-pending-count"),
         loginForm: document.getElementById("profile-login-form"),
         registerForm: document.getElementById("profile-register-form"),
         loginMsg: document.getElementById("profile-login-msg"),
@@ -14675,10 +16238,6 @@ const HUB_GAME_META = {
       }
 
       function sendFriendRequest(name) {
-        return sendFriendRequestAsync(name);
-      }
-
-      async function sendFriendRequestAsync(name) {
         const n = String(name || "").trim();
         const me = currentUser();
         if (!me) return "Сначала войди в аккаунт";
@@ -14686,11 +16245,8 @@ const HUB_GAME_META = {
         if (n === me.username) return "Нельзя добавить себя";
         if (isUserBlocked(n)) return "Игрок заблокирован";
         const users = getUsers();
-        let target = users[n];
-        if (!target && CLOUD_ENABLED) {
-          try { target = await fetchCloudUser(n); } catch (e) { return "Ошибка сервера"; }
-        }
-        if (!target) return "Игрок не найден — он должен зарегистрироваться на сайте";
+        const target = users[n];
+        if (!target) return "Игрок не найден";
         normalizeUser(me);
         normalizeUser(target);
         if (me.friends.indexOf(n) >= 0) return "Уже в друзьях";
@@ -14878,9 +16434,9 @@ const HUB_GAME_META = {
           });
         });
         container.querySelectorAll("[data-friend-add]").forEach((btn) => {
-          btn.addEventListener("click", async (e) => {
+          btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            const err = await sendFriendRequest(btn.getAttribute("data-friend-add"));
+            const err = sendFriendRequest(btn.getAttribute("data-friend-add"));
             if (err) { toast(err); return; }
             if (typeof rerender === "function") rerender();
             else { renderFriendsPage(); render(); }
@@ -15027,7 +16583,7 @@ const HUB_GAME_META = {
         else if (inPending) addBtn.textContent = "Принять заявку";
         else addBtn.textContent = "+ Заявка в друзья";
         addBtn.disabled = outPending;
-        addBtn.addEventListener("click", async () => {
+        addBtn.addEventListener("click", () => {
           if (isFriend(targetName)) {
             removeFriend(targetName);
             toast("Удалено из друзей");
@@ -15035,7 +16591,7 @@ const HUB_GAME_META = {
             acceptFriendRequest(targetName);
             render();
           } else {
-            const err = await sendFriendRequest(targetName);
+            const err = sendFriendRequest(targetName);
             if (err) { toast(err); return; }
             toast("Заявка отправлена");
           }
@@ -15119,161 +16675,10 @@ const HUB_GAME_META = {
         try { return btoa(unescape(encodeURIComponent(String(p)))); } catch (e) { return String(p); }
       }
 
-      const SUPABASE_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
-      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
-      const CLOUD_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
-      let cloudUsers = {};
-      let cloudReady = false;
-
-      function supaHeaders(extra) {
-        return Object.assign({
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: "Bearer " + SUPABASE_ANON_KEY,
-          "Content-Type": "application/json"
-        }, extra || {});
-      }
-
-      async function supaFetch(path, opts) {
-        opts = opts || {};
-        const headers = supaHeaders(opts.prefer ? { Prefer: opts.prefer } : {});
-        const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
-          method: opts.method || "GET",
-          headers: headers,
-          body: opts.body
-        });
-        if (!res.ok) {
-          const txt = await res.text();
-          throw new Error(res.status + " " + txt);
-        }
-        if (res.status === 204) return null;
-        const text = await res.text();
-        return text ? JSON.parse(text) : null;
-      }
-
-      function profileToRow(u) {
-        return {
-          username: u.username,
-          pass_hash: u.pass,
-          display_name: u.displayName || "",
-          coins: getUserCoins(u),
-          avatar_type: u.avatarType || "initials",
-          avatar_shop_id: u.avatarShopId || "",
-          avatar_emoji: u.avatarEmoji || "",
-          avatar_image: u.avatarImage || "",
-          owned_avatars: u.ownedAvatars || [],
-          favorites: u.favorites || [],
-          history: u.history || [],
-          friends: u.friends || [],
-          favorite_friends: u.favoriteFriends || [],
-          incoming_requests: u.incomingFriendRequests || [],
-          outgoing_requests: u.outgoingFriendRequests || [],
-          role: u.role || ""
-        };
-      }
-
-      function rowToProfile(row) {
-        return {
-          username: row.username,
-          pass: row.pass_hash,
-          displayName: row.display_name || "",
-          coins: row.coins || 0,
-          avatarType: row.avatar_type || "initials",
-          avatarShopId: row.avatar_shop_id || "",
-          avatarEmoji: row.avatar_emoji || "",
-          avatarImage: row.avatar_image || "",
-          ownedAvatars: row.owned_avatars || [],
-          favorites: row.favorites || [],
-          history: row.history || [],
-          friends: row.friends || [],
-          favoriteFriends: row.favorite_friends || [],
-          incomingFriendRequests: row.incoming_requests || [],
-          outgoingFriendRequests: row.outgoing_requests || [],
-          role: row.role || "",
-          created: row.created_at ? new Date(row.created_at).getTime() : Date.now()
-        };
-      }
-
-      async function loadCloudUsers() {
-        if (!CLOUD_ENABLED) return;
-        const rows = await supaFetch("profiles?select=*");
-        cloudUsers = {};
-        (rows || []).forEach((row) => {
-          cloudUsers[row.username] = normalizeUser(rowToProfile(row));
-        });
-        cloudReady = true;
-      }
-
-      async function fetchCloudUser(name) {
-        if (!CLOUD_ENABLED) return null;
-        const rows = await supaFetch("profiles?username=eq." + encodeURIComponent(name) + "&select=*");
-        if (rows && rows[0]) {
-          const u = normalizeUser(rowToProfile(rows[0]));
-          cloudUsers[name] = u;
-          return u;
-        }
-        return null;
-      }
-
-      async function insertCloudUser(u) {
-        await supaFetch("profiles", {
-          method: "POST",
-          body: JSON.stringify(profileToRow(u)),
-          prefer: "return=minimal"
-        });
-        cloudUsers[u.username] = normalizeUser(u);
-      }
-
-      async function saveCloudUser(u) {
-        if (!CLOUD_ENABLED || !u || u.isBot) return;
-        await supaFetch("profiles?username=eq." + encodeURIComponent(u.username), {
-          method: "PATCH",
-          body: JSON.stringify(profileToRow(u)),
-          prefer: "return=minimal"
-        });
-        cloudUsers[u.username] = normalizeUser(u);
-      }
-
-      async function syncAdminToCloud() {
-        if (!CLOUD_ENABLED) return;
-        const admin = getUsers()[SUPER_ADMIN_NAME];
-        if (!admin || admin.isBot) return;
-        try {
-          const ex = await fetchCloudUser(SUPER_ADMIN_NAME);
-          if (!ex) await insertCloudUser(admin);
-          else await saveCloudUser(admin);
-        } catch (e) { console.warn("Admin cloud sync", e); }
-      }
-
-      function getLocalUsersRaw() {
+      function getUsers() {
         try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch (e) { return {}; }
       }
-
-      function getUsers() {
-        const local = getLocalUsersRaw();
-        const merged = {};
-        Object.keys(local).forEach((k) => {
-          if (local[k] && local[k].isBot) merged[k] = local[k];
-        });
-        Object.keys(cloudUsers).forEach((k) => { merged[k] = cloudUsers[k]; });
-        Object.keys(local).forEach((k) => {
-          if (local[k] && !local[k].isBot && !merged[k]) merged[k] = local[k];
-        });
-        return merged;
-      }
-
-      function saveUsers(u) {
-        const bots = {};
-        Object.keys(u || {}).forEach((k) => {
-          const row = u[k];
-          if (!row) return;
-          if (row.isBot) bots[k] = row;
-          else {
-            cloudUsers[k] = row;
-            if (CLOUD_ENABLED) saveCloudUser(row).catch(() => toast("Ошибка сохранения на сервер"));
-          }
-        });
-        localStorage.setItem(USERS_KEY, JSON.stringify(Object.assign({}, bots, cloudUsers)));
-      }
+      function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
 
       function getSession() {
         try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (e) { return null; }
@@ -15568,6 +16973,46 @@ const HUB_GAME_META = {
             });
           });
         }
+        const pending = (window.PVFactory && PVFactory.loadPending) ? PVFactory.loadPending() : [];
+        if (el.adminPendingCount) {
+          el.adminPendingCount.textContent = pending.length ? ("(" + pending.length + ")") : "";
+        }
+        if (el.adminPendingList) {
+          if (!pending.length) {
+            el.adminPendingList.innerHTML = '<p class="profile-admin-hint" style="margin:0">Нет игр на проверке.</p>';
+          } else {
+            el.adminPendingList.innerHTML = pending.map((g) =>
+              '<div class="profile-admin-list-item" style="flex-wrap:wrap;gap:8px">' +
+              '<span><strong>' + (g.title || "Без названия") + '</strong> · ' + (g.author || "?") + ' · ' + (g.type || "игра") + '</span>' +
+              '<span style="display:flex;gap:6px;flex-wrap:wrap">' +
+              '<button type="button" class="profile-admin-btn" data-factory-approve="' + g.id + '">Одобрить</button>' +
+              '<button type="button" class="profile-admin-btn ghost" data-factory-preview="' + g.id + '">Тест</button>' +
+              '<button type="button" class="profile-admin-btn danger" data-factory-reject="' + g.id + '">Отклонить</button>' +
+              '</span></div>'
+            ).join("");
+            el.adminPendingList.querySelectorAll("[data-factory-approve]").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                if (window.PVFactory && PVFactory.approve) PVFactory.approve(btn.getAttribute("data-factory-approve"));
+                renderAdmin();
+                toast("Игра одобрена — теперь в хабе у всех");
+              });
+            });
+            el.adminPendingList.querySelectorAll("[data-factory-reject]").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                if (window.PVFactory && PVFactory.reject) PVFactory.reject(btn.getAttribute("data-factory-reject"));
+                renderAdmin();
+                toast("Игра отклонена");
+              });
+            });
+            el.adminPendingList.querySelectorAll("[data-factory-preview]").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-factory-preview");
+                const g = pending.find((x) => x.id === id);
+                if (g && window.PVFactory && PVFactory.openCustom) PVFactory.openCustom(g);
+              });
+            });
+          }
+        }
         const bugReport = getBotBugsReport();
         const bugs = bugReport.bugs || [];
         if (el.adminBotBugsSummary) {
@@ -15787,10 +17232,13 @@ const HUB_GAME_META = {
             if (h) return h.textContent.trim();
           }
           try {
-            const raw = localStorage.getItem("pvFactoryGames_v1");
-            const games = raw ? JSON.parse(raw) : [];
-            const g = games.find((x) => x.id === cid);
-            if (g && g.title) return g.title;
+            const keys = ["pvFactoryPublished_v1", "pvFactoryLocal_v1", "pvFactoryGames_v1"];
+            for (let i = 0; i < keys.length; i++) {
+              const raw = localStorage.getItem(keys[i]);
+              const games = raw ? JSON.parse(raw) : [];
+              const g = games.find((x) => x.id === cid);
+              if (g && g.title) return g.title;
+            }
           } catch (e) {}
         }
         if (typeof hubGameTitle === "function") return hubGameTitle(id);
@@ -15826,10 +17274,13 @@ const HUB_GAME_META = {
           if (gameId.indexOf("custom-") === 0 && window.PVFactory && typeof PVFactory.openCustom === "function") {
             const cid = gameId.replace("custom-", "");
             try {
-              const raw = localStorage.getItem("pvFactoryGames_v1");
-              const games = raw ? JSON.parse(raw) : [];
-              const g = games.find((x) => x.id === cid);
-              if (g) { PVFactory.openCustom(g); return; }
+              const keys = ["pvFactoryPublished_v1", "pvFactoryLocal_v1", "pvFactoryGames_v1"];
+              for (let i = 0; i < keys.length; i++) {
+                const raw = localStorage.getItem(keys[i]);
+                const games = raw ? JSON.parse(raw) : [];
+                const g = games.find((x) => x.id === cid);
+                if (g) { PVFactory.openCustom(g); return; }
+              }
             } catch (e) {}
           }
           if (typeof startGameIntro === "function") startGameIntro(gameId);
@@ -16054,47 +17505,28 @@ const HUB_GAME_META = {
         runBotPlaytest(false);
         ensureUserFields();
         if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
-        const bootCloud = async () => {
-          if (CLOUD_ENABLED) {
-            try {
-              await loadCloudUsers();
-              await syncAdminToCloud();
-              toast("Сервер PlayVerse подключён");
-            } catch (e) {
-              console.warn(e);
-              toast("Сервер недоступен — проверь SQL в Supabase");
-            }
-          }
-          await loadSiteSettings();
+        loadSiteSettings().then(() => {
           if (checkSessionBlocked()) { render(); return; }
           render();
-          renderPlayerNameSelects();
           const pending = getIncomingRequests().length;
           if (pending > 0) {
             setTimeout(() => toast("У тебя " + pending + " " + (pending === 1 ? "заявка" : (pending < 5 ? "заявки" : "заявок")) + " в друзья"), 700);
           }
           if (isLoggedIn()) goToGames();
           else if (typeof showScreen === "function") showScreen("profile");
-        };
-        bootCloud();
+        });
       }
 
-      async function register(name, pass) {
+      function register(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name)) return "Выбери имя из списка";
         if (!validName(name)) return "Некорректное имя";
         if (pass.length < 4) return "Пароль минимум 4 символа";
         if (isUserBlocked(name)) return "Это имя заблокировано";
         if (name === SUPER_ADMIN_NAME) return "Это имя зарезервировано";
-        if (CLOUD_ENABLED) {
-          try {
-            const taken = await fetchCloudUser(name);
-            if (taken) return "Это имя уже занято — выбери другое";
-          } catch (e) { return "Ошибка сервера при регистрации"; }
-        } else if (getUsers()[name]) {
-          return "Это имя уже занято — выбери другое";
-        }
-        const user = {
+        const users = getUsers();
+        if (users[name]) return "Это имя уже занято — выбери другое";
+        users[name] = {
           username: name,
           displayName: "",
           pass: hashPass(pass),
@@ -16111,25 +17543,18 @@ const HUB_GAME_META = {
           incomingFriendRequests: [],
           outgoingFriendRequests: []
         };
-        if (CLOUD_ENABLED) {
-          try { await insertCloudUser(user); } catch (e) { return "Не удалось создать аккаунт на сервере"; }
-        }
-        const users = getUsers();
-        users[name] = user;
         saveUsers(users);
         setSession(name);
         renderPlayerNameSelects();
         return null;
       }
 
-      async function login(name, pass) {
+      function login(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name) && name !== SUPER_ADMIN_NAME) return "Выбери имя из списка";
         if (isUserBlocked(name)) return "Аккаунт заблокирован администратором";
-        let u = getUsers()[name];
-        if (!u && CLOUD_ENABLED) {
-          try { u = await fetchCloudUser(name); } catch (e) { return "Ошибка сервера"; }
-        }
+        const users = getUsers();
+        const u = users[name];
         if (!u) return "Пользователь не найден";
         if (u.pass !== hashPass(pass)) return "Неверный пароль";
         setSession(name);
@@ -16156,11 +17581,11 @@ const HUB_GAME_META = {
       });
 
       if (el.loginForm) {
-        el.loginForm.addEventListener("submit", async (e) => {
+        el.loginForm.addEventListener("submit", (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-login-name").value.trim();
           const pass = document.getElementById("profile-login-pass").value;
-          const err = await login(name, pass);
+          const err = login(name, pass);
           if (err) { setMsg(el.loginMsg, err); return; }
           setMsg(el.loginMsg, "Добро пожаловать!", true);
           render();
@@ -16170,13 +17595,13 @@ const HUB_GAME_META = {
       }
 
       if (el.registerForm) {
-        el.registerForm.addEventListener("submit", async (e) => {
+        el.registerForm.addEventListener("submit", (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-reg-name").value.trim();
           const pass = document.getElementById("profile-reg-pass").value;
           const pass2 = document.getElementById("profile-reg-pass2").value;
           if (pass !== pass2) { setMsg(el.registerMsg, "Пароли не совпадают"); return; }
-          const err = await register(name, pass);
+          const err = register(name, pass);
           if (err) { setMsg(el.registerMsg, err); return; }
           setMsg(el.registerMsg, "Аккаунт создан!", true);
           render();
@@ -16192,9 +17617,9 @@ const HUB_GAME_META = {
         if (typeof showScreen === "function") showScreen("cover");
       });
       if (el.friendsPageAddBtn) {
-        el.friendsPageAddBtn.addEventListener("click", async () => {
+        el.friendsPageAddBtn.addEventListener("click", () => {
           const name = el.friendsPageAddName ? el.friendsPageAddName.value.trim() : "";
-          const err = await sendFriendRequest(name);
+          const err = sendFriendRequest(name);
           if (err) { toast(err); return; }
           if (el.friendsPageAddName) el.friendsPageAddName.value = "";
           renderFriendsPage();
@@ -16296,9 +17721,7 @@ const HUB_GAME_META = {
         getBotBugsReport: getBotBugsReport,
         getUserRecord: getUserRecord,
         serverPlayerFromUser: serverPlayerFromUser,
-        sendFriendRequest: sendFriendRequest,
-        getUsers: getUsers,
-        cloudEnabled: function () { return CLOUD_ENABLED && cloudReady; }
+        sendFriendRequest: sendFriendRequest
       };
     })();
 
@@ -16555,9 +17978,6 @@ const HUB_GAME_META = {
         try {
           const s = JSON.parse(localStorage.getItem("playverse_session"));
           if (!s || !s.username) return null;
-          if (window.PVProfile && typeof PVProfile.getUsers === "function") {
-            return PVProfile.getUsers()[s.username] || null;
-          }
           const users = JSON.parse(localStorage.getItem("playverse_users")) || {};
           return users[s.username] || null;
         } catch (e) {
@@ -16570,7 +17990,6 @@ const HUB_GAME_META = {
       }
 
       function getUsersMap() {
-        if (window.PVProfile && typeof PVProfile.getUsers === "function") return PVProfile.getUsers();
         try { return JSON.parse(localStorage.getItem("playverse_users")) || {}; } catch (e) { return {}; }
       }
 
