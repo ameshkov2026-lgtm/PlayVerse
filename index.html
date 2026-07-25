@@ -13923,7 +13923,7 @@ const HUB_GAME_META = {
           }));
           if(edge){st.dir*=-1; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)inv.y+=16;}));}
           if(st.t%Math.floor(40/packMul(diff))===0){
-            const live=[]; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)live.push(inv);});
+            const live=[]; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)live.push(inv);}));
             if(live.length) { const t=live[Math.floor(Math.random()*live.length)]; st.ebullets.push({x:t.x,y:t.y+20,vy:3}); }
           }
           st.bullets.forEach(b=>{ b.y+=b.vy; st.inv.forEach(row=>row.forEach(inv=>{
@@ -14026,7 +14026,7 @@ const HUB_GAME_META = {
       };
     },
     pk_hang: function(id,c,W,H,diff) {
-      const words=[\'РАКЕТА\', \'ПЛАНЕТА\', \'КОМЕТА\', \'ЗВЕЗДА\', \'ОРБИТА\', \'ПИЛОТ\', \'НЕБО\', \'ОБЛАКО\'];
+      const words=['РАКЕТА', 'ПЛАНЕТА', 'КОМЕТА', 'ЗВЕЗДА', 'ОРБИТА', 'ПИЛОТ', 'НЕБО', 'ОБЛАКО'];
       const st={word:words[Math.floor(Math.random()*words.length)], guessed:new Set(), wrong:0, score:0};
       return {
         tick: function(inp) {
@@ -14072,7 +14072,7 @@ const HUB_GAME_META = {
       };
     },
     pk_type: function(id,c,W,H,diff) {
-      const words=[\'игра\', \'небо\', \'скорость\', \'победа\', \'космос\', \'робот\', \'звезда\', \'мир\'];
+      const words=['игра', 'небо', 'скорость', 'победа', 'космос', 'робот', 'звезда', 'мир'];
       const st={word:words[Math.floor(Math.random()*words.length)], typed:"", score:0, t:0, limit:diff==="hard"?180:diff==="easy"?400:280};
       return {
         tick: function(inp) {
