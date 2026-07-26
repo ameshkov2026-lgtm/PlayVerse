@@ -15469,6 +15469,11 @@ const HUB_GAME_META = {
       const SESSION_KEY = "playverse_session";
       const SITE_SETTINGS_KEY = "playverse_site_settings";
       const SUPER_ADMIN_NAME = "PlayVerseAdmin";
+      const SUPABASE_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
+      const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
+      const CLOUD_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON);
+      let cloudUsers = {};
+      let cloudSyncedOnce = false;
 
       const PLAYER_NAME_PRESETS = [
         "НебоПилот", "TurboJet", "ЗмейМастер", "BlockHero", "КосмоИгрок",
@@ -16237,23 +16242,65 @@ const HUB_GAME_META = {
         return getIncomingRequests().indexOf(name) >= 0;
       }
 
-      function sendFriendRequest(name) {
-        const n = String(name || "").trim();
+      function resolveFriendTarget(query) {
+        const raw = String(query || "").trim();
+        if (!raw) return null;
+        const users = getUsers();
+        if (users[raw]) return { key: raw, user: users[raw] };
+        const lower = raw.toLowerCase();
+        let exactCi = null;
+        const partial = [];
+        Object.keys(users).forEach((key) => {
+          const u = users[key];
+          const dn = u && u.displayName ? String(u.displayName).trim() : "";
+          if (key.toLowerCase() === lower || (dn && dn.toLowerCase() === lower)) {
+            exactCi = { key: key, user: u };
+          } else if (
+            key.toLowerCase().indexOf(lower) >= 0 ||
+            (dn && dn.toLowerCase().indexOf(lower) >= 0)
+          ) {
+            partial.push({ key: key, user: u });
+          }
+        });
+        if (exactCi) return exactCi;
+        if (partial.length === 1) return partial[0];
+        return null;
+      }
+
+      function friendAddResultMessage(name, err) {
+        if (err) return err;
+        const resolved = resolveFriendTarget(name);
+        const key = resolved ? resolved.key : String(name || "").trim();
+        const users = getUsers();
+        const target = users[key];
+        if (target && target.isBot) return "Добавлен в друзья!";
+        if (isFriend(key)) return "Добавлен в друзья!";
+        return "Заявка отправлена — друг должен принять её в разделе «Заявки в друзья»";
+      }
+
+      async function sendFriendRequest(name) {
+        const raw = String(name || "").trim();
         const me = currentUser();
         if (!me) return "Сначала войди в аккаунт";
-        if (!validName(n)) return "Имя: 2–20 символов, буквы, цифры или _";
+        if (!validName(raw)) return "Имя: 2–20 символов, буквы, цифры или _";
+        const resolved = await resolveFriendTargetAsync(raw);
+        if (!resolved) {
+          return "Игрок не найден на сервере. Пусть друг зарегистрируется на сайте — имя должно совпадать точно.";
+        }
+        const n = resolved.key;
+        const target = resolved.user;
         if (n === me.username) return "Нельзя добавить себя";
         if (isUserBlocked(n)) return "Игрок заблокирован";
         const users = getUsers();
-        const target = users[n];
-        if (!target) return "Игрок не найден";
         normalizeUser(me);
         normalizeUser(target);
         if (me.friends.indexOf(n) >= 0) return "Уже в друзьях";
-        if (me.outgoingFriendRequests.indexOf(n) >= 0) return "Заявка уже отправлена";
+        if (me.outgoingFriendRequests.indexOf(n) >= 0) {
+          return "Заявка уже отправлена — жди, пока " + n + " нажмёт «Принять»";
+        }
         if (target.incomingFriendRequests.indexOf(me.username) >= 0) return "Заявка уже отправлена";
         if (target.outgoingFriendRequests.indexOf(me.username) >= 0) {
-          return acceptFriendRequest(n, true) ? null : "Не удалось принять заявку";
+          return (await acceptFriendRequest(n, true)) ? null : "Не удалось принять заявку";
         }
         if (target.isBot) {
           if (me.friends.indexOf(n) < 0) me.friends.push(n);
@@ -16268,15 +16315,25 @@ const HUB_GAME_META = {
         users[me.username] = me;
         users[n] = target;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, n]);
         return null;
       }
 
-      function acceptFriendRequest(fromName, silent) {
+      async function acceptFriendRequest(fromName, silent) {
         const from = String(fromName || "").trim();
         const me = currentUser();
         if (!me) return false;
         const users = getUsers();
-        const other = users[from];
+        let other = users[from];
+        if (!other && CLOUD_ENABLED) {
+          try {
+            other = await fetchCloudUser(from);
+            if (other) {
+              cloudUsers[from] = other;
+              users[from] = other;
+            }
+          } catch (e) {}
+        }
         if (!other) return false;
         normalizeUser(me);
         normalizeUser(other);
@@ -16288,16 +16345,20 @@ const HUB_GAME_META = {
         users[me.username] = me;
         users[from] = other;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, from]);
         if (!silent) toast("Друг добавлен");
         return true;
       }
 
-      function declineFriendRequest(fromName) {
+      async function declineFriendRequest(fromName) {
         const from = String(fromName || "").trim();
         const me = currentUser();
         if (!me) return;
         const users = getUsers();
-        const other = users[from];
+        let other = users[from];
+        if (!other && CLOUD_ENABLED) {
+          try { other = await fetchCloudUser(from); if (other) users[from] = other; } catch (e) {}
+        }
         normalizeUser(me);
         me.incomingFriendRequests = me.incomingFriendRequests.filter((x) => x !== from);
         if (other) {
@@ -16307,14 +16368,18 @@ const HUB_GAME_META = {
         }
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, from]);
       }
 
-      function cancelFriendRequest(toName) {
+      async function cancelFriendRequest(toName) {
         const n = String(toName || "").trim();
         const me = currentUser();
         if (!me) return;
         const users = getUsers();
-        const other = users[n];
+        let other = users[n];
+        if (!other && CLOUD_ENABLED) {
+          try { other = await fetchCloudUser(n); if (other) users[n] = other; } catch (e) {}
+        }
         normalizeUser(me);
         me.outgoingFriendRequests = me.outgoingFriendRequests.filter((x) => x !== n);
         if (other) {
@@ -16324,13 +16389,14 @@ const HUB_GAME_META = {
         }
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, n]);
       }
 
       function addFriend(name) {
         return sendFriendRequest(name);
       }
 
-      function removeFriend(name) {
+      async function removeFriend(name) {
         const me = currentUser();
         if (!me) return;
         normalizeUser(me);
@@ -16339,6 +16405,7 @@ const HUB_GAME_META = {
         const users = getUsers();
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username]);
       }
 
       function toggleFavoriteFriend(name) {
@@ -16434,28 +16501,29 @@ const HUB_GAME_META = {
           });
         });
         container.querySelectorAll("[data-friend-add]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            const err = sendFriendRequest(btn.getAttribute("data-friend-add"));
+            const addName = btn.getAttribute("data-friend-add");
+            const err = await sendFriendRequest(addName);
             if (err) { toast(err); return; }
             if (typeof rerender === "function") rerender();
             else { renderFriendsPage(); render(); }
-            toast("Заявка отправлена");
+            toast(friendAddResultMessage(addName));
           });
         });
         container.querySelectorAll("[data-accept-request]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            acceptFriendRequest(btn.getAttribute("data-accept-request"));
+            await acceptFriendRequest(btn.getAttribute("data-accept-request"));
             if (typeof rerender === "function") rerender();
             else renderFriendsPage();
             render();
           });
         });
         container.querySelectorAll("[data-decline-request]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            declineFriendRequest(btn.getAttribute("data-decline-request"));
+            await declineFriendRequest(btn.getAttribute("data-decline-request"));
             if (typeof rerender === "function") rerender();
             else renderFriendsPage();
             render();
@@ -16531,8 +16599,15 @@ const HUB_GAME_META = {
           if (typeof showScreen === "function") showScreen("profile");
           return;
         }
-        renderFriendsPage();
-        if (typeof showScreen === "function") showScreen("friends");
+        const open = () => {
+          renderFriendsPage();
+          if (typeof showScreen === "function") showScreen("friends");
+        };
+        if (CLOUD_ENABLED) {
+          refreshCloudSocial().then(open).catch(() => open());
+        } else {
+          open();
+        }
       }
 
       function renderUserFavoritesGrid(gridEl, emptyEl, favIds, readonly) {
@@ -16583,17 +16658,17 @@ const HUB_GAME_META = {
         else if (inPending) addBtn.textContent = "Принять заявку";
         else addBtn.textContent = "+ Заявка в друзья";
         addBtn.disabled = outPending;
-        addBtn.addEventListener("click", () => {
+        addBtn.addEventListener("click", async () => {
           if (isFriend(targetName)) {
-            removeFriend(targetName);
+            await removeFriend(targetName);
             toast("Удалено из друзей");
           } else if (hasIncomingRequest(targetName)) {
-            acceptFriendRequest(targetName);
+            await acceptFriendRequest(targetName);
             render();
           } else {
-            const err = sendFriendRequest(targetName);
+            const err = await sendFriendRequest(targetName);
             if (err) { toast(err); return; }
-            toast("Заявка отправлена");
+            toast(friendAddResultMessage(targetName));
           }
           renderUserProfile(targetName);
           renderFriendsPage();
@@ -16675,10 +16750,206 @@ const HUB_GAME_META = {
         try { return btoa(unescape(encodeURIComponent(String(p)))); } catch (e) { return String(p); }
       }
 
-      function getUsers() {
-        try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch (e) { return {}; }
+      function cloudHeaders(extra) {
+        return Object.assign({
+          apikey: SUPABASE_ANON,
+          Authorization: "Bearer " + SUPABASE_ANON,
+          "Content-Type": "application/json"
+        }, extra || {});
       }
-      function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+
+      function cloudErrorText(res, body) {
+        const msg = body && body.message ? String(body.message) : "";
+        if (res.status === 401 || res.status === 403 || /permission denied/i.test(msg)) {
+          return "Нет прав на сервер — выполни supabase-setup.sql в Supabase";
+        }
+        if (/relation.*profiles.*does not exist/i.test(msg)) {
+          return "Таблица profiles не создана — выполни supabase-setup.sql";
+        }
+        if (msg) return msg;
+        return "Ошибка сервера (" + res.status + ")";
+      }
+
+      function rowToUser(row) {
+        if (!row) return null;
+        return normalizeUser({
+          username: row.username,
+          pass: row.pass_hash,
+          displayName: row.display_name || "",
+          coins: row.coins || 0,
+          avatarType: row.avatar_type || "initials",
+          avatarShopId: row.avatar_shop_id || "",
+          avatarEmoji: row.avatar_emoji || "",
+          avatarImage: row.avatar_image || "",
+          ownedAvatars: Array.isArray(row.owned_avatars) ? row.owned_avatars : [],
+          favorites: Array.isArray(row.favorites) ? row.favorites : [],
+          history: Array.isArray(row.history) ? row.history : [],
+          friends: Array.isArray(row.friends) ? row.friends : [],
+          favoriteFriends: Array.isArray(row.favorite_friends) ? row.favorite_friends : [],
+          incomingFriendRequests: Array.isArray(row.incoming_requests) ? row.incoming_requests : [],
+          outgoingFriendRequests: Array.isArray(row.outgoing_requests) ? row.outgoing_requests : [],
+          role: row.role || "",
+          created: row.created_at ? new Date(row.created_at).getTime() : Date.now()
+        });
+      }
+
+      function userToRow(u) {
+        return {
+          username: u.username,
+          pass_hash: u.pass,
+          display_name: u.displayName || "",
+          coins: getUserCoins(u),
+          avatar_type: u.avatarType || "initials",
+          avatar_shop_id: u.avatarShopId || "",
+          avatar_emoji: u.avatarEmoji || "",
+          avatar_image: u.avatarImage || "",
+          owned_avatars: u.ownedAvatars || [],
+          favorites: u.favorites || [],
+          history: u.history || [],
+          friends: u.friends || [],
+          favorite_friends: u.favoriteFriends || [],
+          incoming_requests: u.incomingFriendRequests || [],
+          outgoing_requests: u.outgoingFriendRequests || [],
+          role: u.role || ""
+        };
+      }
+
+      async function fetchCloudUser(username) {
+        const res = await fetch(
+          SUPABASE_URL + "/rest/v1/profiles?username=eq." + encodeURIComponent(username) + "&limit=1",
+          { headers: cloudHeaders() }
+        );
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(cloudErrorText(res, body));
+        const rows = Array.isArray(body) ? body : [];
+        return rows[0] ? rowToUser(rows[0]) : null;
+      }
+
+      async function insertCloudUser(u) {
+        const res = await fetch(SUPABASE_URL + "/rest/v1/profiles", {
+          method: "POST",
+          headers: cloudHeaders({ Prefer: "return=representation" }),
+          body: JSON.stringify(userToRow(u))
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.status === 409) return "Это имя уже занято — выбери другое";
+        if (!res.ok) return cloudErrorText(res, body);
+        const rows = Array.isArray(body) ? body : [body];
+        if (rows[0]) cloudUsers[u.username] = rowToUser(rows[0]);
+        return null;
+      }
+
+      async function saveCloudUser(u) {
+        if (!u || u.isBot) return null;
+        const res = await fetch(
+          SUPABASE_URL + "/rest/v1/profiles?username=eq." + encodeURIComponent(u.username),
+          {
+            method: "PATCH",
+            headers: cloudHeaders({ Prefer: "return=representation" }),
+            body: JSON.stringify(userToRow(u))
+          }
+        );
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) return cloudErrorText(res, body);
+        const rows = Array.isArray(body) ? body : [body];
+        if (rows[0]) cloudUsers[u.username] = rowToUser(rows[0]);
+        return null;
+      }
+
+      async function loadCloudUsers() {
+        if (!CLOUD_ENABLED) return;
+        const res = await fetch(SUPABASE_URL + "/rest/v1/profiles?select=*", { headers: cloudHeaders() });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(cloudErrorText(res, body));
+        (Array.isArray(body) ? body : []).forEach((row) => {
+          if (row && row.username) cloudUsers[row.username] = rowToUser(row);
+        });
+        mergeAllCloudIntoLocal();
+        cloudSyncedOnce = true;
+      }
+
+      function mergeCloudIntoLocal(username) {
+        const u = cloudUsers[username];
+        if (!u || u.isBot) return;
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        users[username] = u;
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function mergeAllCloudIntoLocal() {
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        Object.keys(cloudUsers).forEach((name) => {
+          if (cloudUsers[name] && !cloudUsers[name].isBot) users[name] = cloudUsers[name];
+        });
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      async function refreshCurrentUserFromCloud() {
+        if (!CLOUD_ENABLED) return;
+        const s = getSession();
+        if (!s || !s.username) return;
+        try {
+          const u = await fetchCloudUser(s.username);
+          if (u) {
+            cloudUsers[s.username] = u;
+            mergeCloudIntoLocal(s.username);
+          }
+        } catch (e) { console.warn("refresh user", e); }
+      }
+
+      async function refreshCloudSocial() {
+        if (!CLOUD_ENABLED) return;
+        await loadCloudUsers();
+        await refreshCurrentUserFromCloud();
+      }
+
+      async function persistCloudUsers(users, names) {
+        if (!CLOUD_ENABLED) return;
+        for (let i = 0; i < names.length; i++) {
+          const u = users[names[i]];
+          if (u && !u.isBot) {
+            const err = await saveCloudUser(u);
+            if (err) console.warn("cloud save", names[i], err);
+          }
+        }
+      }
+
+      async function resolveFriendTargetAsync(query) {
+        let resolved = resolveFriendTarget(query);
+        if (resolved || !CLOUD_ENABLED) return resolved;
+        if (!cloudSyncedOnce) {
+          try { await loadCloudUsers(); } catch (e) { return null; }
+        } else {
+          try {
+            const raw = String(query || "").trim();
+            const u = await fetchCloudUser(raw);
+            if (u) {
+              cloudUsers[u.username] = u;
+              mergeCloudIntoLocal(u.username);
+            }
+          } catch (e) {}
+        }
+        return resolveFriendTarget(query);
+      }
+
+      function getUsers() {
+        try {
+          const local = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+          const merged = Object.assign({}, local);
+          Object.keys(cloudUsers).forEach((k) => {
+            if (cloudUsers[k] && !cloudUsers[k].isBot) merged[k] = cloudUsers[k];
+          });
+          return merged;
+        } catch (e) {
+          return Object.assign({}, cloudUsers);
+        }
+      }
+      function saveUsers(u) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(u));
+        Object.keys(u).forEach((k) => {
+          if (u[k] && !u[k].isBot) cloudUsers[k] = u[k];
+        });
+      }
 
       function getSession() {
         try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (e) { return null; }
@@ -17505,7 +17776,17 @@ const HUB_GAME_META = {
         runBotPlaytest(false);
         ensureUserFields();
         if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
-        loadSiteSettings().then(() => {
+        loadSiteSettings().then(async () => {
+          if (CLOUD_ENABLED) {
+            try {
+              await loadCloudUsers();
+              await refreshCurrentUserFromCloud();
+              if (isLoggedIn()) toast("Сервер PlayVerse подключён");
+            } catch (e) {
+              console.warn("cloud boot", e);
+              if (isLoggedIn()) toast("Офлайн — друзья только на этом устройстве");
+            }
+          }
           if (checkSessionBlocked()) { render(); return; }
           render();
           const pending = getIncomingRequests().length;
@@ -17517,7 +17798,7 @@ const HUB_GAME_META = {
         });
       }
 
-      function register(name, pass) {
+      async function register(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name)) return "Выбери имя из списка";
         if (!validName(name)) return "Некорректное имя";
@@ -17526,6 +17807,14 @@ const HUB_GAME_META = {
         if (name === SUPER_ADMIN_NAME) return "Это имя зарезервировано";
         const users = getUsers();
         if (users[name]) return "Это имя уже занято — выбери другое";
+        if (CLOUD_ENABLED) {
+          try {
+            const existing = await fetchCloudUser(name);
+            if (existing) return "Это имя уже занято — выбери другое";
+          } catch (e) {
+            console.warn("cloud register check", e);
+          }
+        }
         users[name] = {
           username: name,
           displayName: "",
@@ -17543,19 +17832,36 @@ const HUB_GAME_META = {
           incomingFriendRequests: [],
           outgoingFriendRequests: []
         };
+        if (CLOUD_ENABLED) {
+          const cloudErr = await insertCloudUser(users[name]);
+          if (cloudErr) return cloudErr;
+        }
         saveUsers(users);
         setSession(name);
         renderPlayerNameSelects();
         return null;
       }
 
-      function login(name, pass) {
+      async function login(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name) && name !== SUPER_ADMIN_NAME) return "Выбери имя из списка";
         if (isUserBlocked(name)) return "Аккаунт заблокирован администратором";
         const users = getUsers();
-        const u = users[name];
-        if (!u) return "Пользователь не найден";
+        let u = users[name];
+        if (CLOUD_ENABLED) {
+          try {
+            const cloud = await fetchCloudUser(name);
+            if (cloud) {
+              u = cloud;
+              cloudUsers[name] = cloud;
+              users[name] = cloud;
+              saveUsers(users);
+            }
+          } catch (e) {
+            console.warn("cloud login", e);
+          }
+        }
+        if (!u) return "Пользователь не найден — зарегистрируйся на этом сайте";
         if (u.pass !== hashPass(pass)) return "Неверный пароль";
         setSession(name);
         return null;
@@ -17581,11 +17887,11 @@ const HUB_GAME_META = {
       });
 
       if (el.loginForm) {
-        el.loginForm.addEventListener("submit", (e) => {
+        el.loginForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-login-name").value.trim();
           const pass = document.getElementById("profile-login-pass").value;
-          const err = login(name, pass);
+          const err = await login(name, pass);
           if (err) { setMsg(el.loginMsg, err); return; }
           setMsg(el.loginMsg, "Добро пожаловать!", true);
           render();
@@ -17595,13 +17901,13 @@ const HUB_GAME_META = {
       }
 
       if (el.registerForm) {
-        el.registerForm.addEventListener("submit", (e) => {
+        el.registerForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-reg-name").value.trim();
           const pass = document.getElementById("profile-reg-pass").value;
           const pass2 = document.getElementById("profile-reg-pass2").value;
           if (pass !== pass2) { setMsg(el.registerMsg, "Пароли не совпадают"); return; }
-          const err = register(name, pass);
+          const err = await register(name, pass);
           if (err) { setMsg(el.registerMsg, err); return; }
           setMsg(el.registerMsg, "Аккаунт создан!", true);
           render();
@@ -17617,14 +17923,14 @@ const HUB_GAME_META = {
         if (typeof showScreen === "function") showScreen("cover");
       });
       if (el.friendsPageAddBtn) {
-        el.friendsPageAddBtn.addEventListener("click", () => {
+        el.friendsPageAddBtn.addEventListener("click", async () => {
           const name = el.friendsPageAddName ? el.friendsPageAddName.value.trim() : "";
-          const err = sendFriendRequest(name);
+          const err = await sendFriendRequest(name);
           if (err) { toast(err); return; }
           if (el.friendsPageAddName) el.friendsPageAddName.value = "";
           renderFriendsPage();
           render();
-          toast("Заявка отправлена");
+          toast(friendAddResultMessage(name));
         });
       }
       if (el.friendsPageAddName) {
@@ -17903,14 +18209,16 @@ const HUB_GAME_META = {
             menuToast(player.display + " уже в друзьях");
             return;
           }
-          const err = player.accountUsername && PVProfile.sendFriendRequest
-            ? PVProfile.sendFriendRequest(player.accountUsername)
-            : PVProfile.addBotFriend(player);
-          if (err) { menuToast(err); return; }
-          menuToast(player.display + " добавлен в друзья!");
-          if (typeof PVProfile.render === "function") PVProfile.render();
-          if (typeof PVProfile.renderFriendsPage === "function") PVProfile.renderFriendsPage();
-          renderPlayers(currentMenuMode);
+          (async () => {
+            const err = player.accountUsername && PVProfile.sendFriendRequest
+              ? await PVProfile.sendFriendRequest(player.accountUsername)
+              : await PVProfile.addBotFriend(player);
+            if (err) { menuToast(err); return; }
+            menuToast(player.display + " добавлен в друзья!");
+            if (typeof PVProfile.render === "function") PVProfile.render();
+            if (typeof PVProfile.renderFriendsPage === "function") PVProfile.renderFriendsPage();
+            renderPlayers(currentMenuMode);
+          })();
         }
       }
 
