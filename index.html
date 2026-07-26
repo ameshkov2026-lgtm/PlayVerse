@@ -4168,6 +4168,38 @@
       margin-bottom: 18px;
     }
     .rules-panel li { margin-bottom: 8px; }
+    .rules-panel ol.rules-picker-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .rules-game-pick {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border: 2px solid #bae6fd;
+      border-radius: 12px;
+      background: #f0f9ff;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .rules-game-pick:hover { background: #e0f2fe; }
+    .rules-back {
+      display: block;
+      margin-bottom: 10px;
+      border: none;
+      background: none;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 4px 0;
+    }
     .rules-close {
       display: block;
       width: 100%;
@@ -5190,281 +5222,165 @@
     body.on-cover, body.on-profile {
       background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
     }
-
-    /* ===== PlayVerse · Roblox UI (фиолетовая тема) ===== */
-    body.rbx-v2 {
-      --rbx-bg: #3b0764;
-      --rbx-surface: #4c1d95;
-      --rbx-surface2: #5b21b6;
-      --rbx-accent: #9333ea;
-      --rbx-accent-bright: #a855f7;
-      --rbx-green: #7c3aed;
-      --rbx-green-hover: #6d28d9;
-      --rbx-text: #f5f3ff;
-      --rbx-muted: #c4b5fd;
-      --rbx-bar: #2e1065;
-      --rbx-card: rgba(255,255,255,0.12);
-      --rbx-border: rgba(255,255,255,0.14);
-    }
-    body.rbx-v2 #screen-cover {
-      background: linear-gradient(180deg, var(--rbx-surface) 0%, var(--rbx-bg) 100%) !important;
-    }
-    body.rbx-v2 .rbx-rblx-top {
-      justify-content: flex-start;
-      gap: 12px;
-      padding: 10px 14px;
-      background: var(--rbx-bar);
-      border-bottom: 1px solid var(--rbx-border);
-    }
-    body.rbx-v2 .rbx-rblx-logo {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: #fff;
-      letter-spacing: 0.04em;
-      flex-shrink: 0;
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 4px 0;
-    }
-    body.rbx-v2 .rbx-rblx-search-wrap {
-      flex: 1;
-      max-width: 520px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid var(--rbx-border);
-      border-radius: 999px;
-      padding: 8px 14px;
-      min-width: 0;
-    }
-    body.rbx-v2 .rbx-rblx-search-wrap svg {
-      width: 18px; height: 18px; stroke: var(--rbx-muted); fill: none; stroke-width: 2; flex-shrink: 0;
-    }
-    body.rbx-v2 .rbx-rblx-search-wrap input {
-      border: none; background: transparent; color: #fff; font-weight: 600; font-size: 0.92rem; width: 100%; outline: none;
-    }
-    body.rbx-v2 .rbx-rblx-search-wrap input::placeholder { color: #a78bfa; }
-    body.rbx-v2 .rbx-rblx-user-btn {
-      border: 2px solid rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.08);
-      border-radius: 50%;
-      width: 40px; height: 40px;
-      padding: 0; cursor: pointer; overflow: hidden; flex-shrink: 0;
-    }
-    body.rbx-v2 .rbx-coin-pill {
-      background: rgba(0,0,0,0.22);
-      border-color: var(--rbx-border);
-      color: #fde68a;
-    }
-    body.rbx-v2 .rbx-beta-btn { display: none !important; }
-    body.rbx-v2 .rbx-search-panel { display: none !important; }
-    body.rbx-v2 .rbx-profile-row { display: flex !important; align-items: center; gap: 12px; padding: 12px 16px 4px; }
-    body.rbx-v2 .rbx-hub-panel { display: none; }
-    body.rbx-v2 .rbx-hub-panel.active { display: block; }
-    body.rbx-v2 .rbx-section-title {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      text-align: left;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--rbx-text);
-      margin: 0 0 10px;
-      padding: 0 16px;
-    }
-    body.rbx-v2 .rbx-rec-section .rbx-section-title { padding: 0 16px; }
-    body.rbx-v2 .hub-grid {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 12px;
-      padding: 0 16px 12px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      --hub-row-h: auto;
-    }
-    body.rbx-v2 .hub-grid .cover-card {
-      flex: 0 0 clamp(150px, 42vw, 190px);
-      min-height: 0;
-      scroll-snap-align: start;
-      padding: 8px;
-      border-radius: 12px;
-      background: var(--rbx-card);
-      border: 1px solid var(--rbx-border);
-      box-shadow: none;
-    }
-    body.rbx-v2 .hub-grid .cover-art {
-      min-height: 100px;
-      aspect-ratio: 16/10;
-      border-radius: 10px;
-    }
-    body.rbx-v2 .hub-grid .cover-meta h2 {
-      font-size: 0.82rem;
-      color: var(--rbx-text);
-      font-weight: 700;
-    }
-    body.rbx-v2 .hub-grid .cover-title { display: none; }
-    body.rbx-v2 .rbx-bottom-nav {
-      justify-content: space-around;
-      gap: 0;
-      padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
-      background: var(--rbx-bar);
-      border-top: 1px solid var(--rbx-border);
-    }
-    body.rbx-v2 .rbx-nav-item { font-size: 0.62rem; gap: 3px; padding: 6px 2px; flex: 1; max-width: 80px; }
-    body.rbx-v2 .rbx-nav-item svg { width: 24px; height: 24px; }
-    body.rbx-v2 .rbx-nav-item.active { color: #fff; background: rgba(168,85,247,0.25); }
-    body.rbx-v2 .rbx-blocky {
-      display: flex; flex-direction: column; align-items: center; width: 36px; margin: 0 auto;
-    }
-    body.rbx-v2 .rbx-blocky-sm { transform: scale(0.85); transform-origin: center bottom; }
-    body.rbx-v2 .rbx-blocky-head {
-      width: 14px; height: 14px; background: #fcd9b6; border-radius: 2px;
-      box-shadow: inset -2px -2px 0 rgba(0,0,0,0.12);
-    }
-    body.rbx-v2 .rbx-blocky-torso {
-      width: 18px; height: 16px; margin-top: 1px; border-radius: 2px;
-      background: var(--rbx-shirt, var(--rbx-accent));
-    }
-    body.rbx-v2 .rbx-blocky-legs { display: flex; gap: 2px; margin-top: 1px; }
-    body.rbx-v2 .rbx-blocky-leg {
-      width: 7px; height: 12px; border-radius: 1px;
-      background: var(--rbx-pants, #312e81);
-    }
-    body.rbx-v2 .rbx-blocky-lg { transform: scale(2.2); margin: 24px auto; }
-    body.rbx-v2 .rbx-friend-tile .rbx-friend-avatar {
-      background: rgba(255,255,255,0.08);
-      border: 2px solid rgba(255,255,255,0.2);
-    }
-    body.rbx-v2 .rbx-user-menu {
-      position: absolute; top: 56px; right: 12px; z-index: 50;
-      min-width: 200px; background: #1e1035; border: 1px solid var(--rbx-border);
-      border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); overflow: hidden;
-    }
-    body.rbx-v2 .rbx-user-menu-head {
-      padding: 14px; border-bottom: 1px solid var(--rbx-border);
-      display: flex; align-items: center; gap: 10px;
-    }
-    body.rbx-v2 .rbx-user-menu-name { font-weight: 800; color: #fff; font-size: 0.95rem; }
-    body.rbx-v2 .rbx-user-menu-item {
-      display: block; width: 100%; text-align: left; border: none; background: none;
-      color: var(--rbx-text); padding: 12px 14px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
-    }
-    body.rbx-v2 .rbx-user-menu-item:hover { background: rgba(168,85,247,0.2); }
-    body.rbx-v2 .rbx-user-menu-item.danger { color: #fca5a5; }
-    body.rbx-v2 .rbx-login-overlay {
-      position: fixed; inset: 0; z-index: 20000;
-      background: rgba(30, 16, 53, 0.88);
-      display: none; align-items: center; justify-content: center; padding: 16px;
-    }
-    body.rbx-v2 .rbx-login-overlay.open { display: flex; }
-    body.rbx-v2 .rbx-login-card {
-      width: min(420px, 100%); background: #faf5ff; border-radius: 16px;
-      padding: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-    }
-    body.rbx-v2 .rbx-login-card h2 { margin: 0 0 6px; color: #4c1d95; font-size: 1.5rem; }
-    body.rbx-v2 .rbx-login-card p { margin: 0 0 16px; color: #6b21a8; font-weight: 600; font-size: 0.9rem; }
-    body.rbx-v2 .rbx-login-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-    body.rbx-v2 .rbx-login-tab {
-      flex: 1; border: none; border-radius: 10px; padding: 10px;
-      font-weight: 800; cursor: pointer; background: #ede9fe; color: #6d28d9;
-    }
-    body.rbx-v2 .rbx-login-tab.active { background: var(--rbx-accent); color: #fff; }
-    body.rbx-v2 .rbx-login-card label { display: block; font-weight: 700; color: #4c1d95; font-size: 0.85rem; margin-bottom: 12px; }
-    body.rbx-v2 .rbx-login-card select,
-    body.rbx-v2 .rbx-login-card input {
-      width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px;
-      border: 2px solid #ddd6fe; font-size: 1rem; box-sizing: border-box;
-    }
-    body.rbx-v2 .rbx-login-submit {
-      width: 100%; margin-top: 8px; padding: 14px; border: none; border-radius: 10px;
-      background: var(--rbx-accent); color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer;
-    }
-    body.rbx-v2 .rbx-login-submit:hover { background: var(--rbx-accent-bright); }
-    body.rbx-v2 .rbx-login-close {
-      position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,0.15);
-      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;
-    }
-    body.rbx-v2 .rbx-chat-layout { display: flex; flex-direction: column; height: calc(100dvh - 130px); min-height: 280px; }
-    body.rbx-v2 .rbx-chat-list { flex: 0 0 auto; max-height: 40%; overflow-y: auto; border-bottom: 1px solid var(--rbx-border); }
-    body.rbx-v2 .rbx-chat-thread {
-      flex: 1; display: flex; flex-direction: column; min-height: 0;
-    }
-    body.rbx-v2 .rbx-chat-contact {
-      display: flex; align-items: center; gap: 10px; width: 100%;
-      border: none; background: transparent; color: var(--rbx-text);
-      padding: 12px 16px; cursor: pointer; text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    body.rbx-v2 .rbx-chat-contact.active { background: rgba(168,85,247,0.22); }
-    body.rbx-v2 .rbx-chat-msgs {
-      flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px;
-    }
-    body.rbx-v2 .rbx-chat-bubble {
-      max-width: 82%; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; line-height: 1.35;
-    }
-    body.rbx-v2 .rbx-chat-bubble.me { align-self: flex-end; background: var(--rbx-accent); color: #fff; border-bottom-right-radius: 4px; }
-    body.rbx-v2 .rbx-chat-bubble.them { align-self: flex-start; background: rgba(255,255,255,0.12); color: #fff; border-bottom-left-radius: 4px; }
-    body.rbx-v2 .rbx-chat-form {
-      display: flex; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-      border-top: 1px solid var(--rbx-border); background: var(--rbx-bar);
-    }
-    body.rbx-v2 .rbx-chat-form input {
-      flex: 1; border: 1px solid var(--rbx-border); border-radius: 999px; padding: 10px 14px;
-      background: rgba(0,0,0,0.2); color: #fff; font-weight: 600;
-    }
-    body.rbx-v2 .rbx-chat-form button {
-      border: none; border-radius: 999px; padding: 10px 16px; background: var(--rbx-accent);
-      color: #fff; font-weight: 800; cursor: pointer;
-    }
-    body.rbx-v2 .rbx-more-list { padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 8px; }
-    body.rbx-v2 .rbx-more-btn {
-      display: flex; align-items: center; gap: 12px; width: 100%;
-      border: 1px solid var(--rbx-border); border-radius: 12px; padding: 14px 16px;
-      background: var(--rbx-card); color: var(--rbx-text); font-weight: 800; font-size: 0.95rem; cursor: pointer;
-    }
-    body.rbx-v2 .rbx-more-btn:hover { background: rgba(168,85,247,0.2); }
-    body.rbx-v2 .pv-rbx-action.primary { background: var(--rbx-accent) !important; }
-    body.rbx-v2 .pv-rbx-panel { background: rgba(46, 16, 101, 0.98); }
-    body.rbx-v2 .pv-rbx-topbar { background: var(--rbx-bar); }
-    body.rbx-v2 #screen-profile {
+    body.on-newverse {
       background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+    }
+
+    /* ===== НОВАЯ ВЕРСИЯ · Roblox UI (фиолетовая, без игр) ===== */
+    #screen-newverse {
+      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+      padding: 0 !important;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
       color: #f5f3ff;
     }
-    body.rbx-v2 .profile-header, body.rbx-v2 .profile-auth-card, body.rbx-v2 .profile-user-card {
-      background: rgba(255,255,255,0.1); border: 1px solid var(--rbx-border);
+    #screen-newverse.active { align-items: stretch; justify-content: flex-start; }
+    .nv-hub {
+      display: flex; flex-direction: column; height: 100dvh; max-height: 100dvh; overflow: hidden;
     }
-    body.rbx-v2 .profile-brand { color: #e9d5ff; }
-    body.rbx-v2 .profile-hero { background: linear-gradient(135deg, #6d28d9, #9333ea); }
-    body.rbx-v2 .profile-hero h1, body.rbx-v2 .profile-hero p { color: #fff; }
-    body.rbx-v2 .profile-submit { background: var(--rbx-accent); }
-    body.rbx-v2 .profile-tab.active { background: var(--rbx-accent); color: #fff; }
-    body.rbx-v2 .rbx-continue-row {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 12px;
-      padding: 0 16px 12px;
-      scroll-snap-type: x mandatory;
+    .nv-topbar {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      background: #2e1065; border-bottom: 1px solid rgba(255,255,255,0.14); flex-shrink: 0;
     }
-    body.rbx-v2 .rbx-continue-row .cover-card {
-      flex: 0 0 clamp(150px, 42vw, 190px);
-      scroll-snap-align: start;
+    .nv-back-btn {
+      border: none; background: rgba(255,255,255,0.12); color: #ede9fe;
+      border-radius: 999px; padding: 8px 12px; font-weight: 800; font-size: 0.82rem; cursor: pointer; flex-shrink: 0;
     }
-    body.rbx-v2 .rbx-friend-avatar .rbx-blocky { transform: scale(0.7); transform-origin: center bottom; }
-    body.rbx-v2 .pv-rbx-avatar.rbx-blocky-wrap {
-      background: transparent; overflow: visible;
+    .nv-logo { font-weight: 900; font-size: 1.05rem; color: #fff; flex-shrink: 0; }
+    .nv-search-wrap {
+      flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0;
+      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px; padding: 8px 14px;
     }
-    body.rbx-v2 .hub-join-play-btn { background: var(--rbx-accent, #9333ea); }
-    body.rbx-v2 .hub-join-play-btn:hover { background: var(--rbx-accent-bright, #a855f7); }
-    body.rbx-v2 .pv-rbx-action.primary { background: var(--rbx-accent) !important; }
-    body.rbx-v2 .pv-rbx-chat-form button { background: var(--rbx-accent); }
+    .nv-search-wrap svg { width: 18px; height: 18px; stroke: #c4b5fd; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .nv-search-wrap input {
+      border: none; background: transparent; color: #fff; font-weight: 600; font-size: 0.9rem; width: 100%; outline: none;
+    }
+    .nv-search-wrap input::placeholder { color: #a78bfa; }
+    .nv-top-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nv-coin-pill {
+      display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+      background: rgba(0,0,0,0.22); border: 1px solid rgba(255,255,255,0.14); color: #fde68a; font-weight: 900; font-size: 0.88rem;
+    }
+    .nv-user-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08); padding: 0; cursor: pointer; overflow: hidden;
+    }
+    .nv-scroll { flex: 1; overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+    .nv-panel { display: none; padding-bottom: 12px; }
+    .nv-panel.active { display: block; }
+    .nv-section-title {
+      margin: 12px 0 10px; padding: 0 16px; font-size: 1rem; font-weight: 800; color: #faf5ff;
+    }
+    .nv-empty {
+      margin: 8px 16px 16px; padding: 28px 20px; border-radius: 16px; text-align: center;
+      background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.2);
+      color: #ddd6fe; font-weight: 700; line-height: 1.45;
+    }
+    .nv-friends-rail {
+      display: flex; gap: 12px; overflow-x: auto; padding: 0 16px 8px; -webkit-overflow-scrolling: touch;
+    }
+    .nv-friends-rail::-webkit-scrollbar { height: 0; }
+    .nv-bottom-nav {
+      display: flex; justify-content: space-around; gap: 0;
+      padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+      background: #2e1065; border-top: 1px solid rgba(255,255,255,0.14); flex-shrink: 0;
+    }
+    .nv-nav-item {
+      flex: 1; max-width: 80px; border: none; background: transparent; color: #c4b5fd;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 2px; font-size: 0.62rem; font-weight: 800; cursor: pointer; border-radius: 12px;
+    }
+    .nv-nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+    .nv-nav-item.active { color: #fff; background: rgba(168,85,247,0.25); }
+    .nv-blocky { display: flex; flex-direction: column; align-items: center; width: 36px; margin: 0 auto; }
+    .nv-blocky-sm { transform: scale(0.85); transform-origin: center bottom; }
+    .nv-blocky-lg { transform: scale(2.2); margin: 20px auto; }
+    .nv-blocky-head { width: 14px; height: 14px; background: #fcd9b6; border-radius: 2px; }
+    .nv-blocky-torso { width: 18px; height: 16px; margin-top: 1px; border-radius: 2px; background: #9333ea; }
+    .nv-blocky-legs { display: flex; gap: 2px; margin-top: 1px; }
+    .nv-blocky-leg { width: 7px; height: 12px; border-radius: 1px; background: #312e81; }
+    .nv-user-menu {
+      position: absolute; top: 56px; right: 12px; z-index: 60; min-width: 200px;
+      background: #1e1035; border: 1px solid rgba(255,255,255,0.14); border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45); overflow: hidden;
+    }
+    .nv-user-menu-head { display: flex; align-items: center; gap: 10px; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nv-user-menu-name { font-weight: 800; color: #fff; }
+    .nv-user-menu-item {
+      display: block; width: 100%; text-align: left; border: none; background: none;
+      color: #f5f3ff; padding: 12px 14px; font-weight: 700; cursor: pointer;
+    }
+    .nv-user-menu-item:hover { background: rgba(168,85,247,0.2); }
+    .nv-user-menu-item.danger { color: #fca5a5; }
+    .nv-friend-tile {
+      flex: 0 0 72px; border: none; background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .nv-friend-avatar {
+      width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.18); display: grid; place-items: center; position: relative;
+    }
+    .nv-friend-name { font-size: 0.72rem; font-weight: 800; color: #ede9fe; max-width: 72px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .nv-chat-layout { display: flex; flex-direction: column; height: calc(100dvh - 130px); min-height: 280px; }
+    .nv-chat-list { flex: 0 0 auto; max-height: 38%; overflow-y: auto; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nv-chat-contact {
+      display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: transparent;
+      color: #f5f3ff; padding: 12px 16px; cursor: pointer; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nv-chat-contact.active { background: rgba(168,85,247,0.22); }
+    .nv-chat-msgs { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .nv-chat-bubble { max-width: 82%; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; }
+    .nv-chat-bubble.me { align-self: flex-end; background: #9333ea; color: #fff; border-bottom-right-radius: 4px; }
+    .nv-chat-bubble.them { align-self: flex-start; background: rgba(255,255,255,0.12); color: #fff; border-bottom-left-radius: 4px; }
+    .nv-chat-form { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid rgba(255,255,255,0.1); background: #2e1065; }
+    .nv-chat-form input {
+      flex: 1; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 10px 14px;
+      background: rgba(0,0,0,0.2); color: #fff; font-weight: 600;
+    }
+    .nv-chat-form button {
+      border: none; border-radius: 999px; padding: 10px 14px; background: #9333ea; color: #fff; font-weight: 800; cursor: pointer;
+    }
+    .nv-more-list { padding: 8px 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+    .nv-more-btn {
+      display: flex; align-items: center; gap: 10px; width: 100%; border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px; padding: 14px 16px; background: rgba(255,255,255,0.08); color: #f5f3ff;
+      font-weight: 800; font-size: 0.92rem; cursor: pointer;
+    }
+    .nv-login-overlay {
+      position: fixed; inset: 0; z-index: 25000; background: rgba(30, 16, 53, 0.88);
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .nv-login-overlay.open { display: flex; }
+    .nv-login-card {
+      width: min(420px, 100%); background: #faf5ff; border-radius: 16px; padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    .nv-login-card h2 { margin: 0 0 6px; color: #4c1d95; }
+    .nv-login-card p { margin: 0 0 16px; color: #6b21a8; font-weight: 600; font-size: 0.9rem; }
+    .nv-login-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .nv-login-tab {
+      flex: 1; border: none; border-radius: 10px; padding: 10px; font-weight: 800; cursor: pointer;
+      background: #ede9fe; color: #6d28d9;
+    }
+    .nv-login-tab.active { background: #9333ea; color: #fff; }
+    .nv-login-card label { display: block; font-weight: 700; color: #4c1d95; font-size: 0.85rem; margin-bottom: 12px; }
+    .nv-login-card select, .nv-login-card input {
+      width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px; border: 2px solid #ddd6fe; box-sizing: border-box;
+    }
+    .nv-login-submit {
+      width: 100%; margin-top: 8px; padding: 14px; border: none; border-radius: 10px;
+      background: #9333ea; color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer;
+    }
+    .nv-login-close {
+      position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,0.15);
+      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    }
 
   </style>
 </head>
-<body class="rbx-v2">
+<body>
 
   <button type="button" class="rules-tab" id="rules-tab">Правила</button>
   <button type="button" class="music-tab" id="music-tab" title="Фоновая музыка">Музыка вкл</button>
@@ -5522,16 +5438,9 @@
 
   <div class="rules-overlay" id="rules-overlay" aria-hidden="true">
     <div class="rules-panel" role="dialog" aria-labelledby="rules-title">
+      <button type="button" class="rules-back profile-hidden" id="rules-back">← Все игры</button>
       <h2 id="rules-title">Правила игры</h2>
-      <ol id="rules-list">
-        <li>Это ходилка по карте, как настольная игра. Фишка стартует со «СТАРТ».</li>
-        <li>В правом нижнем углу — кубик 🎲. Нажми на него, чтобы кинуть.</li>
-        <li>Фишка передвинется вперёд на выпавшее число клеток. Клетки, через которые ты пролетел, помечаются точкой.</li>
-        <li>Автоматически открывается вопрос той клетки, на которой ты остановился.</li>
-        <li>На ответ даётся 7 секунд. Выбери один из четырёх вариантов.</li>
-        <li>Правильные ответы становятся зелёными, ошибки — красными.</li>
-        <li>Когда фишка дойдёт до последней клетки, откроется финиш и результат.</li>
-      </ol>
+      <ol id="rules-list"></ol>
       <button type="button" class="rules-close" id="rules-close">Понятно!</button>
     </div>
   </div>
@@ -5627,7 +5536,7 @@
   </div>
   
   <!-- ПРОФИЛЬ -->
-  <div id="screen-profile" class="screen">
+  <div id="screen-profile" class="screen active">
     <div class="profile-shell">
       <header class="profile-header">
         <div class="profile-brand">PlayVerse</div>
@@ -5802,92 +5711,39 @@
 
   <div class="profile-toast" id="profile-toast" role="status"></div>
 
-  <div class="rbx-login-overlay" id="rbx-login-overlay" aria-hidden="true">
-    <button type="button" class="rbx-login-close" id="rbx-login-close" aria-label="Закрыть">✕</button>
-    <div class="rbx-login-card">
-      <h2>PlayVerse</h2>
-      <p>Войди или создай аккаунт, чтобы играть с друзьями</p>
-      <div class="rbx-login-tabs">
-        <button type="button" class="rbx-login-tab active" data-rbx-login-tab="login">Вход</button>
-        <button type="button" class="rbx-login-tab" data-rbx-login-tab="register">Регистрация</button>
-      </div>
-      <form id="rbx-modal-login-form">
-        <label>Имя игрока
-          <select id="rbx-modal-login-name" required><option value="">Выбери имя</option></select>
-        </label>
-        <label>Пароль
-          <input type="password" id="rbx-modal-login-pass" required maxlength="32" placeholder="••••••">
-        </label>
-        <p class="profile-msg" id="rbx-modal-login-msg"></p>
-        <button type="submit" class="rbx-login-submit">Войти</button>
-      </form>
-      <form id="rbx-modal-register-form" class="profile-hidden">
-        <label>Игровое имя
-          <select id="rbx-modal-reg-name" required><option value="">Загрузка…</option></select>
-        </label>
-        <label>Пароль
-          <input type="password" id="rbx-modal-reg-pass" required maxlength="32" placeholder="Минимум 4 символа">
-        </label>
-        <label>Повтор пароля
-          <input type="password" id="rbx-modal-reg-pass2" required maxlength="32" placeholder="Ещё раз">
-        </label>
-        <p class="profile-msg" id="rbx-modal-register-msg"></p>
-        <button type="submit" class="rbx-login-submit">Создать аккаунт</button>
-      </form>
-    </div>
-  </div>
-
   <!-- ХАБ ИГР --><!-- ХАБ ИГР -->
-  <div id="screen-cover" class="screen active">
+  <div id="screen-cover" class="screen">
     <div class="rbx-hub">
-      <header class="rbx-topbar rbx-rblx-top">
-        <button type="button" class="rbx-rblx-logo" id="hub-logo-btn">PlayVerse</button>
-        <div class="rbx-rblx-search-wrap">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
-          <input type="search" id="hub-search-input" placeholder="Поиск игр..." autocomplete="off" enterkeyhint="search">
+      <header class="rbx-topbar">
+        <div class="rbx-logo">
+          <span class="rbx-logo-main">PlayVerse</span>
         </div>
         <div class="rbx-topbar-actions">
+          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">Новая версия</button>
+          <button type="button" class="rbx-search-btn" id="hub-search-btn" aria-label="Поиск">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+          </button>
           <div class="rbx-coin-pill" id="hub-coins" title="Монеты за прохождение игр">
             <span class="rbx-coin-icon">🪙</span>
             <span id="hub-coins-val">0</span>
           </div>
-          <button type="button" class="rbx-rblx-user-btn" id="hub-user-menu-btn" aria-label="Меню аккаунта">
-            <span class="rbx-blocky rbx-blocky-sm" id="hub-top-avatar"></span>
-          </button>
         </div>
       </header>
-      <div class="rbx-user-menu profile-hidden" id="hub-user-menu">
-        <div class="rbx-user-menu-head">
-          <span class="rbx-blocky rbx-blocky-sm" id="hub-menu-avatar"></span>
-          <div>
-            <div class="rbx-user-menu-name" id="hub-menu-name">Гость</div>
-            <div style="font-size:0.78rem;color:#c4b5fd;font-weight:600" id="hub-menu-tag">@guest</div>
-          </div>
-        </div>
-        <button type="button" class="rbx-user-menu-item" id="hub-menu-profile">Профиль</button>
-        <button type="button" class="rbx-user-menu-item" id="hub-menu-friends">Друзья</button>
-        <button type="button" class="rbx-user-menu-item" id="hub-menu-avatar">Аватар</button>
-        <button type="button" class="rbx-user-menu-item" id="hub-menu-login">Войти</button>
-        <button type="button" class="rbx-user-menu-item danger profile-hidden" id="hub-menu-logout">Выйти</button>
-      </div>
 
       <div class="rbx-search-panel profile-hidden" id="hub-search-panel">
-        <input type="search" class="rbx-search-input" id="hub-search-input-legacy" autocomplete="off">
+        <input type="search" class="rbx-search-input" id="hub-search-input" placeholder="Буква или название игры..." autocomplete="off" enterkeyhint="search">
         <button type="button" class="rbx-search-close" id="hub-search-close" aria-label="Закрыть поиск">✕</button>
       </div>
 
       <div class="rbx-hub-scroll">
-        <div class="rbx-hub-panel active" data-hub-panel="home">
         <div class="rbx-profile-row" id="hub-user-strip">
           <div class="rbx-user-avatar" id="hub-user-avatar">?</div>
           <div class="rbx-profile-meta">
             <div class="rbx-user-name" id="hub-user-name">Гость</div>
             <div class="rbx-user-tag" id="hub-user-tag">PlayVerse</div>
           </div>
-          <span class="profile-hidden" id="hub-user-status">В сети</span>
           <span class="profile-hidden" id="hub-profile-dot">?</span>
           <span class="profile-hidden" id="hub-profile-label">Профиль</span>
-          <span class="profile-hidden" id="hub-nav-avatar">?</span>
         </div>
 
         <section class="rbx-hub-section">
@@ -5895,10 +5751,12 @@
           <div class="rbx-friends-rail" id="hub-friends-rail"></div>
         </section>
 
+        <section class="rbx-hub-section">
+          <h2 class="rbx-section-title">Открой для себя аватары</h2>
+          <div class="rbx-avatar-shop-rail" id="hub-avatar-shop"></div>
+        </section>
+
         <section class="rbx-rec-section">
-          <h2 class="rbx-section-title">Продолжить</h2>
-          <div class="rbx-games-scroll rbx-continue-row" id="hub-continue-row"></div>
-          <h2 class="rbx-section-title" style="margin-top:14px">Рекомендуем</h2>
           <div class="rbx-games-scroll">
             <div class="hub-grid" id="hub-grid">
             <p class="hub-search-empty profile-hidden" id="hub-search-empty">Нет игр на эту букву</p>
@@ -6366,47 +6224,6 @@
             </div>
           </div>
         </section>
-        </div>
-
-        <div class="rbx-hub-panel" data-hub-panel="charts">
-          <h2 class="rbx-section-title">Популярное</h2>
-          <div class="rbx-games-scroll">
-            <div class="hub-grid" id="hub-charts-grid"></div>
-          </div>
-        </div>
-
-        <div class="rbx-hub-panel" data-hub-panel="avatar">
-          <div style="text-align:center;padding:16px 0 8px">
-            <div class="rbx-blocky rbx-blocky-lg" id="hub-blocky-preview"></div>
-            <div id="hub-blocky-name" style="font-weight:900;color:#fff;margin-top:8px">Гость</div>
-          </div>
-          <h2 class="rbx-section-title">Магазин аватаров</h2>
-          <div class="rbx-avatar-shop-rail" id="hub-avatar-shop"></div>
-        </div>
-
-        <div class="rbx-hub-panel" data-hub-panel="chats">
-          <div class="rbx-chat-layout">
-            <div class="rbx-chat-list" id="hub-chat-list"></div>
-            <div class="rbx-chat-thread">
-              <div class="rbx-chat-msgs" id="hub-chat-msgs"></div>
-              <form class="rbx-chat-form" id="hub-chat-form">
-                <input type="text" id="hub-chat-input" maxlength="200" placeholder="Напиши сообщение..." autocomplete="off">
-                <button type="submit">Отправить</button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="rbx-hub-panel" data-hub-panel="more">
-          <div class="rbx-more-list">
-            <button type="button" class="rbx-more-btn" id="more-profile">👤 Профиль и настройки</button>
-            <button type="button" class="rbx-more-btn" id="more-friends">🤝 Друзья <span class="rbx-nav-badge" id="hub-friends-badge"></span></button>
-            <button type="button" class="rbx-more-btn" id="more-rules">📋 Правила</button>
-            <button type="button" class="rbx-more-btn" id="more-factory">🏭 Фабрика игр</button>
-            <button type="button" class="rbx-more-btn danger profile-hidden" id="more-logout">🚪 Выйти</button>
-            <button type="button" class="rbx-more-btn" id="more-login">🔑 Войти / Регистрация</button>
-          </div>
-        </div>
       </div>
 
       <nav class="rbx-bottom-nav" aria-label="Навигация хаба">
@@ -6414,23 +6231,114 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           Главная
         </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="charts" aria-label="Популярное">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-          Популярное
-        </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="avatar" aria-label="Аватар">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
-          Аватар
-        </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="chats" aria-label="Чаты">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-          Чаты
-        </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="more" aria-label="Ещё">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          Ещё
+        <button type="button" class="rbx-nav-item" data-hub-nav="account" aria-label="Аккаунт">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Аккаунт
         </button>
       </nav>
+    </div>
+  </div>
+
+  <!-- НОВАЯ ВЕРСИЯ · Roblox UI без игр -->
+  <div id="screen-newverse" class="screen">
+    <div class="nv-hub">
+      <header class="nv-topbar">
+        <button type="button" class="nv-back-btn" id="nv-back-classic">← Классика</button>
+        <span class="nv-logo">PlayVerse 2</span>
+        <div class="nv-search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+          <input type="search" id="nv-search" placeholder="Поиск скоро..." disabled>
+        </div>
+        <div class="nv-top-actions">
+          <div class="nv-coin-pill"><span>🪙</span><span id="nv-coins-val">0</span></div>
+          <button type="button" class="nv-user-btn" id="nv-user-menu-btn" aria-label="Аккаунт">
+            <span class="nv-blocky nv-blocky-sm" id="nv-top-avatar"></span>
+          </button>
+        </div>
+      </header>
+      <div class="nv-user-menu profile-hidden" id="nv-user-menu">
+        <div class="nv-user-menu-head">
+          <span class="nv-blocky nv-blocky-sm" id="nv-menu-avatar"></span>
+          <div>
+            <div class="nv-user-menu-name" id="nv-menu-name">Гость</div>
+            <div style="font-size:0.78rem;color:#c4b5fd;font-weight:600" id="nv-menu-tag">@guest</div>
+          </div>
+        </div>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-profile">Профиль</button>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-friends">Друзья</button>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-login">Войти</button>
+        <button type="button" class="nv-user-menu-item danger profile-hidden" id="nv-menu-logout">Выйти</button>
+      </div>
+      <div class="nv-scroll">
+        <div class="nv-panel active" data-nv-panel="home">
+          <h2 class="nv-section-title">Друзья</h2>
+          <div class="nv-friends-rail" id="nv-friends-rail"></div>
+          <h2 class="nv-section-title">Игры</h2>
+          <div class="nv-empty">🎮 Каталог игр скоро появится в новой версии.<br>Пока играй в <strong>классическом PlayVerse</strong> — кнопка «← Классика».</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="charts">
+          <h2 class="nv-section-title">Популярное</h2>
+          <div class="nv-empty">🔥 Топ игр появится после релиза каталога.</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="avatar">
+          <div style="text-align:center;padding:16px 0 8px">
+            <div class="nv-blocky nv-blocky-lg" id="nv-blocky-preview"></div>
+            <div id="nv-blocky-name" style="font-weight:900;color:#fff;margin-top:8px">Гость</div>
+          </div>
+          <div class="nv-empty">👕 Магазин скинов для blocky-аватара — в разработке.</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="chats">
+          <div class="nv-chat-layout">
+            <div class="nv-chat-list" id="nv-chat-list"></div>
+            <div class="nv-chat-msgs" id="nv-chat-msgs"></div>
+            <form class="nv-chat-form" id="nv-chat-form">
+              <input type="text" id="nv-chat-input" maxlength="200" placeholder="Напиши сообщение..." autocomplete="off">
+              <button type="submit">→</button>
+            </form>
+          </div>
+        </div>
+        <div class="nv-panel" data-nv-panel="more">
+          <div class="nv-more-list">
+            <button type="button" class="nv-more-btn" id="nv-more-profile">👤 Профиль</button>
+            <button type="button" class="nv-more-btn" id="nv-more-friends">🤝 Друзья</button>
+            <button type="button" class="nv-more-btn" id="nv-more-classic">↩️ Классический PlayVerse</button>
+            <button type="button" class="nv-more-btn" id="nv-more-rules">📋 Правила игр</button>
+            <button type="button" class="nv-more-btn" id="nv-more-login">🔑 Войти / Регистрация</button>
+          </div>
+        </div>
+      </div>
+      <nav class="nv-bottom-nav" aria-label="Навигация новой версии">
+        <button type="button" class="nv-nav-item active" data-nv-nav="home"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Главная</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="charts"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Популярное</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="avatar"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>Аватар</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="chats"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>Чаты</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>Ещё</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="nv-login-overlay" id="nv-login-overlay" aria-hidden="true">
+    <button type="button" class="nv-login-close" id="nv-login-close" aria-label="Закрыть">✕</button>
+    <div class="nv-login-card">
+      <h2>PlayVerse 2</h2>
+      <p>Войди, чтобы пользоваться друзьями и чатом</p>
+      <div class="nv-login-tabs">
+        <button type="button" class="nv-login-tab active" data-nv-login-tab="login">Вход</button>
+        <button type="button" class="nv-login-tab" data-nv-login-tab="register">Регистрация</button>
+      </div>
+      <form id="nv-modal-login-form">
+        <label>Имя<select id="nv-modal-login-name" required><option value="">Выбери имя</option></select></label>
+        <label>Пароль<input type="password" id="nv-modal-login-pass" required maxlength="32"></label>
+        <p class="profile-msg" id="nv-modal-login-msg"></p>
+        <button type="submit" class="nv-login-submit">Войти</button>
+      </form>
+      <form id="nv-modal-register-form" class="profile-hidden">
+        <label>Имя<select id="nv-modal-reg-name" required><option value="">Загрузка…</option></select></label>
+        <label>Пароль<input type="password" id="nv-modal-reg-pass" required maxlength="32"></label>
+        <label>Повтор<input type="password" id="nv-modal-reg-pass2" required maxlength="32"></label>
+        <p class="profile-msg" id="nv-modal-register-msg"></p>
+        <button type="submit" class="nv-login-submit">Создать аккаунт</button>
+      </form>
     </div>
   </div>
 
@@ -6462,21 +6370,9 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           Главная
         </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="charts" aria-label="Популярное">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-          Популярное
-        </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="avatar" aria-label="Аватар">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
-          Аватар
-        </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="chats" aria-label="Чаты">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-          Чаты
-        </button>
-        <button type="button" class="rbx-nav-item active" data-hub-nav="more" aria-label="Ещё">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          Ещё
+        <button type="button" class="rbx-nav-item" data-hub-nav="account" aria-label="Аккаунт">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Аккаунт
         </button>
       </nav>
     </div>
@@ -7929,6 +7825,7 @@
       profile: document.getElementById("screen-profile"),
       userProfile: document.getElementById("screen-user-profile"),
       friends: document.getElementById("screen-friends"),
+      newverse: document.getElementById("screen-newverse"),
       intro: document.getElementById("screen-intro"),
       map: document.getElementById("screen-map"),
       question: document.getElementById("screen-question"),
@@ -8190,21 +8087,16 @@
 
     function setHubNavActive(nav) {
       if (!nav) return;
-      window._hubPanel = nav;
       document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
         btn.classList.toggle("active", btn.getAttribute("data-hub-nav") === nav);
-      });
-      document.querySelectorAll("[data-hub-panel]").forEach((panel) => {
-        panel.classList.toggle("active", panel.getAttribute("data-hub-panel") === nav);
       });
     }
     window.setHubNavActive = setHubNavActive;
 
     function showScreen(name) {
-      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "cover" && !isUserLoggedIn()) {
-        name = "cover";
-        if (typeof openRbxLoginModal === "function") openRbxLoginModal();
-        else if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
+      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "newverse" && !isUserLoggedIn()) {
+        name = "profile";
+        if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
       }
       if (!screens[name]) return;
       Object.values(screens).forEach(s => s && s.classList.remove("active"));
@@ -8225,6 +8117,7 @@
       const playing = !!mode && mode !== null;
       document.body.classList.toggle("pv-playing", playing && name !== "cover" && name !== "profile");
       document.body.classList.toggle("on-cover", name === "cover");
+      document.body.classList.toggle("on-newverse", name === "newverse");
       document.body.classList.toggle("on-profile", name === "profile" || name === "userProfile" || name === "friends");
       if (name === "cover" || name === "friends") {
         if (window.PVProfile && typeof PVProfile.renderHub === "function") PVProfile.renderHub();
@@ -8234,12 +8127,10 @@
           enhanceHubCardRatings();
         }
       }
+      if (name === "newverse" && typeof renderNewVerse === "function") renderNewVerse();
       if (typeof setHubNavActive === "function") {
-        let hubNav = null;
-        if (name === "cover") hubNav = window._hubPanel || "home";
-        else if (name === "profile" || name === "userProfile") hubNav = "more";
-        else if (name === "friends") hubNav = "more";
-        if (hubNav) setHubNavActive(hubNav);
+        const hubNav = name === "profile" ? "account" : (name === "cover" ? "home" : null);
+        setHubNavActive(hubNav);
       }
       if (name !== "intro" && window.speechSynthesis) window.speechSynthesis.cancel();
       if (!playing && typeof closeRules === "function") closeRules();
@@ -8432,27 +8323,70 @@
     }
     const rulesList = document.getElementById("rules-list");
     const rulesTitle = document.getElementById("rules-title");
+    const rulesBack = document.getElementById("rules-back");
+
+    function isInActiveGame() {
+      for (let i = 0; i < RULES_ALL_MODES.length; i++) {
+        if (document.body.classList.contains("in-" + RULES_ALL_MODES[i])) return true;
+      }
+      return false;
+    }
 
     function fillRules(list) {
       if (!rulesList) return;
+      rulesList.classList.remove("rules-picker-list");
       rulesList.innerHTML = list.map((t) => "<li>" + t + "</li>").join("");
     }
 
-    function openRules() {
-      const mode = getActiveRulesMode();
-      const name = typeof hubGameTitle === "function" ? hubGameTitle(mode) : mode;
+    function openRulesPicker() {
+      if (rulesTitle) rulesTitle.textContent = "Правила игр";
+      if (rulesBack) rulesBack.classList.add("profile-hidden");
+      if (rulesList) {
+        rulesList.classList.add("rules-picker-list");
+        rulesList.innerHTML = RULES_ALL_MODES.map((mode) =>
+          '<li><button type="button" class="rules-game-pick" data-rules-mode="' + mode + '">' +
+          hubGameTitle(mode) + '</button></li>'
+        ).join("");
+        rulesList.querySelectorAll(".rules-game-pick").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openRulesForMode(btn.getAttribute("data-rules-mode"), true);
+          });
+        });
+      }
+      if (rulesOverlay) {
+        rulesOverlay.classList.add("open");
+        rulesOverlay.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function openRulesForMode(mode, fromPicker) {
+      const name = hubGameTitle(mode);
       if (rulesTitle) rulesTitle.textContent = "Правила «" + name + "»";
+      if (rulesBack) rulesBack.classList.toggle("profile-hidden", !fromPicker);
       fillRules(RULES_BY_MODE[mode] || RULES_AVIA);
+      if (rulesOverlay) {
+        rulesOverlay.classList.add("open");
+        rulesOverlay.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function openRules() {
+      if (isInActiveGame()) {
+        openRulesForMode(getActiveRulesMode(), false);
+      } else {
+        openRulesPicker();
+        return;
+      }
       if (document.body.classList.contains("in-snake") && typeof stopSnakeLoop === "function") stopSnakeLoop();
       if (document.body.classList.contains("in-breakout") && typeof pauseBreakout === "function") pauseBreakout();
       if (document.body.classList.contains("in-clicker") && typeof pauseClicker === "function") pauseClicker();
       if (document.body.classList.contains("in-memory") && typeof pauseMemoryGame === "function") pauseMemoryGame();
-      rulesOverlay.classList.add("open");
-      rulesOverlay.setAttribute("aria-hidden", "false");
     }
     function closeRules() {
       rulesOverlay.classList.remove("open");
       rulesOverlay.setAttribute("aria-hidden", "true");
+      if (rulesBack) rulesBack.classList.add("profile-hidden");
+      if (rulesList) rulesList.classList.remove("rules-picker-list");
       if (document.body.classList.contains("in-breakout") && typeof resumeBreakout === "function") {
         resumeBreakout();
       }
@@ -8464,6 +8398,7 @@
       }
     }
     rulesTab.addEventListener("click", openRules);
+    if (rulesBack) rulesBack.addEventListener("click", openRulesPicker);
     rulesClose.addEventListener("click", closeRules);
     rulesOverlay.addEventListener("click", (e) => {
       if (e.target === rulesOverlay) closeRules();
@@ -9011,9 +8946,29 @@ const HUB_GAME_META = {
     window.applyHubSearchFilter = applyHubSearchFilter;
 
     function initHubSearch() {
+      const btn = document.getElementById("hub-search-btn");
+      const panel = document.getElementById("hub-search-panel");
       const input = document.getElementById("hub-search-input");
-      if (!input) return;
+      const closeBtn = document.getElementById("hub-search-close");
+      if (!btn || !panel || !input) return;
 
+      function openSearch() {
+        panel.classList.remove("profile-hidden");
+        input.focus();
+        input.select();
+      }
+      function closeSearch() {
+        panel.classList.add("profile-hidden");
+        input.value = "";
+        hubSearchQuery = "";
+        applyHubSearchFilter();
+      }
+
+      btn.addEventListener("click", () => {
+        if (panel.classList.contains("profile-hidden")) openSearch();
+        else closeSearch();
+      });
+      if (closeBtn) closeBtn.addEventListener("click", closeSearch);
       input.addEventListener("input", () => {
         hubSearchQuery = input.value;
         applyHubSearchFilter();
@@ -9021,356 +8976,269 @@ const HUB_GAME_META = {
       input.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           e.preventDefault();
-          input.value = "";
-          hubSearchQuery = "";
-          applyHubSearchFilter();
-          input.blur();
+          closeSearch();
         }
       });
+
+      const betaBtn = document.getElementById("hub-beta-btn");
+      if (betaBtn) {
+        betaBtn.addEventListener("click", () => {
+          if (typeof showScreen === "function") showScreen("newverse");
+        });
+      }
     }
     initHubSearch();
 
-    /* ===== Roblox UI (фиолетовая тема) ===== */
-    const CHAT_KEY_PREFIX = "pv_rbx_chat_";
-    let hubChatPeer = null;
+    /* ===== Новая версия · Roblox UI (отдельный экран, без игр) ===== */
+    let nvChatPeer = null;
+    const NV_CHAT_PREFIX = "pv_nv_chat_";
 
-    function rbxHue(name, fallback) {
-      let h = fallback || 270;
+    function nvHue(name) {
+      let h = 270;
       const s = String(name || "");
       for (let i = 0; i < s.length; i++) h = (h + s.charCodeAt(i) * 17) % 360;
       return h;
     }
 
-    function blockyAvatarHtml(u, username) {
-      const name = username || (u && u.username) || "guest";
-      const hue = u && typeof u.avatarHue === "number" ? u.avatarHue : rbxHue(name, 270);
+    function nvBlockyHtml(u, username) {
+      const hue = u && typeof u.avatarHue === "number" ? u.avatarHue : nvHue(username);
       const shirt = "hsl(" + hue + ",55%,52%)";
       const pants = "hsl(" + ((hue + 40) % 360) + ",45%,32%)";
-      return '<span class="rbx-blocky-head"></span>' +
-        '<span class="rbx-blocky-torso" style="background:' + shirt + '"></span>' +
-        '<span class="rbx-blocky-legs">' +
-        '<span class="rbx-blocky-leg" style="background:' + pants + '"></span>' +
-        '<span class="rbx-blocky-leg" style="background:' + pants + '"></span></span>';
+      return '<span class="nv-blocky-head"></span><span class="nv-blocky-torso" style="background:' + shirt + '"></span>' +
+        '<span class="nv-blocky-legs"><span class="nv-blocky-leg" style="background:' + pants + '"></span>' +
+        '<span class="nv-blocky-leg" style="background:' + pants + '"></span></span>';
     }
 
-    function fillBlockyEl(node, u, username) {
+    function nvFillBlocky(node, u, username) {
       if (!node) return;
-      node.className = node.className.replace(/\s*rbx-blocky-lg|\s*rbx-blocky-sm/g, "").trim();
-      if (!node.classList.contains("rbx-blocky")) node.classList.add("rbx-blocky");
-      node.innerHTML = blockyAvatarHtml(u, username);
+      if (!node.classList.contains("nv-blocky")) node.classList.add("nv-blocky");
+      node.innerHTML = nvBlockyHtml(u, username);
     }
 
-    function openRbxLoginModal(tab) {
-      const ov = document.getElementById("rbx-login-overlay");
+    function setNvPanel(panel) {
+      document.querySelectorAll("[data-nv-panel]").forEach((p) => {
+        p.classList.toggle("active", p.getAttribute("data-nv-panel") === panel);
+      });
+      document.querySelectorAll("[data-nv-nav]").forEach((b) => {
+        b.classList.toggle("active", b.getAttribute("data-nv-nav") === panel);
+      });
+    }
+
+    function syncNvModalSelects() {
+      const srcLogin = document.getElementById("profile-login-name");
+      const srcReg = document.getElementById("profile-reg-name");
+      const dstLogin = document.getElementById("nv-modal-login-name");
+      const dstReg = document.getElementById("nv-modal-reg-name");
+      if (srcLogin && dstLogin) dstLogin.innerHTML = srcLogin.innerHTML;
+      if (srcReg && dstReg) dstReg.innerHTML = srcReg.innerHTML;
+    }
+
+    function openNvLogin(tab) {
+      syncNvModalSelects();
+      const ov = document.getElementById("nv-login-overlay");
       if (!ov) return;
       ov.classList.add("open");
-      ov.setAttribute("aria-hidden", "false");
-      if (window.PVProfile && typeof PVProfile.syncRbxModalSelects === "function") PVProfile.syncRbxModalSelects();
       if (tab === "register") {
-        document.querySelectorAll("[data-rbx-login-tab]").forEach((t) => {
-          t.classList.toggle("active", t.getAttribute("data-rbx-login-tab") === "register");
+        document.querySelectorAll("[data-nv-login-tab]").forEach((t) => {
+          t.classList.toggle("active", t.getAttribute("data-nv-login-tab") === "register");
         });
-        const lf = document.getElementById("rbx-modal-login-form");
-        const rf = document.getElementById("rbx-modal-register-form");
-        if (lf) lf.classList.add("profile-hidden");
-        if (rf) rf.classList.remove("profile-hidden");
+        document.getElementById("nv-modal-login-form")?.classList.add("profile-hidden");
+        document.getElementById("nv-modal-register-form")?.classList.remove("profile-hidden");
       }
     }
-    window.openRbxLoginModal = openRbxLoginModal;
 
-    function closeRbxLoginModal() {
-      const ov = document.getElementById("rbx-login-overlay");
-      if (!ov) return;
-      ov.classList.remove("open");
-      ov.setAttribute("aria-hidden", "true");
+    function closeNvLogin() {
+      document.getElementById("nv-login-overlay")?.classList.remove("open");
     }
 
-    function chatStorageKey(a, b) {
-      const pair = [a, b].sort();
-      return CHAT_KEY_PREFIX + pair[0] + "__" + pair[1];
+    function nvChatKey(a, b) {
+      return NV_CHAT_PREFIX + [a, b].sort().join("__");
     }
 
-    function loadChatMessages(me, peer) {
-      try {
-        return JSON.parse(localStorage.getItem(chatStorageKey(me, peer))) || [];
-      } catch (e) { return []; }
+    function nvLoadChat(me, peer) {
+      try { return JSON.parse(localStorage.getItem(nvChatKey(me, peer))) || []; } catch (e) { return []; }
     }
 
-    function saveChatMessage(me, peer, text, fromMe) {
-      const msgs = loadChatMessages(me, peer);
+    function nvSaveChat(me, peer, text, fromMe) {
+      const msgs = nvLoadChat(me, peer);
       msgs.push({ text: text, fromMe: !!fromMe, t: Date.now() });
       if (msgs.length > 100) msgs.splice(0, msgs.length - 100);
-      localStorage.setItem(chatStorageKey(me, peer), JSON.stringify(msgs));
+      localStorage.setItem(nvChatKey(me, peer), JSON.stringify(msgs));
     }
 
-    function renderHubChat() {
-      const listEl = document.getElementById("hub-chat-list");
-      const msgsEl = document.getElementById("hub-chat-msgs");
+    function renderNvChat() {
+      const listEl = document.getElementById("nv-chat-list");
+      const msgsEl = document.getElementById("nv-chat-msgs");
       if (!listEl || !msgsEl) return;
       const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
       if (!logged) {
         listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Войди, чтобы писать друзьям</p>';
         msgsEl.innerHTML = "";
-        hubChatPeer = null;
+        nvChatPeer = null;
         return;
       }
-      const me = PVProfile.currentUser && PVProfile.currentUser();
+      const me = PVProfile.currentUser();
       const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
       if (!friends.length) {
-        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей — и пиши им здесь</p>';
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей в классическом PlayVerse</p>';
         msgsEl.innerHTML = "";
-        hubChatPeer = null;
         return;
       }
-      if (!hubChatPeer || friends.indexOf(hubChatPeer) < 0) hubChatPeer = friends[0];
+      if (!nvChatPeer || friends.indexOf(nvChatPeer) < 0) nvChatPeer = friends[0];
+      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
       listEl.innerHTML = friends.map((name) =>
-        '<button type="button" class="rbx-chat-contact' + (name === hubChatPeer ? " active" : "") + '" data-chat-peer="' + name + '">' +
-        '<span class="rbx-blocky rbx-blocky-sm" data-chat-blocky="' + name + '"></span>' +
-        '<span style="font-weight:800">' + name + '</span></button>'
+        '<button type="button" class="nv-chat-contact' + (name === nvChatPeer ? " active" : "") + '" data-nv-peer="' + name + '">' +
+        '<span class="nv-blocky nv-blocky-sm" data-nv-peer-blocky="' + name + '"></span><span style="font-weight:800">' + name + '</span></button>'
       ).join("");
-      listEl.querySelectorAll("[data-chat-peer]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          hubChatPeer = btn.getAttribute("data-chat-peer");
-          renderHubChat();
-        });
+      listEl.querySelectorAll("[data-nv-peer]").forEach((btn) => {
+        btn.addEventListener("click", () => { nvChatPeer = btn.getAttribute("data-nv-peer"); renderNvChat(); });
       });
-      listEl.querySelectorAll("[data-chat-blocky]").forEach((node) => {
-        const name = node.getAttribute("data-chat-blocky");
-        const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
-        fillBlockyEl(node, users[name], name);
+      listEl.querySelectorAll("[data-nv-peer-blocky]").forEach((node) => {
+        const name = node.getAttribute("data-nv-peer-blocky");
+        nvFillBlocky(node, users[name], name);
       });
-      const msgs = loadChatMessages(me.username, hubChatPeer);
-      msgsEl.innerHTML = msgs.map((m) =>
-        '<div class="rbx-chat-bubble ' + (m.fromMe ? "me" : "them") + '">' + String(m.text).replace(/[<>&]/g, (c) => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c])) + '</div>'
+      msgsEl.innerHTML = nvLoadChat(me.username, nvChatPeer).map((m) =>
+        '<div class="nv-chat-bubble ' + (m.fromMe ? "me" : "them") + '">' +
+        String(m.text).replace(/[<>&]/g, (c) => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c])) + '</div>'
       ).join("");
       msgsEl.scrollTop = msgsEl.scrollHeight;
     }
 
-    function renderHubChartsGrid() {
-      const charts = document.getElementById("hub-charts-grid");
-      const source = document.getElementById("hub-grid");
-      if (!charts || !source) return;
-      const cards = Array.from(source.querySelectorAll(".cover-card")).slice();
-      cards.sort((a, b) => {
-        const ra = parseInt((a.querySelector(".hub-card-rating span") || {}).textContent) || 0;
-        const rb = parseInt((b.querySelector(".hub-card-rating span") || {}).textContent) || 0;
-        return rb - ra;
-      });
-      charts.innerHTML = "";
-      cards.forEach((c) => charts.appendChild(c.cloneNode(true)));
-      if (typeof bindHubCards === "function") bindHubCards(charts);
-      if (typeof enhanceHubCardRatings === "function") enhanceHubCardRatings();
-    }
-
-    function renderHubContinueRow() {
-      const row = document.getElementById("hub-continue-row");
-      const source = document.getElementById("hub-grid");
-      if (!row || !source) return;
-      row.innerHTML = "";
-      let ids = [];
-      try {
-        const s = JSON.parse(localStorage.getItem("playverse_session"));
-        if (s && s.username) {
-          const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
-          const hist = (users[s.username] && users[s.username].history) || [];
-          ids = hist.map((h) => h.game).filter(Boolean).reverse();
-        }
-      } catch (e) {}
-      const seen = new Set();
-      ids = ids.filter((id) => { if (seen.has(id)) return false; seen.add(id); return true; }).slice(0, 4);
-      if (!ids.length) {
-        row.innerHTML = '<p style="padding:0 16px;color:#c4b5fd;font-weight:700;font-size:0.9rem">Сыграй в любую игру — она появится здесь</p>';
+    function renderNvFriends() {
+      const rail = document.getElementById("nv-friends-rail");
+      if (!rail) return;
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      if (!logged) {
+        rail.innerHTML = '<p style="padding:4px 0;color:#c4b5fd;font-weight:700;font-size:0.85rem">Войди, чтобы видеть друзей</p>';
         return;
       }
-      ids.forEach((id) => {
-        const card = source.querySelector("#cover-card-" + id);
-        if (card) row.appendChild(card.cloneNode(true));
+      const me = PVProfile.currentUser();
+      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+      const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      let html = "";
+      if (me) {
+        const label = PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : me.username;
+        html += '<button type="button" class="nv-friend-tile"><div class="nv-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span></div><span class="nv-friend-name">' + label + '</span></button>';
+      }
+      html += '<button type="button" class="nv-friend-tile" id="nv-add-friend"><div class="nv-friend-avatar"><span style="font-size:1.4rem">+</span></div></button>';
+      friends.slice(0, 12).forEach((name) => {
+        html += '<button type="button" class="nv-friend-tile" data-nv-friend="' + name + '"><div class="nv-friend-avatar">' +
+          '<span class="nv-blocky nv-blocky-sm" data-nv-friend-blocky="' + name + '"></span></div>' +
+          '<span class="nv-friend-name">' + name + '</span></button>';
       });
-      if (typeof bindHubCards === "function") bindHubCards(row);
+      rail.innerHTML = html;
+      if (me) nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
+      rail.querySelectorAll("[data-nv-friend-blocky]").forEach((node) => {
+        const name = node.getAttribute("data-nv-friend-blocky");
+        nvFillBlocky(node, users[name], name);
+      });
+      document.getElementById("nv-add-friend")?.addEventListener("click", () => {
+        if (PVProfile.openFriends) PVProfile.openFriends();
+      });
     }
 
-    function renderRbxHubExtras() {
+    function renderNewVerse() {
       const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
       const u = logged && PVProfile.currentUser ? PVProfile.currentUser() : null;
-      const name = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
-      fillBlockyEl(document.getElementById("hub-top-avatar"), u, u && u.username);
-      fillBlockyEl(document.getElementById("hub-menu-avatar"), u, u && u.username);
-      fillBlockyEl(document.getElementById("hub-blocky-preview"), u, u && u.username);
-      const menuName = document.getElementById("hub-menu-name");
-      const menuTag = document.getElementById("hub-menu-tag");
-      const blockyName = document.getElementById("hub-blocky-name");
-      if (menuName) menuName.textContent = name;
-      if (menuTag) menuTag.textContent = u ? ("@" + u.username.toLowerCase()) : "@guest";
-      if (blockyName) blockyName.textContent = name;
-      const loginBtn = document.getElementById("hub-menu-login");
-      const logoutBtn = document.getElementById("hub-menu-logout");
-      const moreLogin = document.getElementById("more-login");
-      const moreLogout = document.getElementById("more-logout");
-      if (loginBtn) loginBtn.classList.toggle("profile-hidden", !!logged);
-      if (logoutBtn) logoutBtn.classList.toggle("profile-hidden", !logged);
-      if (moreLogin) moreLogin.classList.toggle("profile-hidden", !!logged);
-      if (moreLogout) moreLogout.classList.toggle("profile-hidden", !logged);
-      renderHubContinueRow();
-      if (document.querySelector('[data-hub-panel="charts"].active')) renderHubChartsGrid();
-      if (document.querySelector('[data-hub-panel="chats"].active')) renderHubChat();
-    }
-    window.renderRbxHubExtras = renderRbxHubExtras;
-
-    function bindHubCards(container) {
-      if (!container) return;
-      container.querySelectorAll(".cover-card[id^='cover-card-']").forEach((card) => {
-        const id = card.id.replace("cover-card-", "");
-        if (id === "factory") {
-          card.addEventListener("click", () => {
-            if (!isUserLoggedIn()) { openRbxLoginModal(); return; }
-            if (typeof showScreen === "function") showScreen("factory");
-          });
-        } else {
-          card.addEventListener("click", () => launchFromHub(card, id));
-        }
+      const label = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
+      nvFillBlocky(document.getElementById("nv-top-avatar"), u, u && u.username);
+      nvFillBlocky(document.getElementById("nv-menu-avatar"), u, u && u.username);
+      nvFillBlocky(document.getElementById("nv-blocky-preview"), u, u && u.username);
+      const coinsEl = document.getElementById("nv-coins-val");
+      if (coinsEl) coinsEl.textContent = u && PVProfile.getUserCoins ? String(PVProfile.getUserCoins(u)) : "0";
+      ["nv-menu-name", "nv-blocky-name"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = label;
       });
+      const tagEl = document.getElementById("nv-menu-tag");
+      if (tagEl) tagEl.textContent = u ? ("@" + u.username.toLowerCase()) : "@guest";
+      ["nv-menu-login", "nv-more-login"].forEach((id) => {
+        document.getElementById(id)?.classList.toggle("profile-hidden", !!logged);
+      });
+      ["nv-menu-logout"].forEach((id) => {
+        document.getElementById(id)?.classList.toggle("profile-hidden", !logged);
+      });
+      renderNvFriends();
+      if (document.querySelector('[data-nv-panel="chats"].active')) renderNvChat();
     }
-    window.bindHubCards = bindHubCards;
+    window.renderNewVerse = renderNewVerse;
 
-    function initRbxV2UI() {
-      const menuBtn = document.getElementById("hub-user-menu-btn");
-      const menu = document.getElementById("hub-user-menu");
+    function initNewVerse() {
+      document.getElementById("nv-back-classic")?.addEventListener("click", () => showScreen("cover"));
+      document.getElementById("nv-more-classic")?.addEventListener("click", () => showScreen("cover"));
+      const menuBtn = document.getElementById("nv-user-menu-btn");
+      const menu = document.getElementById("nv-user-menu");
       if (menuBtn && menu) {
-        menuBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          menu.classList.toggle("profile-hidden");
-        });
+        menuBtn.addEventListener("click", (e) => { e.stopPropagation(); menu.classList.toggle("profile-hidden"); });
         document.addEventListener("click", () => menu.classList.add("profile-hidden"));
         menu.addEventListener("click", (e) => e.stopPropagation());
       }
-      const closeLogin = document.getElementById("rbx-login-close");
-      const loginOv = document.getElementById("rbx-login-overlay");
-      if (closeLogin) closeLogin.addEventListener("click", closeRbxLoginModal);
-      if (loginOv) loginOv.addEventListener("click", (e) => { if (e.target === loginOv) closeRbxLoginModal(); });
-
-      document.querySelectorAll("[data-rbx-login-tab]").forEach((tab) => {
+      document.getElementById("nv-login-close")?.addEventListener("click", closeNvLogin);
+      document.getElementById("nv-login-overlay")?.addEventListener("click", (e) => { if (e.target.id === "nv-login-overlay") closeNvLogin(); });
+      document.querySelectorAll("[data-nv-login-tab]").forEach((tab) => {
         tab.addEventListener("click", () => {
-          const t = tab.getAttribute("data-rbx-login-tab");
-          document.querySelectorAll("[data-rbx-login-tab]").forEach((x) => x.classList.toggle("active", x === tab));
-          const lf = document.getElementById("rbx-modal-login-form");
-          const rf = document.getElementById("rbx-modal-register-form");
-          if (lf) lf.classList.toggle("profile-hidden", t !== "login");
-          if (rf) rf.classList.toggle("profile-hidden", t !== "register");
+          const t = tab.getAttribute("data-nv-login-tab");
+          document.querySelectorAll("[data-nv-login-tab]").forEach((x) => x.classList.toggle("active", x === tab));
+          document.getElementById("nv-modal-login-form")?.classList.toggle("profile-hidden", t !== "login");
+          document.getElementById("nv-modal-register-form")?.classList.toggle("profile-hidden", t !== "register");
         });
       });
-
-      const openLogin = () => { if (menu) menu.classList.add("profile-hidden"); openRbxLoginModal("login"); };
-      ["hub-menu-login", "more-login"].forEach((id) => {
-        const b = document.getElementById(id);
-        if (b) b.addEventListener("click", openLogin);
+      const openLogin = () => { menu?.classList.add("profile-hidden"); openNvLogin("login"); };
+      ["nv-menu-login", "nv-more-login"].forEach((id) => document.getElementById(id)?.addEventListener("click", openLogin));
+      const doLogout = () => { menu?.classList.add("profile-hidden"); PVProfile.logout && PVProfile.logout(); renderNewVerse(); };
+      document.getElementById("nv-menu-logout")?.addEventListener("click", doLogout);
+      const openProf = () => { menu?.classList.add("profile-hidden"); PVProfile.open && PVProfile.open(); };
+      ["nv-menu-profile", "nv-more-profile"].forEach((id) => document.getElementById(id)?.addEventListener("click", openProf));
+      ["nv-menu-friends", "nv-more-friends"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("click", () => { menu?.classList.add("profile-hidden"); PVProfile.openFriends && PVProfile.openFriends(); });
       });
-      const doLogout = () => {
-        if (menu) menu.classList.add("profile-hidden");
-        if (window.PVProfile && PVProfile.logout) PVProfile.logout();
-      };
-      ["hub-menu-logout", "more-logout"].forEach((id) => {
-        const b = document.getElementById(id);
-        if (b) b.addEventListener("click", doLogout);
+      document.getElementById("nv-more-rules")?.addEventListener("click", () => {
+        if (typeof openRules === "function") openRules();
       });
-      const openProf = () => {
-        if (menu) menu.classList.add("profile-hidden");
-        if (window.PVProfile && PVProfile.open) PVProfile.open();
-      };
-      document.getElementById("hub-menu-profile")?.addEventListener("click", openProf);
-      document.getElementById("more-profile")?.addEventListener("click", openProf);
-      document.getElementById("hub-menu-friends")?.addEventListener("click", () => {
-        if (menu) menu.classList.add("profile-hidden");
-        if (window.PVProfile && PVProfile.openFriends) PVProfile.openFriends();
-      });
-      document.getElementById("more-friends")?.addEventListener("click", () => {
-        if (window.PVProfile && PVProfile.openFriends) PVProfile.openFriends();
-      });
-      document.getElementById("hub-menu-avatar")?.addEventListener("click", () => {
-        if (menu) menu.classList.add("profile-hidden");
-        if (typeof setHubNavActive === "function") setHubNavActive("avatar");
-        if (typeof showScreen === "function") showScreen("cover");
-      });
-      document.getElementById("more-rules")?.addEventListener("click", () => {
-        document.getElementById("rules-tab")?.click();
-      });
-      document.getElementById("more-factory")?.addEventListener("click", () => {
-        if (!isUserLoggedIn()) { openRbxLoginModal(); return; }
-        if (typeof showScreen === "function") showScreen("factory");
-      });
-      document.getElementById("hub-logo-btn")?.addEventListener("click", () => {
-        if (typeof setHubNavActive === "function") setHubNavActive("home");
-        if (typeof showScreen === "function") showScreen("cover");
-      });
-
-      document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
+      document.querySelectorAll("[data-nv-nav]").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const nav = btn.getAttribute("data-hub-nav");
-          if (nav === "chats" && !isUserLoggedIn()) { openRbxLoginModal(); return; }
-          if (typeof showScreen === "function") showScreen("cover");
-          if (typeof setHubNavActive === "function") setHubNavActive(nav);
-          if (nav === "charts") renderHubChartsGrid();
-          if (nav === "chats") renderHubChat();
-          document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
+          const nav = btn.getAttribute("data-nv-nav");
+          if (nav === "chats" && !isUserLoggedIn()) { openNvLogin(); return; }
+          setNvPanel(nav);
+          if (nav === "chats") renderNvChat();
         });
       });
-
-      const chatForm = document.getElementById("hub-chat-form");
-      if (chatForm) {
-        chatForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          if (!isUserLoggedIn() || !hubChatPeer) { openRbxLoginModal(); return; }
-          const input = document.getElementById("hub-chat-input");
-          const text = input && input.value.trim();
-          if (!text) return;
-          const me = PVProfile.currentUser();
-          saveChatMessage(me.username, hubChatPeer, text, true);
-          if (input) input.value = "";
-          renderHubChat();
-        });
-      }
-
-      const modalLogin = document.getElementById("rbx-modal-login-form");
-      if (modalLogin) {
-        modalLogin.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          if (!window.PVProfile) return;
-          const name = document.getElementById("rbx-modal-login-name").value.trim();
-          const pass = document.getElementById("rbx-modal-login-pass").value;
-          const msg = document.getElementById("rbx-modal-login-msg");
-          const err = await PVProfile.login(name, pass);
-          if (err) { if (msg) msg.textContent = err; return; }
-          if (msg) msg.textContent = "Добро пожаловать!";
-          PVProfile.render();
-          closeRbxLoginModal();
-          PVProfile.toast("Вход выполнен");
-        });
-      }
-      const modalReg = document.getElementById("rbx-modal-register-form");
-      if (modalReg) {
-        modalReg.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          if (!window.PVProfile) return;
-          const name = document.getElementById("rbx-modal-reg-name").value.trim();
-          const pass = document.getElementById("rbx-modal-reg-pass").value;
-          const pass2 = document.getElementById("rbx-modal-reg-pass2").value;
-          const msg = document.getElementById("rbx-modal-register-msg");
-          if (pass !== pass2) { if (msg) msg.textContent = "Пароли не совпадают"; return; }
-          const err = await PVProfile.register(name, pass);
-          if (err) { if (msg) msg.textContent = err; return; }
-          if (msg) msg.textContent = "Аккаунт создан!";
-          PVProfile.render();
-          closeRbxLoginModal();
-          PVProfile.toast("Регистрация успешна");
-        });
-      }
+      document.getElementById("nv-chat-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!isUserLoggedIn() || !nvChatPeer) { openNvLogin(); return; }
+        const input = document.getElementById("nv-chat-input");
+        const text = input && input.value.trim();
+        if (!text) return;
+        nvSaveChat(PVProfile.currentUser().username, nvChatPeer, text, true);
+        if (input) input.value = "";
+        renderNvChat();
+      });
+      document.getElementById("nv-modal-login-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!PVProfile) return;
+        const err = await PVProfile.login(
+          document.getElementById("nv-modal-login-name").value.trim(),
+          document.getElementById("nv-modal-login-pass").value
+        );
+        const msg = document.getElementById("nv-modal-login-msg");
+        if (err) { if (msg) msg.textContent = err; return; }
+        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Вход выполнен");
+      });
+      document.getElementById("nv-modal-register-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!PVProfile) return;
+        const pass = document.getElementById("nv-modal-reg-pass").value;
+        const pass2 = document.getElementById("nv-modal-reg-pass2").value;
+        const msg = document.getElementById("nv-modal-register-msg");
+        if (pass !== pass2) { if (msg) msg.textContent = "Пароли не совпадают"; return; }
+        const err = await PVProfile.register(document.getElementById("nv-modal-reg-name").value.trim(), pass);
+        if (err) { if (msg) msg.textContent = err; return; }
+        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Регистрация успешна");
+      });
     }
-    initRbxV2UI();
+    initNewVerse();
 
     function launchFromHub(card, mode) {
-      if (!isUserLoggedIn()) {
-        openRbxLoginModal();
-        return;
-      }
       if (hubLaunching) return;
       if (window.PVAdmin && PVAdmin.isGameDisabled(mode)) {
         if (window.PVProfile && PVProfile.toast) PVProfile.toast("Игра временно отключена администратором");
@@ -15143,7 +15011,6 @@ const HUB_GAME_META = {
             : '<option value="">Все имена заняты</option>';
           if (prev && available.indexOf(prev) >= 0) regSel.value = prev;
         }
-        syncRbxModalSelects();
       }
 
       function applyShopAvatarToUser(u, shopId) {
@@ -16045,7 +15912,7 @@ const HUB_GAME_META = {
       function openFriendsPage() {
         if (!isLoggedIn()) {
           toast("Сначала войди в аккаунт");
-          if (typeof openRbxLoginModal === "function") openRbxLoginModal();
+          if (typeof showScreen === "function") showScreen("profile");
           return;
         }
         const open = () => {
@@ -17093,8 +16960,7 @@ const HUB_GAME_META = {
           repairUserRecord(u, getSession() && getSession().username);
           const label = activeDisplayLabel(u);
           html += '<button type="button" class="rbx-friend-tile me" id="hub-self-tile">' +
-            '<div class="rbx-friend-avatar" data-rail-avatar="self">' +
-            '<span class="rbx-blocky rbx-blocky-sm" id="hub-self-blocky"></span>' +
+            '<div class="rbx-friend-avatar" data-rail-avatar="self">' + initials(label) +
             '<span class="online-dot"></span></div>' +
             '<span class="rbx-friend-name">' + label + '</span></button>';
         }
@@ -17107,8 +16973,7 @@ const HUB_GAME_META = {
             if (fu) repairUserRecord(fu, fname);
             const label = friendDisplayName(fname, fu);
             html += '<button type="button" class="rbx-friend-tile" data-hub-friend="' + fname + '">' +
-              '<div class="rbx-friend-avatar" data-rail-avatar="' + fname + '">' +
-              '<span class="rbx-blocky rbx-blocky-sm" data-rail-blocky="' + fname + '"></span>' +
+              '<div class="rbx-friend-avatar" data-rail-avatar="' + fname + '">' + initials(label) +
               '<span class="online-dot"></span></div>' +
               '<span class="rbx-friend-name">' + label + '</span></button>';
           });
@@ -17121,12 +16986,6 @@ const HUB_GAME_META = {
         el.hubFriendsRail.querySelectorAll("[data-hub-friend]").forEach((btn) => {
           btn.addEventListener("click", () => openUserProfile(btn.getAttribute("data-hub-friend")));
         });
-        el.hubFriendsRail.querySelectorAll("[data-rail-blocky]").forEach((node) => {
-          const key = node.getAttribute("data-rail-blocky");
-          fillBlockyEl(node, users[key], key);
-        });
-        const selfBlocky = document.getElementById("hub-self-blocky");
-        if (selfBlocky && u) fillBlockyEl(selfBlocky, u, activeUsername(u));
         el.hubFriendsRail.querySelectorAll("[data-rail-avatar]").forEach((node) => {
           const key = node.getAttribute("data-rail-avatar");
           if (key === "self" && u) applyAvatarEl(node, u, activeUsername(u));
@@ -17182,7 +17041,6 @@ const HUB_GAME_META = {
         renderHubFriendsRail();
         renderAvatarShop();
         updateFriendsBadges();
-        if (typeof window.renderRbxHubExtras === "function") window.renderRbxHubExtras();
         if (typeof window.enhanceHubCardRatings === "function") window.enhanceHubCardRatings();
       }
 
@@ -17262,7 +17120,7 @@ const HUB_GAME_META = {
       function goToGames() {
         if (!isLoggedIn()) {
           toast("Сначала войди в аккаунт");
-          if (typeof openRbxLoginModal === "function") openRbxLoginModal();
+          if (typeof showScreen === "function") showScreen("profile");
           return;
         }
         if (typeof showScreen === "function") showScreen("cover");
@@ -17292,17 +17150,8 @@ const HUB_GAME_META = {
             setTimeout(() => toast("У тебя " + pending + " " + (pending === 1 ? "заявка" : (pending < 5 ? "заявки" : "заявок")) + " в друзья"), 700);
           }
           if (isLoggedIn()) goToGames();
-          else if (typeof showScreen === "function") showScreen("cover");
+          else if (typeof showScreen === "function") showScreen("profile");
         });
-      }
-
-      function syncRbxModalSelects() {
-        const loginSel = document.getElementById("rbx-modal-login-name");
-        const regSel = document.getElementById("rbx-modal-reg-name");
-        const srcLogin = document.getElementById("profile-login-name");
-        const srcReg = document.getElementById("profile-reg-name");
-        if (loginSel && srcLogin) loginSel.innerHTML = srcLogin.innerHTML;
-        if (regSel && srcReg) regSel.innerHTML = srcReg.innerHTML;
       }
 
       async function register(name, pass) {
@@ -17378,8 +17227,9 @@ const HUB_GAME_META = {
       function logout() {
         setSession(null);
         render();
-        if (typeof showScreen === "function") showScreen("cover");
-        if (typeof setHubNavActive === "function") setHubNavActive("home");
+        const onNv = screens.newverse && screens.newverse.classList.contains("active");
+        if (typeof showScreen === "function") showScreen(onNv ? "newverse" : "profile");
+        if (onNv && typeof renderNewVerse === "function") renderNewVerse();
         toast("Вы вышли из аккаунта");
       }
 
@@ -17450,6 +17300,18 @@ const HUB_GAME_META = {
           }
         });
       }
+      document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const nav = btn.getAttribute("data-hub-nav");
+          if (nav === "home") {
+            if (typeof showScreen === "function") showScreen("cover");
+            document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
+          } else if (nav === "account") {
+            openProfile();
+          }
+          if (typeof setHubNavActive === "function") setHubNavActive(nav);
+        });
+      });
       if (el.adminBlockBtn) el.adminBlockBtn.addEventListener("click", () => {
         const err = blockUser(el.adminBlockName && el.adminBlockName.value);
         if (err) { toast(err); return; }
@@ -17512,10 +17374,10 @@ const HUB_GAME_META = {
         currentUser: currentUser,
         getFriends: getFriends,
         activeDisplayLabel: activeDisplayLabel,
+        getUserCoins: getUserCoins,
         login: login,
         register: register,
         logout: logout,
-        syncRbxModalSelects: syncRbxModalSelects,
         isFavorite: isFavorite,
         toggleFavorite: toggleFavorite,
         toast: toast,
@@ -17906,14 +17768,6 @@ const HUB_GAME_META = {
       }
 
       function playerAvatarHtml(p) {
-        if (document.body.classList.contains("rbx-v2")) {
-          let u = null;
-          if (p.accountUsername) {
-            try { u = JSON.parse(localStorage.getItem("playverse_users") || "{}")[p.accountUsername]; } catch (e) {}
-          }
-          return '<div class="pv-rbx-avatar rbx-blocky-wrap"><span class="rbx-blocky rbx-blocky-sm">' +
-            blockyAvatarHtml(u || { avatarHue: p.hue }, p.accountUsername || p.display) + '</span></div>';
-        }
         if (p.avatarImage) {
           return '<div class="pv-rbx-avatar pv-rbx-avatar-img"><img src="' + escapeHtml(p.avatarImage) + '" alt=""></div>';
         }

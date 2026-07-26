@@ -3863,17 +3863,6 @@
       color: #fff;
     }
 
-    
-    .screen-pack {
-      background: linear-gradient(180deg, #0f172a 0%, #334155 55%, #0f172a 100%);
-      color: #fff;
-      padding: clamp(10px, 2vw, 18px);
-      height: 100dvh;
-      max-height: 100dvh;
-      overflow: hidden;
-    }
-    .screen-pack.active { align-items: stretch; }
-    .cover-card-pack .cover-meta h2 { color: #7c3aed; }
 
     #screen-tetris {
       background: linear-gradient(180deg, #0f172a 0%, #0369a1 55%, #0f172a 100%);
@@ -4179,6 +4168,38 @@
       margin-bottom: 18px;
     }
     .rules-panel li { margin-bottom: 8px; }
+    .rules-panel ol.rules-picker-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .rules-game-pick {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border: 2px solid #bae6fd;
+      border-radius: 12px;
+      background: #f0f9ff;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .rules-game-pick:hover { background: #e0f2fe; }
+    .rules-back {
+      display: block;
+      margin-bottom: 10px;
+      border: none;
+      background: none;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 4px 0;
+    }
     .rules-close {
       display: block;
       width: 100%;
@@ -5201,6 +5222,161 @@
     body.on-cover, body.on-profile {
       background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
     }
+    body.on-newverse {
+      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+    }
+
+    /* ===== НОВАЯ ВЕРСИЯ · Roblox UI (фиолетовая, без игр) ===== */
+    #screen-newverse {
+      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+      padding: 0 !important;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+      color: #f5f3ff;
+    }
+    #screen-newverse.active { align-items: stretch; justify-content: flex-start; }
+    .nv-hub {
+      display: flex; flex-direction: column; height: 100dvh; max-height: 100dvh; overflow: hidden;
+    }
+    .nv-topbar {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      background: #2e1065; border-bottom: 1px solid rgba(255,255,255,0.14); flex-shrink: 0;
+    }
+    .nv-back-btn {
+      border: none; background: rgba(255,255,255,0.12); color: #ede9fe;
+      border-radius: 999px; padding: 8px 12px; font-weight: 800; font-size: 0.82rem; cursor: pointer; flex-shrink: 0;
+    }
+    .nv-logo { font-weight: 900; font-size: 1.05rem; color: #fff; flex-shrink: 0; }
+    .nv-search-wrap {
+      flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0;
+      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px; padding: 8px 14px;
+    }
+    .nv-search-wrap svg { width: 18px; height: 18px; stroke: #c4b5fd; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .nv-search-wrap input {
+      border: none; background: transparent; color: #fff; font-weight: 600; font-size: 0.9rem; width: 100%; outline: none;
+    }
+    .nv-search-wrap input::placeholder { color: #a78bfa; }
+    .nv-top-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nv-coin-pill {
+      display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+      background: rgba(0,0,0,0.22); border: 1px solid rgba(255,255,255,0.14); color: #fde68a; font-weight: 900; font-size: 0.88rem;
+    }
+    .nv-user-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08); padding: 0; cursor: pointer; overflow: hidden;
+    }
+    .nv-scroll { flex: 1; overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+    .nv-panel { display: none; padding-bottom: 12px; }
+    .nv-panel.active { display: block; }
+    .nv-section-title {
+      margin: 12px 0 10px; padding: 0 16px; font-size: 1rem; font-weight: 800; color: #faf5ff;
+    }
+    .nv-empty {
+      margin: 8px 16px 16px; padding: 28px 20px; border-radius: 16px; text-align: center;
+      background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.2);
+      color: #ddd6fe; font-weight: 700; line-height: 1.45;
+    }
+    .nv-friends-rail {
+      display: flex; gap: 12px; overflow-x: auto; padding: 0 16px 8px; -webkit-overflow-scrolling: touch;
+    }
+    .nv-friends-rail::-webkit-scrollbar { height: 0; }
+    .nv-bottom-nav {
+      display: flex; justify-content: space-around; gap: 0;
+      padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+      background: #2e1065; border-top: 1px solid rgba(255,255,255,0.14); flex-shrink: 0;
+    }
+    .nv-nav-item {
+      flex: 1; max-width: 80px; border: none; background: transparent; color: #c4b5fd;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 2px; font-size: 0.62rem; font-weight: 800; cursor: pointer; border-radius: 12px;
+    }
+    .nv-nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+    .nv-nav-item.active { color: #fff; background: rgba(168,85,247,0.25); }
+    .nv-blocky { display: flex; flex-direction: column; align-items: center; width: 36px; margin: 0 auto; }
+    .nv-blocky-sm { transform: scale(0.85); transform-origin: center bottom; }
+    .nv-blocky-lg { transform: scale(2.2); margin: 20px auto; }
+    .nv-blocky-head { width: 14px; height: 14px; background: #fcd9b6; border-radius: 2px; }
+    .nv-blocky-torso { width: 18px; height: 16px; margin-top: 1px; border-radius: 2px; background: #9333ea; }
+    .nv-blocky-legs { display: flex; gap: 2px; margin-top: 1px; }
+    .nv-blocky-leg { width: 7px; height: 12px; border-radius: 1px; background: #312e81; }
+    .nv-user-menu {
+      position: absolute; top: 56px; right: 12px; z-index: 60; min-width: 200px;
+      background: #1e1035; border: 1px solid rgba(255,255,255,0.14); border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45); overflow: hidden;
+    }
+    .nv-user-menu-head { display: flex; align-items: center; gap: 10px; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nv-user-menu-name { font-weight: 800; color: #fff; }
+    .nv-user-menu-item {
+      display: block; width: 100%; text-align: left; border: none; background: none;
+      color: #f5f3ff; padding: 12px 14px; font-weight: 700; cursor: pointer;
+    }
+    .nv-user-menu-item:hover { background: rgba(168,85,247,0.2); }
+    .nv-user-menu-item.danger { color: #fca5a5; }
+    .nv-friend-tile {
+      flex: 0 0 72px; border: none; background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .nv-friend-avatar {
+      width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.18); display: grid; place-items: center; position: relative;
+    }
+    .nv-friend-name { font-size: 0.72rem; font-weight: 800; color: #ede9fe; max-width: 72px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .nv-chat-layout { display: flex; flex-direction: column; height: calc(100dvh - 130px); min-height: 280px; }
+    .nv-chat-list { flex: 0 0 auto; max-height: 38%; overflow-y: auto; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nv-chat-contact {
+      display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: transparent;
+      color: #f5f3ff; padding: 12px 16px; cursor: pointer; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nv-chat-contact.active { background: rgba(168,85,247,0.22); }
+    .nv-chat-msgs { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .nv-chat-bubble { max-width: 82%; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; }
+    .nv-chat-bubble.me { align-self: flex-end; background: #9333ea; color: #fff; border-bottom-right-radius: 4px; }
+    .nv-chat-bubble.them { align-self: flex-start; background: rgba(255,255,255,0.12); color: #fff; border-bottom-left-radius: 4px; }
+    .nv-chat-form { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid rgba(255,255,255,0.1); background: #2e1065; }
+    .nv-chat-form input {
+      flex: 1; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 10px 14px;
+      background: rgba(0,0,0,0.2); color: #fff; font-weight: 600;
+    }
+    .nv-chat-form button {
+      border: none; border-radius: 999px; padding: 10px 14px; background: #9333ea; color: #fff; font-weight: 800; cursor: pointer;
+    }
+    .nv-more-list { padding: 8px 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+    .nv-more-btn {
+      display: flex; align-items: center; gap: 10px; width: 100%; border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px; padding: 14px 16px; background: rgba(255,255,255,0.08); color: #f5f3ff;
+      font-weight: 800; font-size: 0.92rem; cursor: pointer;
+    }
+    .nv-login-overlay {
+      position: fixed; inset: 0; z-index: 25000; background: rgba(30, 16, 53, 0.88);
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .nv-login-overlay.open { display: flex; }
+    .nv-login-card {
+      width: min(420px, 100%); background: #faf5ff; border-radius: 16px; padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    .nv-login-card h2 { margin: 0 0 6px; color: #4c1d95; }
+    .nv-login-card p { margin: 0 0 16px; color: #6b21a8; font-weight: 600; font-size: 0.9rem; }
+    .nv-login-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .nv-login-tab {
+      flex: 1; border: none; border-radius: 10px; padding: 10px; font-weight: 800; cursor: pointer;
+      background: #ede9fe; color: #6d28d9;
+    }
+    .nv-login-tab.active { background: #9333ea; color: #fff; }
+    .nv-login-card label { display: block; font-weight: 700; color: #4c1d95; font-size: 0.85rem; margin-bottom: 12px; }
+    .nv-login-card select, .nv-login-card input {
+      width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px; border: 2px solid #ddd6fe; box-sizing: border-box;
+    }
+    .nv-login-submit {
+      width: 100%; margin-top: 8px; padding: 14px; border: none; border-radius: 10px;
+      background: #9333ea; color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer;
+    }
+    .nv-login-close {
+      position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,0.15);
+      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    }
 
   </style>
 </head>
@@ -5262,16 +5438,9 @@
 
   <div class="rules-overlay" id="rules-overlay" aria-hidden="true">
     <div class="rules-panel" role="dialog" aria-labelledby="rules-title">
+      <button type="button" class="rules-back profile-hidden" id="rules-back">← Все игры</button>
       <h2 id="rules-title">Правила игры</h2>
-      <ol id="rules-list">
-        <li>Это ходилка по карте, как настольная игра. Фишка стартует со «СТАРТ».</li>
-        <li>В правом нижнем углу — кубик 🎲. Нажми на него, чтобы кинуть.</li>
-        <li>Фишка передвинется вперёд на выпавшее число клеток. Клетки, через которые ты пролетел, помечаются точкой.</li>
-        <li>Автоматически открывается вопрос той клетки, на которой ты остановился.</li>
-        <li>На ответ даётся 7 секунд. Выбери один из четырёх вариантов.</li>
-        <li>Правильные ответы становятся зелёными, ошибки — красными.</li>
-        <li>Когда фишка дойдёт до последней клетки, откроется финиш и результат.</li>
-      </ol>
+      <ol id="rules-list"></ol>
       <button type="button" class="rules-close" id="rules-close">Понятно!</button>
     </div>
   </div>
@@ -6067,6 +6236,109 @@
           Аккаунт
         </button>
       </nav>
+    </div>
+  </div>
+
+  <!-- НОВАЯ ВЕРСИЯ · Roblox UI без игр -->
+  <div id="screen-newverse" class="screen">
+    <div class="nv-hub">
+      <header class="nv-topbar">
+        <button type="button" class="nv-back-btn" id="nv-back-classic">← Классика</button>
+        <span class="nv-logo">PlayVerse 2</span>
+        <div class="nv-search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+          <input type="search" id="nv-search" placeholder="Поиск скоро..." disabled>
+        </div>
+        <div class="nv-top-actions">
+          <div class="nv-coin-pill"><span>🪙</span><span id="nv-coins-val">0</span></div>
+          <button type="button" class="nv-user-btn" id="nv-user-menu-btn" aria-label="Аккаунт">
+            <span class="nv-blocky nv-blocky-sm" id="nv-top-avatar"></span>
+          </button>
+        </div>
+      </header>
+      <div class="nv-user-menu profile-hidden" id="nv-user-menu">
+        <div class="nv-user-menu-head">
+          <span class="nv-blocky nv-blocky-sm" id="nv-menu-avatar"></span>
+          <div>
+            <div class="nv-user-menu-name" id="nv-menu-name">Гость</div>
+            <div style="font-size:0.78rem;color:#c4b5fd;font-weight:600" id="nv-menu-tag">@guest</div>
+          </div>
+        </div>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-profile">Профиль</button>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-friends">Друзья</button>
+        <button type="button" class="nv-user-menu-item" id="nv-menu-login">Войти</button>
+        <button type="button" class="nv-user-menu-item danger profile-hidden" id="nv-menu-logout">Выйти</button>
+      </div>
+      <div class="nv-scroll">
+        <div class="nv-panel active" data-nv-panel="home">
+          <h2 class="nv-section-title">Друзья</h2>
+          <div class="nv-friends-rail" id="nv-friends-rail"></div>
+          <h2 class="nv-section-title">Игры</h2>
+          <div class="nv-empty">🎮 Каталог игр скоро появится в новой версии.<br>Пока играй в <strong>классическом PlayVerse</strong> — кнопка «← Классика».</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="charts">
+          <h2 class="nv-section-title">Популярное</h2>
+          <div class="nv-empty">🔥 Топ игр появится после релиза каталога.</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="avatar">
+          <div style="text-align:center;padding:16px 0 8px">
+            <div class="nv-blocky nv-blocky-lg" id="nv-blocky-preview"></div>
+            <div id="nv-blocky-name" style="font-weight:900;color:#fff;margin-top:8px">Гость</div>
+          </div>
+          <div class="nv-empty">👕 Магазин скинов для blocky-аватара — в разработке.</div>
+        </div>
+        <div class="nv-panel" data-nv-panel="chats">
+          <div class="nv-chat-layout">
+            <div class="nv-chat-list" id="nv-chat-list"></div>
+            <div class="nv-chat-msgs" id="nv-chat-msgs"></div>
+            <form class="nv-chat-form" id="nv-chat-form">
+              <input type="text" id="nv-chat-input" maxlength="200" placeholder="Напиши сообщение..." autocomplete="off">
+              <button type="submit">→</button>
+            </form>
+          </div>
+        </div>
+        <div class="nv-panel" data-nv-panel="more">
+          <div class="nv-more-list">
+            <button type="button" class="nv-more-btn" id="nv-more-profile">👤 Профиль</button>
+            <button type="button" class="nv-more-btn" id="nv-more-friends">🤝 Друзья</button>
+            <button type="button" class="nv-more-btn" id="nv-more-classic">↩️ Классический PlayVerse</button>
+            <button type="button" class="nv-more-btn" id="nv-more-rules">📋 Правила игр</button>
+            <button type="button" class="nv-more-btn" id="nv-more-login">🔑 Войти / Регистрация</button>
+          </div>
+        </div>
+      </div>
+      <nav class="nv-bottom-nav" aria-label="Навигация новой версии">
+        <button type="button" class="nv-nav-item active" data-nv-nav="home"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Главная</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="charts"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Популярное</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="avatar"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>Аватар</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="chats"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>Чаты</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>Ещё</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="nv-login-overlay" id="nv-login-overlay" aria-hidden="true">
+    <button type="button" class="nv-login-close" id="nv-login-close" aria-label="Закрыть">✕</button>
+    <div class="nv-login-card">
+      <h2>PlayVerse 2</h2>
+      <p>Войди, чтобы пользоваться друзьями и чатом</p>
+      <div class="nv-login-tabs">
+        <button type="button" class="nv-login-tab active" data-nv-login-tab="login">Вход</button>
+        <button type="button" class="nv-login-tab" data-nv-login-tab="register">Регистрация</button>
+      </div>
+      <form id="nv-modal-login-form">
+        <label>Имя<select id="nv-modal-login-name" required><option value="">Выбери имя</option></select></label>
+        <label>Пароль<input type="password" id="nv-modal-login-pass" required maxlength="32"></label>
+        <p class="profile-msg" id="nv-modal-login-msg"></p>
+        <button type="submit" class="nv-login-submit">Войти</button>
+      </form>
+      <form id="nv-modal-register-form" class="profile-hidden">
+        <label>Имя<select id="nv-modal-reg-name" required><option value="">Загрузка…</option></select></label>
+        <label>Пароль<input type="password" id="nv-modal-reg-pass" required maxlength="32"></label>
+        <label>Повтор<input type="password" id="nv-modal-reg-pass2" required maxlength="32"></label>
+        <p class="profile-msg" id="nv-modal-register-msg"></p>
+        <button type="submit" class="nv-login-submit">Создать аккаунт</button>
+      </form>
     </div>
   </div>
 
@@ -7553,6 +7825,7 @@
       profile: document.getElementById("screen-profile"),
       userProfile: document.getElementById("screen-user-profile"),
       friends: document.getElementById("screen-friends"),
+      newverse: document.getElementById("screen-newverse"),
       intro: document.getElementById("screen-intro"),
       map: document.getElementById("screen-map"),
       question: document.getElementById("screen-question"),
@@ -7821,7 +8094,7 @@
     window.setHubNavActive = setHubNavActive;
 
     function showScreen(name) {
-      if (name !== "profile" && name !== "userProfile" && name !== "friends" && !isUserLoggedIn()) {
+      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "newverse" && !isUserLoggedIn()) {
         name = "profile";
         if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
       }
@@ -7844,6 +8117,7 @@
       const playing = !!mode && mode !== null;
       document.body.classList.toggle("pv-playing", playing && name !== "cover" && name !== "profile");
       document.body.classList.toggle("on-cover", name === "cover");
+      document.body.classList.toggle("on-newverse", name === "newverse");
       document.body.classList.toggle("on-profile", name === "profile" || name === "userProfile" || name === "friends");
       if (name === "cover" || name === "friends") {
         if (window.PVProfile && typeof PVProfile.renderHub === "function") PVProfile.renderHub();
@@ -7853,6 +8127,7 @@
           enhanceHubCardRatings();
         }
       }
+      if (name === "newverse" && typeof renderNewVerse === "function") renderNewVerse();
       if (typeof setHubNavActive === "function") {
         const hubNav = name === "profile" ? "account" : (name === "cover" ? "home" : null);
         setHubNavActive(hubNav);
@@ -8048,27 +8323,70 @@
     }
     const rulesList = document.getElementById("rules-list");
     const rulesTitle = document.getElementById("rules-title");
+    const rulesBack = document.getElementById("rules-back");
+
+    function isInActiveGame() {
+      for (let i = 0; i < RULES_ALL_MODES.length; i++) {
+        if (document.body.classList.contains("in-" + RULES_ALL_MODES[i])) return true;
+      }
+      return false;
+    }
 
     function fillRules(list) {
       if (!rulesList) return;
+      rulesList.classList.remove("rules-picker-list");
       rulesList.innerHTML = list.map((t) => "<li>" + t + "</li>").join("");
     }
 
-    function openRules() {
-      const mode = getActiveRulesMode();
-      const name = typeof hubGameTitle === "function" ? hubGameTitle(mode) : mode;
+    function openRulesPicker() {
+      if (rulesTitle) rulesTitle.textContent = "Правила игр";
+      if (rulesBack) rulesBack.classList.add("profile-hidden");
+      if (rulesList) {
+        rulesList.classList.add("rules-picker-list");
+        rulesList.innerHTML = RULES_ALL_MODES.map((mode) =>
+          '<li><button type="button" class="rules-game-pick" data-rules-mode="' + mode + '">' +
+          hubGameTitle(mode) + '</button></li>'
+        ).join("");
+        rulesList.querySelectorAll(".rules-game-pick").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openRulesForMode(btn.getAttribute("data-rules-mode"), true);
+          });
+        });
+      }
+      if (rulesOverlay) {
+        rulesOverlay.classList.add("open");
+        rulesOverlay.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function openRulesForMode(mode, fromPicker) {
+      const name = hubGameTitle(mode);
       if (rulesTitle) rulesTitle.textContent = "Правила «" + name + "»";
+      if (rulesBack) rulesBack.classList.toggle("profile-hidden", !fromPicker);
       fillRules(RULES_BY_MODE[mode] || RULES_AVIA);
+      if (rulesOverlay) {
+        rulesOverlay.classList.add("open");
+        rulesOverlay.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function openRules() {
+      if (isInActiveGame()) {
+        openRulesForMode(getActiveRulesMode(), false);
+      } else {
+        openRulesPicker();
+        return;
+      }
       if (document.body.classList.contains("in-snake") && typeof stopSnakeLoop === "function") stopSnakeLoop();
       if (document.body.classList.contains("in-breakout") && typeof pauseBreakout === "function") pauseBreakout();
       if (document.body.classList.contains("in-clicker") && typeof pauseClicker === "function") pauseClicker();
       if (document.body.classList.contains("in-memory") && typeof pauseMemoryGame === "function") pauseMemoryGame();
-      rulesOverlay.classList.add("open");
-      rulesOverlay.setAttribute("aria-hidden", "false");
     }
     function closeRules() {
       rulesOverlay.classList.remove("open");
       rulesOverlay.setAttribute("aria-hidden", "true");
+      if (rulesBack) rulesBack.classList.add("profile-hidden");
+      if (rulesList) rulesList.classList.remove("rules-picker-list");
       if (document.body.classList.contains("in-breakout") && typeof resumeBreakout === "function") {
         resumeBreakout();
       }
@@ -8080,6 +8398,7 @@
       }
     }
     rulesTab.addEventListener("click", openRules);
+    if (rulesBack) rulesBack.addEventListener("click", openRulesPicker);
     rulesClose.addEventListener("click", closeRules);
     rulesOverlay.addEventListener("click", (e) => {
       if (e.target === rulesOverlay) closeRules();
@@ -8664,13 +8983,260 @@ const HUB_GAME_META = {
       const betaBtn = document.getElementById("hub-beta-btn");
       if (betaBtn) {
         betaBtn.addEventListener("click", () => {
-          if (window.PVProfile && typeof PVProfile.toast === "function") {
-            PVProfile.toast("Новая версия сайта — ещё в разработке");
-          }
+          if (typeof showScreen === "function") showScreen("newverse");
         });
       }
     }
     initHubSearch();
+
+    /* ===== Новая версия · Roblox UI (отдельный экран, без игр) ===== */
+    let nvChatPeer = null;
+    const NV_CHAT_PREFIX = "pv_nv_chat_";
+
+    function nvHue(name) {
+      let h = 270;
+      const s = String(name || "");
+      for (let i = 0; i < s.length; i++) h = (h + s.charCodeAt(i) * 17) % 360;
+      return h;
+    }
+
+    function nvBlockyHtml(u, username) {
+      const hue = u && typeof u.avatarHue === "number" ? u.avatarHue : nvHue(username);
+      const shirt = "hsl(" + hue + ",55%,52%)";
+      const pants = "hsl(" + ((hue + 40) % 360) + ",45%,32%)";
+      return '<span class="nv-blocky-head"></span><span class="nv-blocky-torso" style="background:' + shirt + '"></span>' +
+        '<span class="nv-blocky-legs"><span class="nv-blocky-leg" style="background:' + pants + '"></span>' +
+        '<span class="nv-blocky-leg" style="background:' + pants + '"></span></span>';
+    }
+
+    function nvFillBlocky(node, u, username) {
+      if (!node) return;
+      if (!node.classList.contains("nv-blocky")) node.classList.add("nv-blocky");
+      node.innerHTML = nvBlockyHtml(u, username);
+    }
+
+    function setNvPanel(panel) {
+      document.querySelectorAll("[data-nv-panel]").forEach((p) => {
+        p.classList.toggle("active", p.getAttribute("data-nv-panel") === panel);
+      });
+      document.querySelectorAll("[data-nv-nav]").forEach((b) => {
+        b.classList.toggle("active", b.getAttribute("data-nv-nav") === panel);
+      });
+    }
+
+    function syncNvModalSelects() {
+      const srcLogin = document.getElementById("profile-login-name");
+      const srcReg = document.getElementById("profile-reg-name");
+      const dstLogin = document.getElementById("nv-modal-login-name");
+      const dstReg = document.getElementById("nv-modal-reg-name");
+      if (srcLogin && dstLogin) dstLogin.innerHTML = srcLogin.innerHTML;
+      if (srcReg && dstReg) dstReg.innerHTML = srcReg.innerHTML;
+    }
+
+    function openNvLogin(tab) {
+      syncNvModalSelects();
+      const ov = document.getElementById("nv-login-overlay");
+      if (!ov) return;
+      ov.classList.add("open");
+      if (tab === "register") {
+        document.querySelectorAll("[data-nv-login-tab]").forEach((t) => {
+          t.classList.toggle("active", t.getAttribute("data-nv-login-tab") === "register");
+        });
+        document.getElementById("nv-modal-login-form")?.classList.add("profile-hidden");
+        document.getElementById("nv-modal-register-form")?.classList.remove("profile-hidden");
+      }
+    }
+
+    function closeNvLogin() {
+      document.getElementById("nv-login-overlay")?.classList.remove("open");
+    }
+
+    function nvChatKey(a, b) {
+      return NV_CHAT_PREFIX + [a, b].sort().join("__");
+    }
+
+    function nvLoadChat(me, peer) {
+      try { return JSON.parse(localStorage.getItem(nvChatKey(me, peer))) || []; } catch (e) { return []; }
+    }
+
+    function nvSaveChat(me, peer, text, fromMe) {
+      const msgs = nvLoadChat(me, peer);
+      msgs.push({ text: text, fromMe: !!fromMe, t: Date.now() });
+      if (msgs.length > 100) msgs.splice(0, msgs.length - 100);
+      localStorage.setItem(nvChatKey(me, peer), JSON.stringify(msgs));
+    }
+
+    function renderNvChat() {
+      const listEl = document.getElementById("nv-chat-list");
+      const msgsEl = document.getElementById("nv-chat-msgs");
+      if (!listEl || !msgsEl) return;
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      if (!logged) {
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Войди, чтобы писать друзьям</p>';
+        msgsEl.innerHTML = "";
+        nvChatPeer = null;
+        return;
+      }
+      const me = PVProfile.currentUser();
+      const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      if (!friends.length) {
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей в классическом PlayVerse</p>';
+        msgsEl.innerHTML = "";
+        return;
+      }
+      if (!nvChatPeer || friends.indexOf(nvChatPeer) < 0) nvChatPeer = friends[0];
+      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+      listEl.innerHTML = friends.map((name) =>
+        '<button type="button" class="nv-chat-contact' + (name === nvChatPeer ? " active" : "") + '" data-nv-peer="' + name + '">' +
+        '<span class="nv-blocky nv-blocky-sm" data-nv-peer-blocky="' + name + '"></span><span style="font-weight:800">' + name + '</span></button>'
+      ).join("");
+      listEl.querySelectorAll("[data-nv-peer]").forEach((btn) => {
+        btn.addEventListener("click", () => { nvChatPeer = btn.getAttribute("data-nv-peer"); renderNvChat(); });
+      });
+      listEl.querySelectorAll("[data-nv-peer-blocky]").forEach((node) => {
+        const name = node.getAttribute("data-nv-peer-blocky");
+        nvFillBlocky(node, users[name], name);
+      });
+      msgsEl.innerHTML = nvLoadChat(me.username, nvChatPeer).map((m) =>
+        '<div class="nv-chat-bubble ' + (m.fromMe ? "me" : "them") + '">' +
+        String(m.text).replace(/[<>&]/g, (c) => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c])) + '</div>'
+      ).join("");
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    }
+
+    function renderNvFriends() {
+      const rail = document.getElementById("nv-friends-rail");
+      if (!rail) return;
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      if (!logged) {
+        rail.innerHTML = '<p style="padding:4px 0;color:#c4b5fd;font-weight:700;font-size:0.85rem">Войди, чтобы видеть друзей</p>';
+        return;
+      }
+      const me = PVProfile.currentUser();
+      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+      const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      let html = "";
+      if (me) {
+        const label = PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : me.username;
+        html += '<button type="button" class="nv-friend-tile"><div class="nv-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span></div><span class="nv-friend-name">' + label + '</span></button>';
+      }
+      html += '<button type="button" class="nv-friend-tile" id="nv-add-friend"><div class="nv-friend-avatar"><span style="font-size:1.4rem">+</span></div></button>';
+      friends.slice(0, 12).forEach((name) => {
+        html += '<button type="button" class="nv-friend-tile" data-nv-friend="' + name + '"><div class="nv-friend-avatar">' +
+          '<span class="nv-blocky nv-blocky-sm" data-nv-friend-blocky="' + name + '"></span></div>' +
+          '<span class="nv-friend-name">' + name + '</span></button>';
+      });
+      rail.innerHTML = html;
+      if (me) nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
+      rail.querySelectorAll("[data-nv-friend-blocky]").forEach((node) => {
+        const name = node.getAttribute("data-nv-friend-blocky");
+        nvFillBlocky(node, users[name], name);
+      });
+      document.getElementById("nv-add-friend")?.addEventListener("click", () => {
+        if (PVProfile.openFriends) PVProfile.openFriends();
+      });
+    }
+
+    function renderNewVerse() {
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      const u = logged && PVProfile.currentUser ? PVProfile.currentUser() : null;
+      const label = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
+      nvFillBlocky(document.getElementById("nv-top-avatar"), u, u && u.username);
+      nvFillBlocky(document.getElementById("nv-menu-avatar"), u, u && u.username);
+      nvFillBlocky(document.getElementById("nv-blocky-preview"), u, u && u.username);
+      const coinsEl = document.getElementById("nv-coins-val");
+      if (coinsEl) coinsEl.textContent = u && PVProfile.getUserCoins ? String(PVProfile.getUserCoins(u)) : "0";
+      ["nv-menu-name", "nv-blocky-name"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = label;
+      });
+      const tagEl = document.getElementById("nv-menu-tag");
+      if (tagEl) tagEl.textContent = u ? ("@" + u.username.toLowerCase()) : "@guest";
+      ["nv-menu-login", "nv-more-login"].forEach((id) => {
+        document.getElementById(id)?.classList.toggle("profile-hidden", !!logged);
+      });
+      ["nv-menu-logout"].forEach((id) => {
+        document.getElementById(id)?.classList.toggle("profile-hidden", !logged);
+      });
+      renderNvFriends();
+      if (document.querySelector('[data-nv-panel="chats"].active')) renderNvChat();
+    }
+    window.renderNewVerse = renderNewVerse;
+
+    function initNewVerse() {
+      document.getElementById("nv-back-classic")?.addEventListener("click", () => showScreen("cover"));
+      document.getElementById("nv-more-classic")?.addEventListener("click", () => showScreen("cover"));
+      const menuBtn = document.getElementById("nv-user-menu-btn");
+      const menu = document.getElementById("nv-user-menu");
+      if (menuBtn && menu) {
+        menuBtn.addEventListener("click", (e) => { e.stopPropagation(); menu.classList.toggle("profile-hidden"); });
+        document.addEventListener("click", () => menu.classList.add("profile-hidden"));
+        menu.addEventListener("click", (e) => e.stopPropagation());
+      }
+      document.getElementById("nv-login-close")?.addEventListener("click", closeNvLogin);
+      document.getElementById("nv-login-overlay")?.addEventListener("click", (e) => { if (e.target.id === "nv-login-overlay") closeNvLogin(); });
+      document.querySelectorAll("[data-nv-login-tab]").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const t = tab.getAttribute("data-nv-login-tab");
+          document.querySelectorAll("[data-nv-login-tab]").forEach((x) => x.classList.toggle("active", x === tab));
+          document.getElementById("nv-modal-login-form")?.classList.toggle("profile-hidden", t !== "login");
+          document.getElementById("nv-modal-register-form")?.classList.toggle("profile-hidden", t !== "register");
+        });
+      });
+      const openLogin = () => { menu?.classList.add("profile-hidden"); openNvLogin("login"); };
+      ["nv-menu-login", "nv-more-login"].forEach((id) => document.getElementById(id)?.addEventListener("click", openLogin));
+      const doLogout = () => { menu?.classList.add("profile-hidden"); PVProfile.logout && PVProfile.logout(); renderNewVerse(); };
+      document.getElementById("nv-menu-logout")?.addEventListener("click", doLogout);
+      const openProf = () => { menu?.classList.add("profile-hidden"); PVProfile.open && PVProfile.open(); };
+      ["nv-menu-profile", "nv-more-profile"].forEach((id) => document.getElementById(id)?.addEventListener("click", openProf));
+      ["nv-menu-friends", "nv-more-friends"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("click", () => { menu?.classList.add("profile-hidden"); PVProfile.openFriends && PVProfile.openFriends(); });
+      });
+      document.getElementById("nv-more-rules")?.addEventListener("click", () => {
+        if (typeof openRules === "function") openRules();
+      });
+      document.querySelectorAll("[data-nv-nav]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const nav = btn.getAttribute("data-nv-nav");
+          if (nav === "chats" && !isUserLoggedIn()) { openNvLogin(); return; }
+          setNvPanel(nav);
+          if (nav === "chats") renderNvChat();
+        });
+      });
+      document.getElementById("nv-chat-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!isUserLoggedIn() || !nvChatPeer) { openNvLogin(); return; }
+        const input = document.getElementById("nv-chat-input");
+        const text = input && input.value.trim();
+        if (!text) return;
+        nvSaveChat(PVProfile.currentUser().username, nvChatPeer, text, true);
+        if (input) input.value = "";
+        renderNvChat();
+      });
+      document.getElementById("nv-modal-login-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!PVProfile) return;
+        const err = await PVProfile.login(
+          document.getElementById("nv-modal-login-name").value.trim(),
+          document.getElementById("nv-modal-login-pass").value
+        );
+        const msg = document.getElementById("nv-modal-login-msg");
+        if (err) { if (msg) msg.textContent = err; return; }
+        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Вход выполнен");
+      });
+      document.getElementById("nv-modal-register-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!PVProfile) return;
+        const pass = document.getElementById("nv-modal-reg-pass").value;
+        const pass2 = document.getElementById("nv-modal-reg-pass2").value;
+        const msg = document.getElementById("nv-modal-register-msg");
+        if (pass !== pass2) { if (msg) msg.textContent = "Пароли не совпадают"; return; }
+        const err = await PVProfile.register(document.getElementById("nv-modal-reg-name").value.trim(), pass);
+        if (err) { if (msg) msg.textContent = err; return; }
+        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Регистрация успешна");
+      });
+    }
+    initNewVerse();
 
     function launchFromHub(card, mode) {
       if (hubLaunching) return;
@@ -13488,1276 +14054,6 @@ const HUB_GAME_META = {
 
 
 
-    /* ===== 30 НОВЫХ ИГР PlayVerse Pack ===== */
-    (function () {
-      const PACK_DEFS = [
-    { id: "pk_flappy", title: "Полёт", emoji: "🐦", color: "#0284c7", desc: "Пролетай между трубами. Тап, пробел или ● — взмах.", coin: "complete" },
-    { id: "pk_stack", title: "Башня", emoji: "🏗️", color: "#7c3aed", desc: "Строй башню — бросай блоки точно друг на друга.", coin: "complete" },
-    { id: "pk_wow", title: "Слова", emoji: "🧩", color: "#0d9488", desc: "Веди пальцем по буквам в круге — собери слова и заполни кроссворд.", coin: "complete" },
-    { id: "pk_frog", title: "Переход", emoji: "🐸", color: "#16a34a", desc: "Дойди до цели: дорога, река, бревна. Стрелки.", coin: "complete" },
-    { id: "pk_astro", title: "Астероиды", emoji: "☄️", color: "#475569", desc: "Стреляй по камням. Стрелки + пробел.", coin: "complete" },
-    { id: "pk_invade", title: "Захватчики", emoji: "👾", color: "#6366f1", desc: "Уничтожь всех пришельцев. ← → и пробел.", coin: "win" },
-    { id: "pk_c4", title: "4 в ряд", emoji: "🔴", color: "#dc2626", desc: "Клик по столбцу — брось фишку. 4 в ряд = победа.", coin: "win" },
-    { id: "pk_slide", title: "Пятнашки", emoji: "🧩", color: "#0891b2", desc: "Кликай клетку рядом с пустой, собери 1–15.", coin: "complete" },
-    { id: "pk_hang", title: "Слово", emoji: "📝", color: "#be185d", desc: "Угадай слово — кликай буквы на экране.", coin: "win" },
-    { id: "pk_reflex", title: "Рефлекс", emoji: "⚡", color: "#eab308", desc: "Жми ● или пробел, когда экран зелёный.", coin: "complete" },
-    { id: "pk_type", title: "Печать", emoji: "⌨️", color: "#0d9488", desc: "Набери слово с клавиатуры до конца таймера.", coin: "complete" },
-    { id: "pk_math", title: "Счёт", emoji: "➕", color: "#2563eb", desc: "Выбирай правильный ответ на примеры.", coin: "complete" },
-    { id: "pk_dart", title: "Дартс", emoji: "🎯", color: "#b91c1c", desc: "Клик по мишени — ближе к центру = больше очков.", coin: "complete" },
-    { id: "pk_bowl", title: "Боулинг", emoji: "🎳", color: "#4338ca", desc: "Клик — брось шар. Сбей как можно больше кеглей.", coin: "complete" },
-    { id: "pk_golf", title: "Гольф", emoji: "⛳", color: "#15803d", desc: "Клик по полю — направление и сила к лунке.", coin: "complete" },
-    { id: "pk_fish", title: "Рыбалка", emoji: "🎣", color: "#0369a1", desc: "Жми ●, когда поплавок дёрнется (3 рыбы).", coin: "complete" },
-    { id: "pk_beat", title: "Ритм", emoji: "🎵", color: "#c026d3", desc: "Жми ● в такт — 12 нот подряд.", coin: "complete" },
-    { id: "pk_bubble", title: "Пузыри", emoji: "🫧", color: "#06b6d4", desc: "Клик — выстрел. Собери 3+ одного цвета.", coin: "complete" },
-    { id: "pk_gem", title: "3 в ряд", emoji: "💎", color: "#db2777", desc: "Кликни два соседних камня, собери комбо.", coin: "complete" },
-    { id: "pk_pipe", title: "Трубы", emoji: "🔧", color: "#64748b", desc: "Клик — поворот трубы. Проведи воду A→B.", coin: "complete" },
-    { id: "pk_box", title: "Склады", emoji: "🧱", color: "#92400e", desc: "Стрелки толкают ящик на звезду.", coin: "complete" },
-    { id: "pk_fill", title: "Заливка", emoji: "🎨", color: "#f97316", desc: "Клик по цвету внизу — залей всё поле.", coin: "complete" },
-    { id: "pk_flip", title: "Гравитация", emoji: "🔄", color: "#4f46e5", desc: "Пробел меняет гравитацию. Дойди до выхода.", coin: "complete" },
-    { id: "pk_tilt", title: "Баланс", emoji: "⚖️", color: "#059669", desc: "← → наклоняй платформу, доведи шар до цели.", coin: "complete" },
-    { id: "pk_target", title: "Мишень", emoji: "🔫", color: "#991b1b", desc: "Кликай по мишеням — 20 секунд.", coin: "complete" },
-    { id: "pk_race", title: "Гонка", emoji: "🏎️", color: "#ea580c", desc: "← → меняй полосу, объезжай машины.", coin: "complete" },
-    { id: "pk_defense", title: "Оборона", emoji: "🛡️", color: "#1d4ed8", desc: "Кликай по врагам. Не дай им дойти до замка.", coin: "win" },
-    { id: "pk_word", title: "Поиск", emoji: "🔤", color: "#7c3aed", desc: "Найди слово в сетке — кликай буквы по порядку.", coin: "complete" },
-    { id: "pk_hue", title: "Оттенки", emoji: "🌈", color: "#ec4899", desc: "Кликни клетку с другим оттенком. 8 раундов.", coin: "complete" },
-    { id: "pk_pin", title: "Пинбол", emoji: "🎱", color: "#312e81", desc: "← → флипперы. Набери 3000 очков.", coin: "complete" }
-      ];
-      window.PACK_GAME_IDS = PACK_DEFS.map((d) => d.id);
-      if (!window.PV_EXTRA_GAME_IDS) window.PV_EXTRA_GAME_IDS = ["tetris","pong","dobble","mines","simon","space","runner","moles","catcher","maze","battleship","chess","checkers","tictactoe"];
-      window.PV_EXTRA_GAME_IDS = window.PV_EXTRA_GAME_IDS.concat(window.PACK_GAME_IDS);
-
-      const packBest = {};
-      PACK_DEFS.forEach((d) => { packBest[d.id] = 0; EXTRA_GAME_TITLES[d.id] = d.title; });
-
-      function esc(s) { return String(s).replace(/[&<>"']/g, (ch) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[ch])); }
-
-      function buildPackDom() {
-        const hubGrid = document.getElementById("hub-grid");
-        const factoryCard = document.getElementById("cover-card-factory");
-        const container = document.getElementById("pack-screens-root") || (function () {
-          const el = document.createElement("div");
-          el.id = "pack-screens-root";
-          document.body.appendChild(el);
-          return el;
-        })();
-
-        PACK_DEFS.forEach((d) => {
-          if (hubGrid && factoryCard && !document.getElementById("cover-card-" + d.id)) {
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "cover-card cover-card-pack";
-            btn.id = "cover-card-" + d.id;
-            btn.setAttribute("aria-label", "Открыть игру " + d.title);
-            btn.innerHTML =
-              '<div class="cover-art" style="background:linear-gradient(145deg,' + d.color + 'cc,#0f172a)" aria-hidden="true">' +
-              '<div style="font-size:3rem;line-height:1;margin-top:18%">' + d.emoji + '</div>' +
-              '<h1 class="cover-title"><span>Игра</span>' + esc(d.title) + '</h1></div>' +
-              '<div class="cover-meta"><h2>' + esc(d.title) + '</h2><p>' + esc(d.desc) + '</p></div>';
-            hubGrid.insertBefore(btn, factoryCard);
-          }
-
-          if (!document.getElementById("screen-" + d.id)) {
-            container.insertAdjacentHTML("beforeend",
-              '<div id="screen-' + d.id + '" class="screen screen-pack">' +
-              '<div class="pv-shell"><div class="pv-top"><h2>' + esc(d.title) + '</h2>' +
-              '<div class="pv-stats"><span class="pv-pill" id="' + d.id + '-score">Счёт: 0</span>' +
-              '<span class="pv-pill" id="' + d.id + '-best">Рекорд: 0</span>' +
-              '<span class="pv-pill" id="' + d.id + '-extra">—</span></div></div>' +
-              '<div class="pv-board-wrap" id="' + d.id + '-board">' +
-              '<canvas id="' + d.id + '-canvas" width="480" height="480"></canvas>' +
-              '<div class="pv-overlay open" id="' + d.id + '-overlay">' +
-              '<h3 id="' + d.id + '-overlay-title">' + esc(d.title) + '</h3>' +
-              '<p id="' + d.id + '-overlay-text">' + esc(d.desc) + '</p>' +
-              '<div class="pv-diff-row" data-diff-for="' + d.id + '">' +
-              '<button type="button" class="pv-diff-btn" data-diff="easy">Лёгкая</button>' +
-              '<button type="button" class="pv-diff-btn active" data-diff="normal">Средняя</button>' +
-              '<button type="button" class="pv-diff-btn" data-diff="hard">Сложная</button></div>' +
-              '<div class="pv-actions"><button type="button" class="pv-btn primary" id="' + d.id + '-start">Играть</button></div>' +
-              '</div></div><p class="pv-hint">' + d.emoji + ' PlayVerse · ' + esc(d.title) + '</p>' +
-              '<p class="game-brand">PlayVerse</p>' +
-              '<div class="pv-pad" id="' + d.id + '-pad">' +
-              '<button type="button" data-dir="left">←</button><button type="button" data-dir="up">↑</button>' +
-              '<button type="button" data-dir="down">↓</button><button type="button" data-dir="right">→</button>' +
-              '<button type="button" data-dir="action">●</button></div></div></div>');
-          }
-
-          screens[d.id] = document.getElementById("screen-" + d.id);
-          if (typeof gameDifficulty !== "undefined") gameDifficulty[d.id] = "normal";
-          INTRO_TITLES[d.id] = d.title;
-          INTRO_START_LABELS[d.id] = "Играть!";
-          INTRO_BY_GAME[d.id] = [{ badge: "НОВИНКА · " + d.emoji, icon: "", chars: [], text: d.title, detail: d.desc }];
-          if (typeof OVERLAY_GAME_IDS !== "undefined" && OVERLAY_GAME_IDS.indexOf(d.id) === -1) OVERLAY_GAME_IDS.push(d.id);
-          if (typeof GAME_COIN_RULES !== "undefined" && !GAME_COIN_RULES[d.id]) GAME_COIN_RULES[d.id] = { amount: d.coin === "win" ? 2 : 1, kind: d.coin };
-        });
-      }
-
-      
-  function packDiff() {
-    const id = this._id;
-    return (typeof getDiff === "function" ? getDiff(id) : "normal");
-  }
-  function packMul(d) {
-    return d === "easy" ? 0.75 : d === "hard" ? 1.35 : 1;
-  }
-
-  const PACK_GAME_FACTORIES = {
-    pk_flappy: function(id, c, W, H, diff) {
-      const sp = packMul(diff) * 2.8;
-      const st = { y: H/2, vy: 0, pipes: [{ x: W+60, gap: H*0.32, top: 40+Math.random()*(H*0.35) }], score: 0, t: 0 };
-      return {
-        tick: function(inp) {
-          if (inp.flap) st.vy = -7.5;
-          st.vy += 0.42; st.y += st.vy; st.t++;
-          st.pipes.forEach(p => p.x -= sp);
-          if (st.pipes[0].x < -70) {
-            st.pipes.shift();
-            const gap = H * (diff === "hard" ? 0.26 : diff === "easy" ? 0.38 : 0.32);
-            st.pipes.push({ x: W+40, gap, top: 30+Math.random()*(H-gap-60) });
-            st.score++;
-          }
-          const p = st.pipes[0];
-          if (st.y < 8 || st.y > H-8) return { done: true, score: st.score*10, extra: "Трубы: "+st.score };
-          if (p && st.t > 20 && Math.abs(p.x - 80) < 36) {
-            if (st.y < p.top || st.y > p.top + p.gap) return { done: true, score: st.score*10, extra: "Трубы: "+st.score };
-          }
-          if (st.score >= (diff==="hard"?18:diff==="easy"?8:12)) return { done: true, score: st.score*10+50, extra: "Победа!", win: false };
-          return { score: st.score*10, extra: "Трубы: "+st.score };
-        },
-        draw: function() {
-          c.fillStyle="#0c4a6e"; c.fillRect(0,0,W,H);
-          c.fillStyle="#fde68a"; c.beginPath(); c.arc(80,st.y,14,0,Math.PI*2); c.fill();
-          st.pipes.forEach(p => {
-            c.fillStyle="#22c55e";
-            c.fillRect(p.x,0,52,p.top);
-            c.fillRect(p.x,p.top+p.gap,52,H-p.top-p.gap);
-          });
-        },
-        st: st
-      };
-    },
-    pk_stack: function(id,c,W,H,diff) {
-      const st = { blocks: [{x:W/2-50,w:100,y:H-40}], cur: {x:W/2-50,w:100,y:40,dir:1,sp:3*packMul(diff)}, score:0 };
-      return {
-        tick: function(inp) {
-          if (inp.drop) {
-            const b = st.blocks[st.blocks.length-1], cur = st.cur;
-            const overlap = Math.min(b.x+b.w, cur.x+cur.w) - Math.max(b.x, cur.x);
-            if (overlap <= 4) return { done:true, score:st.score*25, extra:"Этажей: "+st.score };
-            const nx = Math.max(b.x, cur.x), nw = overlap;
-            st.blocks.push({x:nx,w:nw,y:b.y-28});
-            st.score++;
-            st.cur = {x:0,w:nw,y:40,dir:1,sp:3.2*packMul(diff)+st.score*0.08};
-            if (st.score >= (diff==="hard"?14:diff==="easy"?6:10)) return { done:true, score:st.score*25+80, extra:"Башня!" };
-          } else {
-            st.cur.x += st.cur.dir*st.cur.sp;
-            if (st.cur.x <= 0 || st.cur.x+st.cur.w >= W) st.cur.dir *= -1;
-          }
-          return { score: st.score*25, extra: "Этаж: "+st.score };
-        },
-        draw: function() {
-          c.fillStyle="#1e1b4b"; c.fillRect(0,0,W,H);
-          st.blocks.forEach(b => { c.fillStyle="#a78bfa"; c.fillRect(b.x,b.y,b.w,24); });
-          c.fillStyle="#c4b5fd"; c.fillRect(st.cur.x,st.cur.y,st.cur.w,24);
-        },
-        st: st
-      };
-    },
-    pk_wow: function(id,c,W,H,diff) {
-      const LEVELS = [
-        {
-          rows: 3, cols: 5,
-          letters: ["К","О","Т","С","О","Н"],
-          words: [
-            { w: "КОТ", cells: [[0,1],[0,2],[0,3]] },
-            { w: "СОН", cells: [[2,0],[2,1],[2,2]] }
-          ]
-        },
-        {
-          rows: 3, cols: 6,
-          letters: ["М","О","Р","Е","Л","Ь","О"],
-          words: [
-            { w: "МОРЕ", cells: [[0,1],[0,2],[0,3],[0,4]] },
-            { w: "РОЛЬ", cells: [[2,0],[2,1],[2,2],[2,3]] }
-          ]
-        },
-        {
-          rows: 4, cols: 5,
-          letters: ["Н","Е","Б","О","Л","У","Н","А","С"],
-          words: [
-            { w: "НЕБО", cells: [[0,0],[0,1],[0,2],[0,3]] },
-            { w: "ЛУНА", cells: [[2,0],[2,1],[2,2],[2,3]] },
-            { w: "НОС", cells: [[3,0],[3,1],[3,2]] }
-          ]
-        }
-      ];
-      const lvl = LEVELS[diff === "hard" ? 2 : diff === "easy" ? 0 : 1];
-      const grid = Array.from({ length: lvl.rows }, () => Array(lvl.cols).fill(null));
-      lvl.words.forEach(({ w, cells }) => {
-        cells.forEach(([r, col], i) => {
-          grid[r][col] = { letter: w[i], filled: false };
-        });
-      });
-      const st = {
-        letters: lvl.letters,
-        grid: grid,
-        rows: lvl.rows,
-        cols: lvl.cols,
-        words: lvl.words,
-        pick: [],
-        found: {},
-        score: 0,
-        flash: "",
-        wheelCx: W / 2,
-        wheelCy: H * 0.78,
-        wheelR: Math.min(W, H) * 0.27,
-        letterPos: []
-      };
-      function layoutWheel() {
-        const n = st.letters.length;
-        st.letterPos = st.letters.map((_, i) => {
-          const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
-          return { x: st.wheelCx + Math.cos(a) * st.wheelR, y: st.wheelCy + Math.sin(a) * st.wheelR, r: Math.min(30, W / (n + 2)) };
-        });
-      }
-      layoutWheel();
-      function hitLetter(x, y) {
-        for (let i = 0; i < st.letterPos.length; i++) {
-          const p = st.letterPos[i];
-          if (Math.hypot(x - p.x, y - p.y) < p.r + 6) return i;
-        }
-        return -1;
-      }
-      function addPick(idx) {
-        if (idx < 0 || st.pick.indexOf(idx) >= 0) return;
-        st.pick.push(idx);
-      }
-      function currentWord() {
-        return st.pick.map((i) => st.letters[i]).join("");
-      }
-      function submitWord() {
-        const word = currentWord();
-        st.pick = [];
-        if (word.length < 2) return;
-        const match = st.words.find((wd) => wd.w === word && !st.found[wd.w]);
-        if (match) {
-          st.found[word] = true;
-          match.cells.forEach(([r, col], i) => {
-            if (st.grid[r][col]) st.grid[r][col].filled = true;
-          });
-          st.score += word.length * 20;
-          st.flash = "✓ " + word;
-        } else {
-          st.flash = "— " + word;
-        }
-      }
-      return {
-        wheelMode: true,
-        hidePad: true,
-        hitLetter: hitLetter,
-        tick: function(inp) {
-          if (inp.wheel) {
-            if (inp.wheel.start) {
-              st.pick = [];
-              if (inp.wheel.pick >= 0) addPick(inp.wheel.pick);
-            } else if (inp.wheel.pick >= 0) {
-              addPick(inp.wheel.pick);
-            }
-            if (inp.wheel.submit) submitWord();
-          }
-          const need = st.words.length;
-          const got = Object.keys(st.found).length;
-          if (got >= need) {
-            return { done: true, score: st.score + 60, extra: "Кроссворд готов!", win: true };
-          }
-          const preview = currentWord();
-          return {
-            score: st.score,
-            extra: got + "/" + need + (preview ? " · " + preview : st.flash ? " · " + st.flash : " · веди по буквам")
-          };
-        },
-        draw: function() {
-          c.fillStyle = "#0c4a6e";
-          c.fillRect(0, 0, W, H);
-          const cs = Math.min((W - 24) / st.cols, H * 0.17);
-          const ox = (W - st.cols * (cs + 4)) / 2;
-          const oy = H * 0.06;
-          st.grid.forEach((row, r) => row.forEach((cell, col) => {
-            if (!cell) return;
-            const x = ox + col * (cs + 4), y = oy + r * (cs + 4);
-            c.fillStyle = cell.filled ? "#fde047" : "#1e293b";
-            c.strokeStyle = cell.filled ? "#f59e0b" : "#475569";
-            c.lineWidth = 2;
-            c.fillRect(x, y, cs, cs);
-            c.strokeRect(x, y, cs, cs);
-            if (cell.filled) {
-              c.fillStyle = "#0f172a";
-              c.font = "bold " + Math.floor(cs * 0.52) + "px sans-serif";
-              c.textAlign = "center";
-              c.fillText(cell.letter, x + cs / 2, y + cs * 0.68);
-            }
-          }));
-          c.fillStyle = "rgba(15,23,42,0.85)";
-          c.beginPath();
-          c.arc(st.wheelCx, st.wheelCy, st.wheelR + 38, 0, Math.PI * 2);
-          c.fill();
-          if (st.pick.length > 1) {
-            c.strokeStyle = "#fbbf24";
-            c.lineWidth = 5;
-            c.lineCap = "round";
-            c.beginPath();
-            st.pick.forEach((idx, i) => {
-              const p = st.letterPos[idx];
-              if (i === 0) c.moveTo(p.x, p.y); else c.lineTo(p.x, p.y);
-            });
-            c.stroke();
-          }
-          st.letters.forEach((ch, i) => {
-            const p = st.letterPos[i];
-            const sel = st.pick.indexOf(i) >= 0;
-            c.fillStyle = sel ? "#fbbf24" : "#334155";
-            c.beginPath();
-            c.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            c.fill();
-            c.strokeStyle = sel ? "#fff" : "#64748b";
-            c.lineWidth = 2;
-            c.stroke();
-            c.fillStyle = sel ? "#1e293b" : "#f8fafc";
-            c.font = "bold " + Math.floor(p.r * 0.85) + "px sans-serif";
-            c.textAlign = "center";
-            c.fillText(ch, p.x, p.y + p.r * 0.32);
-          });
-          const cw = currentWord();
-          if (cw) {
-            c.fillStyle = "#fff";
-            c.font = "bold 18px sans-serif";
-            c.textAlign = "center";
-            c.fillText(cw, st.wheelCx, st.wheelCy - st.wheelR - 16);
-          }
-        },
-        st: st
-      };
-    },
-    pk_frog: function(id,c,W,H,diff) {
-      const lanes=5, st={x:2,y:lanes-1,goal:false,score:0,t:0,cars:[]};
-      for(let i=0;i<4;i++) st.cars.push({y:i,items:Array.from({length:4},(_,k)=>({x:k*2+(i%2),sp:(i%2?1:-1)*(1.2+packMul(diff)*0.5)}))});
-      return {
-        tick: function(inp) {
-          st.t++;
-          if (inp.dir==="up"&&st.y>0) st.y--;
-          if (inp.dir==="down"&&st.y<lanes-1) st.y++;
-          if (inp.dir==="left"&&st.x>0) st.x--;
-          if (inp.dir==="right"&&st.x<5) st.x++;
-          st.cars.forEach(l=>l.items.forEach(it=>{ it.x+=it.sp*0.08; if(it.x>6)it.x=-1; if(it.x<-1)it.x=6; }));
-          if (st.y<4) {
-            st.cars.forEach(l=>{
-              if(l.y===st.y-1) l.items.forEach(it=>{
-                if(Math.abs(it.x-st.x)<0.6) { st.x=2; st.y=lanes-1; st.score=Math.max(0,st.score-20); }
-              });
-            });
-          }
-          if (st.y===0) { st.score+=100; return { done:true, score:st.score+200, extra:"Финиш!" }; }
-          if (st.t>900) return { done:true, score:st.score, extra:"Время" };
-          return { score: st.score+st.y*10, extra: "Ряд: "+(lanes-st.y) };
-        },
-        draw: function() {
-          c.fillStyle="#14532d"; c.fillRect(0,0,W,H);
-          for(let i=0;i<lanes;i++){
-            c.fillStyle=i===0?"#22c55e":i===lanes-1?"#854d0e":"#334155";
-            c.fillRect(0,i*(H/lanes),W,H/lanes);
-            if(i>0&&i<lanes-1) st.cars[i-1].items.forEach(it=>{
-              c.fillStyle="#ef4444"; c.fillRect(it.x*(W/6),i*(H/lanes)+4,W/6-4,H/lanes-8);
-            });
-          }
-          c.fillStyle="#4ade80"; c.fillRect(st.x*(W/6)+8,st.y*(H/lanes)+8,W/6-16,H/lanes-16);
-        },
-        st: st
-      };
-    },
-    pk_astro: function(id,c,W,H,diff) {
-      const st={x:W/2,y:H/2,rocks:[],bullets:[],score:0,angle:0,t:0,lives:3};
-      for(let i=0;i<5;i++) st.rocks.push({x:Math.random()*W,y:Math.random()*H,r:20+Math.random()*20,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2});
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(inp.dir==="left") st.angle-=0.08;
-          if(inp.dir==="right") st.angle+=0.08;
-          if(inp.action) st.bullets.push({x:st.x,y:st.y,vx:Math.cos(st.angle)*8,vy:Math.sin(st.angle)*8,life:60});
-          st.rocks.forEach(r=>{ r.x+=r.vx; r.y+=r.vy; if(r.x<0||r.x>W)r.vx*=-1; if(r.y<0||r.y>H)r.vy*=-1; });
-          st.bullets=st.bullets.filter(b=>{
-            b.x+=b.vx; b.y+=b.vy; b.life--;
-            st.rocks.forEach((r,i)=>{
-              if(Math.hypot(b.x-r.x,b.y-r.y)<r.r){ st.rocks.splice(i,1); st.score+=Math.floor(r.r);
-                if(r.r>14){st.rocks.push({x:r.x+10,y:r.y,r:r.r*0.55,vx:r.vx+0.5,vy:r.vy});st.rocks.push({x:r.x-10,y:r.y,r:r.r*0.55,vx:r.vx-0.5,vy:r.vy});}
-              }
-            });
-            return b.life>0&&b.x>0&&b.x<W&&b.y>0&&b.y<H;
-          });
-          st.rocks.forEach(r=>{ if(Math.hypot(r.x-st.x,r.y-st.y)<r.r+8){ st.lives--; r.x=Math.random()*W; r.y=Math.random()*H; }});
-          if(st.lives<=0) return { done:true, score:st.score, extra:"Жизни: 0" };
-          if(st.rocks.length===0) return { done:true, score:st.score+150, extra:"Чисто!" };
-          return { score: st.score, extra: "Жизни: "+st.lives+" · Камни: "+st.rocks.length };
-        },
-        draw: function() {
-          c.fillStyle="#0f172a"; c.fillRect(0,0,W,H);
-          st.rocks.forEach(r=>{ c.strokeStyle="#94a3b8"; c.beginPath(); c.arc(r.x,r.y,r.r,0,Math.PI*2); c.stroke(); });
-          st.bullets.forEach(b=>{ c.fillStyle="#fde047"; c.fillRect(b.x-2,b.y-2,4,4); });
-          c.save(); c.translate(st.x,st.y); c.rotate(st.angle);
-          c.fillStyle="#60a5fa"; c.fillRect(-12,-6,24,12); c.restore();
-        },
-        st: st
-      };
-    },
-    pk_invade: function(id,c,W,H,diff) {
-      const cols=8, rows=3, st={px:W/2,bullets:[],ebullets:[],inv:Array.from({length:rows},(_,r)=>Array.from({length:cols},(_,col)=>({x:40+col*48,y:40+r*36,alive:true}))),dir:1,score:0,t:0};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(inp.dir==="left") st.px=Math.max(30,st.px-6);
-          if(inp.dir==="right") st.px=Math.min(W-30,st.px+6);
-          if(inp.action&&st.bullets.length<2) st.bullets.push({x:st.px,y:H-50,vy:-7});
-          let edge=false;
-          st.inv.forEach(row=>row.forEach(inv=>{
-            if(!inv.alive)return;
-            inv.x+=st.dir*(1.2+packMul(diff));
-            if(inv.x<20||inv.x>W-30) edge=true;
-          }));
-          if(edge){st.dir*=-1; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)inv.y+=16;}));}
-          if(st.t%Math.floor(40/packMul(diff))===0){
-            const live=[]; st.inv.forEach(row=>row.forEach(inv=>{if(inv.alive)live.push(inv);});
-            if(live.length) { const t=live[Math.floor(Math.random()*live.length)]; st.ebullets.push({x:t.x,y:t.y+20,vy:3}); }
-          }
-          st.bullets.forEach(b=>{ b.y+=b.vy; st.inv.forEach(row=>row.forEach(inv=>{
-            if(inv.alive&&Math.abs(b.x-inv.x)<20&&Math.abs(b.y-inv.y)<16){ inv.alive=false; st.score+=25; b.y=-99; }
-          })); });
-          st.ebullets.forEach(b=>{ b.y+=b.vy; if(Math.abs(b.x-st.px)<22&&Math.abs(b.y-(H-40))<14) b.y=999; });
-          st.bullets=st.bullets.filter(b=>b.y>0); st.ebullets=st.ebullets.filter(b=>b.y<H);
-          const left=st.inv.some(r=>r.some(i=>i.alive));
-          if(!left) return { done:true, score:st.score+100, extra:"Победа!", win:true };
-          if(st.inv.some(r=>r.some(i=>i.alive&&i.y>H-80))) return { done:true, score:st.score, extra:"Проигрыш" };
-          return { score: st.score, extra: "Очки: "+st.score };
-        },
-        draw: function() {
-          c.fillStyle="#020617"; c.fillRect(0,0,W,H);
-          st.inv.forEach(row=>row.forEach(inv=>{ if(!inv.alive)return; c.fillStyle="#a78bfa"; c.fillRect(inv.x,inv.y,28,22); }));
-          c.fillStyle="#22c55e"; c.fillRect(st.px-20,H-44,40,12);
-          st.bullets.forEach(b=>{ c.fillStyle="#fde047"; c.fillRect(b.x-2,b.y,4,10); });
-          st.ebullets.forEach(b=>{ c.fillStyle="#f87171"; c.fillRect(b.x-2,b.y,4,10); });
-        },
-        st: st
-      };
-    },
-    pk_c4: function(id,c,W,H,diff) {
-      const cols=7, rows=6, st={board:Array.from({length:rows},()=>Array(cols).fill(0)), turn:1, score:0, colHover:-1};
-      function checkWin(p) {
-        const d=[[1,0],[0,1],[1,1],[1,-1]];
-        for(let r=0;r<rows;r++) for(let col=0;col<cols;col++) if(st.board[r][col]===p)
-          for(const [dx,dy] of d) {
-            let n=1;
-            for(let k=1;k<4;k++){ const nr=r+dy*k,nc=col+dx*k; if(nr<0||nr>=rows||nc<0||nc>=cols||st.board[nr][nc]!==p)break; n++; }
-            if(n>=4) return true;
-          }
-        return false;
-      }
-      function botMove() {
-        for(let col=0;col<cols;col++){
-          for(let r=rows-1;r>=0;r--) if(!st.board[r][col]){ st.board[r][col]=2; return; }
-        }
-      }
-      function drop(col,p) {
-        for(let r=rows-1;r>=0;r--) if(!st.board[r][col]){ st.board[r][col]=p; return r; }
-        return -1;
-      }
-      return {
-        tick: function(inp) {
-          if (inp.click) {
-            const col=Math.floor(inp.click.x/(W/cols));
-            if(col>=0&&col<cols&&drop(col,1)>=0){
-              st.score+=10;
-              if(checkWin(1)) return { done:true, score:st.score+200, extra:"Победа!", win:true };
-              botMove();
-              if(checkWin(2)) return { done:true, score:st.score, extra:"Бот выиграл" };
-            }
-          }
-          return { score: st.score, extra: "Твой ход" };
-        },
-        draw: function() {
-          c.fillStyle="#1e3a8a"; c.fillRect(0,0,W,H);
-          const cw=W/cols, ch=H/rows;
-          for(let r=0;r<rows;r++) for(let col=0;col<cols;col++){
-            c.beginPath(); c.arc(col*cw+cw/2,r*ch+ch/2,cw*0.38,0,Math.PI*2);
-            c.fillStyle=st.board[r][col]===1?"#fde047":st.board[r][col]===2?"#f87171":"#1d4ed8"; c.fill();
-          }
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_slide: function(id,c,W,H,diff) {
-      const n=diff==="hard"?5:4, total=n*n;
-      let arr=Array.from({length:total-1},(_,i)=>i+1); arr.push(0);
-      for(let k=0;k<200;k++){ const i=arr.indexOf(0), moves=[];
-        if(i%n>0)moves.push(i-1); if(i%n<n-1)moves.push(i+1); if(i>=n)moves.push(i-n); if(i<total-n)moves.push(i+n);
-        const j=moves[Math.floor(Math.random()*moves.length)]; [arr[i],arr[j]]=[arr[j],arr[i]];
-      }
-      const st={arr,score:0,moves:0};
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs), idx=row*n+col;
-            const zi=st.arr.indexOf(0), zr=Math.floor(zi/n), zc=zi%n;
-            if((Math.abs(row-zr)+Math.abs(col-zc))===1){
-              st.arr[zi]=st.arr[idx]; st.arr[idx]=0; st.moves++; st.score=Math.max(st.score,1000-st.moves*8);
-              if(st.arr.every((v,i)=>v===(i===total-1?0:i+1))) return { done:true, score:st.score+300, extra:"Собрано!" };
-            }
-          }
-          return { score: st.score, extra: "Ходы: "+st.moves };
-        },
-        draw: function() {
-          c.fillStyle="#0e7490"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/n-4;
-          st.arr.forEach((v,i)=>{
-            const col=i%n, row=Math.floor(i/n);
-            if(!v)return;
-            c.fillStyle="#bae6fd"; c.fillRect(col*(cs+4)+4,row*(cs+4)+4,cs,cs);
-            c.fillStyle="#0c4a6e"; c.font="bold "+Math.floor(cs*0.35)+"px sans-serif"; c.textAlign="center";
-            c.fillText(v,col*(cs+4)+4+cs/2,row*(cs+4)+4+cs*0.62);
-          });
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_hang: function(id,c,W,H,diff) {
-      const words=[\'РАКЕТА\', \'ПЛАНЕТА\', \'КОМЕТА\', \'ЗВЕЗДА\', \'ОРБИТА\', \'ПИЛОТ\', \'НЕБО\', \'ОБЛАКО\'];
-      const st={word:words[Math.floor(Math.random()*words.length)], guessed:new Set(), wrong:0, score:0};
-      return {
-        tick: function(inp) {
-          if(inp.key && inp.key.length===1) {
-            const ch=inp.key.toUpperCase();
-            if(st.word.includes(ch)&&!st.guessed.has(ch)){ st.guessed.add(ch); st.score+=15; }
-            else if(!st.guessed.has(ch)){ st.guessed.add(ch); st.wrong++; st.score=Math.max(0,st.score-5); }
-          }
-          if([...st.word].every(ch=>st.guessed.has(ch))) return { done:true, score:st.score+120, extra:"Угадано!", win:true };
-          if(st.wrong>=(diff==="hard"?4:diff==="easy"?8:6)) return { done:true, score:st.score, extra:"Слово: "+st.word };
-          return { score: st.score, extra: "Ошибок: "+st.wrong };
-        },
-        draw: function() {
-          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
-          c.strokeStyle="#fbcfe8"; c.lineWidth=3; c.beginPath(); c.moveTo(80,40); c.lineTo(80,200); c.lineTo(160,200); c.stroke();
-          c.fillStyle="#fff"; c.font="bold 22px sans-serif"; c.textAlign="center";
-          c.fillText([...st.word].map(ch=>st.guessed.has(ch)?ch:"_").join(" "),W/2,80);
-          c.font="14px sans-serif"; c.fillText("Кликай буквы на клавиатуре",W/2,110);
-        },
-        st: st, keyMode: true
-      };
-    },
-    pk_reflex: function(id,c,W,H,diff) {
-      const st={phase:"wait",t:0,score:0,round:0,wait:60+Math.random()*120};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(st.phase==="wait"&&st.t>st.wait){ st.phase="go"; st.t=0; }
-          if(st.phase==="go"&&inp.action){
-            const pts=Math.max(10,120-st.t); st.score+=pts; st.round++;
-            st.phase="wait"; st.t=0; st.wait=50+Math.random()*80;
-            if(st.round>=(diff==="hard"?8:diff==="easy"?4:6)) return { done:true, score:st.score, extra:"Ср:"+Math.round(st.score/st.round) };
-          }
-          if(st.phase==="wait"&&inp.action&&st.t>10) return { done:true, score:Math.max(0,st.score-30), extra:"Рано!" };
-          return { score: st.score, extra: st.phase==="go"?"ЖМИ!":"Жди зелёный..." };
-        },
-        draw: function() {
-          c.fillStyle=st.phase==="go"?"#22c55e":"#ca8a04"; c.fillRect(0,0,W,H);
-          c.fillStyle="#fff"; c.font="bold 28px sans-serif"; c.textAlign="center";
-          c.fillText(st.phase==="go"?"ЖМИ!":"Жди...",W/2,H/2);
-        },
-        st: st
-      };
-    },
-    pk_type: function(id,c,W,H,diff) {
-      const words=[\'игра\', \'небо\', \'скорость\', \'победа\', \'космос\', \'робот\', \'звезда\', \'мир\'];
-      const st={word:words[Math.floor(Math.random()*words.length)], typed:"", score:0, t:0, limit:diff==="hard"?180:diff==="easy"?400:280};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(inp.key&&inp.key.length===1){
-            const ch=inp.key.toLowerCase();
-            if(ch===st.word[st.typed.length]){ st.typed+=ch; st.score+=12; }
-            else st.score=Math.max(0,st.score-3);
-          }
-          if(st.typed===st.word) return { done:true, score:st.score+100, extra:"Готово!" };
-          if(st.t>st.limit) return { done:true, score:st.score, extra:"Время" };
-          return { score: st.score, extra: st.typed+"_"+st.word.slice(st.typed.length) };
-        },
-        draw: function() {
-          c.fillStyle="#115e59"; c.fillRect(0,0,W,H);
-          c.fillStyle="#fff"; c.font="bold 32px monospace"; c.textAlign="center";
-          c.fillText(st.word,W/2,H/2-20);
-          c.font="20px monospace"; c.fillText(st.typed,W/2,H/2+30);
-        },
-        st: st, keyMode: true
-      };
-    },
-    pk_math: function(id,c,W,H,diff) {
-      function mk() {
-        const a=1+Math.floor(Math.random()*9*(diff==="hard"?3:1));
-        const b=1+Math.floor(Math.random()*9);
-        const op=["+","-","×"][Math.floor(Math.random()* (diff==="hard"?3:2))];
-        const ans=op==="+"?a+b:op==="-"?a-b:a*b;
-        const opts=[ans,ans+1+Math.floor(Math.random()*3),ans-1-Math.floor(Math.random()*3),ans+5].sort(()=>Math.random()-0.5);
-        return { q:a+" "+op+" "+b+" = ?", ans, opts };
-      }
-      const st={cur:mk(), score:0, round:0, max:diff==="hard"?15:diff==="easy"?6:10};
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const idx=Math.floor(inp.click.y/(H/4));
-            const opts=st.cur.opts;
-            if(idx>=0&&idx<4){
-              if(opts[idx]===st.cur.ans){ st.score+=20; st.round++; st.cur=mk(); }
-              else st.score=Math.max(0,st.score-8);
-            }
-          }
-          if(st.round>=st.max) return { done:true, score:st.score, extra:"Примеров: "+st.max };
-          return { score: st.score, extra: st.cur.q };
-        },
-        draw: function() {
-          c.fillStyle="#1e40af"; c.fillRect(0,0,W,H);
-          c.fillStyle="#fff"; c.font="bold 26px sans-serif"; c.textAlign="center";
-          c.fillText(st.cur.q,W/2,60);
-          st.cur.opts.forEach((o,i)=>{
-            c.fillStyle="#3b82f6"; c.fillRect(40,80+i*(H/4),W-80,H/4-16);
-            c.fillStyle="#fff"; c.fillText(o,W/2,80+i*(H/4)+(H/4)/2+8);
-          });
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_dart: function(id,c,W,H,diff) {
-      const st={score:0,shots:0,max:diff==="hard"?8:diff==="easy"?4:6};
-      return {
-        tick: function(inp) {
-          if(inp.click&&st.shots<st.max){
-            const cx=W/2, cy=H/2, dx=inp.click.x-cx, dy=inp.click.y-cy, dist=Math.hypot(dx,dy);
-            const pts=Math.max(5,Math.round(100-dist*0.6)); st.score+=pts; st.shots++;
-          }
-          if(st.shots>=st.max) return { done:true, score:st.score, extra:"Бросков: "+st.max };
-          return { score: st.score, extra: "Бросок "+(st.shots+1)+"/"+st.max };
-        },
-        draw: function() {
-          c.fillStyle="#450a0a"; c.fillRect(0,0,W,H);
-          const cx=W/2,cy=H/2;
-          ["#ef4444","#fde047","#22c55e","#1d4ed8"].forEach((col,i)=>{
-            c.beginPath(); c.arc(cx,cy,90-i*22,0,Math.PI*2); c.fillStyle=col; c.fill();
-          });
-          c.beginPath(); c.arc(cx,cy,8,0,Math.PI*2); c.fillStyle="#fff"; c.fill();
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_bowl: function(id,c,W,H,diff) {
-      const st={pins:Array.from({length:10},(_,i)=>({x:60+(i%5)*70,y:80+Math.floor(i/5)*30,up:true})), ball:null, score:0, rolls:0, max:diff==="hard"?4:2};
-      return {
-        tick: function(inp) {
-          if(!st.ball&&inp.click&&st.rolls<st.max){
-            st.ball={x:W/2,y:H-40,vx:(inp.click.x-W/2)*0.08,vy:-8-Math.random()*3};
-            st.rolls++;
-          }
-          if(st.ball){
-            st.ball.x+=st.ball.vx; st.ball.y+=st.ball.vy; st.ball.vy+=0.25;
-            st.pins.forEach(p=>{ if(p.up&&Math.hypot(st.ball.x-p.x,st.ball.y-p.y)<22){ p.up=false; st.score+=15; }});
-            if(st.ball.y>H) st.ball=null;
-          }
-          if(st.rolls>=st.max&&!st.ball) return { done:true, score:st.score, extra:"Кегли: "+st.pins.filter(p=>!p.up).length };
-          return { score: st.score, extra: "Бросок "+st.rolls+"/"+st.max };
-        },
-        draw: function() {
-          c.fillStyle="#312e81"; c.fillRect(0,0,W,H);
-          st.pins.forEach(p=>{ if(!p.up)return; c.fillStyle="#fff"; c.beginPath(); c.arc(p.x,p.y,12,0,Math.PI*2); c.fill(); });
-          if(st.ball){ c.fillStyle="#f87171"; c.beginPath(); c.arc(st.ball.x,st.ball.y,14,0,Math.PI*2); c.fill(); }
-          else { c.fillStyle="#94a3b8"; c.beginPath(); c.arc(W/2,H-40,14,0,Math.PI*2); c.fill(); }
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_golf: function(id,c,W,H,diff) {
-      const st={bx:60,by:H-60,hole:{x:W-60,y:60},score:0,strokes:0,max:diff==="hard"?6:diff==="easy"?10:8};
-      return {
-        tick: function(inp) {
-          if(inp.click&&st.strokes<st.max){
-            const dx=inp.click.x-st.bx, dy=inp.click.y-st.by;
-            st.bx+=dx*0.15; st.by+=dy*0.15; st.strokes++; st.score+=5;
-            if(Math.hypot(st.bx-st.hole.x,st.by-st.hole.y)<20) return { done:true, score:st.score+200-st.strokes*10, extra:"Лунка!" };
-          }
-          if(st.strokes>=st.max) return { done:true, score:st.score, extra:"Удары: "+st.strokes };
-          return { score: st.score, extra: "Удар "+(st.strokes+1) };
-        },
-        draw: function() {
-          c.fillStyle="#166534"; c.fillRect(0,0,W,H);
-          c.fillStyle="#22c55e"; c.beginPath(); c.arc(st.hole.x,st.hole.y,16,0,Math.PI*2); c.fill();
-          c.fillStyle="#fff"; c.beginPath(); c.arc(st.bx,st.by,10,0,Math.PI*2); c.fill();
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_fish: function(id,c,W,H,diff) {
-      const st={phase:"wait",t:0,score:0,caught:0,need:diff==="hard"?5:diff==="easy"?2:3,biteAt:0};
-      function reset(){ st.phase="wait"; st.t=0; st.biteAt=80+Math.random()*120; }
-      reset();
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(st.phase==="wait"&&st.t>=st.biteAt) st.phase="bite";
-          if(st.phase==="bite"&&st.t-st.biteAt>(diff==="hard"?25:40)) { st.phase="miss"; st.t=0; reset(); }
-          if(inp.action){
-            if(st.phase==="bite"){ st.score+=50; st.caught++; reset(); if(st.caught>=st.need) return { done:true, score:st.score, extra:"Улов!" }; }
-            else { st.score=Math.max(0,st.score-10); reset(); }
-          }
-          return { score: st.score, extra: "Рыба: "+st.caught+"/"+st.need+(st.phase==="bite"?" — ЖМИ!":"") };
-        },
-        draw: function() {
-          c.fillStyle="#0c4a6e"; c.fillRect(0,0,W,H);
-          c.fillStyle="#0369a1"; c.fillRect(0,H*0.55,W,H*0.45);
-          c.fillStyle=st.phase==="bite"?"#fde047":"#fff";
-          c.beginPath(); c.arc(W/2,H*0.45,8,0,Math.PI*2); c.fill();
-        },
-        st: st
-      };
-    },
-    pk_beat: function(id,c,W,H,diff) {
-      const st={t:0,score:0,hit:0,need:diff==="hard"?16:diff==="easy"?8:12,next:60};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(st.t>=st.next){
-            if(inp.action){ st.score+=40; st.hit++; } else st.score=Math.max(0,st.score-15);
-            st.next=st.t+(diff==="hard"?35:50);
-            if(st.hit>=st.need) return { done:true, score:st.score, extra:"Ритм!" };
-          }
-          return { score: st.score, extra: "Нота "+st.hit+"/"+st.need };
-        },
-        draw: function() {
-          c.fillStyle="#701a75"; c.fillRect(0,0,W,H);
-          const prog=Math.min(1,(st.t%st.next)/st.next);
-          c.strokeStyle="#f0abfc"; c.lineWidth=6; c.beginPath(); c.arc(W/2,H/2,70,0,Math.PI*2*prog); c.stroke();
-          c.fillStyle="#fff"; c.font="bold 24px sans-serif"; c.textAlign="center"; c.fillText("●",W/2,H/2+8);
-        },
-        st: st
-      };
-    },
-    pk_bubble: function(id,c,W,H,diff) {
-      const colors=["#ef4444","#3b82f6","#22c55e","#eab308","#a855f7"];
-      const cols=8, rows=10, st={grid:Array.from({length:rows},()=>Array.from({length:cols},()=>colors[Math.floor(Math.random()*colors.length)])), shooter:colors[0], score:0, shots:0, max:diff==="hard"?25:15};
-      function pop(r,col) {
-        const colr=st.grid[r][col]; if(!colr)return 0;
-        const q=[[r,col]], seen=new Set([r+","+col]), n=0;
-        while(q.length){
-          const [rr,cc]=q.pop(); if(st.grid[rr][cc]!==colr)continue;
-          st.grid[rr][cc]=null; n++;
-          [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc])=>{
-            const nr=rr+dr,nc=cc+dc,k=nr+","+nc;
-            if(nr>=0&&nr<rows&&nc>=0&&nc<cols&&!seen.has(k)&&st.grid[nr][nc]===colr){ seen.add(k); q.push([nr,nc]); }
-          });
-        }
-        return n;
-      }
-      return {
-        tick: function(inp) {
-          if(inp.click&&st.shots<st.max){
-            const col=Math.floor(inp.click.x/(W/cols));
-            if(col>=0&&col<cols){
-              for(let r=rows-1;r>=0;r--) if(st.grid[r][col]){ st.grid[r][col]=st.shooter; break; }
-              let p=0; for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) if(st.grid[r][c]){ const n=pop(r,c); if(n>=3){ p+=n*10; st.score+=n*10; } }
-              st.shooter=colors[Math.floor(Math.random()*colors.length)]; st.shots++;
-            }
-          }
-          if(st.shots>=st.max) return { done:true, score:st.score, extra:"Выстрелов: "+st.max };
-          return { score: st.score, extra: "Цвет: "+st.shooter };
-        },
-        draw: function() {
-          c.fillStyle="#164e63"; c.fillRect(0,0,W,H);
-          const cw=W/cols, ch=H/rows;
-          st.grid.forEach((row,r)=>row.forEach((col,cc)=>{
-            if(!col)return;
-            c.fillStyle=col; c.beginPath(); c.arc(cc*cw+cw/2,r*ch+ch/2,cw*0.38,0,Math.PI*2); c.fill();
-          }));
-          c.fillStyle=st.shooter; c.beginPath(); c.arc(W/2,H-20,16,0,Math.PI*2); c.fill();
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_gem: function(id,c,W,H,diff) {
-      const colors=["#f472b6","#38bdf8","#4ade80","#fbbf24"];
-      const n=6, st={grid:Array.from({length:n},()=>Array.from({length:n},()=>colors[Math.floor(Math.random()*4)])), sel:null, score:0, moves:0, max:diff==="hard"?18:12};
-      function swap(r1,c1,r2,c2){
-        const t=st.grid[r1][c1]; st.grid[r1][c1]=st.grid[r2][c2]; st.grid[r2][c2]=t;
-        let ok=false;
-        for(let r=0;r<n;r++) for(let c=0;c<n-2;c++) if(st.grid[r][c]&&st.grid[r][c]===st.grid[r][c+1]&&st.grid[r][c]===st.grid[r][c+2]) ok=true;
-        if(!ok){ swap(r2,c2,r1,c1); return false; }
-        st.moves++; st.score+=30; return true;
-      }
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
-            if(!st.sel) st.sel=[row,col];
-            else { swap(st.sel[0],st.sel[1],row,col); st.sel=null; }
-          }
-          if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы: "+st.max };
-          return { score: st.score, extra: "Ходы: "+st.moves+"/"+st.max };
-        },
-        draw: function() {
-          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/n-4;
-          st.grid.forEach((row,r)=>row.forEach((col,c)=>{
-            c.fillStyle=col; c.fillRect(c*(cs+4)+4,r*(cs+4)+4,cs,cs);
-            if(st.sel&&st.sel[0]===r&&st.sel[1]===c){ c.strokeStyle="#fff"; c.lineWidth=3; c.strokeRect(c*(cs+4)+4,r*(cs+4)+4,cs,cs); }
-          }));
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_pipe: function(id,c,W,H,diff) {
-      const n=5, types=[0,1,2,3];
-      const st={grid:Array.from({length:n},()=>Array.from({length:n},()=>Math.floor(Math.random()*4))), score:0, connected:false};
-      st.grid[0][0]=1; st.grid[n-1][n-1]=1;
-      function flows() {
-        const q=[[0,0]], seen=new Set(["0,0"]);
-        while(q.length){
-          const [r,c]=q.pop(); if(r===n-1&&c===n-1) return true;
-          [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc],i)=>{
-            const nr=r+dr,nc=c+dc,k=nr+","+nc;
-            if(nr>=0&&nr<n&&nc>=0&&nc<n&&!seen.has(k)) { seen.add(k); q.push([nr,nc]); }
-          });
-        }
-        return false;
-      }
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
-            if(row>=0&&row<n&&col>=0&&col<n){ st.grid[row][col]=(st.grid[row][col]+1)%4; st.score+=5; }
-            if(flows()) return { done:true, score:st.score+150, extra:"Вода пошла!" };
-          }
-          return { score: st.score, extra: "Клик — поворот" };
-        },
-        draw: function() {
-          c.fillStyle="#334155"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/n-6;
-          st.grid.forEach((row,r)=>row.forEach((t,col)=>{
-            c.fillStyle="#64748b"; c.fillRect(col*(cs+6)+6,r*(cs+6)+6,cs,cs);
-            c.strokeStyle="#38bdf8"; c.lineWidth=4;
-            c.beginPath();
-            if(t%2===0){ c.moveTo(col*(cs+6)+6+cs/2,r*(cs+6)+6); c.lineTo(col*(cs+6)+6+cs/2,r*(cs+6)+6+cs); }
-            else { c.moveTo(col*(cs+6)+6,r*(cs+6)+6+cs/2); c.lineTo(col*(cs+6)+6+cs,r*(cs+6)+6+cs/2); }
-            c.stroke();
-          }));
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_box: function(id,c,W,H,diff) {
-      const st={px:1,py:1,bx:3,by:1,gx:3,gy:3,score:0,moves:0,max:diff==="hard"?25:15};
-      return {
-        tick: function(inp) {
-          let dx=0,dy=0;
-          if(inp.dir==="left")dx=-1; if(inp.dir==="right")dx=1; if(inp.dir==="up")dy=-1; if(inp.dir==="down")dy=1;
-          if(dx||dy){
-            const nx=st.bx+dx, ny=st.by+dy;
-            if(nx<0||nx>4||ny<0||ny>4) return { score:st.score, extra:"Стена" };
-            if(nx===st.px&&ny===st.py){ st.px=st.bx; st.py=st.by; st.bx=nx; st.by=ny; st.moves++; st.score+=10; }
-            else if(nx!==st.px||ny!==st.py){ st.bx=nx; st.by=ny; st.moves++; st.score+=5; }
-            if(st.bx===st.gx&&st.by===st.gy) return { done:true, score:st.score+100, extra:"Цель!" };
-            if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы" };
-          }
-          return { score: st.score, extra: "Ходы: "+st.moves };
-        },
-        draw: function() {
-          c.fillStyle="#451a03"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/5;
-          c.fillStyle="#eab308"; c.fillRect(st.gx*cs+4,st.gy*cs+4,cs-8,cs-8);
-          c.fillStyle="#92400e"; c.fillRect(st.bx*cs+4,st.by*cs+4,cs-8,cs-8);
-          c.fillStyle="#22c55e"; c.fillRect(st.px*cs+4,st.py*cs+4,cs-8,cs-8);
-        },
-        st: st
-      };
-    },
-    pk_fill: function(id,c,W,H,diff) {
-      const n=8, colors=["#ef4444","#3b82f6","#22c55e","#eab308"];
-      const st={grid:Array.from({length:n},()=>Array.from({length:n},()=>colors[Math.floor(Math.random()*4)])), score:0, moves:0, max:diff==="hard"?12:20};
-      function flood(col,r,c,target,rep){
-        if(r<0||r>=n||c<0||c>=n||st.grid[r][c]!==target||st.grid[r][c]===rep)return;
-        st.grid[r][c]=rep; flood(col,r+1,c,target,rep); flood(col,r-1,c,target,rep); flood(col,r,c+1,target,rep); flood(col,r,c-1,target,rep);
-      }
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const idx=Math.floor(inp.click.y/(H-60)/(H/n));
-            const col=colors[Math.min(3,Math.max(0,Math.floor(inp.click.x/(W/4))))];
-            if(col&&col!==st.grid[0][0]){ flood(0,0,0,st.grid[0][0],col); st.moves++; st.score+=15;
-              if(st.grid.every(r=>r.every(v=>v===col))) return { done:true, score:st.score+100, extra:"Залито!" };
-            }
-          }
-          if(st.moves>=st.max) return { done:true, score:st.score, extra:"Ходы" };
-          return { score: st.score, extra: "Ходы: "+st.moves+"/"+st.max };
-        },
-        draw: function() {
-          c.fillStyle="#7c2d12"; c.fillRect(0,0,W,H-60);
-          const cs=(H-60)/n;
-          st.grid.forEach((row,r)=>row.forEach((col,ci)=>{ c.fillStyle=col; c.fillRect(ci*cs,r*cs,cs,cs); }));
-          colors.forEach((col,i)=>{ c.fillStyle=col; c.fillRect(i*(W/4),H-50,W/4-4,40); });
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_flip: function(id,c,W,H,diff) {
-      const st={x:40,y:40,g:1,score:0,t:0,goal:{x:W-50,y:H-50}};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(inp.action) st.g*=-1;
-          st.y+=st.g*4; st.x+=2;
-          if(st.y>H-20){ st.y=H-20; st.g=-Math.abs(st.g); }
-          if(st.y<20){ st.y=20; st.g=Math.abs(st.g); }
-          if(Math.hypot(st.x-st.goal.x,st.y-st.goal.y)<24) return { done:true, score:st.score+200, extra:"Выход!" };
-          if(st.t>600) return { done:true, score:st.score, extra:"Время" };
-          st.score+=1;
-          return { score: st.score, extra: "Пробел — гравитация" };
-        },
-        draw: function() {
-          c.fillStyle="#312e81"; c.fillRect(0,0,W,H);
-          c.fillStyle="#22c55e"; c.fillRect(st.goal.x-12,st.goal.y-12,24,24);
-          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.x,st.y,14,0,Math.PI*2); c.fill();
-        },
-        st: st
-      };
-    },
-    pk_tilt: function(id,c,W,H,diff) {
-      const st={bx:W/2,by:40,angle:0,score:0,t:0,goal:{x:W/2,y:H-40}, holes:[{x:W*0.3,y:H*0.5,r:18},{x:W*0.7,y:H*0.65,r:18}]};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(inp.dir==="left") st.angle=Math.max(-0.35,st.angle-0.02);
-          if(inp.dir==="right") st.angle=Math.min(0.35,st.angle+0.02);
-          st.bx+=st.angle*8; st.by+=2+Math.abs(st.angle)*2;
-          st.holes.forEach(h=>{ if(Math.hypot(st.bx-h.x,st.by-h.y)<h.r){ st.bx=W/2; st.by=40; st.score=Math.max(0,st.score-20); }});
-          if(st.by>=st.goal.y-10&&Math.abs(st.bx-st.goal.x)<30) return { done:true, score:st.score+150, extra:"Цель!" };
-          if(st.t>700||st.by>H) return { done:true, score:st.score, extra:"Упал" };
-          st.score+=1;
-          return { score: st.score, extra: "Баланс" };
-        },
-        draw: function() {
-          c.fillStyle="#064e3b"; c.fillRect(0,0,W,H);
-          st.holes.forEach(h=>{ c.fillStyle="#022c22"; c.beginPath(); c.arc(h.x,h.y,h.r,0,Math.PI*2); c.fill(); });
-          c.fillStyle="#22c55e"; c.fillRect(0,H-20,W,20);
-          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.bx,st.by,12,0,Math.PI*2); c.fill();
-        },
-        st: st
-      };
-    },
-    pk_target: function(id,c,W,H,diff) {
-      const st={targets:[],score:0,t:0,limit:diff==="hard"?300:480};
-      function spawn(){ st.targets.push({x:30+Math.random()*(W-60),y:30+Math.random()*(H-60),r:16+Math.random()*14,life:80}); }
-      for(let i=0;i<3;i++) spawn();
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(st.t%40===0) spawn();
-          if(inp.click) st.targets.forEach((t,i)=>{
-            if(Math.hypot(inp.click.x-t.x,inp.click.y-t.y)<t.r){ st.score+=Math.round(50-t.r); st.targets.splice(i,1); spawn(); }
-          });
-          st.targets=st.targets.filter(t=>{ t.life--; return t.life>0; });
-          if(st.t>=st.limit) return { done:true, score:st.score, extra:"Время!" };
-          return { score: st.score, extra: "Сек: "+Math.floor((st.limit-st.t)/60) };
-        },
-        draw: function() {
-          c.fillStyle="#450a0a"; c.fillRect(0,0,W,H);
-          st.targets.forEach(t=>{ c.fillStyle="#ef4444"; c.beginPath(); c.arc(t.x,t.y,t.r,0,Math.PI*2); c.fill();
-            c.fillStyle="#fff"; c.beginPath(); c.arc(t.x,t.y,t.r*0.35,0,Math.PI*2); c.fill(); });
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_race: function(id,c,W,H,diff) {
-      const st={lane:1,score:0,t:0,cars:[]};
-      return {
-        tick: function(inp) {
-          st.t++; st.score+=2;
-          if(inp.dir==="left"&&st.lane>0) st.lane--;
-          if(inp.dir==="right"&&st.lane<2) st.lane++;
-          if(st.t%Math.floor(50/packMul(diff))===0) st.cars.push({lane:Math.floor(Math.random()*3),y:-40});
-          let crashed=false;
-          st.cars.forEach(car=>{ car.y+=5+packMul(diff)*2;
-            if(car.lane===st.lane&&car.y>H*0.7&&car.y<H*0.85) crashed=true;
-          });
-          if(crashed) return { done:true, score:st.score, extra:"Авария" };
-          st.cars=st.cars.filter(c=>c.y<H+40);
-          if(st.score>= (diff==="hard"?800:diff==="easy"?350:550)) return { done:true, score:st.score, extra:"Финиш!" };
-          return { score: st.score, extra: "Дистанция: "+st.score };
-        },
-        draw: function() {
-          c.fillStyle="#374151"; c.fillRect(0,0,W,H);
-          for(let i=0;i<3;i++){ c.fillStyle="#1f2937"; c.fillRect(i*(W/3)+4,0,W/3-8,H); }
-          st.cars.forEach(car=>{ c.fillStyle="#ef4444"; c.fillRect(car.lane*(W/3)+20,car.y,W/3-40,50); });
-          c.fillStyle="#3b82f6"; c.fillRect(st.lane*(W/3)+30,H*0.75,W/3-60,40);
-        },
-        st: st
-      };
-    },
-    pk_defense: function(id,c,W,H,diff) {
-      const st={enemies:[],score:0,base:100,t:0};
-      return {
-        tick: function(inp) {
-          st.t++;
-          if(st.t%Math.floor(55/packMul(diff))===0) st.enemies.push({x:20+Math.random()*(W-40),y:0,hp:2});
-          st.enemies.forEach((e,i)=>{
-            e.y+=2+packMul(diff);
-            if(inp.click&&Math.hypot(inp.click.x-e.x,inp.click.y-e.y)<22){ e.hp--; st.score+=15; if(e.hp<=0) st.enemies.splice(i,1); }
-            if(e.y>H-40) { st.base-=8; st.enemies.splice(i,1); }
-          });
-          if(st.base<=0) return { done:true, score:st.score, extra:"Замок пал" };
-          if(st.score>= (diff==="hard"?200:120)) return { done:true, score:st.score+80, extra:"Победа!", win:true };
-          return { score: st.score, extra: "База: "+st.base+"%" };
-        },
-        draw: function() {
-          c.fillStyle="#1e3a8a"; c.fillRect(0,0,W,H);
-          c.fillStyle="#64748b"; c.fillRect(0,H-36,W,36);
-          st.enemies.forEach(e=>{ c.fillStyle="#f87171"; c.fillRect(e.x-14,e.y-14,28,28); });
-          c.fillStyle="#fff"; c.font="14px sans-serif"; c.fillText("База "+st.base+"%",10,20);
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_word: function(id,c,W,H,diff) {
-      const words=["КОТ","СОН","МИР","ЛУНА","ИГРА","НЕБО"];
-      const word=words[Math.floor(Math.random()*words.length)];
-      const n=6, st={letters:word.split(""), found:[], grid:Array.from({length:n},()=>Array.from({length:n},()=>String.fromCharCode(1040+Math.floor(Math.random()*32)))), score:0, next:0};
-      for(let i=0;i<word.length;i++){ st.grid[i][i]=word[i]; }
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const cs=Math.min(W,H)/n, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs);
-            if(st.grid[row][col]===st.letters[st.next]){ st.found.push(row+","+col); st.next++; st.score+=25;
-              if(st.next>=st.letters.length) return { done:true, score:st.score+80, extra:"Слово: "+word };
-            }
-          }
-          return { score: st.score, extra: "Буква "+(st.next+1)+"/"+st.letters.length };
-        },
-        draw: function() {
-          c.fillStyle="#4c1d95"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/n-4;
-          st.grid.forEach((row,r)=>row.forEach((ch,col)=>{
-            c.fillStyle=st.found.includes(r+","+col)?"#fde047":"#ddd6fe";
-            c.fillRect(col*(cs+4)+4,r*(cs+4)+4,cs,cs);
-            c.fillStyle="#312e81"; c.font="bold "+Math.floor(cs*0.45)+"px sans-serif"; c.textAlign="center";
-            c.fillText(ch,col*(cs+4)+4+cs/2,r*(cs+4)+4+cs*0.65);
-          }));
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_hue: function(id,c,W,H,diff) {
-      const st={round:0,score:0,base:120,odd:0,cells:Array.from({length:9},(_,i)=>i), max:diff==="hard"?10:6};
-      function newRound(){
-        st.base=100+Math.floor(Math.random()*80);
-        st.odd=Math.floor(Math.random()*9);
-        st.cells=Array.from({length:9},(_,i)=>i);
-      }
-      newRound();
-      return {
-        tick: function(inp) {
-          if(inp.click){
-            const cs=Math.min(W,H)/3, col=Math.floor(inp.click.x/cs), row=Math.floor(inp.click.y/cs), idx=row*3+col;
-            if(idx===st.odd){ st.score+=30; st.round++; newRound(); if(st.round>=st.max) return { done:true, score:st.score, extra:"Глаз!" }; }
-            else st.score=Math.max(0,st.score-10);
-          }
-          return { score: st.score, extra: "Раунд "+(st.round+1)+"/"+st.max };
-        },
-        draw: function() {
-          c.fillStyle="#831843"; c.fillRect(0,0,W,H);
-          const cs=Math.min(W,H)/3-6;
-          for(let i=0;i<9;i++){
-            const col=i%3, row=Math.floor(i/3);
-            const v=i===st.odd?st.base+18:st.base;
-            c.fillStyle="rgb("+v+","+Math.floor(v*0.6)+","+Math.floor(v*0.85)+")";
-            c.fillRect(col*(cs+6)+6,row*(cs+6)+6,cs,cs);
-          }
-        },
-        st: st, clickMode: true
-      };
-    },
-    pk_pin: function(id,c,W,H,diff) {
-      const st={bx:W/2,by:H*0.35,vx:3*(diff==="hard"?1.3:1),vy:2,score:0,lL:H-60,lR:H-60,goal:diff==="hard"?4000:3000};
-      return {
-        tick: function(inp) {
-          st.bx+=st.vx; st.by+=st.vy; st.vy+=0.15;
-          if(st.bx<16||st.bx>W-16) st.vx*=-1;
-          if(st.by>H-50){ st.by=H-50; st.vy=-Math.abs(st.vy)*0.92;
-            if(inp.dir==="left") st.lL=Math.max(H-120,st.lL-8);
-            if(inp.dir==="right") st.lR=Math.max(H-120,st.lR-8);
-            if(st.by>=st.lL-10&&st.bx<W/2) st.vy=-8-Math.random()*2;
-            if(st.by>=st.lR-10&&st.bx>W/2) st.vy=-8-Math.random()*2;
-            st.score+=5;
-          }
-          if(st.by<40) st.vy=Math.abs(st.vy);
-          if(st.score>=st.goal) return { done:true, score:st.score, extra:"Пинбол!" };
-          if(st.score>1500&&st.vy>0&&st.by>H) return { done:true, score:st.score, extra:"Шар ушёл" };
-          return { score: st.score, extra: "Цель: "+st.goal };
-        },
-        draw: function() {
-          c.fillStyle="#1e1b4b"; c.fillRect(0,0,W,H);
-          c.fillStyle="#fde047"; c.beginPath(); c.arc(st.bx,st.by,10,0,Math.PI*2); c.fill();
-          c.fillStyle="#94a3b8"; c.fillRect(W/2-4,40,8,H-100);
-          c.fillStyle="#f87171"; c.fillRect(20,st.lL,W/2-30,12); c.fillRect(W/2+10,st.lR,W/2-30,12);
-        },
-        st: st
-      };
-    }
-  };
-
-
-      const packRunners = {};
-      let packActiveId = null;
-      let packRaf = 0;
-      let packInput = {};
-
-      function resetPackInput() { packInput = {}; }
-
-      function endPackGame(id, score, extra, title, text, coinEvent) {
-        if (window.PVPlayLog) {
-          PVPlayLog.record(id, "finish", "Счёт: " + score);
-          if (coinEvent) PVPlayLog.tryAward(id, coinEvent);
-        }
-        if (score > (packBest[id] || 0)) packBest[id] = score;
-        showExtraFinal(id, score, "Доп.", extra || "—", "Рекорд", packBest[id] || score, title, text, coinEvent);
-      }
-
-      function makePackRunner(def) {
-        const id = def.id;
-        let running = false;
-        let engine = null;
-        const canvas = () => document.getElementById(id + "-canvas");
-        function stop() { running = false; if (packRaf) cancelAnimationFrame(packRaf); packRaf = 0; packActiveId = null; resetPackInput(); }
-        function loop() {
-          if (!running || packActiveId !== id) return;
-          const cnv = canvas();
-          if (!cnv || !engine) return;
-          const ctx = cnv.getContext("2d");
-          const W = cnv.width, H = cnv.height;
-          const res = engine.tick(packInput);
-          resetPackInput();
-          if (engine.draw) engine.draw(ctx, W, H);
-          if (res && res.score != null) setExtraHud(id, res.score, res.extra || "—");
-          if (res && res.done) {
-            const coin = res.win ? "win" : (def.coin || "complete");
-            endPackGame(id, res.score || 0, res.extra, res.win ? "Победа!" : "Партия окончена",
-              "Ты набрал " + (res.score || 0) + " очков в «" + def.title + "».", res.win ? coin : def.coin);
-            stop();
-            return;
-          }
-          packRaf = requestAnimationFrame(loop);
-        }
-        function start() {
-          stop();
-          packActiveId = id;
-          hideExtraOverlay(id);
-          const cnv = canvas();
-          if (!cnv) return;
-          const factory = PACK_GAME_FACTORIES[id];
-          if (!factory) return;
-          engine = factory(id, cnv.getContext("2d"), cnv.width, cnv.height, getDiff(id));
-          running = true;
-          setExtraHud(id, 0, "—");
-          loop();
-        }
-        function open() {
-          stop();
-          showScreen(id);
-          setExtraHud(id, 0, "—");
-          openExtraOverlay(id, def.title, def.desc);
-        }
-        EXTRA_STOPPERS[id] = stop;
-        EXTRA_OPENERS[id] = open;
-        bindExtraShell(id, start);
-        packRunners[id] = { stop, start, open };
-
-        const cnv = () => document.getElementById(id + "-canvas");
-        let wheelDragging = false;
-        function canvasPoint(e) {
-          const cnvEl = cnv();
-          if (!cnvEl) return null;
-          const rect = cnvEl.getBoundingClientRect();
-          return {
-            x: (e.clientX - rect.left) * (cnvEl.width / rect.width),
-            y: (e.clientY - rect.top) * (cnvEl.height / rect.height)
-          };
-        }
-        document.addEventListener("keydown", (e) => {
-          if (!running || packActiveId !== id) return;
-          if (!screens[id] || !screens[id].classList.contains("active")) return;
-          if (engine && engine.keyMode) {
-            if (e.key.length === 1) { packInput.key = e.key; e.preventDefault(); }
-            return;
-          }
-          if (e.key === "ArrowLeft") { packInput.dir = "left"; e.preventDefault(); }
-          if (e.key === "ArrowRight") { packInput.dir = "right"; e.preventDefault(); }
-          if (e.key === "ArrowUp") { packInput.dir = "up"; e.preventDefault(); }
-          if (e.key === "ArrowDown") { packInput.dir = "down"; e.preventDefault(); }
-          if (e.key === " " || e.key === "Enter") { packInput.action = true; packInput.flap = true; packInput.drop = true; e.preventDefault(); }
-        });
-        const board = document.getElementById(id + "-board");
-        if (board) {
-          board.addEventListener("click", (e) => {
-            if (!running || packActiveId !== id || !engine || !engine.clickMode) return;
-            const cnvEl = cnv(); if (!cnvEl) return;
-            const rect = cnvEl.getBoundingClientRect();
-            packInput.click = { x: (e.clientX - rect.left) * (cnvEl.width / rect.width), y: (e.clientY - rect.top) * (cnvEl.height / rect.height) };
-          });
-          board.addEventListener("pointerdown", (e) => {
-            if (!running || packActiveId !== id || !engine || !engine.wheelMode) return;
-            wheelDragging = true;
-            try { board.setPointerCapture(e.pointerId); } catch (err) {}
-            const pt = canvasPoint(e);
-            if (pt && engine.hitLetter) {
-              packInput.wheel = { start: true, pick: engine.hitLetter(pt.x, pt.y) };
-            }
-          });
-          board.addEventListener("pointermove", (e) => {
-            if (!wheelDragging || !running || packActiveId !== id || !engine || !engine.wheelMode) return;
-            const pt = canvasPoint(e);
-            if (pt && engine.hitLetter) {
-              packInput.wheel = { pick: engine.hitLetter(pt.x, pt.y) };
-            }
-          });
-          board.addEventListener("pointerup", (e) => {
-            if (!wheelDragging || !engine || !engine.wheelMode) return;
-            wheelDragging = false;
-            try { board.releasePointerCapture(e.pointerId); } catch (err) {}
-            packInput.wheel = { submit: true };
-          });
-          board.addEventListener("pointercancel", () => {
-            if (wheelDragging && engine && engine.wheelMode) {
-              wheelDragging = false;
-              packInput.wheel = { submit: true };
-            }
-          });
-        }
-        const pad = document.getElementById(id + "-pad");
-        if (pad) {
-          if (def.id === "pk_wow") pad.style.display = "none";
-          pad.addEventListener("click", (e) => {
-          const btn = e.target.closest("[data-dir]");
-          if (!btn || !running || packActiveId !== id) return;
-          const d = btn.getAttribute("data-dir");
-          if (d === "action") { packInput.action = true; packInput.flap = true; packInput.drop = true; }
-          else packInput.dir = d;
-        });
-        }
-      }
-
-      buildPackDom();
-      PACK_DEFS.forEach(makePackRunner);
-      if (typeof bindDiffRows === "function") bindDiffRows();
-      if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
-      if (typeof enhanceHubCardRatings === "function") enhanceHubCardRatings();
-    })();
 
 
     /* ===== ФАБРИКА ИГР ===== */
@@ -15469,6 +14765,11 @@ const HUB_GAME_META = {
       const SESSION_KEY = "playverse_session";
       const SITE_SETTINGS_KEY = "playverse_site_settings";
       const SUPER_ADMIN_NAME = "PlayVerseAdmin";
+      const SUPABASE_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
+      const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
+      const CLOUD_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON);
+      let cloudUsers = {};
+      let cloudSyncedOnce = false;
 
       const PLAYER_NAME_PRESETS = [
         "НебоПилот", "TurboJet", "ЗмейМастер", "BlockHero", "КосмоИгрок",
@@ -15486,8 +14787,8 @@ const HUB_GAME_META = {
       const ALL_HUB_GAMES = [
         "avia", "snake", "breakout", "clicker", "memory", "tetris", "pong", "dobble",
         "mines", "simon", "space", "runner", "moles", "catcher", "maze",
-        "battleship", "chess", "checkers", "tictactoe"
-      ].concat(window.PACK_GAME_IDS || []).concat(["factory"]);
+        "battleship", "chess", "checkers", "tictactoe", "factory"
+      ];
       const PLAYTEST_GAMES = ALL_HUB_GAMES.filter((g) => g !== "factory");
       const BUGS_KEY = "playverse_bot_bugs";
       const PLAYTEST_VER = "pv_playtest_v3";
@@ -15645,10 +14946,26 @@ const HUB_GAME_META = {
         awardGameCoin(gameId, rule.amount);
       }
 
+      function cleanDisplayText(s) {
+        const t = String(s || "").trim();
+        if (!t || /^(empty|null|undefined)$/i.test(t)) return "";
+        return t;
+      }
+
+      function activeUsername(u) {
+        const s = getSession();
+        return cleanDisplayText(s && s.username) || cleanDisplayText(u && u.username) || "Игрок";
+      }
+
+      function activeDisplayLabel(u) {
+        if (!u) return activeUsername(u);
+        const dn = cleanDisplayText(u.displayName);
+        if (dn) return dn;
+        return activeUsername(u);
+      }
+
       function userDisplayLabel(u) {
-        if (!u) return "Игрок";
-        if (u.displayName) return u.displayName;
-        return u.username;
+        return activeDisplayLabel(u);
       }
 
       function isPresetPlayerName(name) {
@@ -15861,13 +15178,17 @@ const HUB_GAME_META = {
         if (!Array.isArray(u.history)) u.history = [];
         if (typeof u.coins !== "number") u.coins = 0;
         if (!Array.isArray(u.ownedAvatars)) u.ownedAvatars = [];
-        if (u.isBot && !u.displayName) u.displayName = u.username;
+        u.friends = u.friends.filter((n) => cleanDisplayText(n));
+        u.username = cleanDisplayText(u.username);
+        if (/^empty$/i.test(String(u.displayName || "").trim())) u.displayName = "";
+        u.displayName = cleanDisplayText(u.displayName);
+        if (u.isBot && !u.displayName && u.username) u.displayName = u.username;
         return u;
       }
 
       function friendDisplayName(name, u) {
         if (u) return userDisplayLabel(u);
-        return name;
+        return cleanDisplayText(name) || "Игрок";
       }
 
       function botSeededRand(seed) {
@@ -16202,7 +15523,7 @@ const HUB_GAME_META = {
       function getFriends() {
         const u = currentUser();
         if (!u || !Array.isArray(u.friends)) return [];
-        return u.friends.slice();
+        return u.friends.filter((n) => cleanDisplayText(n));
       }
 
       function getFavoriteFriends() {
@@ -16237,23 +15558,65 @@ const HUB_GAME_META = {
         return getIncomingRequests().indexOf(name) >= 0;
       }
 
-      function sendFriendRequest(name) {
-        const n = String(name || "").trim();
+      function resolveFriendTarget(query) {
+        const raw = String(query || "").trim();
+        if (!raw) return null;
+        const users = getUsers();
+        if (users[raw]) return { key: raw, user: users[raw] };
+        const lower = raw.toLowerCase();
+        let exactCi = null;
+        const partial = [];
+        Object.keys(users).forEach((key) => {
+          const u = users[key];
+          const dn = u && u.displayName ? String(u.displayName).trim() : "";
+          if (key.toLowerCase() === lower || (dn && dn.toLowerCase() === lower)) {
+            exactCi = { key: key, user: u };
+          } else if (
+            key.toLowerCase().indexOf(lower) >= 0 ||
+            (dn && dn.toLowerCase().indexOf(lower) >= 0)
+          ) {
+            partial.push({ key: key, user: u });
+          }
+        });
+        if (exactCi) return exactCi;
+        if (partial.length === 1) return partial[0];
+        return null;
+      }
+
+      function friendAddResultMessage(name, err) {
+        if (err) return err;
+        const resolved = resolveFriendTarget(name);
+        const key = resolved ? resolved.key : String(name || "").trim();
+        const users = getUsers();
+        const target = users[key];
+        if (target && target.isBot) return "Добавлен в друзья!";
+        if (isFriend(key)) return "Добавлен в друзья!";
+        return "Заявка отправлена — друг должен принять её в разделе «Заявки в друзья»";
+      }
+
+      async function sendFriendRequest(name) {
+        const raw = String(name || "").trim();
         const me = currentUser();
         if (!me) return "Сначала войди в аккаунт";
-        if (!validName(n)) return "Имя: 2–20 символов, буквы, цифры или _";
+        if (!validName(raw)) return "Имя: 2–20 символов, буквы, цифры или _";
+        const resolved = await resolveFriendTargetAsync(raw);
+        if (!resolved) {
+          return "Игрок не найден на сервере. Пусть друг зарегистрируется на сайте — имя должно совпадать точно.";
+        }
+        const n = resolved.key;
+        const target = resolved.user;
         if (n === me.username) return "Нельзя добавить себя";
         if (isUserBlocked(n)) return "Игрок заблокирован";
         const users = getUsers();
-        const target = users[n];
-        if (!target) return "Игрок не найден";
         normalizeUser(me);
         normalizeUser(target);
         if (me.friends.indexOf(n) >= 0) return "Уже в друзьях";
-        if (me.outgoingFriendRequests.indexOf(n) >= 0) return "Заявка уже отправлена";
+        if (me.outgoingFriendRequests.indexOf(n) >= 0) {
+          return "Заявка уже отправлена — жди, пока " + n + " нажмёт «Принять»";
+        }
         if (target.incomingFriendRequests.indexOf(me.username) >= 0) return "Заявка уже отправлена";
         if (target.outgoingFriendRequests.indexOf(me.username) >= 0) {
-          return acceptFriendRequest(n, true) ? null : "Не удалось принять заявку";
+          return (await acceptFriendRequest(n, true)) ? null : "Не удалось принять заявку";
         }
         if (target.isBot) {
           if (me.friends.indexOf(n) < 0) me.friends.push(n);
@@ -16268,15 +15631,25 @@ const HUB_GAME_META = {
         users[me.username] = me;
         users[n] = target;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, n]);
         return null;
       }
 
-      function acceptFriendRequest(fromName, silent) {
+      async function acceptFriendRequest(fromName, silent) {
         const from = String(fromName || "").trim();
         const me = currentUser();
         if (!me) return false;
         const users = getUsers();
-        const other = users[from];
+        let other = users[from];
+        if (!other && CLOUD_ENABLED) {
+          try {
+            other = await fetchCloudUser(from);
+            if (other) {
+              cloudUsers[from] = other;
+              users[from] = other;
+            }
+          } catch (e) {}
+        }
         if (!other) return false;
         normalizeUser(me);
         normalizeUser(other);
@@ -16288,16 +15661,20 @@ const HUB_GAME_META = {
         users[me.username] = me;
         users[from] = other;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, from]);
         if (!silent) toast("Друг добавлен");
         return true;
       }
 
-      function declineFriendRequest(fromName) {
+      async function declineFriendRequest(fromName) {
         const from = String(fromName || "").trim();
         const me = currentUser();
         if (!me) return;
         const users = getUsers();
-        const other = users[from];
+        let other = users[from];
+        if (!other && CLOUD_ENABLED) {
+          try { other = await fetchCloudUser(from); if (other) users[from] = other; } catch (e) {}
+        }
         normalizeUser(me);
         me.incomingFriendRequests = me.incomingFriendRequests.filter((x) => x !== from);
         if (other) {
@@ -16307,14 +15684,18 @@ const HUB_GAME_META = {
         }
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, from]);
       }
 
-      function cancelFriendRequest(toName) {
+      async function cancelFriendRequest(toName) {
         const n = String(toName || "").trim();
         const me = currentUser();
         if (!me) return;
         const users = getUsers();
-        const other = users[n];
+        let other = users[n];
+        if (!other && CLOUD_ENABLED) {
+          try { other = await fetchCloudUser(n); if (other) users[n] = other; } catch (e) {}
+        }
         normalizeUser(me);
         me.outgoingFriendRequests = me.outgoingFriendRequests.filter((x) => x !== n);
         if (other) {
@@ -16324,13 +15705,14 @@ const HUB_GAME_META = {
         }
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username, n]);
       }
 
       function addFriend(name) {
         return sendFriendRequest(name);
       }
 
-      function removeFriend(name) {
+      async function removeFriend(name) {
         const me = currentUser();
         if (!me) return;
         normalizeUser(me);
@@ -16339,6 +15721,7 @@ const HUB_GAME_META = {
         const users = getUsers();
         users[me.username] = me;
         saveUsers(users);
+        await persistCloudUsers(users, [me.username]);
       }
 
       function toggleFavoriteFriend(name) {
@@ -16434,28 +15817,29 @@ const HUB_GAME_META = {
           });
         });
         container.querySelectorAll("[data-friend-add]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            const err = sendFriendRequest(btn.getAttribute("data-friend-add"));
+            const addName = btn.getAttribute("data-friend-add");
+            const err = await sendFriendRequest(addName);
             if (err) { toast(err); return; }
             if (typeof rerender === "function") rerender();
             else { renderFriendsPage(); render(); }
-            toast("Заявка отправлена");
+            toast(friendAddResultMessage(addName));
           });
         });
         container.querySelectorAll("[data-accept-request]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            acceptFriendRequest(btn.getAttribute("data-accept-request"));
+            await acceptFriendRequest(btn.getAttribute("data-accept-request"));
             if (typeof rerender === "function") rerender();
             else renderFriendsPage();
             render();
           });
         });
         container.querySelectorAll("[data-decline-request]").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
+          btn.addEventListener("click", async (e) => {
             e.stopPropagation();
-            declineFriendRequest(btn.getAttribute("data-decline-request"));
+            await declineFriendRequest(btn.getAttribute("data-decline-request"));
             if (typeof rerender === "function") rerender();
             else renderFriendsPage();
             render();
@@ -16531,8 +15915,15 @@ const HUB_GAME_META = {
           if (typeof showScreen === "function") showScreen("profile");
           return;
         }
-        renderFriendsPage();
-        if (typeof showScreen === "function") showScreen("friends");
+        const open = () => {
+          renderFriendsPage();
+          if (typeof showScreen === "function") showScreen("friends");
+        };
+        if (CLOUD_ENABLED) {
+          refreshCloudSocial().then(open).catch(() => open());
+        } else {
+          open();
+        }
       }
 
       function renderUserFavoritesGrid(gridEl, emptyEl, favIds, readonly) {
@@ -16583,17 +15974,17 @@ const HUB_GAME_META = {
         else if (inPending) addBtn.textContent = "Принять заявку";
         else addBtn.textContent = "+ Заявка в друзья";
         addBtn.disabled = outPending;
-        addBtn.addEventListener("click", () => {
+        addBtn.addEventListener("click", async () => {
           if (isFriend(targetName)) {
-            removeFriend(targetName);
+            await removeFriend(targetName);
             toast("Удалено из друзей");
           } else if (hasIncomingRequest(targetName)) {
-            acceptFriendRequest(targetName);
+            await acceptFriendRequest(targetName);
             render();
           } else {
-            const err = sendFriendRequest(targetName);
+            const err = await sendFriendRequest(targetName);
             if (err) { toast(err); return; }
-            toast("Заявка отправлена");
+            toast(friendAddResultMessage(targetName));
           }
           renderUserProfile(targetName);
           renderFriendsPage();
@@ -16675,10 +16066,239 @@ const HUB_GAME_META = {
         try { return btoa(unescape(encodeURIComponent(String(p)))); } catch (e) { return String(p); }
       }
 
-      function getUsers() {
-        try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; } catch (e) { return {}; }
+      function cloudHeaders(extra) {
+        return Object.assign({
+          apikey: SUPABASE_ANON,
+          Authorization: "Bearer " + SUPABASE_ANON,
+          "Content-Type": "application/json"
+        }, extra || {});
       }
-      function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+
+      function cloudErrorText(res, body) {
+        const msg = body && body.message ? String(body.message) : "";
+        if (res.status === 401 || res.status === 403 || /permission denied/i.test(msg)) {
+          return "Нет прав на сервер — выполни supabase-setup.sql в Supabase";
+        }
+        if (/relation.*profiles.*does not exist/i.test(msg)) {
+          return "Таблица profiles не создана — выполни supabase-setup.sql";
+        }
+        if (msg) return msg;
+        return "Ошибка сервера (" + res.status + ")";
+      }
+
+      function rowToUser(row) {
+        if (!row) return null;
+        const username = cleanDisplayText(row.username);
+        if (!username) return null;
+        return normalizeUser({
+          username: username,
+          pass: row.pass_hash,
+          displayName: row.display_name || "",
+          coins: row.coins || 0,
+          avatarType: row.avatar_type || "initials",
+          avatarShopId: row.avatar_shop_id || "",
+          avatarEmoji: row.avatar_emoji || "",
+          avatarImage: row.avatar_image || "",
+          ownedAvatars: Array.isArray(row.owned_avatars) ? row.owned_avatars : [],
+          favorites: Array.isArray(row.favorites) ? row.favorites : [],
+          history: Array.isArray(row.history) ? row.history : [],
+          friends: Array.isArray(row.friends) ? row.friends : [],
+          favoriteFriends: Array.isArray(row.favorite_friends) ? row.favorite_friends : [],
+          incomingFriendRequests: Array.isArray(row.incoming_requests) ? row.incoming_requests : [],
+          outgoingFriendRequests: Array.isArray(row.outgoing_requests) ? row.outgoing_requests : [],
+          role: row.role || "",
+          created: row.created_at ? new Date(row.created_at).getTime() : Date.now()
+        });
+      }
+
+      function userToRow(u) {
+        return {
+          username: u.username,
+          pass_hash: u.pass,
+          display_name: u.displayName || "",
+          coins: getUserCoins(u),
+          avatar_type: u.avatarType || "initials",
+          avatar_shop_id: u.avatarShopId || "",
+          avatar_emoji: u.avatarEmoji || "",
+          avatar_image: u.avatarImage || "",
+          owned_avatars: u.ownedAvatars || [],
+          favorites: u.favorites || [],
+          history: u.history || [],
+          friends: u.friends || [],
+          favorite_friends: u.favoriteFriends || [],
+          incoming_requests: u.incomingFriendRequests || [],
+          outgoing_requests: u.outgoingFriendRequests || [],
+          role: u.role || ""
+        };
+      }
+
+      async function fetchCloudUser(username) {
+        const res = await fetch(
+          SUPABASE_URL + "/rest/v1/profiles?username=eq." + encodeURIComponent(username) + "&limit=1",
+          { headers: cloudHeaders() }
+        );
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(cloudErrorText(res, body));
+        const rows = Array.isArray(body) ? body : [];
+        return rows[0] ? rowToUser(rows[0]) : null;
+      }
+
+      async function insertCloudUser(u) {
+        const res = await fetch(SUPABASE_URL + "/rest/v1/profiles", {
+          method: "POST",
+          headers: cloudHeaders({ Prefer: "return=representation" }),
+          body: JSON.stringify(userToRow(u))
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.status === 409) return "Это имя уже занято — выбери другое";
+        if (!res.ok) return cloudErrorText(res, body);
+        const rows = Array.isArray(body) ? body : [body];
+        if (rows[0]) cloudUsers[u.username] = rowToUser(rows[0]);
+        return null;
+      }
+
+      async function saveCloudUser(u) {
+        if (!u || u.isBot) return null;
+        const res = await fetch(
+          SUPABASE_URL + "/rest/v1/profiles?username=eq." + encodeURIComponent(u.username),
+          {
+            method: "PATCH",
+            headers: cloudHeaders({ Prefer: "return=representation" }),
+            body: JSON.stringify(userToRow(u))
+          }
+        );
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) return cloudErrorText(res, body);
+        const rows = Array.isArray(body) ? body : [body];
+        if (rows[0]) cloudUsers[u.username] = rowToUser(rows[0]);
+        return null;
+      }
+
+      async function loadCloudUsers() {
+        if (!CLOUD_ENABLED) return;
+        const res = await fetch(SUPABASE_URL + "/rest/v1/profiles?select=*", { headers: cloudHeaders() });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(cloudErrorText(res, body));
+        (Array.isArray(body) ? body : []).forEach((row) => {
+          if (row && row.username) cloudUsers[row.username] = rowToUser(row);
+        });
+        mergeAllCloudIntoLocal();
+        cloudSyncedOnce = true;
+      }
+
+      function mergeCloudIntoLocal(username) {
+        const u = cloudUsers[username];
+        if (!u || u.isBot) return;
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        users[username] = u;
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function mergeAllCloudIntoLocal() {
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        Object.keys(cloudUsers).forEach((name) => {
+          if (cloudUsers[name] && !cloudUsers[name].isBot) users[name] = cloudUsers[name];
+        });
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function repairUserRecord(u, fallbackName) {
+        if (!u) return u;
+        const fb = cleanDisplayText(fallbackName);
+        if ((!cleanDisplayText(u.username) || /^empty$/i.test(String(u.username || "").trim())) && fb) {
+          u.username = fb;
+        }
+        if (/^empty$/i.test(String(u.displayName || "").trim())) u.displayName = "";
+        if (!cleanDisplayText(u.displayName) && cleanDisplayText(u.username)) u.displayName = "";
+        u.friends = (u.friends || []).filter((n) => cleanDisplayText(n) && !/^empty$/i.test(String(n).trim()));
+        return normalizeUser(u);
+      }
+
+      async function repairCurrentUserProfile() {
+        const s = getSession();
+        if (!s || !s.username) return;
+        const users = getUsers();
+        let u = users[s.username];
+        if (!u) return;
+        const before = JSON.stringify(u);
+        u = repairUserRecord(u, s.username);
+        if (JSON.stringify(u) !== before) {
+          users[s.username] = u;
+          cloudUsers[s.username] = u;
+          saveUsers(users);
+          if (CLOUD_ENABLED && !u.isBot) await saveCloudUser(u);
+        }
+      }
+
+      async function refreshCurrentUserFromCloud() {
+        if (!CLOUD_ENABLED) return;
+        const s = getSession();
+        if (!s || !s.username) return;
+        try {
+          let u = await fetchCloudUser(s.username);
+          if (u) {
+            u = repairUserRecord(u, s.username);
+            cloudUsers[s.username] = u;
+            mergeCloudIntoLocal(s.username);
+            if (!u.isBot) await saveCloudUser(u);
+          }
+        } catch (e) { console.warn("refresh user", e); }
+        await repairCurrentUserProfile();
+      }
+
+      async function refreshCloudSocial() {
+        if (!CLOUD_ENABLED) return;
+        await loadCloudUsers();
+        await refreshCurrentUserFromCloud();
+      }
+
+      async function persistCloudUsers(users, names) {
+        if (!CLOUD_ENABLED) return;
+        for (let i = 0; i < names.length; i++) {
+          const u = users[names[i]];
+          if (u && !u.isBot) {
+            const err = await saveCloudUser(u);
+            if (err) console.warn("cloud save", names[i], err);
+          }
+        }
+      }
+
+      async function resolveFriendTargetAsync(query) {
+        let resolved = resolveFriendTarget(query);
+        if (resolved || !CLOUD_ENABLED) return resolved;
+        if (!cloudSyncedOnce) {
+          try { await loadCloudUsers(); } catch (e) { return null; }
+        } else {
+          try {
+            const raw = String(query || "").trim();
+            const u = await fetchCloudUser(raw);
+            if (u) {
+              cloudUsers[u.username] = u;
+              mergeCloudIntoLocal(u.username);
+            }
+          } catch (e) {}
+        }
+        return resolveFriendTarget(query);
+      }
+
+      function getUsers() {
+        try {
+          const local = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+          const merged = Object.assign({}, local);
+          Object.keys(cloudUsers).forEach((k) => {
+            if (cloudUsers[k] && !cloudUsers[k].isBot) merged[k] = cloudUsers[k];
+          });
+          return merged;
+        } catch (e) {
+          return Object.assign({}, cloudUsers);
+        }
+      }
+      function saveUsers(u) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(u));
+        Object.keys(u).forEach((k) => {
+          if (u[k] && !u[k].isBot) cloudUsers[k] = u[k];
+        });
+      }
 
       function getSession() {
         try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (e) { return null; }
@@ -17074,9 +16694,10 @@ const HUB_GAME_META = {
       }
 
       function initials(name) {
-        const parts = String(name || "?").trim().split(/[\s_]+/);
+        const label = cleanDisplayText(name) || "?";
+        const parts = label.split(/[\s_]+/);
         if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-        return String(name || "?").slice(0, 2).toUpperCase();
+        return label.slice(0, 2).toUpperCase();
       }
 
       function applyAvatarEl(el, u, username) {
@@ -17185,7 +16806,8 @@ const HUB_GAME_META = {
         const s = getSession();
         if (!s || !s.username) return null;
         const users = getUsers();
-        const u = users[s.username] || null;
+        let u = users[s.username] || null;
+        u = repairUserRecord(u, s.username);
         return u ? normalizeUser(u) : null;
       }
 
@@ -17335,7 +16957,8 @@ const HUB_GAME_META = {
         const users = getUsers();
         let html = "";
         if (u) {
-          const label = userDisplayLabel(u);
+          repairUserRecord(u, getSession() && getSession().username);
+          const label = activeDisplayLabel(u);
           html += '<button type="button" class="rbx-friend-tile me" id="hub-self-tile">' +
             '<div class="rbx-friend-avatar" data-rail-avatar="self">' + initials(label) +
             '<span class="online-dot"></span></div>' +
@@ -17345,7 +16968,9 @@ const HUB_GAME_META = {
           '<div class="rbx-friend-avatar"><span>+</span></div></button>';
         if (u) {
           getFriends().slice(0, 14).forEach((fname) => {
+            if (!cleanDisplayText(fname) || /^empty$/i.test(String(fname).trim())) return;
             const fu = users[fname];
+            if (fu) repairUserRecord(fu, fname);
             const label = friendDisplayName(fname, fu);
             html += '<button type="button" class="rbx-friend-tile" data-hub-friend="' + fname + '">' +
               '<div class="rbx-friend-avatar" data-rail-avatar="' + fname + '">' + initials(label) +
@@ -17363,7 +16988,7 @@ const HUB_GAME_META = {
         });
         el.hubFriendsRail.querySelectorAll("[data-rail-avatar]").forEach((node) => {
           const key = node.getAttribute("data-rail-avatar");
-          if (key === "self" && u) applyAvatarEl(node, u, u.username);
+          if (key === "self" && u) applyAvatarEl(node, u, activeUsername(u));
           else applyAvatarEl(node, users[key], key);
         });
       }
@@ -17391,10 +17016,12 @@ const HUB_GAME_META = {
 
       function renderHubChip() {
         const u = currentUser();
+        if (u) repairUserRecord(u, getSession() && getSession().username);
         const avatarEls = [el.hubUserAvatar, el.hubNavAvatar, el.hubDot].filter(Boolean);
         if (u) {
-          avatarEls.forEach((node) => applyAvatarEl(node, u, u.username));
-          if (el.hubUserName) el.hubUserName.textContent = userDisplayLabel(u);
+          avatarEls.forEach((node) => applyAvatarEl(node, u, activeUsername(u)));
+          const label = activeDisplayLabel(u);
+          if (el.hubUserName) el.hubUserName.textContent = label;
           if (el.hubUserTag) el.hubUserTag.textContent = "На PlayVerse";
           if (el.hubUserStatus) el.hubUserStatus.textContent = "В сети";
           if (el.hubLabel) el.hubLabel.textContent = userDisplayLabel(u);
@@ -17505,7 +17132,17 @@ const HUB_GAME_META = {
         runBotPlaytest(false);
         ensureUserFields();
         if (typeof injectAllGameOverlayButtons === "function") injectAllGameOverlayButtons();
-        loadSiteSettings().then(() => {
+        loadSiteSettings().then(async () => {
+          if (CLOUD_ENABLED) {
+            try {
+              await loadCloudUsers();
+              await refreshCurrentUserFromCloud();
+              if (isLoggedIn()) toast("Сервер PlayVerse подключён");
+            } catch (e) {
+              console.warn("cloud boot", e);
+              if (isLoggedIn()) toast("Офлайн — друзья только на этом устройстве");
+            }
+          }
           if (checkSessionBlocked()) { render(); return; }
           render();
           const pending = getIncomingRequests().length;
@@ -17517,7 +17154,7 @@ const HUB_GAME_META = {
         });
       }
 
-      function register(name, pass) {
+      async function register(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name)) return "Выбери имя из списка";
         if (!validName(name)) return "Некорректное имя";
@@ -17526,6 +17163,14 @@ const HUB_GAME_META = {
         if (name === SUPER_ADMIN_NAME) return "Это имя зарезервировано";
         const users = getUsers();
         if (users[name]) return "Это имя уже занято — выбери другое";
+        if (CLOUD_ENABLED) {
+          try {
+            const existing = await fetchCloudUser(name);
+            if (existing) return "Это имя уже занято — выбери другое";
+          } catch (e) {
+            console.warn("cloud register check", e);
+          }
+        }
         users[name] = {
           username: name,
           displayName: "",
@@ -17543,19 +17188,37 @@ const HUB_GAME_META = {
           incomingFriendRequests: [],
           outgoingFriendRequests: []
         };
+        if (CLOUD_ENABLED) {
+          const cloudErr = await insertCloudUser(users[name]);
+          if (cloudErr) return cloudErr;
+        }
         saveUsers(users);
         setSession(name);
         renderPlayerNameSelects();
         return null;
       }
 
-      function login(name, pass) {
+      async function login(name, pass) {
         if (!name) return "Выбери имя из списка";
         if (!isPresetPlayerName(name) && name !== SUPER_ADMIN_NAME) return "Выбери имя из списка";
         if (isUserBlocked(name)) return "Аккаунт заблокирован администратором";
         const users = getUsers();
-        const u = users[name];
-        if (!u) return "Пользователь не найден";
+        let u = users[name];
+        if (CLOUD_ENABLED) {
+          try {
+            const cloud = await fetchCloudUser(name);
+            if (cloud) {
+              if (!cloud.username) cloud.username = name;
+              u = cloud;
+              cloudUsers[name] = cloud;
+              users[name] = cloud;
+              saveUsers(users);
+            }
+          } catch (e) {
+            console.warn("cloud login", e);
+          }
+        }
+        if (!u) return "Пользователь не найден — зарегистрируйся на этом сайте";
         if (u.pass !== hashPass(pass)) return "Неверный пароль";
         setSession(name);
         return null;
@@ -17564,7 +17227,9 @@ const HUB_GAME_META = {
       function logout() {
         setSession(null);
         render();
-        if (typeof showScreen === "function") showScreen("profile");
+        const onNv = screens.newverse && screens.newverse.classList.contains("active");
+        if (typeof showScreen === "function") showScreen(onNv ? "newverse" : "profile");
+        if (onNv && typeof renderNewVerse === "function") renderNewVerse();
         toast("Вы вышли из аккаунта");
       }
 
@@ -17581,11 +17246,11 @@ const HUB_GAME_META = {
       });
 
       if (el.loginForm) {
-        el.loginForm.addEventListener("submit", (e) => {
+        el.loginForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-login-name").value.trim();
           const pass = document.getElementById("profile-login-pass").value;
-          const err = login(name, pass);
+          const err = await login(name, pass);
           if (err) { setMsg(el.loginMsg, err); return; }
           setMsg(el.loginMsg, "Добро пожаловать!", true);
           render();
@@ -17595,13 +17260,13 @@ const HUB_GAME_META = {
       }
 
       if (el.registerForm) {
-        el.registerForm.addEventListener("submit", (e) => {
+        el.registerForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("profile-reg-name").value.trim();
           const pass = document.getElementById("profile-reg-pass").value;
           const pass2 = document.getElementById("profile-reg-pass2").value;
           if (pass !== pass2) { setMsg(el.registerMsg, "Пароли не совпадают"); return; }
-          const err = register(name, pass);
+          const err = await register(name, pass);
           if (err) { setMsg(el.registerMsg, err); return; }
           setMsg(el.registerMsg, "Аккаунт создан!", true);
           render();
@@ -17617,14 +17282,14 @@ const HUB_GAME_META = {
         if (typeof showScreen === "function") showScreen("cover");
       });
       if (el.friendsPageAddBtn) {
-        el.friendsPageAddBtn.addEventListener("click", () => {
+        el.friendsPageAddBtn.addEventListener("click", async () => {
           const name = el.friendsPageAddName ? el.friendsPageAddName.value.trim() : "";
-          const err = sendFriendRequest(name);
+          const err = await sendFriendRequest(name);
           if (err) { toast(err); return; }
           if (el.friendsPageAddName) el.friendsPageAddName.value = "";
           renderFriendsPage();
           render();
-          toast("Заявка отправлена");
+          toast(friendAddResultMessage(name));
         });
       }
       if (el.friendsPageAddName) {
@@ -17699,12 +17364,20 @@ const HUB_GAME_META = {
       window.PVProfile = {
         open: openProfile,
         openUserProfile: openUserProfile,
+        openFriends: openFriendsPage,
         render: render,
         renderHub: renderHubChip,
         renderFriendsPage: renderFriendsPage,
         openFriendsPage: openFriendsPage,
         goToGames: goToGames,
         isLoggedIn: isLoggedIn,
+        currentUser: currentUser,
+        getFriends: getFriends,
+        activeDisplayLabel: activeDisplayLabel,
+        getUserCoins: getUserCoins,
+        login: login,
+        register: register,
+        logout: logout,
         isFavorite: isFavorite,
         toggleFavorite: toggleFavorite,
         toast: toast,
@@ -17903,14 +17576,16 @@ const HUB_GAME_META = {
             menuToast(player.display + " уже в друзьях");
             return;
           }
-          const err = player.accountUsername && PVProfile.sendFriendRequest
-            ? PVProfile.sendFriendRequest(player.accountUsername)
-            : PVProfile.addBotFriend(player);
-          if (err) { menuToast(err); return; }
-          menuToast(player.display + " добавлен в друзья!");
-          if (typeof PVProfile.render === "function") PVProfile.render();
-          if (typeof PVProfile.renderFriendsPage === "function") PVProfile.renderFriendsPage();
-          renderPlayers(currentMenuMode);
+          (async () => {
+            const err = player.accountUsername && PVProfile.sendFriendRequest
+              ? await PVProfile.sendFriendRequest(player.accountUsername)
+              : await PVProfile.addBotFriend(player);
+            if (err) { menuToast(err); return; }
+            menuToast(player.display + " добавлен в друзья!");
+            if (typeof PVProfile.render === "function") PVProfile.render();
+            if (typeof PVProfile.renderFriendsPage === "function") PVProfile.renderFriendsPage();
+            renderPlayers(currentMenuMode);
+          })();
         }
       }
 
