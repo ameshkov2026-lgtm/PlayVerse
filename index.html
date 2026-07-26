@@ -5191,9 +5191,280 @@
       background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
     }
 
+    /* ===== PlayVerse · Roblox UI (фиолетовая тема) ===== */
+    body.rbx-v2 {
+      --rbx-bg: #3b0764;
+      --rbx-surface: #4c1d95;
+      --rbx-surface2: #5b21b6;
+      --rbx-accent: #9333ea;
+      --rbx-accent-bright: #a855f7;
+      --rbx-green: #7c3aed;
+      --rbx-green-hover: #6d28d9;
+      --rbx-text: #f5f3ff;
+      --rbx-muted: #c4b5fd;
+      --rbx-bar: #2e1065;
+      --rbx-card: rgba(255,255,255,0.12);
+      --rbx-border: rgba(255,255,255,0.14);
+    }
+    body.rbx-v2 #screen-cover {
+      background: linear-gradient(180deg, var(--rbx-surface) 0%, var(--rbx-bg) 100%) !important;
+    }
+    body.rbx-v2 .rbx-rblx-top {
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--rbx-bar);
+      border-bottom: 1px solid var(--rbx-border);
+    }
+    body.rbx-v2 .rbx-rblx-logo {
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: #fff;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    body.rbx-v2 .rbx-rblx-search-wrap {
+      flex: 1;
+      max-width: 520px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--rbx-border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      min-width: 0;
+    }
+    body.rbx-v2 .rbx-rblx-search-wrap svg {
+      width: 18px; height: 18px; stroke: var(--rbx-muted); fill: none; stroke-width: 2; flex-shrink: 0;
+    }
+    body.rbx-v2 .rbx-rblx-search-wrap input {
+      border: none; background: transparent; color: #fff; font-weight: 600; font-size: 0.92rem; width: 100%; outline: none;
+    }
+    body.rbx-v2 .rbx-rblx-search-wrap input::placeholder { color: #a78bfa; }
+    body.rbx-v2 .rbx-rblx-user-btn {
+      border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      padding: 0; cursor: pointer; overflow: hidden; flex-shrink: 0;
+    }
+    body.rbx-v2 .rbx-coin-pill {
+      background: rgba(0,0,0,0.22);
+      border-color: var(--rbx-border);
+      color: #fde68a;
+    }
+    body.rbx-v2 .rbx-beta-btn { display: none !important; }
+    body.rbx-v2 .rbx-search-panel { display: none !important; }
+    body.rbx-v2 .rbx-profile-row { display: flex !important; align-items: center; gap: 12px; padding: 12px 16px 4px; }
+    body.rbx-v2 .rbx-hub-panel { display: none; }
+    body.rbx-v2 .rbx-hub-panel.active { display: block; }
+    body.rbx-v2 .rbx-section-title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--rbx-text);
+      margin: 0 0 10px;
+      padding: 0 16px;
+    }
+    body.rbx-v2 .rbx-rec-section .rbx-section-title { padding: 0 16px; }
+    body.rbx-v2 .hub-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 0 16px 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      --hub-row-h: auto;
+    }
+    body.rbx-v2 .hub-grid .cover-card {
+      flex: 0 0 clamp(150px, 42vw, 190px);
+      min-height: 0;
+      scroll-snap-align: start;
+      padding: 8px;
+      border-radius: 12px;
+      background: var(--rbx-card);
+      border: 1px solid var(--rbx-border);
+      box-shadow: none;
+    }
+    body.rbx-v2 .hub-grid .cover-art {
+      min-height: 100px;
+      aspect-ratio: 16/10;
+      border-radius: 10px;
+    }
+    body.rbx-v2 .hub-grid .cover-meta h2 {
+      font-size: 0.82rem;
+      color: var(--rbx-text);
+      font-weight: 700;
+    }
+    body.rbx-v2 .hub-grid .cover-title { display: none; }
+    body.rbx-v2 .rbx-bottom-nav {
+      justify-content: space-around;
+      gap: 0;
+      padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+      background: var(--rbx-bar);
+      border-top: 1px solid var(--rbx-border);
+    }
+    body.rbx-v2 .rbx-nav-item { font-size: 0.62rem; gap: 3px; padding: 6px 2px; flex: 1; max-width: 80px; }
+    body.rbx-v2 .rbx-nav-item svg { width: 24px; height: 24px; }
+    body.rbx-v2 .rbx-nav-item.active { color: #fff; background: rgba(168,85,247,0.25); }
+    body.rbx-v2 .rbx-blocky {
+      display: flex; flex-direction: column; align-items: center; width: 36px; margin: 0 auto;
+    }
+    body.rbx-v2 .rbx-blocky-sm { transform: scale(0.85); transform-origin: center bottom; }
+    body.rbx-v2 .rbx-blocky-head {
+      width: 14px; height: 14px; background: #fcd9b6; border-radius: 2px;
+      box-shadow: inset -2px -2px 0 rgba(0,0,0,0.12);
+    }
+    body.rbx-v2 .rbx-blocky-torso {
+      width: 18px; height: 16px; margin-top: 1px; border-radius: 2px;
+      background: var(--rbx-shirt, var(--rbx-accent));
+    }
+    body.rbx-v2 .rbx-blocky-legs { display: flex; gap: 2px; margin-top: 1px; }
+    body.rbx-v2 .rbx-blocky-leg {
+      width: 7px; height: 12px; border-radius: 1px;
+      background: var(--rbx-pants, #312e81);
+    }
+    body.rbx-v2 .rbx-blocky-lg { transform: scale(2.2); margin: 24px auto; }
+    body.rbx-v2 .rbx-friend-tile .rbx-friend-avatar {
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    body.rbx-v2 .rbx-user-menu {
+      position: absolute; top: 56px; right: 12px; z-index: 50;
+      min-width: 200px; background: #1e1035; border: 1px solid var(--rbx-border);
+      border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); overflow: hidden;
+    }
+    body.rbx-v2 .rbx-user-menu-head {
+      padding: 14px; border-bottom: 1px solid var(--rbx-border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    body.rbx-v2 .rbx-user-menu-name { font-weight: 800; color: #fff; font-size: 0.95rem; }
+    body.rbx-v2 .rbx-user-menu-item {
+      display: block; width: 100%; text-align: left; border: none; background: none;
+      color: var(--rbx-text); padding: 12px 14px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    }
+    body.rbx-v2 .rbx-user-menu-item:hover { background: rgba(168,85,247,0.2); }
+    body.rbx-v2 .rbx-user-menu-item.danger { color: #fca5a5; }
+    body.rbx-v2 .rbx-login-overlay {
+      position: fixed; inset: 0; z-index: 20000;
+      background: rgba(30, 16, 53, 0.88);
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    body.rbx-v2 .rbx-login-overlay.open { display: flex; }
+    body.rbx-v2 .rbx-login-card {
+      width: min(420px, 100%); background: #faf5ff; border-radius: 16px;
+      padding: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    body.rbx-v2 .rbx-login-card h2 { margin: 0 0 6px; color: #4c1d95; font-size: 1.5rem; }
+    body.rbx-v2 .rbx-login-card p { margin: 0 0 16px; color: #6b21a8; font-weight: 600; font-size: 0.9rem; }
+    body.rbx-v2 .rbx-login-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    body.rbx-v2 .rbx-login-tab {
+      flex: 1; border: none; border-radius: 10px; padding: 10px;
+      font-weight: 800; cursor: pointer; background: #ede9fe; color: #6d28d9;
+    }
+    body.rbx-v2 .rbx-login-tab.active { background: var(--rbx-accent); color: #fff; }
+    body.rbx-v2 .rbx-login-card label { display: block; font-weight: 700; color: #4c1d95; font-size: 0.85rem; margin-bottom: 12px; }
+    body.rbx-v2 .rbx-login-card select,
+    body.rbx-v2 .rbx-login-card input {
+      width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px;
+      border: 2px solid #ddd6fe; font-size: 1rem; box-sizing: border-box;
+    }
+    body.rbx-v2 .rbx-login-submit {
+      width: 100%; margin-top: 8px; padding: 14px; border: none; border-radius: 10px;
+      background: var(--rbx-accent); color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer;
+    }
+    body.rbx-v2 .rbx-login-submit:hover { background: var(--rbx-accent-bright); }
+    body.rbx-v2 .rbx-login-close {
+      position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,0.15);
+      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;
+    }
+    body.rbx-v2 .rbx-chat-layout { display: flex; flex-direction: column; height: calc(100dvh - 130px); min-height: 280px; }
+    body.rbx-v2 .rbx-chat-list { flex: 0 0 auto; max-height: 40%; overflow-y: auto; border-bottom: 1px solid var(--rbx-border); }
+    body.rbx-v2 .rbx-chat-thread {
+      flex: 1; display: flex; flex-direction: column; min-height: 0;
+    }
+    body.rbx-v2 .rbx-chat-contact {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      border: none; background: transparent; color: var(--rbx-text);
+      padding: 12px 16px; cursor: pointer; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    body.rbx-v2 .rbx-chat-contact.active { background: rgba(168,85,247,0.22); }
+    body.rbx-v2 .rbx-chat-msgs {
+      flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px;
+    }
+    body.rbx-v2 .rbx-chat-bubble {
+      max-width: 82%; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; line-height: 1.35;
+    }
+    body.rbx-v2 .rbx-chat-bubble.me { align-self: flex-end; background: var(--rbx-accent); color: #fff; border-bottom-right-radius: 4px; }
+    body.rbx-v2 .rbx-chat-bubble.them { align-self: flex-start; background: rgba(255,255,255,0.12); color: #fff; border-bottom-left-radius: 4px; }
+    body.rbx-v2 .rbx-chat-form {
+      display: flex; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--rbx-border); background: var(--rbx-bar);
+    }
+    body.rbx-v2 .rbx-chat-form input {
+      flex: 1; border: 1px solid var(--rbx-border); border-radius: 999px; padding: 10px 14px;
+      background: rgba(0,0,0,0.2); color: #fff; font-weight: 600;
+    }
+    body.rbx-v2 .rbx-chat-form button {
+      border: none; border-radius: 999px; padding: 10px 16px; background: var(--rbx-accent);
+      color: #fff; font-weight: 800; cursor: pointer;
+    }
+    body.rbx-v2 .rbx-more-list { padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 8px; }
+    body.rbx-v2 .rbx-more-btn {
+      display: flex; align-items: center; gap: 12px; width: 100%;
+      border: 1px solid var(--rbx-border); border-radius: 12px; padding: 14px 16px;
+      background: var(--rbx-card); color: var(--rbx-text); font-weight: 800; font-size: 0.95rem; cursor: pointer;
+    }
+    body.rbx-v2 .rbx-more-btn:hover { background: rgba(168,85,247,0.2); }
+    body.rbx-v2 .pv-rbx-action.primary { background: var(--rbx-accent) !important; }
+    body.rbx-v2 .pv-rbx-panel { background: rgba(46, 16, 101, 0.98); }
+    body.rbx-v2 .pv-rbx-topbar { background: var(--rbx-bar); }
+    body.rbx-v2 #screen-profile {
+      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+      color: #f5f3ff;
+    }
+    body.rbx-v2 .profile-header, body.rbx-v2 .profile-auth-card, body.rbx-v2 .profile-user-card {
+      background: rgba(255,255,255,0.1); border: 1px solid var(--rbx-border);
+    }
+    body.rbx-v2 .profile-brand { color: #e9d5ff; }
+    body.rbx-v2 .profile-hero { background: linear-gradient(135deg, #6d28d9, #9333ea); }
+    body.rbx-v2 .profile-hero h1, body.rbx-v2 .profile-hero p { color: #fff; }
+    body.rbx-v2 .profile-submit { background: var(--rbx-accent); }
+    body.rbx-v2 .profile-tab.active { background: var(--rbx-accent); color: #fff; }
+    body.rbx-v2 .rbx-continue-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 0 16px 12px;
+      scroll-snap-type: x mandatory;
+    }
+    body.rbx-v2 .rbx-continue-row .cover-card {
+      flex: 0 0 clamp(150px, 42vw, 190px);
+      scroll-snap-align: start;
+    }
+    body.rbx-v2 .rbx-friend-avatar .rbx-blocky { transform: scale(0.7); transform-origin: center bottom; }
+    body.rbx-v2 .pv-rbx-avatar.rbx-blocky-wrap {
+      background: transparent; overflow: visible;
+    }
+    body.rbx-v2 .hub-join-play-btn { background: var(--rbx-accent, #9333ea); }
+    body.rbx-v2 .hub-join-play-btn:hover { background: var(--rbx-accent-bright, #a855f7); }
+    body.rbx-v2 .pv-rbx-action.primary { background: var(--rbx-accent) !important; }
+    body.rbx-v2 .pv-rbx-chat-form button { background: var(--rbx-accent); }
+
   </style>
 </head>
-<body>
+<body class="rbx-v2">
 
   <button type="button" class="rules-tab" id="rules-tab">Правила</button>
   <button type="button" class="music-tab" id="music-tab" title="Фоновая музыка">Музыка вкл</button>
@@ -5356,7 +5627,7 @@
   </div>
   
   <!-- ПРОФИЛЬ -->
-  <div id="screen-profile" class="screen active">
+  <div id="screen-profile" class="screen">
     <div class="profile-shell">
       <header class="profile-header">
         <div class="profile-brand">PlayVerse</div>
@@ -5531,39 +5802,92 @@
 
   <div class="profile-toast" id="profile-toast" role="status"></div>
 
+  <div class="rbx-login-overlay" id="rbx-login-overlay" aria-hidden="true">
+    <button type="button" class="rbx-login-close" id="rbx-login-close" aria-label="Закрыть">✕</button>
+    <div class="rbx-login-card">
+      <h2>PlayVerse</h2>
+      <p>Войди или создай аккаунт, чтобы играть с друзьями</p>
+      <div class="rbx-login-tabs">
+        <button type="button" class="rbx-login-tab active" data-rbx-login-tab="login">Вход</button>
+        <button type="button" class="rbx-login-tab" data-rbx-login-tab="register">Регистрация</button>
+      </div>
+      <form id="rbx-modal-login-form">
+        <label>Имя игрока
+          <select id="rbx-modal-login-name" required><option value="">Выбери имя</option></select>
+        </label>
+        <label>Пароль
+          <input type="password" id="rbx-modal-login-pass" required maxlength="32" placeholder="••••••">
+        </label>
+        <p class="profile-msg" id="rbx-modal-login-msg"></p>
+        <button type="submit" class="rbx-login-submit">Войти</button>
+      </form>
+      <form id="rbx-modal-register-form" class="profile-hidden">
+        <label>Игровое имя
+          <select id="rbx-modal-reg-name" required><option value="">Загрузка…</option></select>
+        </label>
+        <label>Пароль
+          <input type="password" id="rbx-modal-reg-pass" required maxlength="32" placeholder="Минимум 4 символа">
+        </label>
+        <label>Повтор пароля
+          <input type="password" id="rbx-modal-reg-pass2" required maxlength="32" placeholder="Ещё раз">
+        </label>
+        <p class="profile-msg" id="rbx-modal-register-msg"></p>
+        <button type="submit" class="rbx-login-submit">Создать аккаунт</button>
+      </form>
+    </div>
+  </div>
+
   <!-- ХАБ ИГР --><!-- ХАБ ИГР -->
-  <div id="screen-cover" class="screen">
+  <div id="screen-cover" class="screen active">
     <div class="rbx-hub">
-      <header class="rbx-topbar">
-        <div class="rbx-logo">
-          <span class="rbx-logo-main">PlayVerse</span>
+      <header class="rbx-topbar rbx-rblx-top">
+        <button type="button" class="rbx-rblx-logo" id="hub-logo-btn">PlayVerse</button>
+        <div class="rbx-rblx-search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+          <input type="search" id="hub-search-input" placeholder="Поиск игр..." autocomplete="off" enterkeyhint="search">
         </div>
         <div class="rbx-topbar-actions">
-          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">Новая версия</button>
-          <button type="button" class="rbx-search-btn" id="hub-search-btn" aria-label="Поиск">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
-          </button>
           <div class="rbx-coin-pill" id="hub-coins" title="Монеты за прохождение игр">
             <span class="rbx-coin-icon">🪙</span>
             <span id="hub-coins-val">0</span>
           </div>
+          <button type="button" class="rbx-rblx-user-btn" id="hub-user-menu-btn" aria-label="Меню аккаунта">
+            <span class="rbx-blocky rbx-blocky-sm" id="hub-top-avatar"></span>
+          </button>
         </div>
       </header>
+      <div class="rbx-user-menu profile-hidden" id="hub-user-menu">
+        <div class="rbx-user-menu-head">
+          <span class="rbx-blocky rbx-blocky-sm" id="hub-menu-avatar"></span>
+          <div>
+            <div class="rbx-user-menu-name" id="hub-menu-name">Гость</div>
+            <div style="font-size:0.78rem;color:#c4b5fd;font-weight:600" id="hub-menu-tag">@guest</div>
+          </div>
+        </div>
+        <button type="button" class="rbx-user-menu-item" id="hub-menu-profile">Профиль</button>
+        <button type="button" class="rbx-user-menu-item" id="hub-menu-friends">Друзья</button>
+        <button type="button" class="rbx-user-menu-item" id="hub-menu-avatar">Аватар</button>
+        <button type="button" class="rbx-user-menu-item" id="hub-menu-login">Войти</button>
+        <button type="button" class="rbx-user-menu-item danger profile-hidden" id="hub-menu-logout">Выйти</button>
+      </div>
 
       <div class="rbx-search-panel profile-hidden" id="hub-search-panel">
-        <input type="search" class="rbx-search-input" id="hub-search-input" placeholder="Буква или название игры..." autocomplete="off" enterkeyhint="search">
+        <input type="search" class="rbx-search-input" id="hub-search-input-legacy" autocomplete="off">
         <button type="button" class="rbx-search-close" id="hub-search-close" aria-label="Закрыть поиск">✕</button>
       </div>
 
       <div class="rbx-hub-scroll">
+        <div class="rbx-hub-panel active" data-hub-panel="home">
         <div class="rbx-profile-row" id="hub-user-strip">
           <div class="rbx-user-avatar" id="hub-user-avatar">?</div>
           <div class="rbx-profile-meta">
             <div class="rbx-user-name" id="hub-user-name">Гость</div>
             <div class="rbx-user-tag" id="hub-user-tag">PlayVerse</div>
           </div>
+          <span class="profile-hidden" id="hub-user-status">В сети</span>
           <span class="profile-hidden" id="hub-profile-dot">?</span>
           <span class="profile-hidden" id="hub-profile-label">Профиль</span>
+          <span class="profile-hidden" id="hub-nav-avatar">?</span>
         </div>
 
         <section class="rbx-hub-section">
@@ -5571,12 +5895,10 @@
           <div class="rbx-friends-rail" id="hub-friends-rail"></div>
         </section>
 
-        <section class="rbx-hub-section">
-          <h2 class="rbx-section-title">Открой для себя аватары</h2>
-          <div class="rbx-avatar-shop-rail" id="hub-avatar-shop"></div>
-        </section>
-
         <section class="rbx-rec-section">
+          <h2 class="rbx-section-title">Продолжить</h2>
+          <div class="rbx-games-scroll rbx-continue-row" id="hub-continue-row"></div>
+          <h2 class="rbx-section-title" style="margin-top:14px">Рекомендуем</h2>
           <div class="rbx-games-scroll">
             <div class="hub-grid" id="hub-grid">
             <p class="hub-search-empty profile-hidden" id="hub-search-empty">Нет игр на эту букву</p>
@@ -6044,6 +6366,47 @@
             </div>
           </div>
         </section>
+        </div>
+
+        <div class="rbx-hub-panel" data-hub-panel="charts">
+          <h2 class="rbx-section-title">Популярное</h2>
+          <div class="rbx-games-scroll">
+            <div class="hub-grid" id="hub-charts-grid"></div>
+          </div>
+        </div>
+
+        <div class="rbx-hub-panel" data-hub-panel="avatar">
+          <div style="text-align:center;padding:16px 0 8px">
+            <div class="rbx-blocky rbx-blocky-lg" id="hub-blocky-preview"></div>
+            <div id="hub-blocky-name" style="font-weight:900;color:#fff;margin-top:8px">Гость</div>
+          </div>
+          <h2 class="rbx-section-title">Магазин аватаров</h2>
+          <div class="rbx-avatar-shop-rail" id="hub-avatar-shop"></div>
+        </div>
+
+        <div class="rbx-hub-panel" data-hub-panel="chats">
+          <div class="rbx-chat-layout">
+            <div class="rbx-chat-list" id="hub-chat-list"></div>
+            <div class="rbx-chat-thread">
+              <div class="rbx-chat-msgs" id="hub-chat-msgs"></div>
+              <form class="rbx-chat-form" id="hub-chat-form">
+                <input type="text" id="hub-chat-input" maxlength="200" placeholder="Напиши сообщение..." autocomplete="off">
+                <button type="submit">Отправить</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="rbx-hub-panel" data-hub-panel="more">
+          <div class="rbx-more-list">
+            <button type="button" class="rbx-more-btn" id="more-profile">👤 Профиль и настройки</button>
+            <button type="button" class="rbx-more-btn" id="more-friends">🤝 Друзья <span class="rbx-nav-badge" id="hub-friends-badge"></span></button>
+            <button type="button" class="rbx-more-btn" id="more-rules">📋 Правила</button>
+            <button type="button" class="rbx-more-btn" id="more-factory">🏭 Фабрика игр</button>
+            <button type="button" class="rbx-more-btn danger profile-hidden" id="more-logout">🚪 Выйти</button>
+            <button type="button" class="rbx-more-btn" id="more-login">🔑 Войти / Регистрация</button>
+          </div>
+        </div>
       </div>
 
       <nav class="rbx-bottom-nav" aria-label="Навигация хаба">
@@ -6051,9 +6414,21 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           Главная
         </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="account" aria-label="Аккаунт">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          Аккаунт
+        <button type="button" class="rbx-nav-item" data-hub-nav="charts" aria-label="Популярное">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          Популярное
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="avatar" aria-label="Аватар">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
+          Аватар
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="chats" aria-label="Чаты">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+          Чаты
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="more" aria-label="Ещё">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          Ещё
         </button>
       </nav>
     </div>
@@ -6087,9 +6462,21 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           Главная
         </button>
-        <button type="button" class="rbx-nav-item" data-hub-nav="account" aria-label="Аккаунт">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          Аккаунт
+        <button type="button" class="rbx-nav-item" data-hub-nav="charts" aria-label="Популярное">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          Популярное
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="avatar" aria-label="Аватар">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
+          Аватар
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="chats" aria-label="Чаты">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+          Чаты
+        </button>
+        <button type="button" class="rbx-nav-item active" data-hub-nav="more" aria-label="Ещё">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          Ещё
         </button>
       </nav>
     </div>
@@ -7803,16 +8190,21 @@
 
     function setHubNavActive(nav) {
       if (!nav) return;
+      window._hubPanel = nav;
       document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
         btn.classList.toggle("active", btn.getAttribute("data-hub-nav") === nav);
+      });
+      document.querySelectorAll("[data-hub-panel]").forEach((panel) => {
+        panel.classList.toggle("active", panel.getAttribute("data-hub-panel") === nav);
       });
     }
     window.setHubNavActive = setHubNavActive;
 
     function showScreen(name) {
-      if (name !== "profile" && name !== "userProfile" && name !== "friends" && !isUserLoggedIn()) {
-        name = "profile";
-        if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
+      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "cover" && !isUserLoggedIn()) {
+        name = "cover";
+        if (typeof openRbxLoginModal === "function") openRbxLoginModal();
+        else if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
       }
       if (!screens[name]) return;
       Object.values(screens).forEach(s => s && s.classList.remove("active"));
@@ -7843,8 +8235,11 @@
         }
       }
       if (typeof setHubNavActive === "function") {
-        const hubNav = name === "profile" ? "account" : (name === "cover" ? "home" : null);
-        setHubNavActive(hubNav);
+        let hubNav = null;
+        if (name === "cover") hubNav = window._hubPanel || "home";
+        else if (name === "profile" || name === "userProfile") hubNav = "more";
+        else if (name === "friends") hubNav = "more";
+        if (hubNav) setHubNavActive(hubNav);
       }
       if (name !== "intro" && window.speechSynthesis) window.speechSynthesis.cancel();
       if (!playing && typeof closeRules === "function") closeRules();
@@ -8616,29 +9011,9 @@ const HUB_GAME_META = {
     window.applyHubSearchFilter = applyHubSearchFilter;
 
     function initHubSearch() {
-      const btn = document.getElementById("hub-search-btn");
-      const panel = document.getElementById("hub-search-panel");
       const input = document.getElementById("hub-search-input");
-      const closeBtn = document.getElementById("hub-search-close");
-      if (!btn || !panel || !input) return;
+      if (!input) return;
 
-      function openSearch() {
-        panel.classList.remove("profile-hidden");
-        input.focus();
-        input.select();
-      }
-      function closeSearch() {
-        panel.classList.add("profile-hidden");
-        input.value = "";
-        hubSearchQuery = "";
-        applyHubSearchFilter();
-      }
-
-      btn.addEventListener("click", () => {
-        if (panel.classList.contains("profile-hidden")) openSearch();
-        else closeSearch();
-      });
-      if (closeBtn) closeBtn.addEventListener("click", closeSearch);
       input.addEventListener("input", () => {
         hubSearchQuery = input.value;
         applyHubSearchFilter();
@@ -8646,22 +9021,356 @@ const HUB_GAME_META = {
       input.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           e.preventDefault();
-          closeSearch();
+          input.value = "";
+          hubSearchQuery = "";
+          applyHubSearchFilter();
+          input.blur();
         }
       });
-
-      const betaBtn = document.getElementById("hub-beta-btn");
-      if (betaBtn) {
-        betaBtn.addEventListener("click", () => {
-          if (window.PVProfile && typeof PVProfile.toast === "function") {
-            PVProfile.toast("Новая версия сайта — ещё в разработке");
-          }
-        });
-      }
     }
     initHubSearch();
 
+    /* ===== Roblox UI (фиолетовая тема) ===== */
+    const CHAT_KEY_PREFIX = "pv_rbx_chat_";
+    let hubChatPeer = null;
+
+    function rbxHue(name, fallback) {
+      let h = fallback || 270;
+      const s = String(name || "");
+      for (let i = 0; i < s.length; i++) h = (h + s.charCodeAt(i) * 17) % 360;
+      return h;
+    }
+
+    function blockyAvatarHtml(u, username) {
+      const name = username || (u && u.username) || "guest";
+      const hue = u && typeof u.avatarHue === "number" ? u.avatarHue : rbxHue(name, 270);
+      const shirt = "hsl(" + hue + ",55%,52%)";
+      const pants = "hsl(" + ((hue + 40) % 360) + ",45%,32%)";
+      return '<span class="rbx-blocky-head"></span>' +
+        '<span class="rbx-blocky-torso" style="background:' + shirt + '"></span>' +
+        '<span class="rbx-blocky-legs">' +
+        '<span class="rbx-blocky-leg" style="background:' + pants + '"></span>' +
+        '<span class="rbx-blocky-leg" style="background:' + pants + '"></span></span>';
+    }
+
+    function fillBlockyEl(node, u, username) {
+      if (!node) return;
+      node.className = node.className.replace(/\s*rbx-blocky-lg|\s*rbx-blocky-sm/g, "").trim();
+      if (!node.classList.contains("rbx-blocky")) node.classList.add("rbx-blocky");
+      node.innerHTML = blockyAvatarHtml(u, username);
+    }
+
+    function openRbxLoginModal(tab) {
+      const ov = document.getElementById("rbx-login-overlay");
+      if (!ov) return;
+      ov.classList.add("open");
+      ov.setAttribute("aria-hidden", "false");
+      if (window.PVProfile && typeof PVProfile.syncRbxModalSelects === "function") PVProfile.syncRbxModalSelects();
+      if (tab === "register") {
+        document.querySelectorAll("[data-rbx-login-tab]").forEach((t) => {
+          t.classList.toggle("active", t.getAttribute("data-rbx-login-tab") === "register");
+        });
+        const lf = document.getElementById("rbx-modal-login-form");
+        const rf = document.getElementById("rbx-modal-register-form");
+        if (lf) lf.classList.add("profile-hidden");
+        if (rf) rf.classList.remove("profile-hidden");
+      }
+    }
+    window.openRbxLoginModal = openRbxLoginModal;
+
+    function closeRbxLoginModal() {
+      const ov = document.getElementById("rbx-login-overlay");
+      if (!ov) return;
+      ov.classList.remove("open");
+      ov.setAttribute("aria-hidden", "true");
+    }
+
+    function chatStorageKey(a, b) {
+      const pair = [a, b].sort();
+      return CHAT_KEY_PREFIX + pair[0] + "__" + pair[1];
+    }
+
+    function loadChatMessages(me, peer) {
+      try {
+        return JSON.parse(localStorage.getItem(chatStorageKey(me, peer))) || [];
+      } catch (e) { return []; }
+    }
+
+    function saveChatMessage(me, peer, text, fromMe) {
+      const msgs = loadChatMessages(me, peer);
+      msgs.push({ text: text, fromMe: !!fromMe, t: Date.now() });
+      if (msgs.length > 100) msgs.splice(0, msgs.length - 100);
+      localStorage.setItem(chatStorageKey(me, peer), JSON.stringify(msgs));
+    }
+
+    function renderHubChat() {
+      const listEl = document.getElementById("hub-chat-list");
+      const msgsEl = document.getElementById("hub-chat-msgs");
+      if (!listEl || !msgsEl) return;
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      if (!logged) {
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Войди, чтобы писать друзьям</p>';
+        msgsEl.innerHTML = "";
+        hubChatPeer = null;
+        return;
+      }
+      const me = PVProfile.currentUser && PVProfile.currentUser();
+      const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      if (!friends.length) {
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей — и пиши им здесь</p>';
+        msgsEl.innerHTML = "";
+        hubChatPeer = null;
+        return;
+      }
+      if (!hubChatPeer || friends.indexOf(hubChatPeer) < 0) hubChatPeer = friends[0];
+      listEl.innerHTML = friends.map((name) =>
+        '<button type="button" class="rbx-chat-contact' + (name === hubChatPeer ? " active" : "") + '" data-chat-peer="' + name + '">' +
+        '<span class="rbx-blocky rbx-blocky-sm" data-chat-blocky="' + name + '"></span>' +
+        '<span style="font-weight:800">' + name + '</span></button>'
+      ).join("");
+      listEl.querySelectorAll("[data-chat-peer]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          hubChatPeer = btn.getAttribute("data-chat-peer");
+          renderHubChat();
+        });
+      });
+      listEl.querySelectorAll("[data-chat-blocky]").forEach((node) => {
+        const name = node.getAttribute("data-chat-blocky");
+        const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+        fillBlockyEl(node, users[name], name);
+      });
+      const msgs = loadChatMessages(me.username, hubChatPeer);
+      msgsEl.innerHTML = msgs.map((m) =>
+        '<div class="rbx-chat-bubble ' + (m.fromMe ? "me" : "them") + '">' + String(m.text).replace(/[<>&]/g, (c) => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c])) + '</div>'
+      ).join("");
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    }
+
+    function renderHubChartsGrid() {
+      const charts = document.getElementById("hub-charts-grid");
+      const source = document.getElementById("hub-grid");
+      if (!charts || !source) return;
+      const cards = Array.from(source.querySelectorAll(".cover-card")).slice();
+      cards.sort((a, b) => {
+        const ra = parseInt((a.querySelector(".hub-card-rating span") || {}).textContent) || 0;
+        const rb = parseInt((b.querySelector(".hub-card-rating span") || {}).textContent) || 0;
+        return rb - ra;
+      });
+      charts.innerHTML = "";
+      cards.forEach((c) => charts.appendChild(c.cloneNode(true)));
+      if (typeof bindHubCards === "function") bindHubCards(charts);
+      if (typeof enhanceHubCardRatings === "function") enhanceHubCardRatings();
+    }
+
+    function renderHubContinueRow() {
+      const row = document.getElementById("hub-continue-row");
+      const source = document.getElementById("hub-grid");
+      if (!row || !source) return;
+      row.innerHTML = "";
+      let ids = [];
+      try {
+        const s = JSON.parse(localStorage.getItem("playverse_session"));
+        if (s && s.username) {
+          const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+          const hist = (users[s.username] && users[s.username].history) || [];
+          ids = hist.map((h) => h.game).filter(Boolean).reverse();
+        }
+      } catch (e) {}
+      const seen = new Set();
+      ids = ids.filter((id) => { if (seen.has(id)) return false; seen.add(id); return true; }).slice(0, 4);
+      if (!ids.length) {
+        row.innerHTML = '<p style="padding:0 16px;color:#c4b5fd;font-weight:700;font-size:0.9rem">Сыграй в любую игру — она появится здесь</p>';
+        return;
+      }
+      ids.forEach((id) => {
+        const card = source.querySelector("#cover-card-" + id);
+        if (card) row.appendChild(card.cloneNode(true));
+      });
+      if (typeof bindHubCards === "function") bindHubCards(row);
+    }
+
+    function renderRbxHubExtras() {
+      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
+      const u = logged && PVProfile.currentUser ? PVProfile.currentUser() : null;
+      const name = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
+      fillBlockyEl(document.getElementById("hub-top-avatar"), u, u && u.username);
+      fillBlockyEl(document.getElementById("hub-menu-avatar"), u, u && u.username);
+      fillBlockyEl(document.getElementById("hub-blocky-preview"), u, u && u.username);
+      const menuName = document.getElementById("hub-menu-name");
+      const menuTag = document.getElementById("hub-menu-tag");
+      const blockyName = document.getElementById("hub-blocky-name");
+      if (menuName) menuName.textContent = name;
+      if (menuTag) menuTag.textContent = u ? ("@" + u.username.toLowerCase()) : "@guest";
+      if (blockyName) blockyName.textContent = name;
+      const loginBtn = document.getElementById("hub-menu-login");
+      const logoutBtn = document.getElementById("hub-menu-logout");
+      const moreLogin = document.getElementById("more-login");
+      const moreLogout = document.getElementById("more-logout");
+      if (loginBtn) loginBtn.classList.toggle("profile-hidden", !!logged);
+      if (logoutBtn) logoutBtn.classList.toggle("profile-hidden", !logged);
+      if (moreLogin) moreLogin.classList.toggle("profile-hidden", !!logged);
+      if (moreLogout) moreLogout.classList.toggle("profile-hidden", !logged);
+      renderHubContinueRow();
+      if (document.querySelector('[data-hub-panel="charts"].active')) renderHubChartsGrid();
+      if (document.querySelector('[data-hub-panel="chats"].active')) renderHubChat();
+    }
+    window.renderRbxHubExtras = renderRbxHubExtras;
+
+    function bindHubCards(container) {
+      if (!container) return;
+      container.querySelectorAll(".cover-card[id^='cover-card-']").forEach((card) => {
+        const id = card.id.replace("cover-card-", "");
+        if (id === "factory") {
+          card.addEventListener("click", () => {
+            if (!isUserLoggedIn()) { openRbxLoginModal(); return; }
+            if (typeof showScreen === "function") showScreen("factory");
+          });
+        } else {
+          card.addEventListener("click", () => launchFromHub(card, id));
+        }
+      });
+    }
+    window.bindHubCards = bindHubCards;
+
+    function initRbxV2UI() {
+      const menuBtn = document.getElementById("hub-user-menu-btn");
+      const menu = document.getElementById("hub-user-menu");
+      if (menuBtn && menu) {
+        menuBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          menu.classList.toggle("profile-hidden");
+        });
+        document.addEventListener("click", () => menu.classList.add("profile-hidden"));
+        menu.addEventListener("click", (e) => e.stopPropagation());
+      }
+      const closeLogin = document.getElementById("rbx-login-close");
+      const loginOv = document.getElementById("rbx-login-overlay");
+      if (closeLogin) closeLogin.addEventListener("click", closeRbxLoginModal);
+      if (loginOv) loginOv.addEventListener("click", (e) => { if (e.target === loginOv) closeRbxLoginModal(); });
+
+      document.querySelectorAll("[data-rbx-login-tab]").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const t = tab.getAttribute("data-rbx-login-tab");
+          document.querySelectorAll("[data-rbx-login-tab]").forEach((x) => x.classList.toggle("active", x === tab));
+          const lf = document.getElementById("rbx-modal-login-form");
+          const rf = document.getElementById("rbx-modal-register-form");
+          if (lf) lf.classList.toggle("profile-hidden", t !== "login");
+          if (rf) rf.classList.toggle("profile-hidden", t !== "register");
+        });
+      });
+
+      const openLogin = () => { if (menu) menu.classList.add("profile-hidden"); openRbxLoginModal("login"); };
+      ["hub-menu-login", "more-login"].forEach((id) => {
+        const b = document.getElementById(id);
+        if (b) b.addEventListener("click", openLogin);
+      });
+      const doLogout = () => {
+        if (menu) menu.classList.add("profile-hidden");
+        if (window.PVProfile && PVProfile.logout) PVProfile.logout();
+      };
+      ["hub-menu-logout", "more-logout"].forEach((id) => {
+        const b = document.getElementById(id);
+        if (b) b.addEventListener("click", doLogout);
+      });
+      const openProf = () => {
+        if (menu) menu.classList.add("profile-hidden");
+        if (window.PVProfile && PVProfile.open) PVProfile.open();
+      };
+      document.getElementById("hub-menu-profile")?.addEventListener("click", openProf);
+      document.getElementById("more-profile")?.addEventListener("click", openProf);
+      document.getElementById("hub-menu-friends")?.addEventListener("click", () => {
+        if (menu) menu.classList.add("profile-hidden");
+        if (window.PVProfile && PVProfile.openFriends) PVProfile.openFriends();
+      });
+      document.getElementById("more-friends")?.addEventListener("click", () => {
+        if (window.PVProfile && PVProfile.openFriends) PVProfile.openFriends();
+      });
+      document.getElementById("hub-menu-avatar")?.addEventListener("click", () => {
+        if (menu) menu.classList.add("profile-hidden");
+        if (typeof setHubNavActive === "function") setHubNavActive("avatar");
+        if (typeof showScreen === "function") showScreen("cover");
+      });
+      document.getElementById("more-rules")?.addEventListener("click", () => {
+        document.getElementById("rules-tab")?.click();
+      });
+      document.getElementById("more-factory")?.addEventListener("click", () => {
+        if (!isUserLoggedIn()) { openRbxLoginModal(); return; }
+        if (typeof showScreen === "function") showScreen("factory");
+      });
+      document.getElementById("hub-logo-btn")?.addEventListener("click", () => {
+        if (typeof setHubNavActive === "function") setHubNavActive("home");
+        if (typeof showScreen === "function") showScreen("cover");
+      });
+
+      document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const nav = btn.getAttribute("data-hub-nav");
+          if (nav === "chats" && !isUserLoggedIn()) { openRbxLoginModal(); return; }
+          if (typeof showScreen === "function") showScreen("cover");
+          if (typeof setHubNavActive === "function") setHubNavActive(nav);
+          if (nav === "charts") renderHubChartsGrid();
+          if (nav === "chats") renderHubChat();
+          document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      const chatForm = document.getElementById("hub-chat-form");
+      if (chatForm) {
+        chatForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!isUserLoggedIn() || !hubChatPeer) { openRbxLoginModal(); return; }
+          const input = document.getElementById("hub-chat-input");
+          const text = input && input.value.trim();
+          if (!text) return;
+          const me = PVProfile.currentUser();
+          saveChatMessage(me.username, hubChatPeer, text, true);
+          if (input) input.value = "";
+          renderHubChat();
+        });
+      }
+
+      const modalLogin = document.getElementById("rbx-modal-login-form");
+      if (modalLogin) {
+        modalLogin.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!window.PVProfile) return;
+          const name = document.getElementById("rbx-modal-login-name").value.trim();
+          const pass = document.getElementById("rbx-modal-login-pass").value;
+          const msg = document.getElementById("rbx-modal-login-msg");
+          const err = await PVProfile.login(name, pass);
+          if (err) { if (msg) msg.textContent = err; return; }
+          if (msg) msg.textContent = "Добро пожаловать!";
+          PVProfile.render();
+          closeRbxLoginModal();
+          PVProfile.toast("Вход выполнен");
+        });
+      }
+      const modalReg = document.getElementById("rbx-modal-register-form");
+      if (modalReg) {
+        modalReg.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!window.PVProfile) return;
+          const name = document.getElementById("rbx-modal-reg-name").value.trim();
+          const pass = document.getElementById("rbx-modal-reg-pass").value;
+          const pass2 = document.getElementById("rbx-modal-reg-pass2").value;
+          const msg = document.getElementById("rbx-modal-register-msg");
+          if (pass !== pass2) { if (msg) msg.textContent = "Пароли не совпадают"; return; }
+          const err = await PVProfile.register(name, pass);
+          if (err) { if (msg) msg.textContent = err; return; }
+          if (msg) msg.textContent = "Аккаунт создан!";
+          PVProfile.render();
+          closeRbxLoginModal();
+          PVProfile.toast("Регистрация успешна");
+        });
+      }
+    }
+    initRbxV2UI();
+
     function launchFromHub(card, mode) {
+      if (!isUserLoggedIn()) {
+        openRbxLoginModal();
+        return;
+      }
       if (hubLaunching) return;
       if (window.PVAdmin && PVAdmin.isGameDisabled(mode)) {
         if (window.PVProfile && PVProfile.toast) PVProfile.toast("Игра временно отключена администратором");
@@ -14434,6 +15143,7 @@ const HUB_GAME_META = {
             : '<option value="">Все имена заняты</option>';
           if (prev && available.indexOf(prev) >= 0) regSel.value = prev;
         }
+        syncRbxModalSelects();
       }
 
       function applyShopAvatarToUser(u, shopId) {
@@ -15335,7 +16045,7 @@ const HUB_GAME_META = {
       function openFriendsPage() {
         if (!isLoggedIn()) {
           toast("Сначала войди в аккаунт");
-          if (typeof showScreen === "function") showScreen("profile");
+          if (typeof openRbxLoginModal === "function") openRbxLoginModal();
           return;
         }
         const open = () => {
@@ -16383,7 +17093,8 @@ const HUB_GAME_META = {
           repairUserRecord(u, getSession() && getSession().username);
           const label = activeDisplayLabel(u);
           html += '<button type="button" class="rbx-friend-tile me" id="hub-self-tile">' +
-            '<div class="rbx-friend-avatar" data-rail-avatar="self">' + initials(label) +
+            '<div class="rbx-friend-avatar" data-rail-avatar="self">' +
+            '<span class="rbx-blocky rbx-blocky-sm" id="hub-self-blocky"></span>' +
             '<span class="online-dot"></span></div>' +
             '<span class="rbx-friend-name">' + label + '</span></button>';
         }
@@ -16396,7 +17107,8 @@ const HUB_GAME_META = {
             if (fu) repairUserRecord(fu, fname);
             const label = friendDisplayName(fname, fu);
             html += '<button type="button" class="rbx-friend-tile" data-hub-friend="' + fname + '">' +
-              '<div class="rbx-friend-avatar" data-rail-avatar="' + fname + '">' + initials(label) +
+              '<div class="rbx-friend-avatar" data-rail-avatar="' + fname + '">' +
+              '<span class="rbx-blocky rbx-blocky-sm" data-rail-blocky="' + fname + '"></span>' +
               '<span class="online-dot"></span></div>' +
               '<span class="rbx-friend-name">' + label + '</span></button>';
           });
@@ -16409,6 +17121,12 @@ const HUB_GAME_META = {
         el.hubFriendsRail.querySelectorAll("[data-hub-friend]").forEach((btn) => {
           btn.addEventListener("click", () => openUserProfile(btn.getAttribute("data-hub-friend")));
         });
+        el.hubFriendsRail.querySelectorAll("[data-rail-blocky]").forEach((node) => {
+          const key = node.getAttribute("data-rail-blocky");
+          fillBlockyEl(node, users[key], key);
+        });
+        const selfBlocky = document.getElementById("hub-self-blocky");
+        if (selfBlocky && u) fillBlockyEl(selfBlocky, u, activeUsername(u));
         el.hubFriendsRail.querySelectorAll("[data-rail-avatar]").forEach((node) => {
           const key = node.getAttribute("data-rail-avatar");
           if (key === "self" && u) applyAvatarEl(node, u, activeUsername(u));
@@ -16464,6 +17182,7 @@ const HUB_GAME_META = {
         renderHubFriendsRail();
         renderAvatarShop();
         updateFriendsBadges();
+        if (typeof window.renderRbxHubExtras === "function") window.renderRbxHubExtras();
         if (typeof window.enhanceHubCardRatings === "function") window.enhanceHubCardRatings();
       }
 
@@ -16543,7 +17262,7 @@ const HUB_GAME_META = {
       function goToGames() {
         if (!isLoggedIn()) {
           toast("Сначала войди в аккаунт");
-          if (typeof showScreen === "function") showScreen("profile");
+          if (typeof openRbxLoginModal === "function") openRbxLoginModal();
           return;
         }
         if (typeof showScreen === "function") showScreen("cover");
@@ -16573,8 +17292,17 @@ const HUB_GAME_META = {
             setTimeout(() => toast("У тебя " + pending + " " + (pending === 1 ? "заявка" : (pending < 5 ? "заявки" : "заявок")) + " в друзья"), 700);
           }
           if (isLoggedIn()) goToGames();
-          else if (typeof showScreen === "function") showScreen("profile");
+          else if (typeof showScreen === "function") showScreen("cover");
         });
+      }
+
+      function syncRbxModalSelects() {
+        const loginSel = document.getElementById("rbx-modal-login-name");
+        const regSel = document.getElementById("rbx-modal-reg-name");
+        const srcLogin = document.getElementById("profile-login-name");
+        const srcReg = document.getElementById("profile-reg-name");
+        if (loginSel && srcLogin) loginSel.innerHTML = srcLogin.innerHTML;
+        if (regSel && srcReg) regSel.innerHTML = srcReg.innerHTML;
       }
 
       async function register(name, pass) {
@@ -16650,7 +17378,8 @@ const HUB_GAME_META = {
       function logout() {
         setSession(null);
         render();
-        if (typeof showScreen === "function") showScreen("profile");
+        if (typeof showScreen === "function") showScreen("cover");
+        if (typeof setHubNavActive === "function") setHubNavActive("home");
         toast("Вы вышли из аккаунта");
       }
 
@@ -16721,18 +17450,6 @@ const HUB_GAME_META = {
           }
         });
       }
-      document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const nav = btn.getAttribute("data-hub-nav");
-          if (nav === "home") {
-            if (typeof showScreen === "function") showScreen("cover");
-            document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
-          } else if (nav === "account") {
-            openProfile();
-          }
-          if (typeof setHubNavActive === "function") setHubNavActive(nav);
-        });
-      });
       if (el.adminBlockBtn) el.adminBlockBtn.addEventListener("click", () => {
         const err = blockUser(el.adminBlockName && el.adminBlockName.value);
         if (err) { toast(err); return; }
@@ -16785,12 +17502,20 @@ const HUB_GAME_META = {
       window.PVProfile = {
         open: openProfile,
         openUserProfile: openUserProfile,
+        openFriends: openFriendsPage,
         render: render,
         renderHub: renderHubChip,
         renderFriendsPage: renderFriendsPage,
         openFriendsPage: openFriendsPage,
         goToGames: goToGames,
         isLoggedIn: isLoggedIn,
+        currentUser: currentUser,
+        getFriends: getFriends,
+        activeDisplayLabel: activeDisplayLabel,
+        login: login,
+        register: register,
+        logout: logout,
+        syncRbxModalSelects: syncRbxModalSelects,
         isFavorite: isFavorite,
         toggleFavorite: toggleFavorite,
         toast: toast,
@@ -17181,6 +17906,14 @@ const HUB_GAME_META = {
       }
 
       function playerAvatarHtml(p) {
+        if (document.body.classList.contains("rbx-v2")) {
+          let u = null;
+          if (p.accountUsername) {
+            try { u = JSON.parse(localStorage.getItem("playverse_users") || "{}")[p.accountUsername]; } catch (e) {}
+          }
+          return '<div class="pv-rbx-avatar rbx-blocky-wrap"><span class="rbx-blocky rbx-blocky-sm">' +
+            blockyAvatarHtml(u || { avatarHue: p.hue }, p.accountUsername || p.display) + '</span></div>';
+        }
         if (p.avatarImage) {
           return '<div class="pv-rbx-avatar pv-rbx-avatar-img"><img src="' + escapeHtml(p.avatarImage) + '" alt=""></div>';
         }
