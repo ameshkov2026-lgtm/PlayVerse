@@ -89,6 +89,30 @@
       flex-direction: column;
       min-height: 0;
     }
+    .hub-panel { display: none; flex-direction: column; min-height: min-content; }
+    .hub-panel.active { display: flex; }
+    .hub-v2-dev { padding: 0 16px 24px; }
+    .hub-v2-dev-card {
+      border-radius: 16px; overflow: hidden;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .hub-v2-dev-image { position: relative; }
+    .hub-v2-dev-image img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .hub-v2-dev-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #78350f;
+      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em;
+      padding: 6px 12px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .hub-v2-dev-body { padding: 14px 16px 16px; }
+    .hub-v2-dev-title { margin: 0 0 8px; font-size: 1.1rem; font-weight: 900; color: #fff; }
+    .hub-v2-dev-text { margin: 0 0 14px; font-size: 0.9rem; line-height: 1.5; color: #e9d5ff; font-weight: 600; }
+    .hub-v2-dev-btn {
+      width: 100%; border: none; border-radius: 999px; padding: 12px 16px;
+      background: #9333ea; color: #fff; font-weight: 900; font-size: 0.92rem; cursor: pointer;
+    }
+    .hub-v2-dev-btn:hover { filter: brightness(1.08); }
     .rbx-topbar {
       display: flex;
       align-items: center;
@@ -508,7 +532,7 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      gap: 48px;
+      gap: 28px;
       padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
       background: rgba(59, 7, 100, 0.92);
       border-top: 1px solid rgba(255,255,255,0.14);
@@ -788,23 +812,47 @@
       background: #1e293b;
       position: relative;
     }
-    
+    .hub-join-banner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
     .hub-join-icon-modern .cover-art,
     .hub-join-banner .cover-art,
     .hub-join-loading-icon .cover-art,
     .hub-join-loading-bg .cover-art {
       width: 100%;
       height: 100%;
+      min-height: 0;
+      flex: none;
       position: absolute;
       inset: 0;
       border-radius: inherit;
       box-shadow: none;
     }
+    .hub-join-icon-modern .cover-art .cover-preview,
+    .hub-join-banner .cover-art .cover-preview,
+    .hub-join-loading-icon .cover-art .cover-preview,
+    .hub-join-loading-bg .cover-art .cover-preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
-    .hub-join-icon-modern img, .hub-join-icon-modern svg {
+    .hub-join-icon-modern img,
+    .hub-join-icon-modern svg,
+    .hub-join-banner img,
+    .hub-join-banner svg,
+    .hub-join-loading-icon img,
+    .hub-join-loading-icon svg,
+    .hub-join-loading-bg img,
+    .hub-join-loading-bg svg {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
     .hub-join-info-modern {
       flex: 1;
@@ -836,15 +884,6 @@
       position: relative;
       background: #1e293b;
       aspect-ratio: 16 / 9;
-    }
-    .hub-join-banner {
-      width: 100%;
-      height: 100%;
-    }
-    .hub-join-banner img, .hub-join-banner svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
     .hub-join-banner-dots {
       position: absolute;
@@ -1070,6 +1109,7 @@
       align-items: center;
     }
     .hub-join-loading-icon {
+      position: relative;
       width: 120px;
       height: 120px;
       border-radius: 16px;
@@ -1078,11 +1118,6 @@
       margin-bottom: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       background: #1e293b;
-    }
-    .hub-join-loading-icon img, .hub-join-loading-icon svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
     #hub-join-loading-title {
       font-size: 18px;
@@ -5247,7 +5282,14 @@
       border: none; background: rgba(255,255,255,0.12); color: #ede9fe;
       border-radius: 999px; padding: 8px 12px; font-weight: 800; font-size: 0.82rem; cursor: pointer; flex-shrink: 0;
     }
-    .nv-logo { font-weight: 900; font-size: 1.05rem; color: #fff; flex-shrink: 0; }
+    .nv-logo { font-weight: 900; font-size: 1.12rem; color: #fff; flex-shrink: 0; letter-spacing: -0.02em; }
+    .nv-brand-hero { text-align: center; padding: 18px 16px 6px; }
+    .nv-brand-title {
+      margin: 0; font-size: clamp(2.1rem, 9vw, 3rem); font-weight: 900; line-height: 1.05;
+      color: #fff; letter-spacing: -0.03em;
+      text-shadow: 0 4px 28px rgba(168,85,247,0.45);
+    }
+    .nv-brand-title em { font-style: normal; color: #fde68a; }
     .nv-search-wrap {
       flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0;
       background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.14);
@@ -5373,10 +5415,168 @@
       width: 100%; margin-top: 8px; padding: 14px; border: none; border-radius: 10px;
       background: #9333ea; color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer;
     }
-    .nv-login-close {
-      position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,0.15);
-      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    body.on-newverse .rules-tab,
+    body.on-newverse .music-tab,
+    body.on-newverse .hub-exit { display: none !important; }
+    .nv-add-friend-row {
+      display: flex; gap: 8px; padding: 0 16px 12px;
     }
+    .nv-add-friend-row input {
+      flex: 1; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px;
+      padding: 10px 14px; background: rgba(0,0,0,0.2); color: #fff; font-weight: 600;
+    }
+    .nv-add-friend-row button {
+      border: none; border-radius: 999px; padding: 10px 14px; background: #9333ea;
+      color: #fff; font-weight: 800; cursor: pointer; white-space: nowrap;
+    }
+
+    /* ===== Новости PlayVerse (1.0 + 2.0) ===== */
+    .pv-news-feed { display: flex; flex-direction: column; gap: 14px; padding: 0 16px 8px; }
+    .pv-news-card {
+      border-radius: 16px; overflow: hidden;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .pv-news-image img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+    .pv-news-banner {
+      min-height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 40%, #c026d3 100%);
+      position: relative; overflow: hidden;
+    }
+    .pv-news-banner::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(253,224,71,0.25), transparent 40%);
+    }
+    .pv-news-banner-badge {
+      position: relative; z-index: 1; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.08em;
+      background: rgba(0,0,0,0.25); color: #fde68a; padding: 4px 10px; border-radius: 999px;
+    }
+    .pv-news-banner-title {
+      position: relative; z-index: 1; font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 900; color: #fff;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    }
+    .pv-news-body { padding: 14px 16px 16px; }
+    .pv-news-date { display: block; font-size: 0.78rem; font-weight: 700; color: #c4b5fd; margin-bottom: 6px; }
+    .pv-news-title { margin: 0 0 10px; font-size: 1.22rem; font-weight: 900; color: #fff; line-height: 1.3; }
+    .pv-news-text { margin: 0; font-size: 1.05rem; line-height: 1.55; color: #e9d5ff; font-weight: 600; }
+    body.on-cover .pv-news-card {
+      background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2);
+    }
+    body.on-cover .pv-news-text { color: #f3e8ff; }
+
+    /* ===== Заявки на игры (PlayVerse 2) ===== */
+    .nv-requests-lead {
+      margin: 0 16px 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(168,85,247,0.18); border: 1px solid rgba(255,255,255,0.14);
+      color: #ddd6fe; font-weight: 700; font-size: 0.88rem; line-height: 1.45;
+    }
+    .nv-request-form {
+      display: flex; flex-direction: column; gap: 10px; padding: 0 16px 8px;
+    }
+    .nv-request-form textarea {
+      min-height: 96px; resize: vertical; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px;
+      padding: 12px 14px; background: rgba(0,0,0,0.22); color: #fff; font-weight: 600; font-family: inherit;
+      font-size: 0.92rem; line-height: 1.4;
+    }
+    .nv-request-form textarea::placeholder { color: #a78bfa; }
+    .nv-request-form button {
+      border: none; border-radius: 999px; padding: 12px 16px; background: #9333ea;
+      color: #fff; font-weight: 900; cursor: pointer;
+    }
+    .nv-request-form button:disabled { opacity: 0.55; cursor: not-allowed; }
+    #nv-request-msg { margin: 0 16px 8px; min-height: 1.2em; }
+    .nv-requests-subtitle {
+      margin: 8px 0 10px; padding: 0 16px; font-size: 0.92rem; font-weight: 800; color: #faf5ff;
+    }
+    .nv-requests-list { display: flex; flex-direction: column; gap: 10px; padding: 0 16px 16px; }
+    .nv-request-item {
+      border-radius: 14px; padding: 12px 14px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    }
+    .nv-request-meta {
+      display: flex; justify-content: space-between; gap: 8px; margin-bottom: 6px;
+      font-size: 0.78rem; font-weight: 800; color: #c4b5fd;
+    }
+    .nv-request-user { color: #fde68a; }
+    .nv-request-text { margin: 0; color: #f5f3ff; font-weight: 600; line-height: 1.45; font-size: 0.9rem; }
+    .nv-requests-empty {
+      margin: 0 16px 16px; padding: 20px; border-radius: 14px; text-align: center;
+      background: rgba(255,255,255,0.06); color: #c4b5fd; font-weight: 700;
+    }
+    .nv-nav-item { max-width: 68px; font-size: 0.58rem; }
+
+    /* ===== Студия игр PlayVerse 2 (свой UI) ===== */
+    .nvf-studio { padding: 0 0 20px; }
+    .nvf-hero {
+      margin: 0 16px 14px; padding: 18px 16px; border-radius: 18px; text-align: center;
+      background: linear-gradient(145deg, rgba(147,51,234,0.35), rgba(76,29,149,0.5));
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .nvf-hero-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .nvf-hero h3 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 900; color: #fff; }
+    .nvf-hero p { margin: 0; font-size: 0.88rem; color: #ddd6fe; font-weight: 600; line-height: 1.4; }
+    .nvf-card {
+      margin: 0 16px 14px; padding: 14px; border-radius: 16px;
+      background: rgba(0,0,0,0.22); border: 1px solid rgba(255,255,255,0.12);
+    }
+    .nvf-card-title { margin: 0 0 10px; font-size: 0.82rem; font-weight: 900; color: #c4b5fd; letter-spacing: 0.04em; text-transform: uppercase; }
+    .nvf-prompt {
+      width: 100%; min-height: 72px; box-sizing: border-box; resize: vertical;
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 12px 14px;
+      background: rgba(255,255,255,0.06); color: #fff; font-weight: 600; font-family: inherit; font-size: 0.92rem;
+    }
+    .nvf-prompt::placeholder { color: #a78bfa; }
+    .nvf-ai-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .nvf-btn {
+      border: none; border-radius: 999px; padding: 10px 14px; font-weight: 900; font-size: 0.85rem; cursor: pointer;
+    }
+    .nvf-btn.primary { background: #9333ea; color: #fff; }
+    .nvf-btn.ghost { background: rgba(255,255,255,0.1); color: #f5f3ff; border: 1px solid rgba(255,255,255,0.16); }
+    .nvf-ai-out {
+      display: none; margin-top: 10px; padding: 10px 12px; border-radius: 12px;
+      background: rgba(168,85,247,0.2); color: #f3e8ff; font-size: 0.85rem; font-weight: 600; line-height: 1.45;
+    }
+    .nvf-ai-out.show { display: block; }
+    .nvf-types {
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 14px; -webkit-overflow-scrolling: touch;
+    }
+    .nvf-types::-webkit-scrollbar { height: 0; }
+    .nvf-type-tile {
+      flex: 0 0 88px; border: 2px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 12px 8px;
+      background: rgba(255,255,255,0.06); color: #f5f3ff; cursor: pointer; text-align: center;
+    }
+    .nvf-type-tile.active { border-color: #fde68a; background: rgba(253,224,71,0.15); }
+    .nvf-type-emoji { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+    .nvf-type-name { font-size: 0.72rem; font-weight: 900; }
+    .nvf-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 14px;
+    }
+    .nvf-field { display: flex; flex-direction: column; gap: 6px; }
+    .nvf-field.full { grid-column: 1 / -1; }
+    .nvf-field span { font-size: 0.78rem; font-weight: 800; color: #c4b5fd; }
+    .nvf-field input, .nvf-field select, .nvf-field textarea {
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 10px 12px;
+      background: rgba(0,0,0,0.22); color: #fff; font-weight: 600; font-family: inherit; font-size: 0.88rem;
+    }
+    .nvf-field textarea { min-height: 80px; resize: vertical; }
+    .nvf-actions {
+      display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 14px;
+    }
+    .nvf-mine-title { margin: 0 0 10px; padding: 0 16px; font-size: 0.92rem; font-weight: 900; color: #faf5ff; }
+    .nvf-list-rail {
+      display: flex; gap: 12px; overflow-x: auto; padding: 0 16px 4px; -webkit-overflow-scrolling: touch;
+    }
+    .nvf-list-rail::-webkit-scrollbar { height: 0; }
+    .nvf-game-card {
+      flex: 0 0 220px; border-radius: 14px; padding: 12px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    }
+    .nvf-game-card h4 { margin: 0 0 4px; font-size: 0.95rem; color: #fff; font-weight: 900; }
+    .nvf-game-card p { margin: 0 0 10px; font-size: 0.78rem; color: #c4b5fd; font-weight: 600; }
+    .nvf-game-card .mini-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .nvf-game-card .nvf-btn { padding: 7px 10px; font-size: 0.75rem; }
+    .nvf-empty { margin: 0 16px; padding: 16px; border-radius: 14px; text-align: center; color: #c4b5fd; font-weight: 700; font-size: 0.88rem; }
 
   </style>
 </head>
@@ -5719,7 +5919,7 @@
           <span class="rbx-logo-main">PlayVerse</span>
         </div>
         <div class="rbx-topbar-actions">
-          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">Новая версия</button>
+          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">PlayVerse 2.0</button>
           <button type="button" class="rbx-search-btn" id="hub-search-btn" aria-label="Поиск">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           </button>
@@ -5736,6 +5936,7 @@
       </div>
 
       <div class="rbx-hub-scroll">
+        <div class="hub-panel active" data-hub-panel="home">
         <div class="rbx-profile-row" id="hub-user-strip">
           <div class="rbx-user-avatar" id="hub-user-avatar">?</div>
           <div class="rbx-profile-meta">
@@ -6224,12 +6425,24 @@
             </div>
           </div>
         </section>
+        </div>
+
+        <div class="hub-panel" data-hub-panel="more">
+          <section class="rbx-hub-section">
+            <h2 class="rbx-section-title">Новости</h2>
+            <div class="pv-news-feed" id="hub-news-feed"></div>
+          </section>
+        </div>
       </div>
 
       <nav class="rbx-bottom-nav" aria-label="Навигация хаба">
         <button type="button" class="rbx-nav-item active" data-hub-nav="home" aria-label="Главная">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           Главная
+        </button>
+        <button type="button" class="rbx-nav-item" data-hub-nav="more" aria-label="Ещё">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>
+          Ещё
         </button>
         <button type="button" class="rbx-nav-item" data-hub-nav="account" aria-label="Аккаунт">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -6243,8 +6456,8 @@
   <div id="screen-newverse" class="screen">
     <div class="nv-hub">
       <header class="nv-topbar">
-        <button type="button" class="nv-back-btn" id="nv-back-classic">← Классика</button>
-        <span class="nv-logo">PlayVerse 2</span>
+        <button type="button" class="nv-back-btn" id="nv-to-v1">PlayVerse 1.0</button>
+        <span class="nv-logo">PlayVerse 2.0</span>
         <div class="nv-search-wrap">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           <input type="search" id="nv-search" placeholder="Поиск скоро..." disabled>
@@ -6264,21 +6477,64 @@
             <div style="font-size:0.78rem;color:#c4b5fd;font-weight:600" id="nv-menu-tag">@guest</div>
           </div>
         </div>
-        <button type="button" class="nv-user-menu-item" id="nv-menu-profile">Профиль</button>
-        <button type="button" class="nv-user-menu-item" id="nv-menu-friends">Друзья</button>
         <button type="button" class="nv-user-menu-item" id="nv-menu-login">Войти</button>
         <button type="button" class="nv-user-menu-item danger profile-hidden" id="nv-menu-logout">Выйти</button>
       </div>
       <div class="nv-scroll">
         <div class="nv-panel active" data-nv-panel="home">
+          <div class="nv-brand-hero">
+            <h1 class="nv-brand-title">PlayVerse <em>2.0</em></h1>
+          </div>
           <h2 class="nv-section-title">Друзья</h2>
+          <div class="nv-add-friend-row profile-hidden" id="nv-add-friend-row">
+            <input type="text" id="nv-add-friend-input" maxlength="20" placeholder="Имя игрока">
+            <button type="button" id="nv-add-friend-btn">Добавить</button>
+          </div>
           <div class="nv-friends-rail" id="nv-friends-rail"></div>
-          <h2 class="nv-section-title">Игры</h2>
-          <div class="nv-empty">🎮 Каталог игр скоро появится в новой версии.<br>Пока играй в <strong>классическом PlayVerse</strong> — кнопка «← Классика».</div>
+          <h2 class="nv-section-title">Студия игр</h2>
+          <div class="nvf-studio" id="nvf-studio">
+            <div class="nvf-hero">
+              <span class="nvf-hero-icon">🛠️</span>
+              <h3>Собери свою мини-игру</h3>
+              <p>Опиши идею — ИИ подскажет. Настрой параметры и отправь игру админу PlayVerse.</p>
+            </div>
+            <div class="nvf-card">
+              <p class="nvf-card-title">Шаг 1 · Идея</p>
+              <textarea class="nvf-prompt" id="nvf-prompt" placeholder="Например: викторина про динозавров на 5 вопросов или кликер со звёздами на 40 секунд"></textarea>
+              <div class="nvf-ai-row">
+                <button type="button" class="nvf-btn primary" id="nvf-ai-gen">✨ Сгенерировать</button>
+                <button type="button" class="nvf-btn ghost" id="nvf-ai-apply">Подставить</button>
+              </div>
+              <div class="nvf-ai-out" id="nvf-ai-out"></div>
+            </div>
+            <div class="nvf-types" id="nvf-types">
+              <input type="hidden" id="nvf-type" value="clicker">
+              <button type="button" class="nvf-type-tile active" data-nvf-type="clicker"><span class="nvf-type-emoji">👆</span><span class="nvf-type-name">Кликер</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="catcher"><span class="nvf-type-emoji">🧺</span><span class="nvf-type-name">Ловец</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="quiz"><span class="nvf-type-emoji">❓</span><span class="nvf-type-name">Викторина</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="memory"><span class="nvf-type-emoji">🃏</span><span class="nvf-type-name">Мемо</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="dodge"><span class="nvf-type-emoji">💨</span><span class="nvf-type-name">Уклонялка</span></button>
+            </div>
+            <div class="nvf-grid">
+              <label class="nvf-field full"><span>Название</span><input id="nvf-title" maxlength="40" placeholder="Моя игра"></label>
+              <label class="nvf-field"><span>Цель</span><input id="nvf-goal" type="number" min="5" max="500" value="30"></label>
+              <label class="nvf-field"><span>Время (сек)</span><input id="nvf-time" type="number" min="0" max="300" value="30"></label>
+              <label class="nvf-field"><span>Скорость</span><input id="nvf-speed" type="number" min="1" max="5" value="2"></label>
+              <label class="nvf-field"><span>Цвет</span><input id="nvf-color" type="color" value="#9333ea"></label>
+              <label class="nvf-field full"><span>Эмодзи темы</span><input id="nvf-theme" placeholder="⭐ 🚀 🌙"></label>
+              <label class="nvf-field full profile-hidden" id="nvf-quiz-wrap"><span>Вопросы (строка: вопрос | верный | …)</span><textarea id="nvf-quiz" placeholder="Столица Франции? | Париж | Лондон"></textarea></label>
+            </div>
+            <div class="nvf-actions">
+              <button type="button" class="nvf-btn ghost" id="nvf-play">▶ Тест</button>
+              <button type="button" class="nvf-btn primary" id="nvf-publish">📤 Отправить админу</button>
+            </div>
+            <h3 class="nvf-mine-title">Мои проекты</h3>
+            <div class="nvf-list-rail" id="nvf-list"></div>
+          </div>
         </div>
         <div class="nv-panel" data-nv-panel="charts">
           <h2 class="nv-section-title">Популярное</h2>
-          <div class="nv-empty">🔥 Топ игр появится после релиза каталога.</div>
+          <div class="nv-empty">🔥 Скоро здесь появятся игры из Студии.</div>
         </div>
         <div class="nv-panel" data-nv-panel="avatar">
           <div style="text-align:center;padding:16px 0 8px">
@@ -6297,14 +6553,20 @@
             </form>
           </div>
         </div>
+        <div class="nv-panel" data-nv-panel="requests">
+          <h2 class="nv-section-title">Заявки на игры</h2>
+          <p class="nv-requests-lead">Напиши, какую игру хочешь видеть в PlayVerse 2. Администрация PlayVerse читает все заявки и выбирает, что добавить в каталог. Авторы лучших идей получат 50 монет после появления первой игры в PlayVerse 2.0.</p>
+          <form class="nv-request-form" id="nv-request-form">
+            <textarea id="nv-request-input" maxlength="300" placeholder="Например: гонки, паркур, симулятор пилота, строительство..." autocomplete="off"></textarea>
+            <button type="submit" id="nv-request-submit">Отправить заявку</button>
+          </form>
+          <p class="profile-msg" id="nv-request-msg"></p>
+          <h3 class="nv-requests-subtitle">Заявки игроков</h3>
+          <div class="nv-requests-list" id="nv-requests-list"></div>
+        </div>
         <div class="nv-panel" data-nv-panel="more">
-          <div class="nv-more-list">
-            <button type="button" class="nv-more-btn" id="nv-more-profile">👤 Профиль</button>
-            <button type="button" class="nv-more-btn" id="nv-more-friends">🤝 Друзья</button>
-            <button type="button" class="nv-more-btn" id="nv-more-classic">↩️ Классический PlayVerse</button>
-            <button type="button" class="nv-more-btn" id="nv-more-rules">📋 Правила игр</button>
-            <button type="button" class="nv-more-btn" id="nv-more-login">🔑 Войти / Регистрация</button>
-          </div>
+          <h2 class="nv-section-title">Новости</h2>
+          <div class="pv-news-feed nv-news-feed" id="nv-news-feed"></div>
         </div>
       </div>
       <nav class="nv-bottom-nav" aria-label="Навигация новой версии">
@@ -6312,7 +6574,8 @@
         <button type="button" class="nv-nav-item" data-nv-nav="charts"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Популярное</button>
         <button type="button" class="nv-nav-item" data-nv-nav="avatar"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>Аватар</button>
         <button type="button" class="nv-nav-item" data-nv-nav="chats"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>Чаты</button>
-        <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>Ещё</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="requests"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>Заявки</button>
+        <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>Ещё</button>
       </nav>
     </div>
   </div>
@@ -6320,22 +6583,30 @@
   <div class="nv-login-overlay" id="nv-login-overlay" aria-hidden="true">
     <button type="button" class="nv-login-close" id="nv-login-close" aria-label="Закрыть">✕</button>
     <div class="nv-login-card">
-      <h2>PlayVerse 2</h2>
+      <h2>PlayVerse 2.0</h2>
       <p>Войди, чтобы пользоваться друзьями и чатом</p>
       <div class="nv-login-tabs">
         <button type="button" class="nv-login-tab active" data-nv-login-tab="login">Вход</button>
         <button type="button" class="nv-login-tab" data-nv-login-tab="register">Регистрация</button>
       </div>
       <form id="nv-modal-login-form">
-        <label>Имя<select id="nv-modal-login-name" required><option value="">Выбери имя</option></select></label>
-        <label>Пароль<input type="password" id="nv-modal-login-pass" required maxlength="32"></label>
+        <label>Имя игрока
+          <select id="nv-modal-login-name" autocomplete="username" required>
+            <option value="">Выбери своё имя</option>
+          </select>
+        </label>
+        <label>Пароль<input type="password" id="nv-modal-login-pass" required maxlength="32" autocomplete="current-password"></label>
         <p class="profile-msg" id="nv-modal-login-msg"></p>
         <button type="submit" class="nv-login-submit">Войти</button>
       </form>
       <form id="nv-modal-register-form" class="profile-hidden">
-        <label>Имя<select id="nv-modal-reg-name" required><option value="">Загрузка…</option></select></label>
-        <label>Пароль<input type="password" id="nv-modal-reg-pass" required maxlength="32"></label>
-        <label>Повтор<input type="password" id="nv-modal-reg-pass2" required maxlength="32"></label>
+        <label>Имя игрока
+          <select id="nv-modal-reg-name" autocomplete="username" required>
+            <option value="">Выбери имя</option>
+          </select>
+        </label>
+        <label>Пароль<input type="password" id="nv-modal-reg-pass" required maxlength="32" autocomplete="new-password"></label>
+        <label>Повтор<input type="password" id="nv-modal-reg-pass2" required maxlength="32" autocomplete="new-password"></label>
         <p class="profile-msg" id="nv-modal-register-msg"></p>
         <button type="submit" class="nv-login-submit">Создать аккаунт</button>
       </form>
@@ -8085,11 +8356,19 @@
       } catch (e) { return false; }
     }
 
+    function setHubPanel(panel) {
+      document.querySelectorAll("[data-hub-panel]").forEach((p) => {
+        p.classList.toggle("active", p.getAttribute("data-hub-panel") === panel);
+      });
+    }
+    window.setHubPanel = setHubPanel;
+
     function setHubNavActive(nav) {
       if (!nav) return;
-      document.querySelectorAll("[data-hub-nav]").forEach((btn) => {
+      document.querySelectorAll("#screen-cover [data-hub-nav]").forEach((btn) => {
         btn.classList.toggle("active", btn.getAttribute("data-hub-nav") === nav);
       });
+      if (nav === "home" || nav === "more") setHubPanel(nav);
     }
     window.setHubNavActive = setHubNavActive;
 
@@ -8128,9 +8407,10 @@
         }
       }
       if (name === "newverse" && typeof renderNewVerse === "function") renderNewVerse();
+      if (name === "cover" && typeof renderPvNews === "function") renderPvNews();
       if (typeof setHubNavActive === "function") {
         const hubNav = name === "profile" ? "account" : (name === "cover" ? "home" : null);
-        setHubNavActive(hubNav);
+        if (hubNav) setHubNavActive(hubNav);
       }
       if (name !== "intro" && window.speechSynthesis) window.speechSynthesis.cancel();
       if (!playing && typeof closeRules === "function") closeRules();
@@ -8762,6 +9042,17 @@ const HUB_GAME_META = {
       }, 220);
     }
 
+    function cloneHubCoverArt(artEl) {
+      if (!artEl) return "";
+      const clone = artEl.cloneNode(true);
+      clone.style.minHeight = "0";
+      clone.style.height = "100%";
+      clone.style.width = "100%";
+      const title = clone.querySelector(".cover-title");
+      if (title) title.remove();
+      return clone.outerHTML;
+    }
+
     function fillHubJoinReviews(mode) {
       const meta = HUB_GAME_META[mode] || HUB_GAME_META.avia;
       if (!hubJoinReviews) return;
@@ -8799,8 +9090,9 @@ const HUB_GAME_META = {
       
       const thumb = document.getElementById("hub-join-thumb");
       const banner = document.getElementById("hub-join-banner");
-      if (thumb) thumb.innerHTML = art ? art.outerHTML : "";
-      if (banner) banner.innerHTML = art ? art.outerHTML : "";
+      const artHtml = cloneHubCoverArt(art);
+      if (thumb) thumb.innerHTML = artHtml;
+      if (banner) banner.innerHTML = artHtml;
       
       const title = document.getElementById("hub-join-title");
       if (title) title.textContent = hubGameTitle(mode);
@@ -8854,10 +9146,9 @@ const HUB_GAME_META = {
       const title = document.getElementById("hub-join-loading-title");
       const art = hubJoinCard ? hubJoinCard.querySelector(".cover-art") : null;
       
-      if (icon) icon.innerHTML = art ? art.outerHTML : "";
-      if (bg) {
-        bg.innerHTML = art ? art.outerHTML : "";
-      }
+      const artHtml = cloneHubCoverArt(art);
+      if (icon) icon.innerHTML = artHtml;
+      if (bg) bg.innerHTML = artHtml;
       if (title) title.textContent = hubGameTitle(hubJoinMode);
       
       overlay.classList.add("active");
@@ -8880,7 +9171,7 @@ const HUB_GAME_META = {
 
     const GAME_COIN_RULES = {
       avia: { amount: 5, kind: "complete" },
-      factory: { amount: 10, kind: "create" },
+      factory: { amount: 3, kind: "create" },
       chess: { amount: 3, kind: "win" },
       checkers: { amount: 3, kind: "win" },
       battleship: { amount: 3, kind: "win" },
@@ -8989,9 +9280,133 @@ const HUB_GAME_META = {
     }
     initHubSearch();
 
-    /* ===== Новая версия · Roblox UI (отдельный экран, без игр) ===== */
+    /* ===== Новости PlayVerse ===== */
+    const PV_NEWS = [
+      {
+        id: "launch",
+        date: "22 июля 2026",
+        title: "PlayVerse создан!",
+        image: "assets/playverse-launch-news.png",
+        text: "Мы запустили PlayVerse — игровую платформу, где можно играть, общаться с друзьями и открывать новые миры. Платформа ждёт первых игроков: регистрируйся и будь среди первых!"
+      },
+      {
+        id: "v2",
+        date: "26 июля 2026",
+        title: "PlayVerse 2 в разработке",
+        image: "assets/playverse-v2-dev.png",
+        text: "Мы разрабатываем вторую версию PlayVerse с новым фиолетовым интерфейсом! Уже можно зайти в ранний доступ, создавать игры в Студии и отправлять заявки — какую игру добавить в каталог. Авторы лучших идей получат 50 монет после выхода первой игры в PlayVerse 2.0."
+      }
+    ];
+
+    function pvEscapeHtml(s) {
+      return String(s).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+    }
+
+    function renderNewsCard(item) {
+      let media = "";
+      if (item.image) {
+        media = '<div class="pv-news-image"><img src="' + item.image + '" alt="" loading="lazy"></div>';
+      } else if (item.banner === "v2") {
+        media = '<div class="pv-news-banner pv-news-banner-v2"><span class="pv-news-banner-badge">NEW</span><span class="pv-news-banner-title">PlayVerse 2</span></div>';
+      }
+      return '<article class="pv-news-card" data-news-id="' + item.id + '">' + media +
+        '<div class="pv-news-body">' +
+        '<time class="pv-news-date">' + pvEscapeHtml(item.date) + '</time>' +
+        '<h3 class="pv-news-title">' + pvEscapeHtml(item.title) + '</h3>' +
+        '<p class="pv-news-text">' + pvEscapeHtml(item.text) + '</p>' +
+        '</div></article>';
+    }
+
+    function renderPvNews() {
+      const html = PV_NEWS.slice().reverse().map(renderNewsCard).join("");
+      ["hub-news-feed", "nv-news-feed"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      });
+    }
+    window.renderPvNews = renderPvNews;
+    renderPvNews();
+
+    /* ===== PlayVerse 2 · общий аккаунт с 1.0, свой UI ===== */
+    const NV_CHAT_PREFIX = "playverse2_chat_";
+    const NV_REQUESTS_KEY = "playverse2_game_requests";
     let nvChatPeer = null;
-    const NV_CHAT_PREFIX = "pv_nv_chat_";
+
+    function nvIsLoggedIn() {
+      return window.PVProfile && typeof PVProfile.isLoggedIn === "function" && PVProfile.isLoggedIn();
+    }
+
+    function nvCurrentUser() {
+      return nvIsLoggedIn() && PVProfile.currentUser ? PVProfile.currentUser() : null;
+    }
+
+    function nvToast(msg) {
+      if (window.PVProfile && PVProfile.toast) PVProfile.toast(msg);
+    }
+
+    function nvGetUsers() {
+      try { return JSON.parse(localStorage.getItem("playverse_users")) || {}; } catch (e) { return {}; }
+    }
+
+    function nvGetRequests() {
+      try { return JSON.parse(localStorage.getItem(NV_REQUESTS_KEY)) || []; } catch (e) { return []; }
+    }
+
+    function nvSaveRequests(list) {
+      localStorage.setItem(NV_REQUESTS_KEY, JSON.stringify(list));
+    }
+
+    function nvAddRequest(text) {
+      const u = nvCurrentUser();
+      if (!u) return "Сначала войди в аккаунт";
+      text = String(text || "").trim();
+      if (text.length < 4) return "Опиши игру чуть подробнее (минимум 4 символа)";
+      if (text.length > 300) return "Слишком длинная заявка";
+      const list = nvGetRequests();
+      list.unshift({
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        username: u.username,
+        text: text,
+        date: Date.now()
+      });
+      if (list.length > 200) list.length = 200;
+      nvSaveRequests(list);
+      return null;
+    }
+
+    function nvFormatRequestDate(ts) {
+      try {
+        return new Date(ts).toLocaleString("ru-RU", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+      } catch (e) { return ""; }
+    }
+
+    function renderNvRequests() {
+      const listEl = document.getElementById("nv-requests-list");
+      const msgEl = document.getElementById("nv-request-msg");
+      const submitBtn = document.getElementById("nv-request-submit");
+      const input = document.getElementById("nv-request-input");
+      const logged = nvIsLoggedIn();
+      if (submitBtn) submitBtn.disabled = !logged;
+      if (input) {
+        input.disabled = !logged;
+        input.placeholder = logged
+          ? "Например: гонки, паркур, симулятор пилота, строительство..."
+          : "Войди в аккаунт, чтобы отправить заявку";
+      }
+      if (msgEl && !logged) msgEl.textContent = "";
+      if (!listEl) return;
+      const list = nvGetRequests();
+      if (!list.length) {
+        listEl.innerHTML = '<p class="nv-requests-empty">Пока нет заявок. Будь первым — предложи игру!</p>';
+        return;
+      }
+      listEl.innerHTML = list.map((r) =>
+        '<div class="nv-request-item">' +
+        '<div class="nv-request-meta"><span class="nv-request-user">' + pvEscapeHtml(r.username || "Игрок") + '</span>' +
+        '<span>' + pvEscapeHtml(nvFormatRequestDate(r.date)) + '</span></div>' +
+        '<p class="nv-request-text">' + pvEscapeHtml(r.text) + '</p></div>'
+      ).join("");
+    }
 
     function nvHue(name) {
       let h = 270;
@@ -9046,6 +9461,7 @@ const HUB_GAME_META = {
         document.getElementById("nv-modal-register-form")?.classList.remove("profile-hidden");
       }
     }
+    window.openNvLogin = openNvLogin;
 
     function closeNvLogin() {
       document.getElementById("nv-login-overlay")?.classList.remove("open");
@@ -9070,22 +9486,21 @@ const HUB_GAME_META = {
       const listEl = document.getElementById("nv-chat-list");
       const msgsEl = document.getElementById("nv-chat-msgs");
       if (!listEl || !msgsEl) return;
-      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
-      if (!logged) {
+      if (!nvIsLoggedIn()) {
         listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Войди, чтобы писать друзьям</p>';
         msgsEl.innerHTML = "";
         nvChatPeer = null;
         return;
       }
-      const me = PVProfile.currentUser();
+      const me = nvCurrentUser();
       const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      const users = nvGetUsers();
       if (!friends.length) {
-        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей в классическом PlayVerse</p>';
+        listEl.innerHTML = '<p style="padding:16px;color:#c4b5fd;font-weight:700">Добавь друзей на главной — введи имя игрока</p>';
         msgsEl.innerHTML = "";
         return;
       }
       if (!nvChatPeer || friends.indexOf(nvChatPeer) < 0) nvChatPeer = friends[0];
-      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
       listEl.innerHTML = friends.map((name) =>
         '<button type="button" class="nv-chat-contact' + (name === nvChatPeer ? " active" : "") + '" data-nv-peer="' + name + '">' +
         '<span class="nv-blocky nv-blocky-sm" data-nv-peer-blocky="' + name + '"></span><span style="font-weight:800">' + name + '</span></button>'
@@ -9094,8 +9509,7 @@ const HUB_GAME_META = {
         btn.addEventListener("click", () => { nvChatPeer = btn.getAttribute("data-nv-peer"); renderNvChat(); });
       });
       listEl.querySelectorAll("[data-nv-peer-blocky]").forEach((node) => {
-        const name = node.getAttribute("data-nv-peer-blocky");
-        nvFillBlocky(node, users[name], name);
+        nvFillBlocky(node, users[node.getAttribute("data-nv-peer-blocky")], node.getAttribute("data-nv-peer-blocky"));
       });
       msgsEl.innerHTML = nvLoadChat(me.username, nvChatPeer).map((m) =>
         '<div class="nv-chat-bubble ' + (m.fromMe ? "me" : "them") + '">' +
@@ -9106,40 +9520,37 @@ const HUB_GAME_META = {
 
     function renderNvFriends() {
       const rail = document.getElementById("nv-friends-rail");
+      const addRow = document.getElementById("nv-add-friend-row");
       if (!rail) return;
-      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
-      if (!logged) {
-        rail.innerHTML = '<p style="padding:4px 0;color:#c4b5fd;font-weight:700;font-size:0.85rem">Войди, чтобы видеть друзей</p>';
+      if (!nvIsLoggedIn()) {
+        if (addRow) addRow.classList.add("profile-hidden");
+        rail.innerHTML = '<p style="padding:4px 16px;color:#c4b5fd;font-weight:700;font-size:0.85rem">Войди, чтобы видеть друзей</p>';
         return;
       }
-      const me = PVProfile.currentUser();
-      const users = JSON.parse(localStorage.getItem("playverse_users") || "{}");
+      if (addRow) addRow.classList.remove("profile-hidden");
+      const me = nvCurrentUser();
+      const users = nvGetUsers();
       const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
+      const label = PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : me.username;
       let html = "";
-      if (me) {
-        const label = PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : me.username;
-        html += '<button type="button" class="nv-friend-tile"><div class="nv-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span></div><span class="nv-friend-name">' + label + '</span></button>';
-      }
-      html += '<button type="button" class="nv-friend-tile" id="nv-add-friend"><div class="nv-friend-avatar"><span style="font-size:1.4rem">+</span></div></button>';
-      friends.slice(0, 12).forEach((name) => {
+      html += '<button type="button" class="nv-friend-tile"><div class="nv-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span></div>' +
+        '<span class="nv-friend-name">' + label + '</span></button>';
+      friends.slice(0, 14).forEach((name) => {
         html += '<button type="button" class="nv-friend-tile" data-nv-friend="' + name + '"><div class="nv-friend-avatar">' +
           '<span class="nv-blocky nv-blocky-sm" data-nv-friend-blocky="' + name + '"></span></div>' +
           '<span class="nv-friend-name">' + name + '</span></button>';
       });
       rail.innerHTML = html;
-      if (me) nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
+      nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
       rail.querySelectorAll("[data-nv-friend-blocky]").forEach((node) => {
         const name = node.getAttribute("data-nv-friend-blocky");
         nvFillBlocky(node, users[name], name);
       });
-      document.getElementById("nv-add-friend")?.addEventListener("click", () => {
-        if (PVProfile.openFriends) PVProfile.openFriends();
-      });
     }
 
     function renderNewVerse() {
-      const logged = window.PVProfile && PVProfile.isLoggedIn && PVProfile.isLoggedIn();
-      const u = logged && PVProfile.currentUser ? PVProfile.currentUser() : null;
+      const logged = nvIsLoggedIn();
+      const u = nvCurrentUser();
       const label = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
       nvFillBlocky(document.getElementById("nv-top-avatar"), u, u && u.username);
       nvFillBlocky(document.getElementById("nv-menu-avatar"), u, u && u.username);
@@ -9152,20 +9563,22 @@ const HUB_GAME_META = {
       });
       const tagEl = document.getElementById("nv-menu-tag");
       if (tagEl) tagEl.textContent = u ? ("@" + u.username.toLowerCase()) : "@guest";
-      ["nv-menu-login", "nv-more-login"].forEach((id) => {
+      ["nv-menu-login"].forEach((id) => {
         document.getElementById(id)?.classList.toggle("profile-hidden", !!logged);
       });
       ["nv-menu-logout"].forEach((id) => {
         document.getElementById(id)?.classList.toggle("profile-hidden", !logged);
       });
       renderNvFriends();
+      if (window.PVFactory && PVFactory.renderNvfList) PVFactory.renderNvfList();
       if (document.querySelector('[data-nv-panel="chats"].active')) renderNvChat();
+      if (document.querySelector('[data-nv-panel="requests"].active')) renderNvRequests();
+      if (document.querySelector('[data-nv-panel="more"].active')) renderPvNews();
     }
     window.renderNewVerse = renderNewVerse;
 
     function initNewVerse() {
-      document.getElementById("nv-back-classic")?.addEventListener("click", () => showScreen("cover"));
-      document.getElementById("nv-more-classic")?.addEventListener("click", () => showScreen("cover"));
+      document.getElementById("nv-to-v1")?.addEventListener("click", () => showScreen("cover"));
       const menuBtn = document.getElementById("nv-user-menu-btn");
       const menu = document.getElementById("nv-user-menu");
       if (menuBtn && menu) {
@@ -9181,59 +9594,94 @@ const HUB_GAME_META = {
           document.querySelectorAll("[data-nv-login-tab]").forEach((x) => x.classList.toggle("active", x === tab));
           document.getElementById("nv-modal-login-form")?.classList.toggle("profile-hidden", t !== "login");
           document.getElementById("nv-modal-register-form")?.classList.toggle("profile-hidden", t !== "register");
+          syncNvModalSelects();
         });
       });
       const openLogin = () => { menu?.classList.add("profile-hidden"); openNvLogin("login"); };
-      ["nv-menu-login", "nv-more-login"].forEach((id) => document.getElementById(id)?.addEventListener("click", openLogin));
-      const doLogout = () => { menu?.classList.add("profile-hidden"); PVProfile.logout && PVProfile.logout(); renderNewVerse(); };
+      document.getElementById("nv-menu-login")?.addEventListener("click", openLogin);
+      const doLogout = () => {
+        menu?.classList.add("profile-hidden");
+        if (PVProfile.logout) PVProfile.logout();
+      };
       document.getElementById("nv-menu-logout")?.addEventListener("click", doLogout);
-      const openProf = () => { menu?.classList.add("profile-hidden"); PVProfile.open && PVProfile.open(); };
-      ["nv-menu-profile", "nv-more-profile"].forEach((id) => document.getElementById(id)?.addEventListener("click", openProf));
-      ["nv-menu-friends", "nv-more-friends"].forEach((id) => {
-        document.getElementById(id)?.addEventListener("click", () => { menu?.classList.add("profile-hidden"); PVProfile.openFriends && PVProfile.openFriends(); });
-      });
-      document.getElementById("nv-more-rules")?.addEventListener("click", () => {
-        if (typeof openRules === "function") openRules();
-      });
       document.querySelectorAll("[data-nv-nav]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const nav = btn.getAttribute("data-nv-nav");
-          if (nav === "chats" && !isUserLoggedIn()) { openNvLogin(); return; }
+          if (nav === "chats" && !nvIsLoggedIn()) { openNvLogin(); return; }
           setNvPanel(nav);
           if (nav === "chats") renderNvChat();
+          if (nav === "requests") renderNvRequests();
+          if (nav === "more") renderPvNews();
         });
+      });
+      document.getElementById("nv-add-friend-btn")?.addEventListener("click", async () => {
+        const input = document.getElementById("nv-add-friend-input");
+        const name = input ? input.value.trim() : "";
+        if (!nvIsLoggedIn()) { openNvLogin(); return; }
+        if (!PVProfile.sendFriendRequest) return;
+        const err = await PVProfile.sendFriendRequest(name);
+        if (err) { nvToast(err); return; }
+        if (input) input.value = "";
+        renderNewVerse();
+        nvToast(name + " — заявка отправлена или друг добавлен");
+      });
+      document.getElementById("nv-add-friend-input")?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") document.getElementById("nv-add-friend-btn")?.click();
+      });
+      document.getElementById("nv-request-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!nvIsLoggedIn()) { openNvLogin(); return; }
+        const input = document.getElementById("nv-request-input");
+        const msg = document.getElementById("nv-request-msg");
+        const err = nvAddRequest(input ? input.value : "");
+        if (err) { if (msg) msg.textContent = err; return; }
+        if (msg) msg.textContent = "";
+        if (input) input.value = "";
+        renderNvRequests();
+        nvToast("Заявка отправлена — спасибо!");
       });
       document.getElementById("nv-chat-form")?.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (!isUserLoggedIn() || !nvChatPeer) { openNvLogin(); return; }
+        if (!nvIsLoggedIn() || !nvChatPeer) { openNvLogin(); return; }
         const input = document.getElementById("nv-chat-input");
         const text = input && input.value.trim();
         if (!text) return;
-        nvSaveChat(PVProfile.currentUser().username, nvChatPeer, text, true);
+        nvSaveChat(nvCurrentUser().username, nvChatPeer, text, true);
         if (input) input.value = "";
         renderNvChat();
       });
       document.getElementById("nv-modal-login-form")?.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (!PVProfile) return;
+        if (!window.PVProfile) return;
         const err = await PVProfile.login(
           document.getElementById("nv-modal-login-name").value.trim(),
           document.getElementById("nv-modal-login-pass").value
         );
         const msg = document.getElementById("nv-modal-login-msg");
         if (err) { if (msg) msg.textContent = err; return; }
-        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Вход выполнен");
+        if (msg) msg.textContent = "";
+        PVProfile.render();
+        closeNvLogin();
+        renderNewVerse();
+        nvToast("Вход выполнен");
       });
       document.getElementById("nv-modal-register-form")?.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (!PVProfile) return;
+        if (!window.PVProfile) return;
         const pass = document.getElementById("nv-modal-reg-pass").value;
         const pass2 = document.getElementById("nv-modal-reg-pass2").value;
         const msg = document.getElementById("nv-modal-register-msg");
         if (pass !== pass2) { if (msg) msg.textContent = "Пароли не совпадают"; return; }
-        const err = await PVProfile.register(document.getElementById("nv-modal-reg-name").value.trim(), pass);
+        const err = await PVProfile.register(
+          document.getElementById("nv-modal-reg-name").value.trim(),
+          pass
+        );
         if (err) { if (msg) msg.textContent = err; return; }
-        PVProfile.render(); closeNvLogin(); renderNewVerse(); PVProfile.toast("Регистрация успешна");
+        if (msg) msg.textContent = "";
+        PVProfile.render();
+        closeNvLogin();
+        renderNewVerse();
+        nvToast("Регистрация успешна");
       });
     }
     initNewVerse();
@@ -14146,49 +14594,62 @@ const HUB_GAME_META = {
         return out;
       }
 
-      function readForm() {
-        const type = document.getElementById("factory-type").value;
-        const theme = (document.getElementById("factory-theme").value || "⭐ 🎯 ✨").trim();
+      function readForm(prefix) {
+        prefix = prefix || "factory-";
+        const typeEl = document.getElementById(prefix + "type");
+        const type = typeEl ? typeEl.value : "clicker";
+        const theme = ((document.getElementById(prefix + "theme") || {}).value || "⭐ 🎯 ✨").trim();
         const author = factoryAuthor();
         return {
           id: editingId || uid(),
-          title: (document.getElementById("factory-title").value || "Моя игра").trim().slice(0, 40),
+          title: ((document.getElementById(prefix + "title") || {}).value || "Моя игра").trim().slice(0, 40),
           type: type,
-          goal: Math.max(5, Math.min(500, Number(document.getElementById("factory-goal").value) || 30)),
-          time: Math.max(0, Math.min(300, Number(document.getElementById("factory-time").value) || 0)),
-          speed: Math.max(1, Math.min(5, Number(document.getElementById("factory-speed").value) || 2)),
-          color: document.getElementById("factory-color").value || "#a855f7",
+          goal: Math.max(5, Math.min(500, Number((document.getElementById(prefix + "goal") || {}).value) || 30)),
+          time: Math.max(0, Math.min(300, Number((document.getElementById(prefix + "time") || {}).value) || 0)),
+          speed: Math.max(1, Math.min(5, Number((document.getElementById(prefix + "speed") || {}).value) || 2)),
+          color: (document.getElementById(prefix + "color") || {}).value || "#a855f7",
           theme: theme,
-          quiz: type === "quiz" ? parseQuiz(document.getElementById("factory-quiz").value) : [],
+          quiz: type === "quiz" ? parseQuiz((document.getElementById(prefix + "quiz") || {}).value) : [],
           createdAt: Date.now(),
           author: author || "guest",
           status: "local"
         };
       }
 
-      function fillForm(cfg) {
+      function fillForm(cfg, prefix) {
+        prefix = prefix || "factory-";
         if (!cfg) return;
         editingId = cfg.id || null;
-        document.getElementById("factory-title").value = cfg.title || "";
-        document.getElementById("factory-type").value = cfg.type || "clicker";
-        document.getElementById("factory-goal").value = cfg.goal || 30;
-        document.getElementById("factory-time").value = cfg.time == null ? 30 : cfg.time;
-        document.getElementById("factory-speed").value = cfg.speed || 2;
-        document.getElementById("factory-color").value = cfg.color || "#a855f7";
-        document.getElementById("factory-theme").value = cfg.theme || "";
+        const set = (id, val) => { const el = document.getElementById(prefix + id); if (el) el.value = val; };
+        set("title", cfg.title || "");
+        const typeEl = document.getElementById(prefix + "type");
+        if (typeEl) typeEl.value = cfg.type || "clicker";
+        set("goal", cfg.goal || 30);
+        set("time", cfg.time == null ? 30 : cfg.time);
+        set("speed", cfg.speed || 2);
+        set("color", cfg.color || "#a855f7");
+        set("theme", cfg.theme || "");
         if (cfg.quiz && cfg.quiz.length) {
-          document.getElementById("factory-quiz").value = cfg.quiz.map((q) => {
-            return [q.q].concat(q.answers || []).join(" | ");
-          }).join("\n");
+          set("quiz", cfg.quiz.map((q) => [q.q].concat(q.answers || []).join(" | ")).join("\n"));
         }
-        toggleQuizField();
+        toggleQuizField(prefix);
+        if (prefix === "nvf-") {
+          document.querySelectorAll("[data-nvf-type]").forEach((btn) => {
+            btn.classList.toggle("active", btn.getAttribute("data-nvf-type") === (cfg.type || "clicker"));
+          });
+        }
       }
 
       function clearEditing() { editingId = null; }
 
-      function toggleQuizField() {
-        const wrap = document.getElementById("factory-quiz-wrap");
-        if (wrap) wrap.style.display = document.getElementById("factory-type").value === "quiz" ? "grid" : "none";
+      function toggleQuizField(prefix) {
+        prefix = prefix || "factory-";
+        const wrap = document.getElementById(prefix === "factory-" ? "factory-quiz-wrap" : "nvf-quiz-wrap");
+        const typeEl = document.getElementById(prefix + "type");
+        const type = typeEl ? typeEl.value : "clicker";
+        if (!wrap) return;
+        if (prefix === "factory-") wrap.style.display = type === "quiz" ? "grid" : "none";
+        else wrap.classList.toggle("profile-hidden", type !== "quiz");
       }
 
       function sampleQuiz(topic) {
@@ -14270,28 +14731,38 @@ const HUB_GAME_META = {
         };
       }
 
-      function renderList() {
+      function renderList(targetEl, cardStyle) {
+        const el = targetEl || listEl;
         const author = factoryAuthor();
         const local = loadLocalGames().filter((g) => !author || !g.author || g.author === author || g.author === "guest");
         const pending = loadPendingGames().filter((g) => !author || g.author === author);
         const published = loadPublishedGames().filter((g) => !author || g.author === author);
         const all = local.concat(pending).concat(published);
-        if (!listEl) return;
+        if (!el) return;
         if (!all.length) {
-          listEl.innerHTML = '<p style="opacity:.7;margin:0">Пока пусто — создай первую игру выше.</p>';
+          el.innerHTML = cardStyle === "nvf"
+            ? '<p class="nvf-empty">Пока нет проектов — собери первую игру выше.</p>'
+            : '<p style="opacity:.7;margin:0">Пока пусто — создай первую игру выше.</p>';
           return;
         }
-        listEl.innerHTML = all.map((g) => {
+        el.innerHTML = all.map((g) => {
           const st = g.status || "local";
-          return '<div class="factory-game-card" data-id="' + g.id + '" data-status="' + st + '">' +
+          const btnClass = cardStyle === "nvf" ? "nvf-btn" : "factory-btn";
+          const primary = cardStyle === "nvf" ? " primary" : " primary";
+          const ghost = cardStyle === "nvf" ? " ghost" : " ghost";
+          const cardClass = cardStyle === "nvf" ? "nvf-game-card" : "factory-game-card";
+          return '<div class="' + cardClass + '" data-id="' + g.id + '" data-status="' + st + '">' +
             '<div><h4>' + escapeHtml(g.title) +
-            '<span class="factory-status ' + statusClass(st) + '">' + statusLabel(st) + '</span></h4>' +
+            (cardStyle === "nvf"
+              ? '<span style="margin-left:6px;font-size:0.68rem;color:#fde68a">' + statusLabel(st) + '</span>'
+              : '<span class="factory-status ' + statusClass(st) + '">' + statusLabel(st) + '</span>') +
+            '</h4>' +
             '<p>' + typeLabel(g.type) + ' · цель ' + g.goal + (g.author && g.author !== "guest" ? " · " + escapeHtml(g.author) : "") + '</p></div>' +
             '<div class="mini-actions">' +
-            '<button type="button" class="factory-btn primary" data-act="play">Играть</button>' +
-            '<button type="button" class="factory-btn" data-act="edit">Править</button>' +
-            (st === "local" ? '<button type="button" class="factory-btn" data-act="submit">Выложить</button>' : "") +
-            (st === "local" || st === "rejected" ? '<button type="button" class="factory-btn ghost" data-act="del">Удалить</button>' : "") +
+            '<button type="button" class="' + btnClass + primary + '" data-act="play">Играть</button>' +
+            '<button type="button" class="' + btnClass + '" data-act="edit">Править</button>' +
+            (st === "local" ? '<button type="button" class="' + btnClass + '" data-act="submit">Выложить</button>' : "") +
+            (st === "local" || st === "rejected" ? '<button type="button" class="' + btnClass + ghost + '" data-act="del">Удалить</button>' : "") +
             '</div></div>';
         }).join("");
       }
@@ -14329,13 +14800,13 @@ const HUB_GAME_META = {
         return cfg;
       }
 
-      function saveLocalFromForm() {
+      function saveLocalFromForm(prefix) {
         const author = factoryAuthor();
         if (!author) {
           if (window.PVProfile && PVProfile.toast) PVProfile.toast("Войди в аккаунт, чтобы сохранять игры");
           return null;
         }
-        const cfg = prepareCfg(readForm());
+        const cfg = prepareCfg(readForm(prefix));
         cfg.author = author;
         cfg.status = "local";
         const games = loadLocalGames().filter((g) => g.id !== cfg.id);
@@ -14343,19 +14814,21 @@ const HUB_GAME_META = {
         saveLocalGames(games.slice(0, 40));
         editingId = cfg.id;
         renderList();
+        renderList(document.getElementById("nvf-list"), "nvf");
         refreshHubCards();
-        if (aiOut) { aiOut.classList.add("show"); aiOut.textContent = "Игра «" + cfg.title + "» сохранена только у тебя."; }
+        const outEl = prefix === "nvf-" ? document.getElementById("nvf-ai-out") : aiOut;
+        if (outEl) { outEl.classList.add("show"); outEl.textContent = "Игра «" + cfg.title + "» сохранена только у тебя."; }
         if (window.PVProfile && PVProfile.toast) PVProfile.toast("Сохранено у тебя");
         return cfg;
       }
 
-      function submitGame(cfg) {
+      function submitGame(cfg, prefix) {
         const author = factoryAuthor();
         if (!author) {
           if (window.PVProfile && PVProfile.toast) PVProfile.toast("Войди в аккаунт, чтобы выложить игру");
           return false;
         }
-        cfg = prepareCfg(cfg || readForm());
+        cfg = prepareCfg(cfg || readForm(prefix));
         cfg.author = author;
         cfg.status = "pending";
         cfg.submittedAt = Date.now();
@@ -14366,7 +14839,9 @@ const HUB_GAME_META = {
         saveLocalGames(local);
         editingId = cfg.id;
         renderList();
-        if (aiOut) { aiOut.classList.add("show"); aiOut.textContent = "«" + cfg.title + "» отправлена на проверку администратору."; }
+        renderList(document.getElementById("nvf-list"), "nvf");
+        const outEl = prefix === "nvf-" ? document.getElementById("nvf-ai-out") : aiOut;
+        if (outEl) { outEl.classList.add("show"); outEl.textContent = "«" + cfg.title + "» отправлена на проверку администратору."; }
         if (window.PVProfile && PVProfile.toast) PVProfile.toast("Отправлено на проверку");
         if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
         return true;
@@ -14384,6 +14859,7 @@ const HUB_GAME_META = {
         savePublishedGames(pub.slice(0, 100));
         refreshHubCards();
         renderList();
+        renderList(document.getElementById("nvf-list"), "nvf");
         return true;
       }
 
@@ -14398,6 +14874,7 @@ const HUB_GAME_META = {
         local.unshift(g);
         saveLocalGames(local.slice(0, 40));
         renderList();
+        renderList(document.getElementById("nvf-list"), "nvf");
         return true;
       }
 
@@ -14672,6 +15149,26 @@ const HUB_GAME_META = {
         bindTimer(cfg, null, () => { alive = false; cancelAnimationFrame(customRAF); customRAF = 0; finishCustom(score >= cfg.goal, score); });
       }
 
+      function handleFactoryListClick(e, cardSelector, prefix) {
+        const cardEl = e.target.closest(cardSelector);
+        if (!cardEl) return;
+        const id = cardEl.getAttribute("data-id");
+        const act = e.target.getAttribute("data-act");
+        const g = findFactoryGame(id);
+        if (!g || !act) return;
+        if (act === "play") openCustom(g);
+        if (act === "edit") fillForm(g, prefix || "factory-");
+        if (act === "submit") submitGame(Object.assign({}, g), prefix || "factory-");
+        if (act === "del") {
+          const st = cardEl.getAttribute("data-status") || g.status || "local";
+          if (st === "pending") savePendingGames(loadPendingGames().filter((x) => x.id !== id));
+          else saveLocalGames(loadLocalGames().filter((x) => x.id !== id));
+          if (editingId === id) clearEditing();
+          renderList();
+          renderList(document.getElementById("nvf-list"), "nvf");
+        }
+      }
+
       /* events */
       const card = document.getElementById("cover-card-factory");
       if (card) card.addEventListener("click", openFactory);
@@ -14713,24 +15210,51 @@ const HUB_GAME_META = {
         if (cfg.type === "quiz" && (!cfg.quiz || !cfg.quiz.length)) cfg.quiz = sampleQuiz(cfg.title);
         openCustom(cfg);
       });
-      listEl.addEventListener("click", (e) => {
-        const cardEl = e.target.closest(".factory-game-card");
-        if (!cardEl) return;
-        const id = cardEl.getAttribute("data-id");
-        const act = e.target.getAttribute("data-act");
-        const g = findFactoryGame(id);
-        if (!g || !act) return;
-        if (act === "play") openCustom(g);
-        if (act === "edit") fillForm(g);
-        if (act === "submit") submitGame(Object.assign({}, g));
-        if (act === "del") {
-          const st = cardEl.getAttribute("data-status") || g.status || "local";
-          if (st === "pending") savePendingGames(loadPendingGames().filter((x) => x.id !== id));
-          else saveLocalGames(loadLocalGames().filter((x) => x.id !== id));
-          if (editingId === id) clearEditing();
-          renderList();
+      listEl.addEventListener("click", (e) => handleFactoryListClick(e, ".factory-game-card", "factory-"));
+      const nvfListEl = document.getElementById("nvf-list");
+      if (nvfListEl) nvfListEl.addEventListener("click", (e) => handleFactoryListClick(e, ".nvf-game-card", "nvf-"));
+      let nvfDraft = null;
+      document.querySelectorAll("[data-nvf-type]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("[data-nvf-type]").forEach((x) => x.classList.remove("active"));
+          btn.classList.add("active");
+          const typeInput = document.getElementById("nvf-type");
+          if (typeInput) typeInput.value = btn.getAttribute("data-nvf-type") || "clicker";
+          toggleQuizField("nvf-");
+        });
+      });
+      document.getElementById("nvf-ai-gen")?.addEventListener("click", () => {
+        const promptEl = document.getElementById("nvf-prompt");
+        const outEl = document.getElementById("nvf-ai-out");
+        nvfDraft = aiGenerate(promptEl ? promptEl.value : "");
+        if (outEl) {
+          outEl.classList.add("show");
+          outEl.innerHTML = "<strong>ИИ:</strong> " + escapeHtml(nvfDraft.title) + " — " + escapeHtml(nvfDraft.aiNote) +
+            (nvfDraft.quiz && nvfDraft.quiz.length ? "<br>Вопросов: " + nvfDraft.quiz.length : "");
         }
       });
+      document.getElementById("nvf-ai-apply")?.addEventListener("click", () => {
+        const promptEl = document.getElementById("nvf-prompt");
+        const outEl = document.getElementById("nvf-ai-out");
+        if (!nvfDraft) nvfDraft = aiGenerate(promptEl ? promptEl.value : "");
+        fillForm(nvfDraft, "nvf-");
+        if (outEl) { outEl.classList.add("show"); outEl.textContent = "Черновик подставлен — проверь и отправь админу."; }
+      });
+      document.getElementById("nvf-publish")?.addEventListener("click", () => {
+        if (!window.PVProfile || !PVProfile.isLoggedIn()) {
+          if (window.PVProfile && PVProfile.toast) PVProfile.toast("Войди в аккаунт");
+          if (typeof window.openNvLogin === "function") window.openNvLogin();
+          return;
+        }
+        submitGame(null, "nvf-");
+      });
+      document.getElementById("nvf-play")?.addEventListener("click", () => {
+        const cfg = readForm("nvf-");
+        if (cfg.type === "quiz" && (!cfg.quiz || !cfg.quiz.length)) cfg.quiz = sampleQuiz(cfg.title);
+        openCustom(cfg);
+      });
+      toggleQuizField("nvf-");
+      renderList(nvfListEl, "nvf");
       document.getElementById("custom-start").addEventListener("click", startCustom);
 
       /* patch exitToHub to refresh cards */
@@ -14743,6 +15267,7 @@ const HUB_GAME_META = {
         open: openFactory,
         refresh: refreshHubCards,
         openCustom: openCustom,
+        renderNvfList: function () { renderList(document.getElementById("nvf-list"), "nvf"); },
         loadPending: loadPendingGames,
         loadPublished: loadPublishedGames,
         approve: approveFactoryGame,
@@ -16871,6 +17396,7 @@ const HUB_GAME_META = {
         const card = document.getElementById("cover-card-" + id);
         if (card) {
           const art = card.querySelector(".cover-art");
+          if (art && typeof cloneHubCoverArt === "function") return cloneHubCoverArt(art);
           if (art) return art.outerHTML;
         }
         if (id.indexOf("custom-") === 0) {
@@ -16878,6 +17404,7 @@ const HUB_GAME_META = {
           const ccard = document.getElementById("cover-card-custom-" + cid);
           if (ccard) {
             const art = ccard.querySelector(".cover-art");
+            if (art && typeof cloneHubCoverArt === "function") return cloneHubCoverArt(art);
             if (art) return art.outerHTML;
           }
         }
@@ -17041,6 +17568,7 @@ const HUB_GAME_META = {
         renderHubFriendsRail();
         renderAvatarShop();
         updateFriendsBadges();
+        if (typeof window.renderPvNews === "function") window.renderPvNews();
         if (typeof window.enhanceHubCardRatings === "function") window.enhanceHubCardRatings();
       }
 
@@ -17305,6 +17833,12 @@ const HUB_GAME_META = {
           const nav = btn.getAttribute("data-hub-nav");
           if (nav === "home") {
             if (typeof showScreen === "function") showScreen("cover");
+            if (typeof setHubPanel === "function") setHubPanel("home");
+            document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
+          } else if (nav === "more") {
+            if (typeof showScreen === "function") showScreen("cover");
+            if (typeof setHubPanel === "function") setHubPanel("more");
+            if (typeof renderPvNews === "function") renderPvNews();
             document.querySelector("#screen-cover .rbx-hub-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
           } else if (nav === "account") {
             openProfile();
