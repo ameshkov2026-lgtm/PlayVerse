@@ -14626,6 +14626,10 @@ const HUB_GAME_META = {
       const STORE_PENDING = "pvFactoryPending_v1";
       const STORE_PUBLISHED = "pvFactoryPublished_v1";
       const STORE_KEY_LEGACY = "pvFactoryGames_v1";
+      const FACTORY_CLOUD_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
+      const FACTORY_CLOUD_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
+      const FACTORY_CLOUD = !!(FACTORY_CLOUD_URL && FACTORY_CLOUD_ANON);
+      let cloudPendingCache = [];
       const hubGrid = document.querySelector(".hub-grid");
       const listEl = document.getElementById("factory-list");
       const aiOut = document.getElementById("factory-ai-out");
@@ -14682,6 +14686,121 @@ const HUB_GAME_META = {
       function savePendingGames(arr) { saveJson(STORE_PENDING, arr); }
       function loadPublishedGames() { return loadJson(STORE_PUBLISHED); }
       function savePublishedGames(arr) { saveJson(STORE_PUBLISHED, arr); }
+
+      function factoryCloudHeaders(extra) {
+        return Object.assign({
+          apikey: FACTORY_CLOUD_ANON,
+          Authorization: "Bearer " + FACTORY_CLOUD_ANON,
+          "Content-Type": "application/json"
+        }, extra || {});
+      }
+
+      function rowToGame(row) {
+        if (!row) return null;
+        const g = row.game_data && typeof row.game_data === "object" ? row.game_data : {};
+        return Object.assign({}, g, {
+          id: row.id || g.id,
+          author: row.author || g.author || "guest",
+          status: row.status || g.status || "pending",
+          source: row.source || g.source || "v1",
+          submittedAt: row.submitted_at ? new Date(row.submitted_at).getTime() : (g.submittedAt || Date.now())
+        });
+      }
+
+      async function fetchCloudSubmissions(status) {
+        if (!FACTORY_CLOUD) return [];
+        const res = await fetch(
+          FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?status=eq." + encodeURIComponent(status) +
+          "&order=submitted_at.desc&limit=100",
+          { headers: factoryCloudHeaders() }
+        );
+        const body = await res.json().catch(() => ([]));
+        if (!res.ok) {
+          const msg = body && body.message ? String(body.message) : "";
+          if (/factory_submissions.*does not exist/i.test(msg)) {
+            console.warn("factory_submissions table missing — run supabase-setup.sql");
+          }
+          return [];
+        }
+        return (Array.isArray(body) ? body : []).map(rowToGame).filter(Boolean);
+      }
+
+      async function pushSubmissionToCloud(cfg, source) {
+        if (!FACTORY_CLOUD) return { ok: false, offline: true };
+        try {
+          const row = {
+            id: cfg.id,
+            author: cfg.author || "guest",
+            status: "pending",
+            source: source || "v1",
+            game_data: cfg,
+            submitted_at: new Date(cfg.submittedAt || Date.now()).toISOString(),
+            updated_at: new Date().toISOString()
+          };
+          const res = await fetch(
+            FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?on_conflict=id",
+            {
+              method: "POST",
+              headers: factoryCloudHeaders({ Prefer: "resolution=merge-duplicates,return=minimal" }),
+              body: JSON.stringify(row)
+            }
+          );
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            const msg = body && body.message ? String(body.message) : ("HTTP " + res.status);
+            return { ok: false, error: msg };
+          }
+          return { ok: true };
+        } catch (e) {
+          return { ok: false, error: e.message || "network" };
+        }
+      }
+
+      async function patchSubmissionInCloud(id, status, cfg) {
+        if (!FACTORY_CLOUD || !id) return;
+        try {
+          await fetch(
+            FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?id=eq." + encodeURIComponent(id),
+            {
+              method: "PATCH",
+              headers: factoryCloudHeaders({ Prefer: "return=minimal" }),
+              body: JSON.stringify({
+                status: status,
+                game_data: cfg,
+                updated_at: new Date().toISOString()
+              })
+            }
+          );
+        } catch (e) { console.warn("factory cloud patch", e); }
+      }
+
+      async function syncPendingFromCloud() {
+        if (!FACTORY_CLOUD) { cloudPendingCache = []; return cloudPendingCache; }
+        if (!(window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin())) {
+          cloudPendingCache = [];
+          return cloudPendingCache;
+        }
+        cloudPendingCache = await fetchCloudSubmissions("pending");
+        return cloudPendingCache;
+      }
+
+      async function syncPublishedFromCloud() {
+        if (!FACTORY_CLOUD) return;
+        const cloudGames = await fetchCloudSubmissions("published");
+        if (!cloudGames.length) return;
+        const byId = {};
+        loadPublishedGames().forEach((g) => { byId[g.id] = g; });
+        cloudGames.forEach((g) => { byId[g.id] = g; });
+        savePublishedGames(Object.values(byId).slice(0, 100));
+        refreshHubCards();
+      }
+
+      function loadAdminPendingGames() {
+        if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin() && FACTORY_CLOUD) {
+          return cloudPendingCache.slice();
+        }
+        return loadPendingGames();
+      }
 
       function loadGames() { return loadLocalGames(); }
       function saveGames(arr) { saveLocalGames(arr); }
@@ -14948,31 +15067,51 @@ const HUB_GAME_META = {
         cfg.author = author;
         cfg.status = "pending";
         cfg.submittedAt = Date.now();
-        const pending = loadPendingGames().filter((g) => g.id !== cfg.id);
-        pending.unshift(cfg);
-        savePendingGames(pending.slice(0, 80));
+        cfg.source = prefix === "nvf-" ? "v2" : "v1";
+        const rawPending = loadJson(STORE_PENDING).filter((g) => g.id !== cfg.id);
+        rawPending.unshift(cfg);
+        savePendingGames(rawPending.slice(0, 80));
         const local = loadLocalGames().filter((g) => g.id !== cfg.id);
         saveLocalGames(local);
         editingId = cfg.id;
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
         const outEl = prefix === "nvf-" ? document.getElementById("nvf-ai-out") : aiOut;
-        if (outEl) { outEl.classList.add("show"); outEl.textContent = "«" + cfg.title + "» отправлена на проверку администратору."; }
-        if (window.PVProfile && PVProfile.toast) PVProfile.toast("Отправлено на проверку");
-        if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
+        const source = cfg.source;
+        if (outEl) {
+          outEl.classList.add("show");
+          outEl.textContent = FACTORY_CLOUD
+            ? "«" + cfg.title + "» отправляется администратору PlayVerse…"
+            : "«" + cfg.title + "» отправлена на проверку (офлайн — только на этом устройстве).";
+        }
+        if (window.PVProfile && PVProfile.toast) {
+          PVProfile.toast(FACTORY_CLOUD ? "Отправляем на сервер…" : "Отправлено локально");
+        }
+        pushSubmissionToCloud(cfg, source).then((result) => {
+          if (result.ok) {
+            if (outEl) outEl.textContent = "«" + cfg.title + "» отправлена администратору PlayVerse.";
+            if (window.PVProfile && PVProfile.toast) PVProfile.toast("Игра улетела админу — жди проверки");
+            if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
+          } else if (!result.offline) {
+            if (outEl) outEl.textContent = "«" + cfg.title + "» сохранена локально. Сервер: " + (result.error || "ошибка");
+            if (window.PVProfile && PVProfile.toast) PVProfile.toast("Сервер недоступен — игра только на этом устройстве");
+          }
+        });
         return true;
       }
 
       function approveFactoryGame(id) {
-        const pending = loadPendingGames();
-        const g = pending.find((x) => x.id === id);
+        let g = cloudPendingCache.find((x) => x.id === id);
+        if (!g) g = loadJson(STORE_PENDING).find((x) => x.id === id);
         if (!g) return false;
         g.status = "published";
         g.approvedAt = Date.now();
-        savePendingGames(pending.filter((x) => x.id !== id));
+        cloudPendingCache = cloudPendingCache.filter((x) => x.id !== id);
+        savePendingGames(loadJson(STORE_PENDING).filter((x) => x.id !== id));
         const pub = loadPublishedGames().filter((x) => x.id !== id);
         pub.unshift(g);
         savePublishedGames(pub.slice(0, 100));
+        patchSubmissionInCloud(id, "published", g);
         refreshHubCards();
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
@@ -14980,15 +15119,14 @@ const HUB_GAME_META = {
       }
 
       function rejectFactoryGame(id) {
-        const pending = loadPendingGames();
-        const g = pending.find((x) => x.id === id);
+        let g = cloudPendingCache.find((x) => x.id === id);
+        if (!g) g = loadJson(STORE_PENDING).find((x) => x.id === id);
         if (!g) return false;
         g.status = "rejected";
         g.rejectedAt = Date.now();
-        savePendingGames(pending.filter((x) => x.id !== id));
-        const local = loadLocalGames();
-        local.unshift(g);
-        saveLocalGames(local.slice(0, 40));
+        cloudPendingCache = cloudPendingCache.filter((x) => x.id !== id);
+        savePendingGames(loadJson(STORE_PENDING).filter((x) => x.id !== id));
+        patchSubmissionInCloud(id, "rejected", g);
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
         return true;
@@ -15377,6 +15515,12 @@ const HUB_GAME_META = {
       const _exit = window.exitToHub;
       refreshHubCards();
       toggleQuizField();
+      if (window.PVFactory && PVFactory.syncPublishedFromCloud) {
+        PVFactory.syncPublishedFromCloud().catch(function () {});
+      }
+      if (window.PVFactory && PVFactory.syncPendingFromCloud) {
+        PVFactory.syncPendingFromCloud().catch(function () {});
+      }
       if (window.PVAdmin && typeof PVAdmin.applyDisabledGames === "function") PVAdmin.applyDisabledGames();
 
       window.PVFactory = {
@@ -15387,13 +15531,20 @@ const HUB_GAME_META = {
         openCustom: openCustom,
         renderNvfList: function () { renderList(document.getElementById("nvf-list"), "nvf"); },
         toggleNvfQuiz: function () { toggleQuizField("nvf-"); },
-        loadPending: loadPendingGames,
+        loadPending: loadAdminPendingGames,
+        syncPendingFromCloud: syncPendingFromCloud,
+        syncPublishedFromCloud: syncPublishedFromCloud,
         loadPublished: loadPublishedGames,
         approve: approveFactoryGame,
         reject: rejectFactoryGame
       };
       window.PVFactoryModeration = {
-        getPendingCount: function () { return loadPendingGames().length; },
+        getPendingCount: function () {
+          if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin() && FACTORY_CLOUD) {
+            return cloudPendingCache.length;
+          }
+          return loadJson(STORE_PENDING).length;
+        },
         notifyAdmin: function () {
           if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin()) {
             if (typeof PVProfile.render === "function") PVProfile.render();
@@ -17201,6 +17352,48 @@ const HUB_GAME_META = {
         ).join("");
       }
 
+      function renderAdminPendingList(pending) {
+        if (el.adminPendingCount) {
+          el.adminPendingCount.textContent = pending.length ? ("(" + pending.length + ")") : "";
+        }
+        if (!el.adminPendingList) return;
+        if (!pending.length) {
+          el.adminPendingList.innerHTML = '<p class="profile-admin-hint" style="margin:0">Нет игр на проверке.</p>';
+          return;
+        }
+        el.adminPendingList.innerHTML = pending.map((g) =>
+          '<div class="profile-admin-list-item" style="flex-wrap:wrap;gap:8px">' +
+          '<span><strong>' + (g.title || "Без названия") + '</strong> · ' + (g.author || "?") +
+          ' · ' + (g.type || "игра") + (g.source === "v2" ? " · v2" : "") + '</span>' +
+          '<span style="display:flex;gap:6px;flex-wrap:wrap">' +
+          '<button type="button" class="profile-admin-btn" data-factory-approve="' + g.id + '">Одобрить</button>' +
+          '<button type="button" class="profile-admin-btn ghost" data-factory-preview="' + g.id + '">Тест</button>' +
+          '<button type="button" class="profile-admin-btn danger" data-factory-reject="' + g.id + '">Отклонить</button>' +
+          '</span></div>'
+        ).join("");
+        el.adminPendingList.querySelectorAll("[data-factory-approve]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (window.PVFactory && PVFactory.approve) PVFactory.approve(btn.getAttribute("data-factory-approve"));
+            renderAdmin();
+            toast("Игра одобрена — теперь в хабе у всех");
+          });
+        });
+        el.adminPendingList.querySelectorAll("[data-factory-reject]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (window.PVFactory && PVFactory.reject) PVFactory.reject(btn.getAttribute("data-factory-reject"));
+            renderAdmin();
+            toast("Игра отклонена");
+          });
+        });
+        el.adminPendingList.querySelectorAll("[data-factory-preview]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-factory-preview");
+            const g = pending.find((x) => x.id === id);
+            if (g && window.PVFactory && PVFactory.openCustom) PVFactory.openCustom(g);
+          });
+        });
+      }
+
       function renderAdmin() {
         if (!el.adminSection) return;
         const admin = isSuperAdmin();
@@ -17238,44 +17431,11 @@ const HUB_GAME_META = {
           });
         }
         const pending = (window.PVFactory && PVFactory.loadPending) ? PVFactory.loadPending() : [];
-        if (el.adminPendingCount) {
-          el.adminPendingCount.textContent = pending.length ? ("(" + pending.length + ")") : "";
-        }
-        if (el.adminPendingList) {
-          if (!pending.length) {
-            el.adminPendingList.innerHTML = '<p class="profile-admin-hint" style="margin:0">Нет игр на проверке.</p>';
-          } else {
-            el.adminPendingList.innerHTML = pending.map((g) =>
-              '<div class="profile-admin-list-item" style="flex-wrap:wrap;gap:8px">' +
-              '<span><strong>' + (g.title || "Без названия") + '</strong> · ' + (g.author || "?") + ' · ' + (g.type || "игра") + '</span>' +
-              '<span style="display:flex;gap:6px;flex-wrap:wrap">' +
-              '<button type="button" class="profile-admin-btn" data-factory-approve="' + g.id + '">Одобрить</button>' +
-              '<button type="button" class="profile-admin-btn ghost" data-factory-preview="' + g.id + '">Тест</button>' +
-              '<button type="button" class="profile-admin-btn danger" data-factory-reject="' + g.id + '">Отклонить</button>' +
-              '</span></div>'
-            ).join("");
-            el.adminPendingList.querySelectorAll("[data-factory-approve]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                if (window.PVFactory && PVFactory.approve) PVFactory.approve(btn.getAttribute("data-factory-approve"));
-                renderAdmin();
-                toast("Игра одобрена — теперь в хабе у всех");
-              });
-            });
-            el.adminPendingList.querySelectorAll("[data-factory-reject]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                if (window.PVFactory && PVFactory.reject) PVFactory.reject(btn.getAttribute("data-factory-reject"));
-                renderAdmin();
-                toast("Игра отклонена");
-              });
-            });
-            el.adminPendingList.querySelectorAll("[data-factory-preview]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                const id = btn.getAttribute("data-factory-preview");
-                const g = pending.find((x) => x.id === id);
-                if (g && window.PVFactory && PVFactory.openCustom) PVFactory.openCustom(g);
-              });
-            });
-          }
+        renderAdminPendingList(pending);
+        if (window.PVFactory && PVFactory.syncPendingFromCloud) {
+          PVFactory.syncPendingFromCloud().then(function () {
+            renderAdminPendingList(PVFactory.loadPending());
+          }).catch(function () {});
         }
         const bugReport = getBotBugsReport();
         const bugs = bugReport.bugs || [];
@@ -17784,6 +17944,9 @@ const HUB_GAME_META = {
             try {
               await loadCloudUsers();
               await refreshCurrentUserFromCloud();
+              if (window.PVFactory && PVFactory.syncPublishedFromCloud) {
+                await PVFactory.syncPublishedFromCloud();
+              }
               if (isLoggedIn()) toast("Сервер PlayVerse подключён");
             } catch (e) {
               console.warn("cloud boot", e);
