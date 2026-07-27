@@ -5272,6 +5272,7 @@
     }
     #screen-newverse.active { align-items: stretch; justify-content: flex-start; }
     .nv-hub {
+      position: relative;
       display: flex; flex-direction: column; height: 100dvh; max-height: 100dvh; overflow: hidden;
     }
     .nv-topbar {
@@ -5577,6 +5578,47 @@
     .nvf-game-card .mini-actions { display: flex; flex-wrap: wrap; gap: 6px; }
     .nvf-game-card .nvf-btn { padding: 7px 10px; font-size: 0.75rem; }
     .nvf-empty { margin: 0 16px; padding: 16px; border-radius: 14px; text-align: center; color: #c4b5fd; font-weight: 700; font-size: 0.88rem; }
+
+    .nvf-teaser {
+      display: block; width: calc(100% - 32px); margin: 0 16px 20px; padding: 0;
+      border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; overflow: hidden;
+      text-align: left; cursor: pointer;
+      background: rgba(255,255,255,0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .nvf-teaser:active { transform: scale(0.985); }
+    .nvf-teaser-art {
+      position: relative;
+      background:
+        radial-gradient(circle at 28% 30%, rgba(255,255,255,0.2), transparent 42%),
+        linear-gradient(145deg, #312e81 0%, #7c3aed 48%, #db2777 100%);
+      padding: 22px 16px 18px;
+    }
+    .nvf-teaser-art svg { display: block; width: 100%; max-width: 280px; margin: 0 auto; height: auto; }
+    .nvf-teaser-body { padding: 14px 16px 16px; }
+    .nvf-teaser-badge {
+      display: inline-block; margin-bottom: 8px;
+      background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f;
+      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em;
+      padding: 5px 10px; border-radius: 999px;
+    }
+    .nvf-teaser-title { margin: 0 0 6px; font-size: 1.12rem; font-weight: 900; color: #fff; }
+    .nvf-teaser-text { margin: 0; font-size: 0.88rem; line-height: 1.45; color: #e9d5ff; font-weight: 600; }
+
+    .nvf-page {
+      position: absolute; inset: 0; z-index: 50;
+      display: flex; flex-direction: column;
+      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%);
+      transform: translateX(100%); transition: transform 0.28s ease;
+      pointer-events: none;
+    }
+    .nvf-page.open { transform: translateX(0); pointer-events: auto; }
+    .nvf-page-top {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px; flex-shrink: 0;
+      background: #2e1065; border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+    .nvf-page-top h2 { margin: 0; flex: 1; font-size: 1.05rem; font-weight: 900; color: #fff; }
+    .nvf-page-scroll { flex: 1; overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+    body.nvf-open .nv-bottom-nav { display: none; }
 
   </style>
 </head>
@@ -6492,45 +6534,25 @@
           </div>
           <div class="nv-friends-rail" id="nv-friends-rail"></div>
           <h2 class="nv-section-title">Студия игр</h2>
-          <div class="nvf-studio" id="nvf-studio">
-            <div class="nvf-hero">
-              <span class="nvf-hero-icon">🛠️</span>
-              <h3>Собери свою мини-игру</h3>
-              <p>Опиши идею — ИИ подскажет. Настрой параметры и отправь игру админу PlayVerse.</p>
+          <button type="button" class="nvf-teaser" id="nvf-teaser" aria-label="Открыть Фабрику игр">
+            <div class="nvf-teaser-art" aria-hidden="true">
+              <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                <rect x="48" y="70" width="70" height="90" rx="12" fill="#ede9fe"/>
+                <rect x="128" y="55" width="70" height="105" rx="12" fill="#f5d0fe"/>
+                <rect x="208" y="80" width="70" height="80" rx="12" fill="#fde68a"/>
+                <circle cx="83" cy="115" r="16" fill="#7c3aed"/>
+                <circle cx="163" cy="105" r="16" fill="#db2777"/>
+                <circle cx="243" cy="120" r="16" fill="#f59e0b"/>
+                <path d="M70 175h180" stroke="rgba(255,255,255,0.4)" stroke-width="6" stroke-linecap="round"/>
+                <text x="160" y="42" text-anchor="middle" fill="#fff" font-size="22" font-weight="800" font-family="system-ui">AI</text>
+              </svg>
             </div>
-            <div class="nvf-card">
-              <p class="nvf-card-title">Шаг 1 · Идея</p>
-              <textarea class="nvf-prompt" id="nvf-prompt" placeholder="Например: викторина про динозавров на 5 вопросов или кликер со звёздами на 40 секунд"></textarea>
-              <div class="nvf-ai-row">
-                <button type="button" class="nvf-btn primary" id="nvf-ai-gen">✨ Сгенерировать</button>
-                <button type="button" class="nvf-btn ghost" id="nvf-ai-apply">Подставить</button>
-              </div>
-              <div class="nvf-ai-out" id="nvf-ai-out"></div>
+            <div class="nvf-teaser-body">
+              <span class="nvf-teaser-badge">Студия</span>
+              <h3 class="nvf-teaser-title">Фабрика игр</h3>
+              <p class="nvf-teaser-text">Создай свою игру с ИИ или вручную — нажми, чтобы открыть конструктор.</p>
             </div>
-            <div class="nvf-types" id="nvf-types">
-              <input type="hidden" id="nvf-type" value="clicker">
-              <button type="button" class="nvf-type-tile active" data-nvf-type="clicker"><span class="nvf-type-emoji">👆</span><span class="nvf-type-name">Кликер</span></button>
-              <button type="button" class="nvf-type-tile" data-nvf-type="catcher"><span class="nvf-type-emoji">🧺</span><span class="nvf-type-name">Ловец</span></button>
-              <button type="button" class="nvf-type-tile" data-nvf-type="quiz"><span class="nvf-type-emoji">❓</span><span class="nvf-type-name">Викторина</span></button>
-              <button type="button" class="nvf-type-tile" data-nvf-type="memory"><span class="nvf-type-emoji">🃏</span><span class="nvf-type-name">Мемо</span></button>
-              <button type="button" class="nvf-type-tile" data-nvf-type="dodge"><span class="nvf-type-emoji">💨</span><span class="nvf-type-name">Уклонялка</span></button>
-            </div>
-            <div class="nvf-grid">
-              <label class="nvf-field full"><span>Название</span><input id="nvf-title" maxlength="40" placeholder="Моя игра"></label>
-              <label class="nvf-field"><span>Цель</span><input id="nvf-goal" type="number" min="5" max="500" value="30"></label>
-              <label class="nvf-field"><span>Время (сек)</span><input id="nvf-time" type="number" min="0" max="300" value="30"></label>
-              <label class="nvf-field"><span>Скорость</span><input id="nvf-speed" type="number" min="1" max="5" value="2"></label>
-              <label class="nvf-field"><span>Цвет</span><input id="nvf-color" type="color" value="#9333ea"></label>
-              <label class="nvf-field full"><span>Эмодзи темы</span><input id="nvf-theme" placeholder="⭐ 🚀 🌙"></label>
-              <label class="nvf-field full profile-hidden" id="nvf-quiz-wrap"><span>Вопросы (строка: вопрос | верный | …)</span><textarea id="nvf-quiz" placeholder="Столица Франции? | Париж | Лондон"></textarea></label>
-            </div>
-            <div class="nvf-actions">
-              <button type="button" class="nvf-btn ghost" id="nvf-play">▶ Тест</button>
-              <button type="button" class="nvf-btn primary" id="nvf-publish">📤 Отправить админу</button>
-            </div>
-            <h3 class="nvf-mine-title">Мои проекты</h3>
-            <div class="nvf-list-rail" id="nvf-list"></div>
-          </div>
+          </button>
         </div>
         <div class="nv-panel" data-nv-panel="charts">
           <h2 class="nv-section-title">Популярное</h2>
@@ -6577,6 +6599,53 @@
         <button type="button" class="nv-nav-item" data-nv-nav="requests"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>Заявки</button>
         <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>Ещё</button>
       </nav>
+      <div class="nvf-page" id="nvf-page" aria-hidden="true">
+        <header class="nvf-page-top">
+          <button type="button" class="nv-back-btn" id="nvf-back">← Назад</button>
+          <h2>Фабрика игр</h2>
+        </header>
+        <div class="nvf-page-scroll">
+          <div class="nvf-studio" id="nvf-studio">
+            <div class="nvf-hero">
+              <span class="nvf-hero-icon">🛠️</span>
+              <h3>Собери свою мини-игру</h3>
+              <p>Опиши идею — ИИ подскажет. Настрой параметры и отправь игру админу PlayVerse.</p>
+            </div>
+            <div class="nvf-card">
+              <p class="nvf-card-title">Шаг 1 · Идея</p>
+              <textarea class="nvf-prompt" id="nvf-prompt" placeholder="Например: викторина про динозавров на 5 вопросов или кликер со звёздами на 40 секунд"></textarea>
+              <div class="nvf-ai-row">
+                <button type="button" class="nvf-btn primary" id="nvf-ai-gen">✨ Сгенерировать</button>
+                <button type="button" class="nvf-btn ghost" id="nvf-ai-apply">Подставить</button>
+              </div>
+              <div class="nvf-ai-out" id="nvf-ai-out"></div>
+            </div>
+            <div class="nvf-types" id="nvf-types">
+              <input type="hidden" id="nvf-type" value="clicker">
+              <button type="button" class="nvf-type-tile active" data-nvf-type="clicker"><span class="nvf-type-emoji">👆</span><span class="nvf-type-name">Кликер</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="catcher"><span class="nvf-type-emoji">🧺</span><span class="nvf-type-name">Ловец</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="quiz"><span class="nvf-type-emoji">❓</span><span class="nvf-type-name">Викторина</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="memory"><span class="nvf-type-emoji">🃏</span><span class="nvf-type-name">Мемо</span></button>
+              <button type="button" class="nvf-type-tile" data-nvf-type="dodge"><span class="nvf-type-emoji">💨</span><span class="nvf-type-name">Уклонялка</span></button>
+            </div>
+            <div class="nvf-grid">
+              <label class="nvf-field full"><span>Название</span><input id="nvf-title" maxlength="40" placeholder="Моя игра"></label>
+              <label class="nvf-field"><span>Цель</span><input id="nvf-goal" type="number" min="5" max="500" value="30"></label>
+              <label class="nvf-field"><span>Время (сек)</span><input id="nvf-time" type="number" min="0" max="300" value="30"></label>
+              <label class="nvf-field"><span>Скорость</span><input id="nvf-speed" type="number" min="1" max="5" value="2"></label>
+              <label class="nvf-field"><span>Цвет</span><input id="nvf-color" type="color" value="#9333ea"></label>
+              <label class="nvf-field full"><span>Эмодзи темы</span><input id="nvf-theme" placeholder="⭐ 🚀 🌙"></label>
+              <label class="nvf-field full profile-hidden" id="nvf-quiz-wrap"><span>Вопросы (строка: вопрос | верный | …)</span><textarea id="nvf-quiz" placeholder="Столица Франции? | Париж | Лондон"></textarea></label>
+            </div>
+            <div class="nvf-actions">
+              <button type="button" class="nvf-btn ghost" id="nvf-play">▶ Тест</button>
+              <button type="button" class="nvf-btn primary" id="nvf-publish">📤 Отправить админу</button>
+            </div>
+            <h3 class="nvf-mine-title">Мои проекты</h3>
+            <div class="nvf-list-rail" id="nvf-list"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -7782,21 +7851,27 @@
 
 
     const EXTRA_INTRO_ICONS = {
-      tetris: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%230369a1%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      pong: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%236d28d9%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      battleship: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%230ea5e9%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      chess: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23d97706%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      checkers: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23f87171%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      tictactoe: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%2310b981%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      dobble: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%231e293b%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2228%22%20width%3D%2236%22%20height%3D%2252%22%20rx%3D%226%22%20fill%3D%22%23ef4444%22/%3E%3Crect%20x%3D%2232%22%20y%3D%2222%22%20width%3D%2236%22%20height%3D%2252%22%20rx%3D%226%22%20fill%3D%22%23eab308%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2288%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fde047%22%20font-size%3D%2214%22%20font-weight%3D%22900%22%3EДУБЛЬ%3C/text%3E%3C/svg%3E",
-      mines: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%230891b2%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      simon: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23a21caf%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      space: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%231d4ed8%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      runner: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%2316a34a%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      moles: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23ea580c%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      catcher: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%232563eb%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
-      maze: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%234f46e5%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2222%22%20fill%3D%22%23fde68a%22/%3E%3C/svg%3E",
+      tetris: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230ea5e9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230369a1%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%2258%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%2338bdf8%22%2F%3E%3Crect%20x%3D%2236%22%20y%3D%2258%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%2338bdf8%22%2F%3E%3Crect%20x%3D%2250%22%20y%3D%2258%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%2338bdf8%22%2F%3E%3Crect%20x%3D%2264%22%20y%3D%2258%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%2338bdf8%22%2F%3E%3Crect%20x%3D%2236%22%20y%3D%2244%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23fbbf24%22%2F%3E%3Crect%20x%3D%2236%22%20y%3D%2230%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23fbbf24%22%2F%3E%3Crect%20x%3D%2250%22%20y%3D%2244%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23a78bfa%22%2F%3E%3Crect%20x%3D%2264%22%20y%3D%2244%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23a78bfa%22%2F%3E%3Crect%20x%3D%2264%22%20y%3D%2230%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23a78bfa%22%2F%3E%3C%2Fsvg%3E",
+      pong: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%238b5cf6%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236d28d9%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%2228%22%20width%3D%228%22%20height%3D%2244%22%20rx%3D%224%22%20fill%3D%22%23fde68a%22%2F%3E%3Crect%20x%3D%2278%22%20y%3D%2236%22%20width%3D%228%22%20height%3D%2244%22%20rx%3D%224%22%20fill%3D%22%23c4b5fd%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%229%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%224%22%20fill%3D%22%23a78bfa%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%2218%22%20width%3D%224%22%20height%3D%2264%22%20rx%3D%222%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.2%29%22%2F%3E%3C%2Fsvg%3E",
+      battleship: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230284c7%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230c4a6e%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Cpath%20d%3D%22M8%2072%20Q30%2062%2050%2068%20T92%2064%20L92%2078%20L8%2078%20Z%22%20fill%3D%22%230369a1%22%2F%3E%3Cpath%20d%3D%22M12%2068%20Q34%2058%2054%2064%20T88%2060%20L88%2072%20L12%2072%20Z%22%20fill%3D%22%230ea5e9%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2244%22%20width%3D%2244%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23e2e8f0%22%2F%3E%3Crect%20x%3D%2238%22%20y%3D%2234%22%20width%3D%2224%22%20height%3D%2212%22%20rx%3D%223%22%20fill%3D%22%2394a3b8%22%2F%3E%3Crect%20x%3D%2246%22%20y%3D%2224%22%20width%3D%228%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23cbd5e1%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2255%22%20r%3D%223%22%20fill%3D%22%230ea5e9%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2255%22%20r%3D%223%22%20fill%3D%22%230ea5e9%22%2F%3E%3Ccircle%20cx%3D%2264%22%20cy%3D%2255%22%20r%3D%223%22%20fill%3D%22%230ea5e9%22%2F%3E%3Cpath%20d%3D%22M18%2052%20L24%2042%20L24%2052%22%20stroke%3D%22%23ef4444%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+      chess: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f59e0b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23b45309%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2272%22%20width%3D%2260%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23fef3c7%22%2F%3E%3Cpath%20d%3D%22M32%2072%20L36%2048%20L30%2048%20L50%2022%20L70%2048%20L64%2048%20L68%2072%20Z%22%20fill%3D%22%23fff7ed%22%20stroke%3D%22%23fde68a%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2230%22%20r%3D%225%22%20fill%3D%22%23fbbf24%22%2F%3E%3Crect%20x%3D%2244%22%20y%3D%2235%22%20width%3D%2212%22%20height%3D%228%22%20rx%3D%222%22%20fill%3D%22%23fde68a%22%2F%3E%3C%2Fsvg%3E",
+      checkers: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f87171%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23b91c1c%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2224%22%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%228%22%20fill%3D%22%23fef2f2%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2224%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23991b1b%22%2F%3E%3Crect%20x%3D%2250%22%20y%3D%2224%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23991b1b%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2240%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23991b1b%22%2F%3E%3Crect%20x%3D%2266%22%20y%3D%2240%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23991b1b%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2272%22%20r%3D%2210%22%20fill%3D%22%23fff%22%20stroke%3D%22%23fca5a5%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2258%22%20cy%3D%2256%22%20r%3D%2210%22%20fill%3D%22%231e293b%22%20stroke%3D%22%23475569%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E",
+      tictactoe: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2334d399%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23059669%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%2222%22%20width%3D%2256%22%20height%3D%2256%22%20rx%3D%228%22%20fill%3D%22%23ecfdf5%22%20stroke%3D%22%236ee7b7%22%20stroke-width%3D%223%22%2F%3E%3Cline%20x1%3D%2241%22%20y1%3D%2224%22%20x2%3D%2241%22%20y2%3D%2276%22%20stroke%3D%22%2310b981%22%20stroke-width%3D%224%22%2F%3E%3Cline%20x1%3D%2259%22%20y1%3D%2224%22%20x2%3D%2259%22%20y2%3D%2276%22%20stroke%3D%22%2310b981%22%20stroke-width%3D%224%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%2241%22%20x2%3D%2276%22%20y2%3D%2241%22%20stroke%3D%22%2310b981%22%20stroke-width%3D%224%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%2259%22%20x2%3D%2276%22%20y2%3D%2259%22%20stroke%3D%22%2310b981%22%20stroke-width%3D%224%22%2F%3E%3Cpath%20d%3D%22M28%2032%20L36%2048%20L28%2064%22%20stroke%3D%22%232563eb%22%20stroke-width%3D%224%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M36%2032%20L28%2048%20L36%2064%22%20stroke%3D%22%232563eb%22%20stroke-width%3D%224%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2250%22%20r%3D%229%22%20fill%3D%22none%22%20stroke%3D%22%23dc2626%22%20stroke-width%3D%224%22%2F%3E%3C%2Fsvg%3E",
+      dobble: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231e293b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230f172a%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2250%22%20r%3D%2226%22%20fill%3D%22%23fff%22%20stroke%3D%22%23fcd34d%22%20stroke-width%3D%224%22%2F%3E%3Ccircle%20cx%3D%2262%22%20cy%3D%2250%22%20r%3D%2226%22%20fill%3D%22%23fff%22%20stroke%3D%22%23fcd34d%22%20stroke-width%3D%224%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2244%22%20r%3D%228%22%20fill%3D%22%2338bdf8%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2256%22%20r%3D%227%22%20fill%3D%22%23f472b6%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2258%22%20r%3D%226%22%20fill%3D%22%2322c55e%22%2F%3E%3Ccircle%20cx%3D%2262%22%20cy%3D%2242%22%20r%3D%228%22%20fill%3D%22%2338bdf8%22%2F%3E%3Ccircle%20cx%3D%2254%22%20cy%3D%2258%22%20r%3D%227%22%20fill%3D%22%23eab308%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2252%22%20r%3D%226%22%20fill%3D%22%23a78bfa%22%2F%3E%3C%2Fsvg%3E",
+      mines: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230891b2%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23155e75%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2224%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23ecfeff%22%2F%3E%3Ctext%20x%3D%2231%22%20y%3D%2240%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20font-weight%3D%22900%22%20fill%3D%22%230e7490%22%20font-family%3D%22Georgia%2Cserif%22%3E1%3C%2Ftext%3E%3Crect%20x%3D%2246%22%20y%3D%2224%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23155e75%22%2F%3E%3Crect%20x%3D%2272%22%20y%3D%2224%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23ecfeff%22%2F%3E%3Ctext%20x%3D%2283%22%20y%3D%2240%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20font-weight%3D%22900%22%20fill%3D%22%23b91c1c%22%20font-family%3D%22Georgia%2Cserif%22%3E3%3C%2Ftext%3E%3Crect%20x%3D%2233%22%20y%3D%2250%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23ef4444%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2261%22%20r%3D%226%22%20fill%3D%22%230f172a%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2261%22%20r%3D%222%22%20fill%3D%22%23f8fafc%22%2F%3E%3Crect%20x%3D%2259%22%20y%3D%2250%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%225%22%20fill%3D%22%23ecfeff%22%2F%3E%3Ctext%20x%3D%2270%22%20y%3D%2266%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20font-weight%3D%22900%22%20fill%3D%22%230369a1%22%20font-family%3D%22Georgia%2Cserif%22%3E2%3C%2Ftext%3E%3C%2Fsvg%3E",
+      simon: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23a855f7%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%237e22ce%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Cpath%20d%3D%22M50%2018%20L82%2050%20L50%2082%20L18%2050%20Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.08%29%22%2F%3E%3Cpath%20d%3D%22M50%2022%20L74%2050%20L50%2050%20Z%22%20fill%3D%22%23ef4444%22%2F%3E%3Cpath%20d%3D%22M50%2050%20L74%2050%20L50%2078%20Z%22%20fill%3D%22%233b82f6%22%2F%3E%3Cpath%20d%3D%22M50%2050%20L26%2050%20L50%2078%20Z%22%20fill%3D%22%23eab308%22%2F%3E%3Cpath%20d%3D%22M50%2022%20L26%2050%20L50%2050%20Z%22%20fill%3D%22%2322c55e%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2214%22%20fill%3D%22%231e1b4b%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%226%22%20fill%3D%22%23f5f3ff%22%2F%3E%3C%2Fsvg%3E",
+      space: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231d4ed8%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231e3a8a%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2222%22%20cy%3D%2228%22%20r%3D%222%22%20fill%3D%22%2394a3b8%22%2F%3E%3Ccircle%20cx%3D%2276%22%20cy%3D%2222%22%20r%3D%221.5%22%20fill%3D%22%2394a3b8%22%2F%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2238%22%20r%3D%222%22%20fill%3D%22%2394a3b8%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2234%22%20width%3D%2222%22%20height%3D%2212%22%20rx%3D%224%22%20fill%3D%22%23f472b6%22%2F%3E%3Crect%20x%3D%2258%22%20y%3D%2230%22%20width%3D%2222%22%20height%3D%2212%22%20rx%3D%224%22%20fill%3D%22%23fb7185%22%2F%3E%3Crect%20x%3D%2244%22%20y%3D%2252%22%20width%3D%223%22%20height%3D%2218%22%20rx%3D%221%22%20fill%3D%22%23fde68a%22%2F%3E%3Cpath%20d%3D%22M46%2074%20L34%2092%20L46%2084%20L58%2092%20Z%22%20fill%3D%22%2360a5fa%22%2F%3E%3Crect%20x%3D%2242%22%20y%3D%2282%22%20width%3D%2216%22%20height%3D%226%22%20rx%3D%222%22%20fill%3D%22%2393c5fd%22%2F%3E%3C%2Fsvg%3E",
+      runner: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322c55e%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2314532d%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2276%22%20width%3D%22100%22%20height%3D%2224%22%20fill%3D%22%2314532d%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2276%22%20width%3D%22100%22%20height%3D%226%22%20fill%3D%22%234ade80%22%2F%3E%3Crect%20x%3D%2262%22%20y%3D%2248%22%20width%3D%2214%22%20height%3D%2228%22%20rx%3D%223%22%20fill%3D%22%23f87171%22%2F%3E%3Crect%20x%3D%2278%22%20y%3D%2240%22%20width%3D%2212%22%20height%3D%2236%22%20rx%3D%223%22%20fill%3D%22%23ef4444%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%2252%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%224%22%20fill%3D%22%2386efac%22%2F%3E%3Ccircle%20cx%3D%2231%22%20cy%3D%2244%22%20r%3D%227%22%20fill%3D%22%23bbf7d0%22%2F%3E%3Crect%20x%3D%2227%22%20y%3D%2266%22%20width%3D%225%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%234ade80%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2266%22%20width%3D%225%22%20height%3D%227%22%20rx%3D%222%22%20fill%3D%22%234ade80%22%2F%3E%3C%2Fsvg%3E",
+      moles: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fb923c%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c2410c%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Cellipse%20cx%3D%2228%22%20cy%3D%2272%22%20rx%3D%2218%22%20ry%3D%228%22%20fill%3D%22%23431407%22%2F%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2272%22%20rx%3D%2218%22%20ry%3D%228%22%20fill%3D%22%23431407%22%2F%3E%3Cellipse%20cx%3D%2272%22%20cy%3D%2272%22%20rx%3D%2218%22%20ry%3D%228%22%20fill%3D%22%23431407%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2258%22%20r%3D%2214%22%20fill%3D%22%23fdba74%22%2F%3E%3Ccircle%20cx%3D%2222%22%20cy%3D%2254%22%20r%3D%222.5%22%20fill%3D%22%230f172a%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2254%22%20r%3D%222.5%22%20fill%3D%22%230f172a%22%2F%3E%3Cellipse%20cx%3D%2228%22%20cy%3D%2262%22%20rx%3D%225%22%20ry%3D%223%22%20fill%3D%22%239a3412%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2256%22%20r%3D%2212%22%20fill%3D%22%23fb923c%22%2F%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2252%22%20r%3D%222%22%20fill%3D%22%230f172a%22%2F%3E%3Ccircle%20cx%3D%2276%22%20cy%3D%2252%22%20r%3D%222%22%20fill%3D%22%230f172a%22%2F%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2272%22%20rx%3D%2210%22%20ry%3D%225%22%20fill%3D%22%237c2d12%22%2F%3E%3C%2Fsvg%3E",
+      catcher: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233b82f6%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231d4ed8%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23fde68a%22%2F%3E%3Ccircle%20cx%3D%2258%22%20cy%3D%2224%22%20r%3D%225%22%20fill%3D%22%23fef08a%22%2F%3E%3Ccircle%20cx%3D%2276%22%20cy%3D%2238%22%20r%3D%226%22%20fill%3D%22%23fde68a%22%2F%3E%3Cpath%20d%3D%22M24%2032%20L28%2024%20L32%2032%20L38%2034%20L32%2038%20L34%2046%20L28%2042%20L22%2046%20L24%2038%20L18%2034%20Z%22%20fill%3D%22%23fbbf24%22%2F%3E%3Cpath%20d%3D%22M70%2038%20L74%2030%20L78%2038%20L84%2040%20L78%2044%20L80%2052%20L74%2048%20L68%2052%20L70%2044%20L64%2040%20Z%22%20fill%3D%22%23f59e0b%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2274%22%20width%3D%2232%22%20height%3D%2210%22%20rx%3D%224%22%20fill%3D%22%2393c5fd%22%2F%3E%3Crect%20x%3D%2238%22%20y%3D%2268%22%20width%3D%2224%22%20height%3D%228%22%20rx%3D%223%22%20fill%3D%22%2360a5fa%22%2F%3E%3Crect%20x%3D%2246%22%20y%3D%2262%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20fill%3D%22%233b82f6%22%2F%3E%3C%2Fsvg%3E",
+      maze: "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%236366f1%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%234338ca%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%228%22%20fill%3D%22%23312e81%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2226%22%20width%3D%2210%22%20height%3D%2210%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2236%22%20y%3D%2226%22%20width%3D%2210%22%20height%3D%225%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2246%22%20y%3D%2226%22%20width%3D%225%22%20height%3D%2220%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2251%22%20y%3D%2241%22%20width%3D%2215%22%20height%3D%225%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2261%22%20y%3D%2226%22%20width%3D%225%22%20height%3D%2220%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2241%22%20width%3D%225%22%20height%3D%2220%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2231%22%20y%3D%2256%22%20width%3D%2225%22%20height%3D%225%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2251%22%20y%3D%2246%22%20width%3D%225%22%20height%3D%2215%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Crect%20x%3D%2256%22%20y%3D%2256%22%20width%3D%2215%22%20height%3D%225%22%20fill%3D%22%23e0e7ff%22%2F%3E%3Ccircle%20cx%3D%2231%22%20cy%3D%2231%22%20r%3D%224%22%20fill%3D%22%23f59e0b%22%2F%3E%3Crect%20x%3D%2264%22%20y%3D%2264%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20fill%3D%22%2322c55e%22%2F%3E%3C%2Fsvg%3E",
     };
+
+    const DOBBLE_INTRO_CHARS = [
+      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fcd34d%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f59e0b%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2238%22%20fill%3D%22%23fff%22%20stroke%3D%22%23fbbf24%22%20stroke-width%3D%224%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2212%22%20fill%3D%22%2338bdf8%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2258%22%20r%3D%2210%22%20fill%3D%22%23f472b6%22%2F%3E%3Ccircle%20cx%3D%2266%22%20cy%3D%2258%22%20r%3D%2210%22%20fill%3D%22%2322c55e%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2268%22%20r%3D%228%22%20fill%3D%22%23a78bfa%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2242%22%20r%3D%227%22%20fill%3D%22%23eab308%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2242%22%20r%3D%227%22%20fill%3D%22%23ef4444%22%2F%3E%3C%2Fsvg%3E",
+      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f472b6%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23db2777%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2238%22%20fill%3D%22%23fff%22%20stroke%3D%22%23fbcfe8%22%20stroke-width%3D%224%22%2F%3E%3Cpath%20d%3D%22M50%2024%20L58%2044%20L80%2048%20L62%2058%20L68%2078%20L50%2066%20L32%2078%20L38%2058%20L20%2048%20L42%2044%20Z%22%20fill%3D%22%23fde047%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2236%22%20r%3D%228%22%20fill%3D%22%2338bdf8%22%2F%3E%3Ccircle%20cx%3D%2266%22%20cy%3D%2236%22%20r%3D%228%22%20fill%3D%22%2322c55e%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2272%22%20r%3D%228%22%20fill%3D%22%23a78bfa%22%2F%3E%3C%2Fsvg%3E",
+      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2360a5fa%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%232563eb%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2238%22%20fill%3D%22%23fff%22%20stroke%3D%22%2393c5fd%22%20stroke-width%3D%224%22%2F%3E%3Crect%20x%3D%2238%22%20y%3D%2228%22%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%23ef4444%22%2F%3E%3Cpolygon%20points%3D%2250%2C62%2038%2C82%2062%2C82%22%20fill%3D%22%2322c55e%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2252%22%20r%3D%229%22%20fill%3D%22%23eab308%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2252%22%20r%3D%229%22%20fill%3D%22%23f472b6%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2222%22%20r%3D%227%22%20fill%3D%22%23a78bfa%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2288%22%20r%3D%226%22%20fill%3D%22%2338bdf8%22%2F%3E%3C%2Fsvg%3E",
+    ];
 
     const INTRO_BY_GAME = {
       avia: [
@@ -7941,9 +8016,9 @@
           badge: "ГЛАВА 1 · СИМВОЛЫ",
           icon: EXTRA_INTRO_ICONS.dobble,
           chars: [
-            AVIATION_PHOTOS[10],
-            AVIATION_PHOTOS[11],
-            AVIATION_PHOTOS[12]
+            DOBBLE_INTRO_CHARS[0],
+            DOBBLE_INTRO_CHARS[1],
+            DOBBLE_INTRO_CHARS[2]
           ],
           text: "На каждой карте — шесть картинок самолётов. Между твоей картой и стопкой всегда ровно одна общая.",
           detail: "Смотри на свою карту и на стопку по центру. Найди одинаковую картинку и нажми её на центральной карте быстрее бота. Кто первым наберёт 15 очков — победил!"
@@ -8397,6 +8472,7 @@
       document.body.classList.toggle("pv-playing", playing && name !== "cover" && name !== "profile");
       document.body.classList.toggle("on-cover", name === "cover");
       document.body.classList.toggle("on-newverse", name === "newverse");
+      if (name !== "newverse" && typeof window.closeNvfPage === "function") window.closeNvfPage();
       document.body.classList.toggle("on-profile", name === "profile" || name === "userProfile" || name === "friends");
       if (name === "cover" || name === "friends") {
         if (window.PVProfile && typeof PVProfile.renderHub === "function") PVProfile.renderHub();
@@ -9281,19 +9357,26 @@ const HUB_GAME_META = {
     initHubSearch();
 
     /* ===== Новости PlayVerse ===== */
+    function pvPublicUrl(rel) {
+      if (!rel) return "";
+      if (/^https?:\/\//i.test(rel)) return rel;
+      const base = location.pathname.replace(/\/[^/]*$/, "/");
+      return base + String(rel).replace(/^\//, "");
+    }
+
     const PV_NEWS = [
       {
         id: "launch",
         date: "22 июля 2026",
         title: "PlayVerse создан!",
-        image: "assets/playverse-launch-news.png",
+        image: "playverse-launch-news.png",
         text: "Мы запустили PlayVerse — игровую платформу, где можно играть, общаться с друзьями и открывать новые миры. Платформа ждёт первых игроков: регистрируйся и будь среди первых!"
       },
       {
         id: "v2",
         date: "26 июля 2026",
         title: "PlayVerse 2 в разработке",
-        image: "assets/playverse-v2-dev.png",
+        image: "playverse-v2-dev.png",
         text: "Мы разрабатываем вторую версию PlayVerse с новым фиолетовым интерфейсом! Уже можно зайти в ранний доступ, создавать игры в Студии и отправлять заявки — какую игру добавить в каталог. Авторы лучших идей получат 50 монет после выхода первой игры в PlayVerse 2.0."
       }
     ];
@@ -9305,7 +9388,13 @@ const HUB_GAME_META = {
     function renderNewsCard(item) {
       let media = "";
       if (item.image) {
-        media = '<div class="pv-news-image"><img src="' + item.image + '" alt="" loading="lazy"></div>';
+        const src = pvPublicUrl(item.image);
+        const fallback = item.image.indexOf("assets/") === 0
+          ? pvPublicUrl(item.image.replace(/^assets\//, ""))
+          : pvPublicUrl("assets/" + item.image);
+        media = '<div class="pv-news-image"><img src="' + pvEscapeHtml(src) + '" alt="" loading="lazy"' +
+          ' data-alt="' + pvEscapeHtml(fallback) + '"' +
+          ' onerror="if(this.dataset.alt&&!this.dataset.triedAlt){this.dataset.triedAlt=1;this.src=this.dataset.alt}"></div>';
       } else if (item.banner === "v2") {
         media = '<div class="pv-news-banner pv-news-banner-v2"><span class="pv-news-banner-badge">NEW</span><span class="pv-news-banner-title">PlayVerse 2</span></div>';
       }
@@ -9431,6 +9520,7 @@ const HUB_GAME_META = {
     }
 
     function setNvPanel(panel) {
+      if (typeof window.closeNvfPage === "function") window.closeNvfPage();
       document.querySelectorAll("[data-nv-panel]").forEach((p) => {
         p.classList.toggle("active", p.getAttribute("data-nv-panel") === panel);
       });
@@ -9578,6 +9668,27 @@ const HUB_GAME_META = {
     window.renderNewVerse = renderNewVerse;
 
     function initNewVerse() {
+      function openNvfPage() {
+        const page = document.getElementById("nvf-page");
+        if (!page) return;
+        page.classList.add("open");
+        page.setAttribute("aria-hidden", "false");
+        document.body.classList.add("nvf-open");
+        if (window.PVFactory && PVFactory.renderNvfList) PVFactory.renderNvfList();
+        if (window.PVFactory && PVFactory.toggleNvfQuiz) PVFactory.toggleNvfQuiz();
+      }
+      function closeNvfPage() {
+        const page = document.getElementById("nvf-page");
+        if (!page) return;
+        page.classList.remove("open");
+        page.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("nvf-open");
+      }
+      window.openNvfPage = openNvfPage;
+      window.closeNvfPage = closeNvfPage;
+      document.getElementById("nvf-teaser")?.addEventListener("click", openNvfPage);
+      document.getElementById("nvf-back")?.addEventListener("click", closeNvfPage);
+
       document.getElementById("nv-to-v1")?.addEventListener("click", () => showScreen("cover"));
       const menuBtn = document.getElementById("nv-user-menu-btn");
       const menu = document.getElementById("nv-user-menu");
@@ -15265,9 +15376,12 @@ const HUB_GAME_META = {
 
       window.PVFactory = {
         open: openFactory,
+        openNvf: function () { if (typeof window.openNvfPage === "function") window.openNvfPage(); },
+        closeNvf: function () { if (typeof window.closeNvfPage === "function") window.closeNvfPage(); },
         refresh: refreshHubCards,
         openCustom: openCustom,
         renderNvfList: function () { renderList(document.getElementById("nvf-list"), "nvf"); },
+        toggleNvfQuiz: function () { toggleQuizField("nvf-"); },
         loadPending: loadPendingGames,
         loadPublished: loadPublishedGames,
         approve: approveFactoryGame,
