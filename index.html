@@ -5507,6 +5507,9 @@
     }
     .nv-nav-item { max-width: 68px; font-size: 0.58rem; }
 
+    /* Временно скрыто в v2 — убрать .nv-temp-off, когда вернём функции */
+    .nv-temp-off { display: none !important; }
+
     /* ===== Студия игр PlayVerse 2 (свой UI) ===== */
     .nvf-studio { padding: 0 0 20px; }
     .nvf-hero {
@@ -6499,8 +6502,8 @@
     <div class="nv-hub">
       <header class="nv-topbar">
         <button type="button" class="nv-back-btn" id="nv-to-v1">PlayVerse 1.0</button>
-        <span class="nv-logo">PlayVerse 2.0</span>
-        <div class="nv-search-wrap">
+        <span class="nv-logo nv-temp-off">PlayVerse 2.0</span>
+        <div class="nv-search-wrap nv-temp-off">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           <input type="search" id="nv-search" placeholder="Поиск скоро..." disabled>
         </div>
@@ -6527,12 +6530,14 @@
           <div class="nv-brand-hero">
             <h1 class="nv-brand-title">PlayVerse <em>2.0</em></h1>
           </div>
+          <div class="nv-friends-section nv-temp-off">
           <h2 class="nv-section-title">Друзья</h2>
           <div class="nv-add-friend-row profile-hidden" id="nv-add-friend-row">
             <input type="text" id="nv-add-friend-input" maxlength="20" placeholder="Имя игрока">
             <button type="button" id="nv-add-friend-btn">Добавить</button>
           </div>
           <div class="nv-friends-rail" id="nv-friends-rail"></div>
+          </div>
           <h2 class="nv-section-title">Студия игр</h2>
           <button type="button" class="nvf-teaser" id="nvf-teaser" aria-label="Открыть Фабрику игр">
             <div class="nvf-teaser-art" aria-hidden="true">
