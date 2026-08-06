@@ -322,7 +322,10 @@
     .rbx-avatar-shop-price.free { color: #86efac; }
     .rbx-user-strip { display: none !important; }
     .rbx-logo {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 2.5vw, 14px);
       line-height: 1.05;
     }
     .rbx-logo-main {
@@ -335,18 +338,50 @@
       text-shadow: 0 3px 18px rgba(46, 16, 101, 0.55);
     }
     .rbx-logo-sub { display: none !important; }
-    .rbx-beta-btn {
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.1);
-      color: #ede9fe;
-      font-weight: 800;
-      font-size: 0.72rem;
-      padding: 7px 10px;
-      border-radius: 999px;
+    .rbx-v2-badge {
+      flex-shrink: 0;
+      align-self: center;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      margin-top: 0.35em;
+      padding: 6px 10px 7px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #fef08a 0%, #fbbf24 55%, #f59e0b 100%);
+      color: #1e1b4b;
+      box-shadow:
+        0 0 0 1px rgba(30, 27, 75, 0.18),
+        0 6px 18px rgba(251, 191, 36, 0.55);
       cursor: pointer;
       white-space: nowrap;
+      transform: rotate(-4deg);
+      animation: v2BadgePulse 2.4s ease-in-out infinite;
     }
-    .rbx-beta-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .rbx-v2-badge:hover {
+      filter: brightness(1.06);
+      transform: rotate(-4deg) scale(1.04);
+    }
+    .rbx-v2-badge-tag {
+      font-size: 0.52rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      line-height: 1;
+      color: #991b1b;
+      text-transform: uppercase;
+    }
+    .rbx-v2-badge-ver {
+      font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    @keyframes v2BadgePulse {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(30, 27, 75, 0.18), 0 6px 18px rgba(251, 191, 36, 0.55); }
+      50% { box-shadow: 0 0 0 1px rgba(30, 27, 75, 0.18), 0 8px 24px rgba(251, 191, 36, 0.78); }
+    }
+    .rbx-beta-btn { display: none !important; }
     .rbx-search-btn {
       position: static;
       transform: none;
@@ -5262,7 +5297,9 @@
     @media (max-width: 640px) {
       .rbx-topbar { padding: 10px 12px 10px; }
       .rbx-topbar-actions { right: 8px; gap: 6px; }
-      .rbx-beta-btn { font-size: 0.65rem; padding: 6px 8px; max-width: 92px; overflow: hidden; text-overflow: ellipsis; }
+      .rbx-v2-badge { padding: 5px 8px 6px; border-radius: 8px; }
+      .rbx-v2-badge-tag { font-size: 0.48rem; }
+      .rbx-v2-badge-ver { font-size: 0.82rem; }
       .rbx-logo-main { font-size: 1.35rem; }
       .hub-grid { grid-template-columns: 1fr; --hub-row-h: clamp(220px, 42vw, 320px); gap: 12px; }
       .hub-grid .cover-meta h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
@@ -5284,7 +5321,8 @@
       .profile-admin-row input { width: 100%; }
     }
     @media (max-width: 380px) {
-      .rbx-beta-btn { display: none; }
+      .rbx-v2-badge { padding: 4px 7px 5px; }
+      .rbx-v2-badge-ver { font-size: 0.74rem; }
     }
     body.on-cover, body.on-profile {
       background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
@@ -5599,6 +5637,136 @@
     body.on-newverse .rules-tab,
     body.on-newverse .music-tab,
     body.on-newverse .hub-exit { display: none !important; }
+
+    /* ===== PlayVerse 2.0 · Roblox Obby ===== */
+    #screen-nv-obby {
+      position: fixed; inset: 0; z-index: 12000;
+      background: #6eb5ff; overflow: hidden;
+    }
+    #screen-nv-obby.active { display: block; }
+    #nv-obby-canvas {
+      display: block; width: 100%; height: 100%;
+      touch-action: none; cursor: crosshair;
+    }
+    .nv-obby-hud {
+      position: fixed; inset: 0; pointer-events: none; z-index: 12001;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    .nv-obby-hud-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 12px 14px; gap: 10px;
+    }
+    .nv-obby-hud-pill {
+      pointer-events: auto;
+      background: rgba(0,0,0,0.55); color: #fff; border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 10px; padding: 8px 12px; font-weight: 800; font-size: 0.82rem;
+      backdrop-filter: blur(6px); box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .nv-obby-hud-pill span { color: #fde68a; }
+    .nv-obby-back-btn {
+      pointer-events: auto; border: none; border-radius: 10px;
+      background: rgba(0,0,0,0.55); color: #fff; font-weight: 900;
+      padding: 10px 14px; cursor: pointer; border: 2px solid rgba(255,255,255,0.2);
+    }
+    .nv-obby-stage-bar {
+      position: fixed; left: 50%; top: 12px; transform: translateX(-50%);
+      display: flex; gap: 5px; pointer-events: none;
+    }
+    .nv-obby-stage-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.45);
+    }
+    .nv-obby-stage-dot.done { background: #4ade80; border-color: #bbf7d0; }
+    .nv-obby-stage-dot.current { background: #fde68a; border-color: #fff; box-shadow: 0 0 8px #fde68a; }
+    .nv-obby-controls-hint {
+      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.5); color: #fff; padding: 8px 14px;
+      border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.18); white-space: nowrap;
+    }
+    .nv-obby-mobile-pad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 12002;
+      display: none;
+    }
+    @media (max-width: 900px), (pointer: coarse) {
+      .nv-obby-mobile-pad { display: block; }
+      .nv-obby-controls-hint { display: none; }
+    }
+    .nv-obby-joy {
+      position: absolute; bottom: 24px; left: 24px;
+      width: 120px; height: 120px; pointer-events: auto;
+      border-radius: 50%; background: rgba(0,0,0,0.35);
+      border: 2px solid rgba(255,255,255,0.25); touch-action: none;
+    }
+    .nv-obby-joy-knob {
+      position: absolute; left: 50%; top: 50%; width: 48px; height: 48px;
+      margin: -24px 0 0 -24px; border-radius: 50%;
+      background: rgba(255,255,255,0.85); box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
+    .nv-obby-jump-btn {
+      position: absolute; bottom: 36px; right: 24px;
+      width: 72px; height: 72px; pointer-events: auto;
+      border-radius: 50%; border: 3px solid rgba(255,255,255,0.35);
+      background: rgba(34,197,94,0.85); color: #fff;
+      font-weight: 900; font-size: 0.9rem; cursor: pointer; touch-action: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .nv-obby-jump-btn:active { transform: scale(0.94); background: rgba(22,163,74,0.95); }
+    .nv-obby-overlay {
+      position: fixed; inset: 0; z-index: 12003;
+      background: rgba(15,23,42,0.72); display: none;
+      align-items: center; justify-content: center; padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .nv-obby-overlay.open { display: flex; }
+    .nv-obby-overlay-card {
+      width: min(420px, 100%); background: #f8fafc; border-radius: 16px;
+      padding: 24px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    .nv-obby-overlay-card h2 { margin: 0 0 8px; color: #1e293b; font-size: 1.4rem; }
+    .nv-obby-overlay-card p { margin: 0 0 16px; color: #475569; font-weight: 600; line-height: 1.45; }
+    .nv-obby-overlay-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .nv-obby-btn {
+      border: none; border-radius: 12px; padding: 12px 20px;
+      font-weight: 900; cursor: pointer; font-size: 0.95rem;
+    }
+    .nv-obby-btn.primary { background: #22c55e; color: #fff; }
+    .nv-obby-btn.ghost { background: #e2e8f0; color: #334155; }
+    .nv-obby-toast {
+      position: fixed; top: 56px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.7); color: #fff; padding: 10px 16px;
+      border-radius: 10px; font-weight: 800; z-index: 12004;
+      opacity: 0; transition: opacity 0.25s; pointer-events: none;
+    }
+    .nv-obby-toast.show { opacity: 1; }
+    .nv-obby-game-card {
+      margin: 0 16px 16px; border: none; width: calc(100% - 32px); cursor: pointer;
+      border-radius: 16px; overflow: hidden; text-align: left;
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 55%, #a855f7 100%);
+      box-shadow: 0 12px 32px rgba(99,102,241,0.35);
+      transition: transform 0.15s;
+    }
+    .nv-obby-game-card:active { transform: scale(0.985); }
+    .nv-obby-game-card-art {
+      height: 140px; position: relative; overflow: hidden;
+      background: linear-gradient(180deg, #87ceeb 0%, #b8e2ff 100%);
+    }
+    .nv-obby-game-card-art::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(255,255,255,0.15) 18px, rgba(255,255,255,0.15) 20px),
+        repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.15) 18px, rgba(255,255,255,0.15) 20px);
+    }
+    .nv-obby-game-card-body { padding: 14px 16px 16px; color: #fff; }
+    .nv-obby-game-card-badge {
+      display: inline-block; background: rgba(255,255,255,0.22);
+      padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .nv-obby-game-card h3 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 900; }
+    .nv-obby-game-card p { margin: 0; font-size: 0.86rem; font-weight: 600; opacity: 0.92; line-height: 1.4; }
+    body.in-nv-obby .rules-tab, body.in-nv-obby .music-tab, body.in-nv-obby .hub-exit { display: none !important; }
+
     .nv-add-friend-row {
       display: flex; gap: 8px; padding: 0 16px 12px;
     }
@@ -5779,6 +5947,161 @@
     .nvf-teaser-art svg { display: block; width: 100%; max-width: 280px; margin: 0 auto; height: auto; }
     .nvf-teaser-body { padding: 14px 16px 16px; }
     .nvf-teaser-badge {
+      display: inline-block; margin-bottom: 8px;
+      background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f;
+      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em;
+      padding: 5px 10px; border-radius: 999px;
+    }
+
+    /* ===== Premium + реклама ===== */
+    .pv-premium-top-btn {
+      border: 1px solid rgba(251, 191, 36, 0.55);
+      background: linear-gradient(180deg, rgba(254, 240, 138, 0.22), rgba(245, 158, 11, 0.18));
+      color: #fde68a;
+      font-weight: 900;
+      font-size: 0.72rem;
+      padding: 7px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .pv-premium-top-btn.active {
+      background: linear-gradient(180deg, #fde68a, #fbbf24);
+      color: #1e1b4b;
+    }
+    .pv-premium-tag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fde68a, #fbbf24);
+      color: #1e1b4b;
+      font-size: 0.72rem;
+      vertical-align: middle;
+    }
+    .pv-premium-grid .cover-art { position: relative; }
+    .pv-premium-lock {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #fde68a;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    .pv-ad-overlay, .pv-premium-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12000;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(6px);
+    }
+    .pv-ad-overlay[hidden], .pv-premium-overlay[hidden] { display: none !important; }
+    .pv-ad-card, .pv-premium-card {
+      width: min(420px, 100%);
+      border-radius: 20px;
+      padding: 22px 20px;
+      background: linear-gradient(180deg, #4c1d95 0%, #312e81 100%);
+      color: #f5f3ff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.14);
+      position: relative;
+    }
+    .pv-ad-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.12);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pv-ad-card h3, .pv-premium-card h2 { margin: 0 0 8px; font-size: 1.35rem; }
+    .pv-ad-list, .pv-premium-list {
+      margin: 14px 0;
+      padding-left: 18px;
+      line-height: 1.5;
+    }
+    .pv-ad-actions { display: grid; gap: 10px; margin-top: 16px; }
+    .pv-ad-premium-btn, .pv-premium-activate {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 900;
+      cursor: pointer;
+      background: linear-gradient(180deg, #fde68a, #fbbf24);
+      color: #1e1b4b;
+    }
+    .pv-ad-close-btn, .pv-premium-close {
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      color: #ede9fe;
+    }
+    .pv-premium-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+    }
+    .pv-ad-counter {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #c4b5fd;
+      font-weight: 700;
+    }
+    .pv-premium-badge {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fde68a, #fbbf24);
+      color: #1e1b4b;
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    .pv-premium-price {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fde68a;
+      margin: 10px 0;
+    }
+    .pv-premium-code {
+      width: 100%;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .pv-premium-bot { font-size: 0.88rem; color: #ddd6fe; }
+    .rbx-avatar-shop-card.premium-only::after {
+      content: "PRO";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: #fbbf24;
+      color: #1e1b4b;
+      font-size: 0.62rem;
+      font-weight: 900;
+    }
       display: inline-block; margin-bottom: 8px;
       background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f;
       font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em;
@@ -6142,9 +6465,13 @@
       <header class="rbx-topbar">
         <div class="rbx-logo">
           <span class="rbx-logo-main">PlayVerse</span>
+          <button type="button" class="rbx-v2-badge" id="hub-beta-btn" title="Открыть PlayVerse 2.0">
+            <span class="rbx-v2-badge-tag">NEW</span>
+            <span class="rbx-v2-badge-ver">2.0</span>
+          </button>
         </div>
         <div class="rbx-topbar-actions">
-          <button type="button" class="rbx-beta-btn" id="hub-beta-btn">PlayVerse 2.0</button>
+          <button type="button" class="pv-premium-top-btn" id="hub-premium-btn">Premium</button>
           <button type="button" class="rbx-search-btn" id="hub-search-btn" aria-label="Поиск">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           </button>
@@ -6180,6 +6507,11 @@
         <section class="rbx-hub-section">
           <h2 class="rbx-section-title">Открой для себя аватары</h2>
           <div class="rbx-avatar-shop-rail" id="hub-avatar-shop"></div>
+        </section>
+
+        <section class="rbx-hub-section pv-premium-section" id="hub-premium-section">
+          <h2 class="rbx-section-title">Premium игры <span class="pv-premium-tag">PRO</span></h2>
+          <div class="hub-grid pv-premium-grid" id="hub-premium-grid"></div>
         </section>
 
         <section class="rbx-rec-section">
@@ -6713,6 +7045,32 @@
       <div class="nv-scroll">
         <div class="nv-panel active" data-nv-panel="home">
           <section class="rbx-rec-section">
+            <h2 class="rbx-section-title">Играть</h2>
+            <button type="button" class="nv-obby-game-card" id="nv-obby-launch" aria-label="Открыть Roblox Obby">
+              <div class="nv-obby-game-card-art" aria-hidden="true">
+                <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+                  <rect x="20" y="95" width="60" height="12" rx="2" fill="#4ade80" stroke="#166534" stroke-width="2"/>
+                  <rect x="100" y="88" width="40" height="12" rx="2" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+                  <rect x="160" y="80" width="30" height="12" rx="2" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                  <rect x="210" y="72" width="35" height="12" rx="2" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+                  <rect x="270" y="65" width="30" height="12" rx="2" fill="#fde68a" stroke="#ca8a04" stroke-width="2"/>
+                  <g transform="translate(48,72)">
+                    <rect x="0" y="0" width="8" height="8" rx="1" fill="#fcd9b6"/>
+                    <rect x="-2" y="8" width="12" height="10" rx="1" fill="#9333ea"/>
+                    <rect x="0" y="18" width="4" height="10" rx="1" fill="#312e81"/>
+                    <rect x="4" y="18" width="4" height="10" rx="1" fill="#312e81"/>
+                  </g>
+                  <text x="160" y="38" text-anchor="middle" fill="#fff" font-size="22" font-weight="900" font-family="system-ui">OBBY</text>
+                </svg>
+              </div>
+              <div class="nv-obby-game-card-body">
+                <span class="nv-obby-game-card-badge">Первая игра · 2.0</span>
+                <h3>Roblox Obby — Sky Tower</h3>
+                <p>WASD + пробел + мышь. 10 препятствий как в Roblox: лава, вращающиеся балки, движущиеся платформы и финиш!</p>
+              </div>
+            </button>
+          </section>
+          <section class="rbx-rec-section">
             <h2 class="rbx-section-title">Студия игр</h2>
             <div style="padding:0 16px">
               <button type="button" class="nvf-teaser" id="nvf-teaser" aria-label="Открыть Фабрику игр" style="width:100%;margin:0">
@@ -6739,7 +7097,14 @@
         </div>
         <div class="nv-panel" data-nv-panel="charts">
           <h2 class="nv-section-title">Популярное</h2>
-          <div class="nv-empty">🔥 Скоро здесь появятся игры из Студии.</div>
+          <button type="button" class="nv-obby-game-card" id="nv-obby-launch-charts" aria-label="Открыть Roblox Obby" style="margin-top:8px">
+            <div class="nv-obby-game-card-art" aria-hidden="true"></div>
+            <div class="nv-obby-game-card-body">
+              <span class="nv-obby-game-card-badge">#1 · Паркур</span>
+              <h3>Roblox Obby — Sky Tower</h3>
+              <p>Классический обби с управлением как в Roblox. Пройди все 10 этапов!</p>
+            </div>
+          </button>
         </div>
         <div class="nv-panel" data-nv-panel="chats">
           <div class="nv-chat-layout">
@@ -6822,6 +7187,35 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- PlayVerse 2.0 · Roblox Obby -->
+  <div id="screen-nv-obby" class="screen">
+    <canvas id="nv-obby-canvas" aria-label="Roblox Obby 3D"></canvas>
+    <div class="nv-obby-hud">
+      <div class="nv-obby-hud-top">
+        <button type="button" class="nv-obby-back-btn" id="nv-obby-back">← Меню</button>
+        <div class="nv-obby-hud-pill" id="nv-obby-timer">⏱ <span>0:00</span></div>
+        <div class="nv-obby-hud-pill" id="nv-obby-stage">Этап <span>1</span>/10</div>
+      </div>
+      <div class="nv-obby-stage-bar" id="nv-obby-dots" aria-hidden="true"></div>
+      <div class="nv-obby-controls-hint">WASD — движение · Пробел — прыжок · Мышь — камера · Клик — захват курсора</div>
+    </div>
+    <div class="nv-obby-mobile-pad" id="nv-obby-mobile">
+      <div class="nv-obby-joy" id="nv-obby-joy"><div class="nv-obby-joy-knob" id="nv-obby-joy-knob"></div></div>
+      <button type="button" class="nv-obby-jump-btn" id="nv-obby-jump-m">Прыжок</button>
+    </div>
+    <div class="nv-obby-overlay open" id="nv-obby-overlay">
+      <div class="nv-obby-overlay-card">
+        <h2 id="nv-obby-overlay-title">Roblox Obby — Sky Tower</h2>
+        <p id="nv-obby-overlay-text">Классический паркур как в Roblox! Управление: WASD, пробел для прыжка, мышь для камеры. Пройди 10 препятствий до золотого финиша. Падаешь в лаву — возвращаешься на чекпоинт.</p>
+        <div class="nv-obby-overlay-actions">
+          <button type="button" class="nv-obby-btn primary" id="nv-obby-start">▶ Играть</button>
+          <button type="button" class="nv-obby-btn ghost" id="nv-obby-exit">В меню 2.0</button>
+        </div>
+      </div>
+    </div>
+    <div class="nv-obby-toast" id="nv-obby-toast"></div>
   </div>
 
   <div class="nv-login-overlay" id="nv-login-overlay" aria-hidden="true">
@@ -7783,6 +8177,8 @@
     </div>
   </div>
 
+  <script src="premium.js"></script>
+  <script src="nv-obby.js"></script>
   <script>
     const RAW_QUESTIONS = [
       { question: "Какой самолёт самый большой пассажирский самолёт в мире?", answers: ["Ан-225", "Airbus A380-800", "Boeing 747-8", "MD-12"], correct: 1, explanation: "Airbus A380-800 — крупнейший пассажирский авиалайнер. У него две полноценные палубы и огромная вместимость." },
@@ -8347,6 +8743,7 @@
       userProfile: document.getElementById("screen-user-profile"),
       friends: document.getElementById("screen-friends"),
       newverse: document.getElementById("screen-newverse"),
+      nvObby: document.getElementById("screen-nv-obby"),
       intro: document.getElementById("screen-intro"),
       map: document.getElementById("screen-map"),
       question: document.getElementById("screen-question"),
@@ -8623,7 +9020,7 @@
     window.setHubNavActive = setHubNavActive;
 
     function showScreen(name) {
-      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "newverse" && !isUserLoggedIn()) {
+      if (name !== "profile" && name !== "userProfile" && name !== "friends" && name !== "newverse" && name !== "nvObby" && !isUserLoggedIn()) {
         name = "profile";
         if (window.PVProfile && typeof PVProfile.render === "function") PVProfile.render();
       }
@@ -8647,6 +9044,9 @@
       document.body.classList.toggle("pv-playing", playing && name !== "cover" && name !== "profile");
       document.body.classList.toggle("on-cover", name === "cover");
       document.body.classList.toggle("on-newverse", name === "newverse");
+      document.body.classList.toggle("in-nv-obby", name === "nvObby");
+      if (name === "nvObby" && typeof window.startNVObby === "function") window.startNVObby();
+      if (name !== "nvObby" && typeof window.stopNVObby === "function") window.stopNVObby();
       if (name !== "newverse" && typeof window.closeNvfPage === "function") window.closeNvfPage();
       document.body.classList.toggle("on-profile", name === "profile" || name === "userProfile" || name === "friends");
       if (name === "cover" || name === "friends") {
@@ -9928,6 +10328,11 @@ const HUB_GAME_META = {
       window.closeNvfPage = closeNvfPage;
       document.getElementById("nvf-teaser")?.addEventListener("click", openNvfPage);
       document.getElementById("nvf-back")?.addEventListener("click", closeNvfPage);
+      function launchNvObby() {
+        if (typeof showScreen === "function") showScreen("nvObby");
+      }
+      document.getElementById("nv-obby-launch")?.addEventListener("click", launchNvObby);
+      document.getElementById("nv-obby-launch-charts")?.addEventListener("click", launchNvObby);
 
       document.getElementById("nv-to-v1")?.addEventListener("click", () => showScreen("cover"));
 
@@ -15859,6 +16264,7 @@ const HUB_GAME_META = {
         { id: "av_gold", name: "Золото", price: 32, tier: 8, c1: "#422006", c2: "#eab308", c3: "#fef9c3", skin: "#e8b88a", shirt: "#eab308", pants: "#422006", arms: "#ca8a04", hat: "#fef9c3", acc: "wings", accColor: "#fde047" },
         { id: "av_phoenix", name: "Феникс", price: 36, tier: 9, c1: "#450a0a", c2: "#f59e0b", c3: "#fef08a", skin: "#e8b88a", shirt: "#f59e0b", pants: "#450a0a", arms: "#ef4444", hat: "#fef08a", acc: "wings", accColor: "#fbbf24", acc2: "aura", acc2Color: "#f97316" }
       ];
+      window.AVATAR_SHOP_REF = AVATAR_SHOP;
       const shopArtCache = {};
 
       function buildShopAvatarSvg(item) {
@@ -16093,7 +16499,13 @@ const HUB_GAME_META = {
           equipShopAvatar(shopId);
           return;
         }
-        const price = typeof item.price === "number" ? item.price : 0;
+        if (item.premiumOnly && !(window.PVPremium && PVPremium.isPremium && PVPremium.isPremium())) {
+          if (window.PVPremium && PVPremium.showPremiumModal) PVPremium.showPremiumModal();
+          return toast("Этот аватар только для Premium");
+        }
+        const price = (window.PVPremium && PVPremium.getAvatarPrice)
+          ? PVPremium.getAvatarPrice(item)
+          : (typeof item.price === "number" ? item.price : 0);
         if (price > 0 && getUserCoins(u) < price) {
           return toast("Нужно " + price + " монет. Играй и зарабатывай!");
         }
@@ -16223,6 +16635,9 @@ const HUB_GAME_META = {
         if (!Array.isArray(u.favorites)) u.favorites = [];
         if (!Array.isArray(u.history)) u.history = [];
         if (typeof u.coins !== "number") u.coins = 0;
+        if (typeof u.premium !== "boolean") u.premium = false;
+        if (typeof u.premiumUntil !== "number") u.premiumUntil = 0;
+        if (typeof u.ligaMember !== "boolean") u.ligaMember = false;
         if (!Array.isArray(u.ownedAvatars)) u.ownedAvatars = [];
         u.friends = u.friends.filter((n) => cleanDisplayText(n));
         u.username = cleanDisplayText(u.username);
@@ -18061,10 +18476,14 @@ const HUB_GAME_META = {
           const owned = u && Array.isArray(u.ownedAvatars) && u.ownedAvatars.indexOf(item.id) >= 0;
           const equipped = u && u.avatarShopId === item.id;
           const url = getShopAvatarDataUrl(item.id);
+          const price = (window.PVPremium && PVPremium.getAvatarPrice)
+            ? PVPremium.getAvatarPrice(item)
+            : item.price;
           let priceHtml = owned
             ? (equipped ? '<span class="rbx-avatar-shop-price free">Надето</span>' : '<span class="rbx-avatar-shop-price free">Надеть</span>')
-            : '<span class="rbx-avatar-shop-price">' + (typeof window.pvRbxCoinHtml === "function" ? window.pvRbxCoinHtml() : "") + '<span>' + item.price + '</span></span>';
+            : '<span class="rbx-avatar-shop-price">' + (typeof window.pvRbxCoinHtml === "function" ? window.pvRbxCoinHtml() : "") + '<span>' + price + '</span></span>';
           return '<button type="button" class="rbx-avatar-shop-card' + (owned ? " owned" : "") + (equipped ? " equipped" : "") +
+            (item.premiumOnly ? " premium-only" : "") +
             '" data-shop-id="' + item.id + '" data-tier="' + item.tier + '">' +
             '<div class="rbx-avatar-art"><img src="' + url + '" alt=""></div>' +
             priceHtml + '</button>';
@@ -18100,6 +18519,9 @@ const HUB_GAME_META = {
         }
         renderHubFriendsRail();
         renderAvatarShop();
+        if (window.PVPremium && typeof window.PVPremium.renderPremiumUi === "function") {
+          window.PVPremium.renderPremiumUi();
+        }
         updateFriendsBadges();
         if (typeof window.renderPvNews === "function") window.renderPvNews();
         if (typeof window.enhanceHubCardRatings === "function") window.enhanceHubCardRatings();
@@ -18250,7 +18672,10 @@ const HUB_GAME_META = {
           friends: [],
           favoriteFriends: [],
           incomingFriendRequests: [],
-          outgoingFriendRequests: []
+          outgoingFriendRequests: [],
+          premium: false,
+          premiumUntil: 0,
+          ligaMember: false
         };
         if (CLOUD_ENABLED) {
           const cloudErr = await insertCloudUser(users[name]);
