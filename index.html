@@ -831,14 +831,22 @@
     .hub-card-coins {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
+      margin-top: 2px;
       font-size: clamp(0.78rem, 2.2vw, 0.92rem);
-      font-weight: 800;
-      color: #b45309;
+      font-weight: 900;
+      color: #92400e;
       background: linear-gradient(135deg, #fef3c7, #fde68a);
       padding: 4px 10px;
       border-radius: 999px;
       line-height: 1.2;
+      box-shadow: 0 1px 0 rgba(180, 83, 9, 0.18);
+    }
+    .hub-card-coins .pv-rbx-coin {
+      width: 14px;
+      height: 14px;
+      color: #d97706;
+      flex-shrink: 0;
     }
     .rbx-bottom-nav {
       display: flex;
@@ -1229,7 +1237,7 @@
       border: none;
       border-radius: 20px;
       padding: 8px 16px;
-      color: #a0a7cc;
+      color: #fff;
       font-size: 14px;
       font-weight: 600;
       display: flex;
@@ -1245,9 +1253,6 @@
       background: rgba(251, 191, 36, 0.18);
       color: #fde047;
       box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.45);
-    }
-    .hub-join-pill#hub-join-rating-btn {
-      color: #fff;
     }
 
     .hub-join-records-section { margin-bottom: 20px; }
@@ -6958,10 +6963,8 @@
       display: none !important;
     }
 
-    /* Скрытые Premium-блок и монеты на карточках */
-    .pv-premium-top-btn,
-    #hub-premium-section,
-    .hub-card-coins {
+    /* Скрытый блок Premium-игр (кнопка Premium в шапке видна) */
+    #hub-premium-section {
       display: none !important;
     }
     .nvf-teaser-title { margin: 0 0 6px; font-size: 1.12rem; font-weight: 900; color: #fff; }
@@ -7085,10 +7088,6 @@
         <button class="hub-join-pill">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
           <span id="hub-join-playing">195 в игре</span>
-        </button>
-        <button class="hub-join-pill">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"></path></svg>
-          Уведомить
         </button>
         <button class="hub-join-pill" id="hub-join-fav">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
@@ -8104,10 +8103,6 @@
             </div>
           </section>
         </div>
-        <div class="nv-panel" data-nv-panel="charts">
-          <h2 class="nv-section-title">Популярное</h2>
-          <div class="nv-empty">🔥 Скоро здесь появятся игры из Студии.</div>
-        </div>
         <div class="nv-panel" data-nv-panel="requests">
           <h2 class="nv-section-title">Заявки на игры</h2>
           <p class="nv-requests-lead">Напиши, какую игру хочешь видеть в PlayVerse 2. Администрация PlayVerse читает все заявки и выбирает, что добавить в каталог. Авторы лучших идей получат 50 монет после появления первой игры в PlayVerse 2.0.</p>
@@ -8126,7 +8121,6 @@
       </div>
       <nav class="nv-bottom-nav" aria-label="Навигация новой версии">
         <button type="button" class="nv-nav-item active" data-nv-nav="home"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Главная</button>
-        <button type="button" class="nv-nav-item" data-nv-nav="charts"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Популярное</button>
         <button type="button" class="nv-nav-item" data-nv-nav="requests"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>Заявки</button>
         <button type="button" class="nv-nav-item" data-nv-nav="more"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>Ещё</button>
       </nav>
@@ -10979,7 +10973,7 @@ const HUB_GAME_META = {
       if (rule.kind === "win") return " за победу";
       if (rule.kind === "create") return " за создание";
       if (rule.kind === "all_goals") return " за все цели";
-      return " за прохождение";
+      return "";
     }
 
     function hubGameCoinReward(gameId) {
@@ -10987,18 +10981,19 @@ const HUB_GAME_META = {
     }
 
     function enhanceHubCardRatings() {
-      document.querySelectorAll("#hub-grid .cover-card").forEach((card) => {
+      document.querySelectorAll("#hub-grid .cover-card, #hub-search-rec-list .cover-card, #hub-premium-grid .cover-card").forEach((card) => {
         const meta = card.querySelector(".cover-meta");
         if (!meta) return;
         if (card.classList.contains("cover-card-coming-soon")) return;
         const raw = card.id.replace("cover-card-", "").replace(/^custom-.+/, "custom");
-        if (!meta.querySelector(".hub-card-coins")) {
-          const rule = getGameCoinRule(raw === "custom" ? "custom" : raw);
-          const coinRow = document.createElement("div");
+        const rule = getGameCoinRule(raw === "custom" ? "custom" : raw);
+        let coinRow = meta.querySelector(".hub-card-coins");
+        if (!coinRow) {
+          coinRow = document.createElement("div");
           coinRow.className = "hub-card-coins";
-          coinRow.innerHTML = pvRbxCoinHtml() + '<span>+' + rule.amount + coinRuleHubLabel(rule) + '</span>';
           meta.appendChild(coinRow);
         }
+        coinRow.innerHTML = pvRbxCoinHtml() + '<span>+' + rule.amount + coinRuleHubLabel(rule) + '</span>';
         if (meta.querySelector(".hub-card-rating")) return;
         const rating = hubGameRating(raw);
         const row = document.createElement("div");
@@ -11478,7 +11473,7 @@ const HUB_GAME_META = {
     }
 
     function setNvPanel(panel) {
-      if (panel === "chats" || panel === "friends") panel = "home";
+      if (panel === "chats" || panel === "friends" || panel === "charts") panel = "home";
       if (typeof window.closeNvfPage === "function") window.closeNvfPage();
       document.querySelectorAll("[data-nv-panel]").forEach((p) => {
         p.classList.toggle("active", p.getAttribute("data-nv-panel") === panel);
