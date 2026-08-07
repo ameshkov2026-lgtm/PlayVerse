@@ -144,7 +144,21 @@
       color: #fde68a;
       white-space: nowrap;
     }
-    .rbx-coin-icon { font-size: 1.05rem; line-height: 1; }
+    .rbx-coin-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+    .pv-rbx-coin {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    .hub-card-coins .pv-rbx-coin { width: 14px; height: 14px; }
+    #screen-newverse .rbx-coin-pill { color: #fff; }
+    #screen-newverse .rbx-coin-pill .pv-rbx-coin { color: #fff; }
     .rbx-profile-row { display: none !important; }
     .rbx-profile-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .rbx-user-tag {
@@ -297,6 +311,10 @@
       white-space: nowrap;
     }
     .rbx-avatar-shop-price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
       font-size: clamp(0.78rem, 2.8vw, 0.92rem);
       font-weight: 900;
       color: #fde68a;
@@ -414,6 +432,15 @@
       object-fit: cover;
       border-radius: 50%;
     }
+    .rbx-user-avatar .nv-blocky,
+    .rbx-friend-avatar .nv-blocky,
+    .profile-avatar .nv-blocky,
+    .profile-mini-avatar .nv-blocky,
+    .hub-profile-btn-dot .nv-blocky,
+    .profile-member-avatar .nv-blocky {
+      transform: scale(0.88);
+      transform-origin: center bottom;
+    }
     .rbx-user-name {
       font-weight: 900;
       font-size: clamp(1.35rem, 4.8vw, 1.85rem);
@@ -471,13 +498,15 @@
       height: auto;
       padding: clamp(12px, 2vw, 16px);
       background: #ffffff;
-      border-radius: clamp(18px, 2.5vw, 24px);
-      box-shadow: 0 14px 36px rgba(46, 16, 101, 0.28);
+      border: 3px solid rgba(0,0,0,0.2);
+      border-radius: clamp(14px, 2.5vw, 18px);
+      box-shadow: 0 5px 0 rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.14);
       gap: 10px;
+      overflow: hidden;
     }
     .hub-grid .cover-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 20px 44px rgba(46, 16, 101, 0.38);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.14);
     }
     .hub-grid .cover-card:active { transform: scale(0.985); }
     .hub-grid .cover-art {
@@ -485,8 +514,9 @@
       flex: 1 1 auto;
       min-height: calc(var(--hub-row-h) - 72px);
       height: auto;
-      border-radius: clamp(14px, 2vw, 18px);
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+      border-radius: clamp(10px, 2vw, 14px);
+      border: 2px solid rgba(0,0,0,0.18);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.14);
     }
     .hub-grid .cover-meta {
       padding: 4px 4px 2px;
@@ -2608,7 +2638,8 @@
     .factory-game-card p { margin: 0; opacity: 0.75; font-size: 0.85rem; }
     .factory-game-card .mini-actions { display: flex; gap: 6px; flex-wrap: wrap; }
     #screen-custom {
-      background: #0f172a; color: #e2e8f0;
+      background: linear-gradient(180deg, #6eb5ff 0%, #94d0ff 45%, #7cbd6b 46%, #5a9e4f 100%) !important;
+      color: #e2e8f0;
       min-height: 100dvh; box-sizing: border-box; padding: 12px;
       display: none; flex-direction: column; gap: 10px;
     }
@@ -2618,8 +2649,9 @@
     .custom-stats { display: flex; gap: 8px; flex-wrap: wrap; }
     .custom-pill { background: rgba(255,255,255,0.1); padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
     .custom-stage {
-      flex: 1; min-height: 320px; border-radius: 16px; position: relative; overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.15);
+      flex: 1; min-height: 320px; border-radius: 12px; position: relative; overflow: hidden;
+      border: 4px solid rgba(0,0,0,0.25);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15), 0 6px 0 rgba(0,0,0,0.2);
       display: flex; align-items: center; justify-content: center;
     }
     .custom-stage canvas { width: 100%; height: 100%; display: block; max-height: 70vh; }
@@ -5258,12 +5290,16 @@
       background: linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
     }
     body.on-newverse {
-      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(196, 181, 253, 0.55), transparent 42%),
+        linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
     }
 
     /* ===== НОВАЯ ВЕРСИЯ · Roblox UI (фиолетовая, без игр) ===== */
     #screen-newverse {
-      background: linear-gradient(180deg, #4c1d95 0%, #3b0764 100%) !important;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(196, 181, 253, 0.55), transparent 42%),
+        linear-gradient(180deg, #4c1d95 0%, #6d28d9 38%, #5b21b6 100%) !important;
       padding: 0 !important;
       height: 100dvh;
       max-height: 100dvh;
@@ -5271,6 +5307,89 @@
       color: #f5f3ff;
     }
     #screen-newverse.active { align-items: stretch; justify-content: flex-start; }
+    #screen-newverse .rbx-section-title,
+    #screen-newverse .nv-home-logo {
+      font-family: inherit;
+      letter-spacing: -0.02em;
+    }
+    #screen-newverse .nv-home-logo {
+      display: block;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 10vw, 3.6rem);
+      line-height: 1.05;
+      color: #faf5ff;
+      text-shadow: 0 4px 28px rgba(168,85,247,0.45);
+    }
+    #screen-newverse .nv-home-logo em { font-style: normal; color: #fde68a; }
+    #screen-newverse .nv-hub-topbar {
+      display: flex; align-items: center; justify-content: center; position: relative;
+      gap: 10px; padding: 14px 56px 12px; flex-shrink: 0;
+    }
+    #screen-newverse .nv-hub-topbar-actions {
+      display: flex; align-items: center; gap: 10px;
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    }
+    #screen-newverse .nv-hub-v1-btn {
+      border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.1);
+      color: #ede9fe; font-weight: 800; font-size: 0.72rem; padding: 7px 10px;
+      border-radius: 999px; cursor: pointer; white-space: nowrap;
+    }
+    #screen-newverse .nv-hub-search-panel {
+      display: flex; align-items: center; gap: 10px; padding: 0 16px 12px;
+    }
+    #screen-newverse .nv-hub-search-panel.profile-hidden { display: none; }
+    #screen-newverse .nv-home-avatar-section {
+      padding-bottom: 4px;
+    }
+    #screen-newverse .nv-home-avatar-wrap {
+      margin: 0 12px 4px;
+      padding: 14px 0 10px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    #screen-newverse .nv-home-avatar-rail {
+      display: flex; gap: 12px; overflow-x: auto; padding: 0 14px;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    #screen-newverse .nv-home-avatar-rail::-webkit-scrollbar { height: 0; }
+    #screen-newverse .nv-home-shop-card {
+      flex: 0 0 auto; width: clamp(92px, 26vw, 112px); border: none; background: transparent;
+      border-radius: 0; padding: 0; cursor: pointer; text-align: center; color: #f8fafc;
+      scroll-snap-align: start;
+    }
+    #screen-newverse .nv-home-shop-preview {
+      width: 100%; aspect-ratio: 3 / 4; overflow: visible;
+      background: transparent; border: none; box-shadow: none; border-radius: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+      margin: 0 auto 8px;
+    }
+    #screen-newverse .nv-home-shop-preview .nv-blocky {
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45));
+    }
+    #screen-newverse .nv-home-shop-preview .nv-blocky-shop {
+      transform: scale(2.15);
+      transform-origin: center bottom;
+    }
+    #screen-newverse .nv-home-shop-card.equipped .nv-home-shop-preview .nv-blocky {
+      filter: drop-shadow(0 0 10px rgba(253,224,106,0.65)) drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+    }
+    #screen-newverse .nv-home-shop-card.owned .nv-home-shop-preview .nv-blocky {
+      filter: drop-shadow(0 0 6px rgba(134,239,172,0.45)) drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+    }
+    #screen-newverse .nv-home-shop-price {
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      font-size: 0.82rem; font-weight: 800; color: #fff;
+    }
+    #screen-newverse .nv-home-shop-price.free { color: #86efac; }
+    #screen-newverse .nv-rbx-coin,
+    #screen-newverse .pv-rbx-coin { width: 15px; height: 15px; flex-shrink: 0; display: block; }
+    #screen-newverse .nv-friends-rail .rbx-friend-tile .rbx-friend-avatar {
+      border-radius: 16px; width: 72px; height: 72px;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.18);
+      display: flex; align-items: flex-end; justify-content: center;
+    }
     .nv-hub {
       position: relative;
       display: flex; flex-direction: column; height: 100dvh; max-height: 100dvh; overflow: hidden;
@@ -5310,9 +5429,14 @@
       width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35);
       background: rgba(255,255,255,0.08); padding: 0; cursor: pointer; overflow: hidden;
     }
-    .nv-scroll { flex: 1; overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+    .nv-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; min-height: 0; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
     .nv-panel { display: none; padding-bottom: 12px; }
     .nv-panel.active { display: block; }
+    .nv-hub-section { padding: 0 0 18px; width: 100%; }
+    .nv-hub-section .rbx-section-title {
+      text-align: left; margin: 0 0 14px; padding: 0 16px;
+      font-size: clamp(1.55rem, 5.5vw, 2.15rem); font-weight: 900; color: #faf5ff;
+    }
     .nv-section-title {
       margin: 12px 0 10px; padding: 0 16px; font-size: 1rem; font-weight: 800; color: #faf5ff;
     }
@@ -5337,13 +5461,109 @@
     }
     .nv-nav-item svg { width: 24px; height: 24px; fill: currentColor; }
     .nv-nav-item.active { color: #fff; background: rgba(168,85,247,0.25); }
-    .nv-blocky { display: flex; flex-direction: column; align-items: center; width: 36px; margin: 0 auto; }
-    .nv-blocky-sm { transform: scale(0.85); transform-origin: center bottom; }
-    .nv-blocky-lg { transform: scale(2.2); margin: 20px auto; }
-    .nv-blocky-head { width: 14px; height: 14px; background: #fcd9b6; border-radius: 2px; }
-    .nv-blocky-torso { width: 18px; height: 16px; margin-top: 1px; border-radius: 2px; background: #9333ea; }
-    .nv-blocky-legs { display: flex; gap: 2px; margin-top: 1px; }
-    .nv-blocky-leg { width: 7px; height: 12px; border-radius: 1px; background: #312e81; }
+    .nv-blocky { display: inline-flex; align-items: flex-end; justify-content: center; margin: 0 auto; position: relative; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); }
+    .nv-blocky-sm { transform: scale(0.78); transform-origin: center bottom; }
+    .nv-blocky-lg { transform: scale(2.6); margin: 24px auto; }
+    .nv-blocky-shop { transform: scale(1.45); transform-origin: center bottom; }
+
+    /* Roblox R6 персонаж */
+    .rbx-char { display: flex; flex-direction: column; align-items: center; position: relative; width: 44px; }
+    .rbx-char-hat {
+      width: 22px; height: 7px; margin-bottom: -2px; border-radius: 4px 4px 2px 2px; z-index: 3;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 0 rgba(0,0,0,0.2);
+    }
+    .rbx-char-head {
+      width: 20px; height: 20px; border-radius: 4px; position: relative; z-index: 2;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .rbx-eye {
+      position: absolute; top: 7px; width: 3px; height: 3px; background: #111; border-radius: 50%;
+    }
+    .rbx-eye-l { left: 5px; } .rbx-eye-r { right: 5px; }
+    .rbx-smile {
+      position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+      width: 9px; height: 4px; border-bottom: 2px solid #111; border-radius: 0 0 8px 8px;
+    }
+    .rbx-char-mid { display: flex; align-items: center; gap: 1px; margin-top: 1px; z-index: 2; }
+    .rbx-char-arm {
+      width: 7px; height: 18px; border-radius: 3px;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.18);
+    }
+    .rbx-char-torso {
+      width: 22px; height: 22px; border-radius: 4px;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .rbx-char-legs { display: flex; gap: 2px; margin-top: 1px; z-index: 2; }
+    .rbx-char-leg {
+      width: 10px; height: 18px; border-radius: 3px;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2);
+    }
+    .rbx-char-cape {
+      position: absolute; top: 24px; left: 50%; transform: translateX(-50%);
+      width: 32px; height: 24px; border-radius: 0 0 14px 14px; opacity: 0.92; z-index: 1;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+    .rbx-char-wings {
+      position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+      width: 38px; height: 14px; z-index: 1; opacity: 0.95; pointer-events: none;
+    }
+    .rbx-char-wings::before, .rbx-char-wings::after {
+      content: ""; position: absolute; top: 0; width: 16px; height: 14px;
+      border-radius: 70% 20% 60% 30%; opacity: 0.9;
+    }
+    .rbx-char-wings::before { left: 0; transform: rotate(-18deg); background: currentColor; }
+    .rbx-char-wings::after { right: 0; transform: rotate(18deg) scaleX(-1); background: currentColor; }
+    .rbx-char-aura {
+      position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+      width: 40px; height: 58px; border: 2px solid; border-radius: 40% 40% 30% 30%;
+      opacity: 0.45; z-index: 0; animation: rbxAuraPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes rbxAuraPulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.35; }
+      50% { transform: translateX(-50%) scale(1.06); opacity: 0.55; }
+    }
+
+    .nv-avatar-shop-name, .nv-home-shop-name, .rbx-avatar-shop-name { display: none !important; }
+
+    .nv-avatar-shop-head { padding: 0 16px 8px; }
+    .nv-avatar-shop-lead { margin: 0 0 12px; font-size: 0.88rem; color: #ddd6fe; font-weight: 600; line-height: 1.45; }
+    .nv-avatar-shop-coins {
+      margin: 0 0 14px; font-size: 0.92rem; font-weight: 900; color: #fff;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .nv-avatar-shop-rail {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+      padding: 0 16px 20px;
+    }
+    .nv-avatar-shop-card {
+      border: 2px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 12px 10px 10px;
+      background: rgba(0,0,0,0.22); cursor: pointer; text-align: center; color: #f5f3ff;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .nv-avatar-shop-card:active { transform: scale(0.98); }
+    .nv-avatar-shop-card.owned { border-color: rgba(34,197,94,0.55); }
+    .nv-avatar-shop-card.equipped { border-color: #fde68a; box-shadow: 0 0 16px rgba(253,224,106,0.25); }
+    .nv-avatar-shop-card[data-tier="7"],
+    .nv-avatar-shop-card[data-tier="8"],
+    .nv-avatar-shop-card[data-tier="9"] { background: rgba(147,51,234,0.18); }
+    .nv-avatar-shop-preview {
+      height: 100px; display: flex; align-items: flex-end; justify-content: center;
+      margin-bottom: 8px; border-radius: 0;
+      background: transparent; border: none; box-shadow: none;
+    }
+    .nv-avatar-shop-preview .nv-blocky {
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45));
+    }
+    .nv-avatar-shop-name { font-size: 0.82rem; font-weight: 900; margin-bottom: 4px; color: #fff; }
+    .nv-avatar-shop-price {
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      font-size: 0.78rem; font-weight: 900; color: #fff;
+    }
+    .nv-avatar-shop-price.free { color: #86efac; }
+    .nv-avatar-shop-guest {
+      margin: 0 16px 16px; padding: 14px; border-radius: 14px; text-align: center;
+      background: rgba(255,255,255,0.08); color: #c4b5fd; font-weight: 700; font-size: 0.88rem;
+    }
     .nv-user-menu {
       position: absolute; top: 56px; right: 12px; z-index: 60; min-width: 200px;
       background: #1e1035; border: 1px solid rgba(255,255,255,0.14); border-radius: 12px;
@@ -5506,6 +5726,9 @@
       background: rgba(255,255,255,0.06); color: #c4b5fd; font-weight: 700;
     }
     .nv-nav-item { max-width: 68px; font-size: 0.58rem; }
+
+    /* Временно скрыто в v2 — убрать .nv-temp-off, когда вернём функции */
+    .nv-temp-off { display: none !important; }
 
     /* ===== Студия игр PlayVerse 2 (свой UI) ===== */
     .nvf-studio { padding: 0 0 20px; }
@@ -5966,7 +6189,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           </button>
           <div class="rbx-coin-pill" id="hub-coins" title="Монеты за прохождение игр">
-            <span class="rbx-coin-icon">🪙</span>
+            <span class="rbx-coin-icon" id="hub-coins-icon" aria-hidden="true"></span>
             <span id="hub-coins-val">0</span>
           </div>
         </div>
@@ -6497,20 +6720,25 @@
   <!-- НОВАЯ ВЕРСИЯ · Roblox UI без игр -->
   <div id="screen-newverse" class="screen">
     <div class="nv-hub">
-      <header class="nv-topbar">
-        <button type="button" class="nv-back-btn" id="nv-to-v1">PlayVerse 1.0</button>
-        <span class="nv-logo">PlayVerse 2.0</span>
-        <div class="nv-search-wrap">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
-          <input type="search" id="nv-search" placeholder="Поиск скоро..." disabled>
+      <header class="nv-hub-topbar">
+        <div class="rbx-logo">
+          <span class="nv-home-logo">PlayVerse <em>2.0</em></span>
         </div>
-        <div class="nv-top-actions">
-          <div class="nv-coin-pill"><span>🪙</span><span id="nv-coins-val">0</span></div>
-          <button type="button" class="nv-user-btn" id="nv-user-menu-btn" aria-label="Аккаунт">
-            <span class="nv-blocky nv-blocky-sm" id="nv-top-avatar"></span>
+        <div class="nv-hub-topbar-actions">
+          <button type="button" class="nv-hub-v1-btn" id="nv-to-v1">PlayVerse 1.0</button>
+          <button type="button" class="rbx-search-btn" id="nv-search-btn" aria-label="Поиск">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
           </button>
+          <div class="rbx-coin-pill" title="Монеты">
+            <span class="rbx-coin-icon" id="nv-coins-icon" aria-hidden="true"></span>
+            <span id="nv-coins-val">0</span>
+          </div>
         </div>
       </header>
+      <div class="nv-hub-search-panel profile-hidden" id="nv-search-panel">
+        <input type="search" class="rbx-search-input" id="nv-search-input" placeholder="Поиск скоро..." disabled autocomplete="off">
+        <button type="button" class="rbx-search-close" id="nv-search-close" aria-label="Закрыть поиск">✕</button>
+      </div>
       <div class="nv-user-menu profile-hidden" id="nv-user-menu">
         <div class="nv-user-menu-head">
           <span class="nv-blocky nv-blocky-sm" id="nv-menu-avatar"></span>
@@ -6524,46 +6752,34 @@
       </div>
       <div class="nv-scroll">
         <div class="nv-panel active" data-nv-panel="home">
-          <div class="nv-brand-hero">
-            <h1 class="nv-brand-title">PlayVerse <em>2.0</em></h1>
-          </div>
-          <h2 class="nv-section-title">Друзья</h2>
-          <div class="nv-add-friend-row profile-hidden" id="nv-add-friend-row">
-            <input type="text" id="nv-add-friend-input" maxlength="20" placeholder="Имя игрока">
-            <button type="button" id="nv-add-friend-btn">Добавить</button>
-          </div>
-          <div class="nv-friends-rail" id="nv-friends-rail"></div>
-          <h2 class="nv-section-title">Студия игр</h2>
-          <button type="button" class="nvf-teaser" id="nvf-teaser" aria-label="Открыть Фабрику игр">
-            <div class="nvf-teaser-art" aria-hidden="true">
-              <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-                <rect x="48" y="70" width="70" height="90" rx="12" fill="#ede9fe"/>
-                <rect x="128" y="55" width="70" height="105" rx="12" fill="#f5d0fe"/>
-                <rect x="208" y="80" width="70" height="80" rx="12" fill="#fde68a"/>
-                <circle cx="83" cy="115" r="16" fill="#7c3aed"/>
-                <circle cx="163" cy="105" r="16" fill="#db2777"/>
-                <circle cx="243" cy="120" r="16" fill="#f59e0b"/>
-                <path d="M70 175h180" stroke="rgba(255,255,255,0.4)" stroke-width="6" stroke-linecap="round"/>
-                <text x="160" y="42" text-anchor="middle" fill="#fff" font-size="22" font-weight="800" font-family="system-ui">AI</text>
-              </svg>
+          <section class="rbx-rec-section">
+            <h2 class="rbx-section-title">Студия игр</h2>
+            <div style="padding:0 16px">
+              <button type="button" class="nvf-teaser" id="nvf-teaser" aria-label="Открыть Фабрику игр" style="width:100%;margin:0">
+                <div class="nvf-teaser-art" aria-hidden="true">
+                  <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="48" y="70" width="70" height="90" rx="12" fill="#ede9fe"/>
+                    <rect x="128" y="55" width="70" height="105" rx="12" fill="#f5d0fe"/>
+                    <rect x="208" y="80" width="70" height="80" rx="12" fill="#fde68a"/>
+                    <circle cx="83" cy="115" r="16" fill="#7c3aed"/>
+                    <circle cx="163" cy="105" r="16" fill="#db2777"/>
+                    <circle cx="243" cy="120" r="16" fill="#f59e0b"/>
+                    <path d="M70 175h180" stroke="rgba(255,255,255,0.4)" stroke-width="6" stroke-linecap="round"/>
+                    <text x="160" y="42" text-anchor="middle" fill="#fff" font-size="22" font-weight="800" font-family="system-ui">AI</text>
+                  </svg>
+                </div>
+                <div class="nvf-teaser-body">
+                  <span class="nvf-teaser-badge">Студия</span>
+                  <h3 class="nvf-teaser-title">Фабрика игр</h3>
+                  <p class="nvf-teaser-text">Создай свою игру с ИИ или вручную — нажми, чтобы открыть конструктор.</p>
+                </div>
+              </button>
             </div>
-            <div class="nvf-teaser-body">
-              <span class="nvf-teaser-badge">Студия</span>
-              <h3 class="nvf-teaser-title">Фабрика игр</h3>
-              <p class="nvf-teaser-text">Создай свою игру с ИИ или вручную — нажми, чтобы открыть конструктор.</p>
-            </div>
-          </button>
+          </section>
         </div>
         <div class="nv-panel" data-nv-panel="charts">
           <h2 class="nv-section-title">Популярное</h2>
           <div class="nv-empty">🔥 Скоро здесь появятся игры из Студии.</div>
-        </div>
-        <div class="nv-panel" data-nv-panel="avatar">
-          <div style="text-align:center;padding:16px 0 8px">
-            <div class="nv-blocky nv-blocky-lg" id="nv-blocky-preview"></div>
-            <div id="nv-blocky-name" style="font-weight:900;color:#fff;margin-top:8px">Гость</div>
-          </div>
-          <div class="nv-empty">👕 Магазин скинов для blocky-аватара — в разработке.</div>
         </div>
         <div class="nv-panel" data-nv-panel="chats">
           <div class="nv-chat-layout">
@@ -9244,6 +9460,17 @@ const HUB_GAME_META = {
     }
 
     const HUB_RATING_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>';
+    function pvRbxCoinHtml() {
+      return '<svg class="pv-rbx-coin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l8 4.5v11L12 22 4 17.5v-11L12 2zm0 2.2L6.5 7.8V16L12 19.8 17.5 16V7.8L12 4.2z"/><path fill="currentColor" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>';
+    }
+    window.pvRbxCoinHtml = pvRbxCoinHtml;
+    function pvInitCoinIcons() {
+      ["hub-coins-icon", "nv-coins-icon"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = pvRbxCoinHtml();
+      });
+    }
+    pvInitCoinIcons();
 
     const GAME_COIN_RULES = {
       avia: { amount: 5, kind: "complete" },
@@ -9281,7 +9508,7 @@ const HUB_GAME_META = {
           const rule = getGameCoinRule(raw === "custom" ? "custom" : raw);
           const coinRow = document.createElement("div");
           coinRow.className = "hub-card-coins";
-          coinRow.textContent = "🪙 +" + rule.amount + coinRuleHubLabel(rule);
+          coinRow.innerHTML = pvRbxCoinHtml() + '<span>+' + rule.amount + coinRuleHubLabel(rule) + '</span>';
           meta.appendChild(coinRow);
         }
         if (meta.querySelector(".hub-card-rating")) return;
@@ -9357,19 +9584,26 @@ const HUB_GAME_META = {
     initHubSearch();
 
     /* ===== Новости PlayVerse ===== */
+    function pvPublicUrl(rel) {
+      if (!rel) return "";
+      if (/^https?:\/\//i.test(rel)) return rel;
+      const base = location.pathname.replace(/\/[^/]*$/, "/");
+      return base + String(rel).replace(/^\//, "");
+    }
+
     const PV_NEWS = [
       {
         id: "launch",
         date: "22 июля 2026",
         title: "PlayVerse создан!",
-        image: "assets/playverse-launch-news.png",
+        image: "playverse-launch-news.png",
         text: "Мы запустили PlayVerse — игровую платформу, где можно играть, общаться с друзьями и открывать новые миры. Платформа ждёт первых игроков: регистрируйся и будь среди первых!"
       },
       {
         id: "v2",
         date: "26 июля 2026",
         title: "PlayVerse 2 в разработке",
-        image: "assets/playverse-v2-dev.png",
+        image: "playverse-v2-dev.png",
         text: "Мы разрабатываем вторую версию PlayVerse с новым фиолетовым интерфейсом! Уже можно зайти в ранний доступ, создавать игры в Студии и отправлять заявки — какую игру добавить в каталог. Авторы лучших идей получат 50 монет после выхода первой игры в PlayVerse 2.0."
       }
     ];
@@ -9381,7 +9615,13 @@ const HUB_GAME_META = {
     function renderNewsCard(item) {
       let media = "";
       if (item.image) {
-        media = '<div class="pv-news-image"><img src="' + item.image + '" alt="" loading="lazy"></div>';
+        const src = pvPublicUrl(item.image);
+        const fallback = item.image.indexOf("assets/") === 0
+          ? pvPublicUrl(item.image.replace(/^assets\//, ""))
+          : pvPublicUrl("assets/" + item.image);
+        media = '<div class="pv-news-image"><img src="' + pvEscapeHtml(src) + '" alt="" loading="lazy"' +
+          ' data-alt="' + pvEscapeHtml(fallback) + '"' +
+          ' onerror="if(this.dataset.alt&&!this.dataset.triedAlt){this.dataset.triedAlt=1;this.src=this.dataset.alt}"></div>';
       } else if (item.banner === "v2") {
         media = '<div class="pv-news-banner pv-news-banner-v2"><span class="pv-news-banner-badge">NEW</span><span class="pv-news-banner-title">PlayVerse 2</span></div>';
       }
@@ -9402,6 +9642,40 @@ const HUB_GAME_META = {
     }
     window.renderPvNews = renderPvNews;
     renderPvNews();
+
+    function rbxCharHtml(cols) {
+      cols = cols || {};
+      const skin = cols.skin || "#fcd9b6";
+      const shirt = cols.shirt || "#9333ea";
+      const pants = cols.pants || "#312e81";
+      const arms = cols.arms || shirt;
+      const hat = cols.hat;
+      const acc = cols.acc;
+      const accColor = cols.accColor || cols.c3 || shirt;
+      const acc2 = cols.acc2;
+      const acc2Color = cols.acc2Color || accColor;
+      function accBit(type, color) {
+        if (type === "aura") return '<span class="rbx-char-aura" style="border-color:' + color + '"></span>';
+        if (type === "cape") return '<span class="rbx-char-cape" style="background:' + color + '"></span>';
+        if (type === "wings") return '<span class="rbx-char-wings" style="color:' + color + '"></span>';
+        return "";
+      }
+      let html = '<div class="rbx-char">';
+      if (acc2) html += accBit(acc2, acc2Color);
+      if (acc) html += accBit(acc, accColor);
+      if (hat) html += '<span class="rbx-char-hat" style="background:' + hat + '"></span>';
+      html += '<span class="rbx-char-head" style="background:' + skin + '">' +
+        '<span class="rbx-eye rbx-eye-l"></span><span class="rbx-eye rbx-eye-r"></span><span class="rbx-smile"></span></span>' +
+        '<span class="rbx-char-mid">' +
+        '<span class="rbx-char-arm" style="background:' + arms + '"></span>' +
+        '<span class="rbx-char-torso" style="background:' + shirt + '"></span>' +
+        '<span class="rbx-char-arm" style="background:' + arms + '"></span></span>' +
+        '<span class="rbx-char-legs">' +
+        '<span class="rbx-char-leg" style="background:' + pants + '"></span>' +
+        '<span class="rbx-char-leg" style="background:' + pants + '"></span></span></div>';
+      return html;
+    }
+    window.rbxCharHtml = rbxCharHtml;
 
     /* ===== PlayVerse 2 · общий аккаунт с 1.0, свой UI ===== */
     const NV_CHAT_PREFIX = "playverse2_chat_";
@@ -9491,13 +9765,22 @@ const HUB_GAME_META = {
       return h;
     }
 
+    function nvBlockyHtmlFromColors(skin, shirt, pants, hat, arms, acc, accColor, acc2, acc2Color) {
+      return rbxCharHtml({
+        skin: skin, shirt: shirt, pants: pants, hat: hat,
+        arms: arms || shirt, acc: acc, accColor: accColor, acc2: acc2, acc2Color: acc2Color
+      });
+    }
+
     function nvBlockyHtml(u, username) {
+      if (u && u.avatarType === "shop" && u.avatarShopId && window.PVProfile && PVProfile.getShopBlockyColors) {
+        const cols = PVProfile.getShopBlockyColors(u.avatarShopId);
+        if (cols) return rbxCharHtml(cols);
+      }
       const hue = u && typeof u.avatarHue === "number" ? u.avatarHue : nvHue(username);
       const shirt = "hsl(" + hue + ",55%,52%)";
       const pants = "hsl(" + ((hue + 40) % 360) + ",45%,32%)";
-      return '<span class="nv-blocky-head"></span><span class="nv-blocky-torso" style="background:' + shirt + '"></span>' +
-        '<span class="nv-blocky-legs"><span class="nv-blocky-leg" style="background:' + pants + '"></span>' +
-        '<span class="nv-blocky-leg" style="background:' + pants + '"></span></span>';
+      return nvBlockyHtmlFromColors("#fcd9b6", shirt, pants, null);
     }
 
     function nvFillBlocky(node, u, username) {
@@ -9505,6 +9788,8 @@ const HUB_GAME_META = {
       if (!node.classList.contains("nv-blocky")) node.classList.add("nv-blocky");
       node.innerHTML = nvBlockyHtml(u, username);
     }
+
+    function renderNvAvatarShop() {}
 
     function setNvPanel(panel) {
       if (typeof window.closeNvfPage === "function") window.closeNvfPage();
@@ -9595,33 +9880,71 @@ const HUB_GAME_META = {
       msgsEl.scrollTop = msgsEl.scrollHeight;
     }
 
+    function renderNvHomeAvatarShop() {
+      const rail = document.getElementById("nv-home-avatar-shop");
+      if (!rail || !window.PVProfile || !PVProfile.getAvatarShopItems) return;
+      const u = nvCurrentUser();
+      const items = PVProfile.getAvatarShopItems().slice().sort((a, b) => a.price - b.price);
+      rail.innerHTML = items.map((item) => {
+        const owned = u && Array.isArray(u.ownedAvatars) && u.ownedAvatars.indexOf(item.id) >= 0;
+        const equipped = u && u.avatarShopId === item.id;
+        const cols = PVProfile.getShopBlockyColors ? PVProfile.getShopBlockyColors(item.id) : null;
+        const preview = cols ? rbxCharHtml(cols) : nvBlockyHtml(null, "");
+        return '<button type="button" class="nv-home-shop-card' + (equipped ? " equipped" : "") + (owned ? " owned" : "") +
+          '" data-nv-home-shop="' + item.id + '">' +
+          '<div class="nv-home-shop-preview"><span class="nv-blocky nv-blocky-shop">' + preview + '</span></div></button>';
+      }).join("");
+      rail.querySelectorAll("[data-nv-home-shop]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!nvIsLoggedIn()) { openNvLogin(); return; }
+          if (PVProfile.buyShopAvatar) PVProfile.buyShopAvatar(btn.getAttribute("data-nv-home-shop"));
+        });
+      });
+    }
+
     function renderNvFriends() {
       const rail = document.getElementById("nv-friends-rail");
-      const addRow = document.getElementById("nv-add-friend-row");
       if (!rail) return;
-      if (!nvIsLoggedIn()) {
-        if (addRow) addRow.classList.add("profile-hidden");
-        rail.innerHTML = '<p style="padding:4px 16px;color:#c4b5fd;font-weight:700;font-size:0.85rem">Войди, чтобы видеть друзей</p>';
-        return;
-      }
-      if (addRow) addRow.classList.remove("profile-hidden");
-      const me = nvCurrentUser();
       const users = nvGetUsers();
-      const friends = PVProfile.getFriends ? PVProfile.getFriends() : [];
-      const label = PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : me.username;
+      const friends = nvIsLoggedIn() && PVProfile.getFriends ? PVProfile.getFriends() : [];
       let html = "";
-      html += '<button type="button" class="nv-friend-tile"><div class="nv-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span></div>' +
-        '<span class="nv-friend-name">' + label + '</span></button>';
+      if (nvIsLoggedIn()) {
+        const me = nvCurrentUser();
+        const label = me && PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(me) : (me ? me.username : "Я");
+        html += '<button type="button" class="rbx-friend-tile me" id="nv-self-tile">' +
+          '<div class="rbx-friend-avatar"><span class="nv-blocky nv-blocky-sm" id="nv-self-blocky"></span><span class="online-dot"></span></div>' +
+          '<span class="rbx-friend-name">' + label + '</span></button>';
+      }
+      html += '<button type="button" class="rbx-friend-tile add" id="nv-add-friend-tile">' +
+        '<div class="rbx-friend-avatar"><span>+</span></div><span class="rbx-friend-name">Добавить</span></button>';
       friends.slice(0, 14).forEach((name) => {
-        html += '<button type="button" class="nv-friend-tile" data-nv-friend="' + name + '"><div class="nv-friend-avatar">' +
-          '<span class="nv-blocky nv-blocky-sm" data-nv-friend-blocky="' + name + '"></span></div>' +
-          '<span class="nv-friend-name">' + name + '</span></button>';
+        html += '<button type="button" class="rbx-friend-tile" data-nv-friend="' + name + '">' +
+          '<div class="rbx-friend-avatar"><span class="nv-blocky nv-blocky-sm" data-nv-friend-blocky="' + name + '"></span><span class="online-dot"></span></div>' +
+          '<span class="rbx-friend-name">' + name + '</span></button>';
       });
+      if (!nvIsLoggedIn()) {
+        html = '<p style="padding:0 16px 8px;color:#c4b5fd;font-weight:700;font-size:0.85rem;margin:0">Войди, чтобы видеть друзей</p>' + html;
+      }
       rail.innerHTML = html;
-      nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
+      const me = nvCurrentUser();
+      if (me) nvFillBlocky(document.getElementById("nv-self-blocky"), me, me.username);
       rail.querySelectorAll("[data-nv-friend-blocky]").forEach((node) => {
         const name = node.getAttribute("data-nv-friend-blocky");
         nvFillBlocky(node, users[name], name);
+      });
+      document.getElementById("nv-self-tile")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const menu = document.getElementById("nv-user-menu");
+        if (!nvIsLoggedIn()) openNvLogin();
+        else if (menu) menu.classList.toggle("profile-hidden");
+      });
+      document.getElementById("nv-add-friend-tile")?.addEventListener("click", async () => {
+        if (!nvIsLoggedIn()) { openNvLogin(); return; }
+        const name = window.prompt("Имя игрока для заявки:");
+        if (!name || !name.trim() || !PVProfile.sendFriendRequest) return;
+        const err = await PVProfile.sendFriendRequest(name.trim());
+        if (err) nvToast(err);
+        else { renderNvFriends(); nvToast("Заявка отправлена"); }
       });
     }
 
@@ -9629,7 +9952,6 @@ const HUB_GAME_META = {
       const logged = nvIsLoggedIn();
       const u = nvCurrentUser();
       const label = u ? (PVProfile.activeDisplayLabel ? PVProfile.activeDisplayLabel(u) : u.username) : "Гость";
-      nvFillBlocky(document.getElementById("nv-top-avatar"), u, u && u.username);
       nvFillBlocky(document.getElementById("nv-menu-avatar"), u, u && u.username);
       nvFillBlocky(document.getElementById("nv-blocky-preview"), u, u && u.username);
       const coinsEl = document.getElementById("nv-coins-val");
@@ -9646,7 +9968,6 @@ const HUB_GAME_META = {
       ["nv-menu-logout"].forEach((id) => {
         document.getElementById(id)?.classList.toggle("profile-hidden", !logged);
       });
-      renderNvFriends();
       if (window.PVFactory && PVFactory.renderNvfList) PVFactory.renderNvfList();
       if (document.querySelector('[data-nv-panel="chats"].active')) renderNvChat();
       if (document.querySelector('[data-nv-panel="requests"].active')) renderNvRequests();
@@ -9677,10 +9998,23 @@ const HUB_GAME_META = {
       document.getElementById("nvf-back")?.addEventListener("click", closeNvfPage);
 
       document.getElementById("nv-to-v1")?.addEventListener("click", () => showScreen("cover"));
-      const menuBtn = document.getElementById("nv-user-menu-btn");
+
+      const nvSearchBtn = document.getElementById("nv-search-btn");
+      const nvSearchPanel = document.getElementById("nv-search-panel");
+      const nvSearchInput = document.getElementById("nv-search-input");
+      const nvSearchClose = document.getElementById("nv-search-close");
+      if (nvSearchBtn && nvSearchPanel) {
+        nvSearchBtn.addEventListener("click", () => {
+          nvSearchPanel.classList.toggle("profile-hidden");
+          if (!nvSearchPanel.classList.contains("profile-hidden") && nvSearchInput) nvSearchInput.focus();
+        });
+      }
+      if (nvSearchClose && nvSearchPanel) {
+        nvSearchClose.addEventListener("click", () => nvSearchPanel.classList.add("profile-hidden"));
+      }
+
       const menu = document.getElementById("nv-user-menu");
-      if (menuBtn && menu) {
-        menuBtn.addEventListener("click", (e) => { e.stopPropagation(); menu.classList.toggle("profile-hidden"); });
+      if (menu) {
         document.addEventListener("click", () => menu.classList.add("profile-hidden"));
         menu.addEventListener("click", (e) => e.stopPropagation());
       }
@@ -9711,20 +10045,6 @@ const HUB_GAME_META = {
           if (nav === "requests") renderNvRequests();
           if (nav === "more") renderPvNews();
         });
-      });
-      document.getElementById("nv-add-friend-btn")?.addEventListener("click", async () => {
-        const input = document.getElementById("nv-add-friend-input");
-        const name = input ? input.value.trim() : "";
-        if (!nvIsLoggedIn()) { openNvLogin(); return; }
-        if (!PVProfile.sendFriendRequest) return;
-        const err = await PVProfile.sendFriendRequest(name);
-        if (err) { nvToast(err); return; }
-        if (input) input.value = "";
-        renderNewVerse();
-        nvToast(name + " — заявка отправлена или друг добавлен");
-      });
-      document.getElementById("nv-add-friend-input")?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") document.getElementById("nv-add-friend-btn")?.click();
       });
       document.getElementById("nv-request-form")?.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -14608,6 +14928,10 @@ const HUB_GAME_META = {
       const STORE_PENDING = "pvFactoryPending_v1";
       const STORE_PUBLISHED = "pvFactoryPublished_v1";
       const STORE_KEY_LEGACY = "pvFactoryGames_v1";
+      const FACTORY_CLOUD_URL = "https://vfvjtkxnnzvaiuzvgors.supabase.co";
+      const FACTORY_CLOUD_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmp0a3hubnp2YWl1enZnb3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5NzAxNjEsImV4cCI6MjEwMDU0NjE2MX0.DvWnIiXTYAN8DlhQ5ItYRYypiUQdX6rHcoc2dJMibOc";
+      const FACTORY_CLOUD = !!(FACTORY_CLOUD_URL && FACTORY_CLOUD_ANON);
+      let cloudPendingCache = [];
       const hubGrid = document.querySelector(".hub-grid");
       const listEl = document.getElementById("factory-list");
       const aiOut = document.getElementById("factory-ai-out");
@@ -14664,6 +14988,121 @@ const HUB_GAME_META = {
       function savePendingGames(arr) { saveJson(STORE_PENDING, arr); }
       function loadPublishedGames() { return loadJson(STORE_PUBLISHED); }
       function savePublishedGames(arr) { saveJson(STORE_PUBLISHED, arr); }
+
+      function factoryCloudHeaders(extra) {
+        return Object.assign({
+          apikey: FACTORY_CLOUD_ANON,
+          Authorization: "Bearer " + FACTORY_CLOUD_ANON,
+          "Content-Type": "application/json"
+        }, extra || {});
+      }
+
+      function rowToGame(row) {
+        if (!row) return null;
+        const g = row.game_data && typeof row.game_data === "object" ? row.game_data : {};
+        return Object.assign({}, g, {
+          id: row.id || g.id,
+          author: row.author || g.author || "guest",
+          status: row.status || g.status || "pending",
+          source: row.source || g.source || "v1",
+          submittedAt: row.submitted_at ? new Date(row.submitted_at).getTime() : (g.submittedAt || Date.now())
+        });
+      }
+
+      async function fetchCloudSubmissions(status) {
+        if (!FACTORY_CLOUD) return [];
+        const res = await fetch(
+          FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?status=eq." + encodeURIComponent(status) +
+          "&order=submitted_at.desc&limit=100",
+          { headers: factoryCloudHeaders() }
+        );
+        const body = await res.json().catch(() => ([]));
+        if (!res.ok) {
+          const msg = body && body.message ? String(body.message) : "";
+          if (/factory_submissions.*does not exist/i.test(msg)) {
+            console.warn("factory_submissions table missing — run supabase-setup.sql");
+          }
+          return [];
+        }
+        return (Array.isArray(body) ? body : []).map(rowToGame).filter(Boolean);
+      }
+
+      async function pushSubmissionToCloud(cfg, source) {
+        if (!FACTORY_CLOUD) return { ok: false, offline: true };
+        try {
+          const row = {
+            id: cfg.id,
+            author: cfg.author || "guest",
+            status: "pending",
+            source: source || "v1",
+            game_data: cfg,
+            submitted_at: new Date(cfg.submittedAt || Date.now()).toISOString(),
+            updated_at: new Date().toISOString()
+          };
+          const res = await fetch(
+            FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?on_conflict=id",
+            {
+              method: "POST",
+              headers: factoryCloudHeaders({ Prefer: "resolution=merge-duplicates,return=minimal" }),
+              body: JSON.stringify(row)
+            }
+          );
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            const msg = body && body.message ? String(body.message) : ("HTTP " + res.status);
+            return { ok: false, error: msg };
+          }
+          return { ok: true };
+        } catch (e) {
+          return { ok: false, error: e.message || "network" };
+        }
+      }
+
+      async function patchSubmissionInCloud(id, status, cfg) {
+        if (!FACTORY_CLOUD || !id) return;
+        try {
+          await fetch(
+            FACTORY_CLOUD_URL + "/rest/v1/factory_submissions?id=eq." + encodeURIComponent(id),
+            {
+              method: "PATCH",
+              headers: factoryCloudHeaders({ Prefer: "return=minimal" }),
+              body: JSON.stringify({
+                status: status,
+                game_data: cfg,
+                updated_at: new Date().toISOString()
+              })
+            }
+          );
+        } catch (e) { console.warn("factory cloud patch", e); }
+      }
+
+      async function syncPendingFromCloud() {
+        if (!FACTORY_CLOUD) { cloudPendingCache = []; return cloudPendingCache; }
+        if (!(window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin())) {
+          cloudPendingCache = [];
+          return cloudPendingCache;
+        }
+        cloudPendingCache = await fetchCloudSubmissions("pending");
+        return cloudPendingCache;
+      }
+
+      async function syncPublishedFromCloud() {
+        if (!FACTORY_CLOUD) return;
+        const cloudGames = await fetchCloudSubmissions("published");
+        if (!cloudGames.length) return;
+        const byId = {};
+        loadPublishedGames().forEach((g) => { byId[g.id] = g; });
+        cloudGames.forEach((g) => { byId[g.id] = g; });
+        savePublishedGames(Object.values(byId).slice(0, 100));
+        refreshHubCards();
+      }
+
+      function loadAdminPendingGames() {
+        if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin() && FACTORY_CLOUD) {
+          return cloudPendingCache.slice();
+        }
+        return loadPendingGames();
+      }
 
       function loadGames() { return loadLocalGames(); }
       function saveGames(arr) { saveLocalGames(arr); }
@@ -14930,31 +15369,51 @@ const HUB_GAME_META = {
         cfg.author = author;
         cfg.status = "pending";
         cfg.submittedAt = Date.now();
-        const pending = loadPendingGames().filter((g) => g.id !== cfg.id);
-        pending.unshift(cfg);
-        savePendingGames(pending.slice(0, 80));
+        cfg.source = prefix === "nvf-" ? "v2" : "v1";
+        const rawPending = loadJson(STORE_PENDING).filter((g) => g.id !== cfg.id);
+        rawPending.unshift(cfg);
+        savePendingGames(rawPending.slice(0, 80));
         const local = loadLocalGames().filter((g) => g.id !== cfg.id);
         saveLocalGames(local);
         editingId = cfg.id;
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
         const outEl = prefix === "nvf-" ? document.getElementById("nvf-ai-out") : aiOut;
-        if (outEl) { outEl.classList.add("show"); outEl.textContent = "«" + cfg.title + "» отправлена на проверку администратору."; }
-        if (window.PVProfile && PVProfile.toast) PVProfile.toast("Отправлено на проверку");
-        if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
+        const source = cfg.source;
+        if (outEl) {
+          outEl.classList.add("show");
+          outEl.textContent = FACTORY_CLOUD
+            ? "«" + cfg.title + "» отправляется администратору PlayVerse…"
+            : "«" + cfg.title + "» отправлена на проверку (офлайн — только на этом устройстве).";
+        }
+        if (window.PVProfile && PVProfile.toast) {
+          PVProfile.toast(FACTORY_CLOUD ? "Отправляем на сервер…" : "Отправлено локально");
+        }
+        pushSubmissionToCloud(cfg, source).then((result) => {
+          if (result.ok) {
+            if (outEl) outEl.textContent = "«" + cfg.title + "» отправлена администратору PlayVerse.";
+            if (window.PVProfile && PVProfile.toast) PVProfile.toast("Игра улетела админу — жди проверки");
+            if (window.PVFactoryModeration && PVFactoryModeration.notifyAdmin) PVFactoryModeration.notifyAdmin();
+          } else if (!result.offline) {
+            if (outEl) outEl.textContent = "«" + cfg.title + "» сохранена локально. Сервер: " + (result.error || "ошибка");
+            if (window.PVProfile && PVProfile.toast) PVProfile.toast("Сервер недоступен — игра только на этом устройстве");
+          }
+        });
         return true;
       }
 
       function approveFactoryGame(id) {
-        const pending = loadPendingGames();
-        const g = pending.find((x) => x.id === id);
+        let g = cloudPendingCache.find((x) => x.id === id);
+        if (!g) g = loadJson(STORE_PENDING).find((x) => x.id === id);
         if (!g) return false;
         g.status = "published";
         g.approvedAt = Date.now();
-        savePendingGames(pending.filter((x) => x.id !== id));
+        cloudPendingCache = cloudPendingCache.filter((x) => x.id !== id);
+        savePendingGames(loadJson(STORE_PENDING).filter((x) => x.id !== id));
         const pub = loadPublishedGames().filter((x) => x.id !== id);
         pub.unshift(g);
         savePublishedGames(pub.slice(0, 100));
+        patchSubmissionInCloud(id, "published", g);
         refreshHubCards();
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
@@ -14962,15 +15421,14 @@ const HUB_GAME_META = {
       }
 
       function rejectFactoryGame(id) {
-        const pending = loadPendingGames();
-        const g = pending.find((x) => x.id === id);
+        let g = cloudPendingCache.find((x) => x.id === id);
+        if (!g) g = loadJson(STORE_PENDING).find((x) => x.id === id);
         if (!g) return false;
         g.status = "rejected";
         g.rejectedAt = Date.now();
-        savePendingGames(pending.filter((x) => x.id !== id));
-        const local = loadLocalGames();
-        local.unshift(g);
-        saveLocalGames(local.slice(0, 40));
+        cloudPendingCache = cloudPendingCache.filter((x) => x.id !== id);
+        savePendingGames(loadJson(STORE_PENDING).filter((x) => x.id !== id));
+        patchSubmissionInCloud(id, "rejected", g);
         renderList();
         renderList(document.getElementById("nvf-list"), "nvf");
         return true;
@@ -15359,6 +15817,12 @@ const HUB_GAME_META = {
       const _exit = window.exitToHub;
       refreshHubCards();
       toggleQuizField();
+      if (window.PVFactory && PVFactory.syncPublishedFromCloud) {
+        PVFactory.syncPublishedFromCloud().catch(function () {});
+      }
+      if (window.PVFactory && PVFactory.syncPendingFromCloud) {
+        PVFactory.syncPendingFromCloud().catch(function () {});
+      }
       if (window.PVAdmin && typeof PVAdmin.applyDisabledGames === "function") PVAdmin.applyDisabledGames();
 
       window.PVFactory = {
@@ -15369,13 +15833,20 @@ const HUB_GAME_META = {
         openCustom: openCustom,
         renderNvfList: function () { renderList(document.getElementById("nvf-list"), "nvf"); },
         toggleNvfQuiz: function () { toggleQuizField("nvf-"); },
-        loadPending: loadPendingGames,
+        loadPending: loadAdminPendingGames,
+        syncPendingFromCloud: syncPendingFromCloud,
+        syncPublishedFromCloud: syncPublishedFromCloud,
         loadPublished: loadPublishedGames,
         approve: approveFactoryGame,
         reject: rejectFactoryGame
       };
       window.PVFactoryModeration = {
-        getPendingCount: function () { return loadPendingGames().length; },
+        getPendingCount: function () {
+          if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin() && FACTORY_CLOUD) {
+            return cloudPendingCache.length;
+          }
+          return loadJson(STORE_PENDING).length;
+        },
         notifyAdmin: function () {
           if (window.PVProfile && PVProfile.isSuperAdmin && PVProfile.isSuperAdmin()) {
             if (typeof PVProfile.render === "function") PVProfile.render();
@@ -15443,18 +15914,18 @@ const HUB_GAME_META = {
       const AVATAR_COLORS = ["#7c3aed", "#2563eb", "#0891b2", "#059669", "#d97706", "#db2777", "#4f46e5"];
 
       const AVATAR_SHOP = [
-        { id: "av_stone", name: "Камень", price: 8, tier: 1, c1: "#57534e", c2: "#a8a29e", c3: "#d6d3d1" },
-        { id: "av_clay", name: "Глина", price: 10, tier: 1, c1: "#78350f", c2: "#b45309", c3: "#fcd34d" },
-        { id: "av_moss", name: "Мох", price: 12, tier: 2, c1: "#14532d", c2: "#22c55e", c3: "#86efac" },
-        { id: "av_ripple", name: "Волна", price: 14, tier: 2, c1: "#0c4a6e", c2: "#0ea5e9", c3: "#bae6fd" },
-        { id: "av_flame", name: "Искра", price: 16, tier: 3, c1: "#7f1d1d", c2: "#ef4444", c3: "#fca5a5" },
-        { id: "av_sunset", name: "Закат", price: 18, tier: 3, c1: "#7c2d12", c2: "#f97316", c3: "#fde68a" },
-        { id: "av_sakura", name: "Сакура", price: 20, tier: 4, c1: "#831843", c2: "#ec4899", c3: "#fbcfe8" },
-        { id: "av_crystal", name: "Кристалл", price: 22, tier: 5, c1: "#1e1b4b", c2: "#6366f1", c3: "#e879f9" },
-        { id: "av_neon", name: "Неон", price: 24, tier: 6, c1: "#09090b", c2: "#d946ef", c3: "#22d3ee" },
-        { id: "av_galaxy", name: "Галактика", price: 28, tier: 7, c1: "#020617", c2: "#4f46e5", c3: "#f472b6" },
-        { id: "av_gold", name: "Золото", price: 32, tier: 8, c1: "#422006", c2: "#eab308", c3: "#fef9c3" },
-        { id: "av_phoenix", name: "Феникс", price: 36, tier: 9, c1: "#450a0a", c2: "#f59e0b", c3: "#fef08a" }
+        { id: "av_stone", name: "Камень", price: 8, tier: 1, c1: "#57534e", c2: "#a8a29e", c3: "#d6d3d1", skin: "#c4a484", shirt: "#78716c", pants: "#44403c", arms: "#78716c" },
+        { id: "av_clay", name: "Глина", price: 10, tier: 1, c1: "#78350f", c2: "#b45309", c3: "#fcd34d", skin: "#d4956a", shirt: "#b45309", pants: "#78350f", arms: "#b45309" },
+        { id: "av_moss", name: "Мох", price: 12, tier: 2, c1: "#14532d", c2: "#22c55e", c3: "#86efac", skin: "#e8b88a", shirt: "#22c55e", pants: "#14532d", arms: "#16a34a" },
+        { id: "av_ripple", name: "Волна", price: 14, tier: 2, c1: "#0c4a6e", c2: "#0ea5e9", c3: "#bae6fd", skin: "#e8b88a", shirt: "#0ea5e9", pants: "#0c4a6e", arms: "#0284c7" },
+        { id: "av_flame", name: "Искра", price: 16, tier: 3, c1: "#7f1d1d", c2: "#ef4444", c3: "#fca5a5", skin: "#e8b88a", shirt: "#ef4444", pants: "#7f1d1d", arms: "#dc2626" },
+        { id: "av_sunset", name: "Закат", price: 18, tier: 3, c1: "#7c2d12", c2: "#f97316", c3: "#fde68a", skin: "#e8b88a", shirt: "#f97316", pants: "#7c2d12", arms: "#ea580c", acc: "cape", accColor: "#fdba74" },
+        { id: "av_sakura", name: "Сакура", price: 20, tier: 4, c1: "#831843", c2: "#ec4899", c3: "#fbcfe8", skin: "#fbcfe8", shirt: "#ec4899", pants: "#831843", arms: "#db2777", hat: "#fbcfe8" },
+        { id: "av_crystal", name: "Кристалл", price: 22, tier: 5, c1: "#1e1b4b", c2: "#6366f1", c3: "#e879f9", skin: "#e8b88a", shirt: "#6366f1", pants: "#1e1b4b", arms: "#4f46e5", acc: "cape", accColor: "#c084fc" },
+        { id: "av_neon", name: "Неон", price: 24, tier: 6, c1: "#09090b", c2: "#d946ef", c3: "#22d3ee", skin: "#e8b88a", shirt: "#d946ef", pants: "#09090b", arms: "#22d3ee", hat: "#22d3ee", acc: "aura", accColor: "#d946ef" },
+        { id: "av_galaxy", name: "Галактика", price: 28, tier: 7, c1: "#020617", c2: "#4f46e5", c3: "#f472b6", skin: "#e8b88a", shirt: "#4f46e5", pants: "#020617", arms: "#6366f1", hat: "#f472b6", acc: "cape", accColor: "#818cf8" },
+        { id: "av_gold", name: "Золото", price: 32, tier: 8, c1: "#422006", c2: "#eab308", c3: "#fef9c3", skin: "#e8b88a", shirt: "#eab308", pants: "#422006", arms: "#ca8a04", hat: "#fef9c3", acc: "wings", accColor: "#fde047" },
+        { id: "av_phoenix", name: "Феникс", price: 36, tier: 9, c1: "#450a0a", c2: "#f59e0b", c3: "#fef08a", skin: "#e8b88a", shirt: "#f59e0b", pants: "#450a0a", arms: "#ef4444", hat: "#fef08a", acc: "wings", accColor: "#fbbf24", acc2: "aura", acc2Color: "#f97316" }
       ];
       const shopArtCache = {};
 
@@ -15521,6 +15992,22 @@ const HUB_GAME_META = {
         }
         shapes += '<circle cx="60" cy="60" r="58" fill="none" stroke="rgba(255,255,255,' + (0.12 + tier * 0.04) + ')" stroke-width="2"/>';
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs>' + defs + '</defs>' + shapes + '</svg>';
+      }
+
+      function getShopBlockyColors(shopId) {
+        const item = AVATAR_SHOP.find((a) => a.id === shopId);
+        if (!item) return null;
+        return {
+          skin: item.skin || "#fcd9b6",
+          shirt: item.shirt || item.c2 || "#9333ea",
+          pants: item.pants || item.c1 || "#312e81",
+          arms: item.arms || item.shirt || item.c2 || "#9333ea",
+          hat: item.hat || null,
+          acc: item.acc || null,
+          accColor: item.accColor || item.c3 || null,
+          acc2: item.acc2 || null,
+          acc2Color: item.acc2Color || item.accColor || item.c3 || null
+        };
       }
 
       function getShopAvatarDataUrl(shopId) {
@@ -15646,7 +16133,6 @@ const HUB_GAME_META = {
         u.avatarShopId = shopId;
         u.avatarImage = getShopAvatarDataUrl(shopId);
         u.avatarEmoji = "";
-        u.displayName = item.name;
         return item;
       }
 
@@ -15685,7 +16171,8 @@ const HUB_GAME_META = {
         saveUsers(users);
         renderHubChip();
         render();
-        toast("«" + item.name + "» куплен!" + (price > 0 ? " −" + price + " 🪙" : "") + " · теперь ты " + item.name);
+        if (typeof window.renderNewVerse === "function") window.renderNewVerse();
+        toast("Аватар куплен!" + (price > 0 ? " −" + price + " монет" : ""));
       }
 
       function equipShopAvatar(shopId) {
@@ -15699,7 +16186,8 @@ const HUB_GAME_META = {
         saveUsers(users);
         renderHubChip();
         render();
-        toast("Теперь ты «" + (item ? item.name : "") + "»");
+        if (typeof window.renderNewVerse === "function") window.renderNewVerse();
+        toast("Аватар надет!");
       }
 
       let siteSettings = { blockedUsers: [], disabledGames: [] };
@@ -17183,6 +17671,48 @@ const HUB_GAME_META = {
         ).join("");
       }
 
+      function renderAdminPendingList(pending) {
+        if (el.adminPendingCount) {
+          el.adminPendingCount.textContent = pending.length ? ("(" + pending.length + ")") : "";
+        }
+        if (!el.adminPendingList) return;
+        if (!pending.length) {
+          el.adminPendingList.innerHTML = '<p class="profile-admin-hint" style="margin:0">Нет игр на проверке.</p>';
+          return;
+        }
+        el.adminPendingList.innerHTML = pending.map((g) =>
+          '<div class="profile-admin-list-item" style="flex-wrap:wrap;gap:8px">' +
+          '<span><strong>' + (g.title || "Без названия") + '</strong> · ' + (g.author || "?") +
+          ' · ' + (g.type || "игра") + (g.source === "v2" ? " · v2" : "") + '</span>' +
+          '<span style="display:flex;gap:6px;flex-wrap:wrap">' +
+          '<button type="button" class="profile-admin-btn" data-factory-approve="' + g.id + '">Одобрить</button>' +
+          '<button type="button" class="profile-admin-btn ghost" data-factory-preview="' + g.id + '">Тест</button>' +
+          '<button type="button" class="profile-admin-btn danger" data-factory-reject="' + g.id + '">Отклонить</button>' +
+          '</span></div>'
+        ).join("");
+        el.adminPendingList.querySelectorAll("[data-factory-approve]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (window.PVFactory && PVFactory.approve) PVFactory.approve(btn.getAttribute("data-factory-approve"));
+            renderAdmin();
+            toast("Игра одобрена — теперь в хабе у всех");
+          });
+        });
+        el.adminPendingList.querySelectorAll("[data-factory-reject]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (window.PVFactory && PVFactory.reject) PVFactory.reject(btn.getAttribute("data-factory-reject"));
+            renderAdmin();
+            toast("Игра отклонена");
+          });
+        });
+        el.adminPendingList.querySelectorAll("[data-factory-preview]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-factory-preview");
+            const g = pending.find((x) => x.id === id);
+            if (g && window.PVFactory && PVFactory.openCustom) PVFactory.openCustom(g);
+          });
+        });
+      }
+
       function renderAdmin() {
         if (!el.adminSection) return;
         const admin = isSuperAdmin();
@@ -17220,44 +17750,11 @@ const HUB_GAME_META = {
           });
         }
         const pending = (window.PVFactory && PVFactory.loadPending) ? PVFactory.loadPending() : [];
-        if (el.adminPendingCount) {
-          el.adminPendingCount.textContent = pending.length ? ("(" + pending.length + ")") : "";
-        }
-        if (el.adminPendingList) {
-          if (!pending.length) {
-            el.adminPendingList.innerHTML = '<p class="profile-admin-hint" style="margin:0">Нет игр на проверке.</p>';
-          } else {
-            el.adminPendingList.innerHTML = pending.map((g) =>
-              '<div class="profile-admin-list-item" style="flex-wrap:wrap;gap:8px">' +
-              '<span><strong>' + (g.title || "Без названия") + '</strong> · ' + (g.author || "?") + ' · ' + (g.type || "игра") + '</span>' +
-              '<span style="display:flex;gap:6px;flex-wrap:wrap">' +
-              '<button type="button" class="profile-admin-btn" data-factory-approve="' + g.id + '">Одобрить</button>' +
-              '<button type="button" class="profile-admin-btn ghost" data-factory-preview="' + g.id + '">Тест</button>' +
-              '<button type="button" class="profile-admin-btn danger" data-factory-reject="' + g.id + '">Отклонить</button>' +
-              '</span></div>'
-            ).join("");
-            el.adminPendingList.querySelectorAll("[data-factory-approve]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                if (window.PVFactory && PVFactory.approve) PVFactory.approve(btn.getAttribute("data-factory-approve"));
-                renderAdmin();
-                toast("Игра одобрена — теперь в хабе у всех");
-              });
-            });
-            el.adminPendingList.querySelectorAll("[data-factory-reject]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                if (window.PVFactory && PVFactory.reject) PVFactory.reject(btn.getAttribute("data-factory-reject"));
-                renderAdmin();
-                toast("Игра отклонена");
-              });
-            });
-            el.adminPendingList.querySelectorAll("[data-factory-preview]").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                const id = btn.getAttribute("data-factory-preview");
-                const g = pending.find((x) => x.id === id);
-                if (g && window.PVFactory && PVFactory.openCustom) PVFactory.openCustom(g);
-              });
-            });
-          }
+        renderAdminPendingList(pending);
+        if (window.PVFactory && PVFactory.syncPendingFromCloud) {
+          PVFactory.syncPendingFromCloud().then(function () {
+            renderAdminPendingList(PVFactory.loadPending());
+          }).catch(function () {});
         }
         const bugReport = getBotBugsReport();
         const bugs = bugReport.bugs || [];
@@ -17337,6 +17834,9 @@ const HUB_GAME_META = {
         if (u && u.avatarType === "shop" && u.avatarShopId) {
           const url = u.avatarImage || getShopAvatarDataUrl(u.avatarShopId);
           el.style.background = "transparent";
+          el.style.display = "";
+          el.style.alignItems = "";
+          el.style.justifyContent = "";
           el.innerHTML = '<img src="' + url + '" alt="">';
           return;
         }
@@ -17631,11 +18131,11 @@ const HUB_GAME_META = {
           const url = getShopAvatarDataUrl(item.id);
           let priceHtml = owned
             ? (equipped ? '<span class="rbx-avatar-shop-price free">Надето</span>' : '<span class="rbx-avatar-shop-price free">Надеть</span>')
-            : '<span class="rbx-avatar-shop-price">🪙 ' + item.price + '</span>';
+            : '<span class="rbx-avatar-shop-price">' + (typeof window.pvRbxCoinHtml === "function" ? window.pvRbxCoinHtml() : "") + '<span>' + item.price + '</span></span>';
           return '<button type="button" class="rbx-avatar-shop-card' + (owned ? " owned" : "") + (equipped ? " equipped" : "") +
             '" data-shop-id="' + item.id + '" data-tier="' + item.tier + '">' +
-            '<div class="rbx-avatar-art"><img src="' + url + '" alt="' + item.name + '"></div>' +
-            '<div class="rbx-avatar-shop-name">' + item.name + '</div>' + priceHtml + '</button>';
+            '<div class="rbx-avatar-art"><img src="' + url + '" alt=""></div>' +
+            priceHtml + '</button>';
         }).join("");
         el.hubAvatarShop.querySelectorAll("[data-shop-id]").forEach((btn) => {
           btn.addEventListener("click", () => buyShopAvatar(btn.getAttribute("data-shop-id")));
@@ -17766,6 +18266,9 @@ const HUB_GAME_META = {
             try {
               await loadCloudUsers();
               await refreshCurrentUserFromCloud();
+              if (window.PVFactory && PVFactory.syncPublishedFromCloud) {
+                await PVFactory.syncPublishedFromCloud();
+              }
               if (isLoggedIn()) toast("Сервер PlayVerse подключён");
             } catch (e) {
               console.warn("cloud boot", e);
@@ -18029,7 +18532,12 @@ const HUB_GAME_META = {
         getBotBugsReport: getBotBugsReport,
         getUserRecord: getUserRecord,
         serverPlayerFromUser: serverPlayerFromUser,
-        sendFriendRequest: sendFriendRequest
+        sendFriendRequest: sendFriendRequest,
+        buyShopAvatar: buyShopAvatar,
+        equipShopAvatar: equipShopAvatar,
+        getAvatarShopItems: function () { return AVATAR_SHOP.slice(); },
+        getShopBlockyColors: getShopBlockyColors,
+        rbxCharHtml: function (cols) { return typeof window.rbxCharHtml === "function" ? window.rbxCharHtml(cols) : ""; }
       };
     })();
 
